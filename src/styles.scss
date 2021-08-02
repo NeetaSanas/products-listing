@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+//Container Position & Spacing
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10%; 
+}
+
+.h-100{
+    height: 100%;
+}
+
+.card-spacing{
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.card-inner{
+    padding: 24px;
+    text-align: center;
+
+    .link{
+        margin: 30px 0 30px 0;
+    }
+}
+
+.w-100{
+    width: 100% !important;
+}
+//FORM CSS LOGIN & SIGNUP
+.form-control{
+    
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    label{
+        float:left;
+    }
+    input{
+        float:right;    
+    }
+    
+}
+.error-message{
+    float:left;
+    font-size:13px;
+    color:red;
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+
+.submit-button-container{
+    margin: 20px 0 20px 0;
+    .submit-button {
+        
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        color: #ffffff;
+        background-color: #0095da;
+        text-transform: uppercase;
+        padding: 10px;
+        box-shadow: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+}
+

@@ -1,0 +1,16 @@
+.icon {
+    padding: 5px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+  }
+.form-control{
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    input{
+        min-width: 74%;
+    }
+}  

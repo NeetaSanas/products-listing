@@ -1,0 +1,66 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()"
+        style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
+         <app-header 
+             [icon]="'exit_to_app'" 
+             [title]="'SIGNUP'" 
+             [hasBgImage]="true" 
+             [class]="'card-spacing'"></app-header>            
+           <div class="card-inner">
+                <a routerLink="/login" color="accent" class="w-100 link">Already have an account? login now!</a>
+                <div class="form-control">
+                    <!-- <label for="firstname">First Name</label> -->
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" id="firstname" placeholder="First Name" name="firstname" formControlName="firstname"><br>
+                    
+                </div>
+                <span class="error-message" *ngIf="form.controls.firstname.errors?.required && form.controls.firstname.touched">firstname is required</span>
+                
+                <div class="form-control">
+                    <!-- <label for="lastname">Last Name</label> -->
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" id="lastname" placeholder="Last Name" name="lastname" formControlName="lastname"><br> 
+                </div>
+                <span class="error-message" *ngIf="form.controls.lastname.errors?.required && form.controls.lastname.touched">lastname is required</span>
+                
+                <div class="form-control">
+                    <!-- <label for="contact">Contact</label> -->
+                    <i class="fa fa-phone icon"></i>
+                    <input type="text" id="contact" placeholder="Contact" name="contact" formControlName="contact"><br>
+                    
+                </div>
+                <span class="error-message" *ngIf="form.controls.contact.errors?.required && form.controls.contact.touched">contact is required</span>
+                
+                <div class="form-control">
+                    <!-- <label for="email">Email</label> -->
+                    <i class="fa fa-envelope icon"></i>
+                    <input type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
+                    <!-- <span *ngIf="form.controls.email.hasError('invalidEmail')">email is invalid</span> -->
+                </div>
+                <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">email is required</span>
+
+                <div class="form-control">
+                    <!-- <label for="password">Password &nbsp;</label> -->
+                    <i class="fa fa-key icon"></i>
+                    <input type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
+                </div>
+                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Password is required</span>
+                <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
+                
+                <div class="form-control">
+                    <!-- <label for="retype_password">Retype Password &nbsp;</label> -->
+                    <i class="fa fa-key icon"></i>
+                    <input type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
+                    
+                </div>
+                <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched">Password is required</span>
+                <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
+                
+                <div class="submit-button-container">
+                    <button class="w-100 submit-button" type="submit" [disabled]="!form.valid">SIGNUP</button>
+                </div> 
+                <a color="accent" routerLink="/" class="w-100 link">Back to Homepage</a>
+            </div>        
+     </form>
+     
+</div>

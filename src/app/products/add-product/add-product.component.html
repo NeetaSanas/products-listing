@@ -1,0 +1,27 @@
+<div class="row my-4">
+    <div class="col-md-12">
+      <h3>Add Product</h3>
+      <hr />
+      <form [formGroup]="form" (ngSubmit)="onAddProduct()">
+        <div>
+          <label>Title</label>
+          <input type="text" class="form-control" formControlName="title" />
+            <span *ngIf="form.controls.title.touched && form.controls.title.errors?.required">Title is required</span>
+        </div>
+        <div>
+          <label>Description</label>
+          <textarea class="form-control" formControlName="description"></textarea>
+        </div>
+  
+        <div class="my-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!form.valid">
+            Add Product
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
