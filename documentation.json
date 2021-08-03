@@ -479,7 +479,7 @@
         },
         {
             "name": "AuthService",
-            "id": "injectable-AuthService-611f70fe551349befb0a63c1289c3a53",
+            "id": "injectable-AuthService-e30285a19dcb79957d1fefcba268d146",
             "file": "src/app/login/auth.service.ts",
             "properties": [
                 {
@@ -621,16 +621,6 @@
                     ]
                 },
                 {
-                    "name": "setLoginSubscription",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 82,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
                     "name": "setUserInLocalStorage",
                     "args": [
                         {
@@ -766,7 +756,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AuthResponseData } from './AuthResponseDate.model';\nimport { environment } from 'src/environments/environment';\nimport { User } from './user.model';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.state';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n  timeoutInterval: any;\n\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\n\n  signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){\n    const params={\n      firstname: firstname,\n      lastname: lastname, \n      contact: contact, \n      email: email, \n      password: password, \n      retype_password: retype_password\n    };\n    console.log(params);\n    return this.http.post(`http://localhost:3000/users`, params);\n  }\n\n  login(email:string, password:string){\n    console.log(email, password);\n    // return this.http.post<AuthResponseData>(\n    //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,\n    //   { email, password, returnSecureToken: true }\n    // );\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  formatUser(data: AuthResponseData) {\n    const expirationDate = new Date(\n      new Date().getTime() + +data.expiresIn * 1000\n    );\n    const user = new User(\n      data.email,\n      data.idToken,\n      data.localId,\n      expirationDate\n    );\n    return user;\n  }\n  getErrorMessage(message: string) {\n    switch (message) {\n      case 'EMAIL_NOT_FOUND':\n        return 'Email Not Found';\n      case 'INVALID_PASSWORD':\n        return 'Invalid Password';\n      case 'EMAIL_EXISTS':\n        return 'Email already exists';\n      default:\n        return 'Unknown error occurred. Please try again';\n    }\n  }\n\n  setUserInLocalStorage(user: User) {\n    localStorage.setItem('userData', JSON.stringify(user));\n\n    this.runTimeoutInterval(user);\n  }\n\n  runTimeoutInterval(user: User) {\n    const todaysDate = new Date().getTime();\n    const expirationDate = user.expireDate.getTime();\n    const timeInterval = expirationDate - todaysDate;\n\n    this.timeoutInterval = setTimeout(() => {\n      //this.store.dispatch(autoLogout());\n      //logout functionality or get the refresh token\n    }, timeInterval);\n  }\n\n  setLoginSubscription(){\n    return\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AuthResponseData } from './AuthResponseDate.model';\nimport { environment } from 'src/environments/environment';\nimport { User } from './user.model';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.state';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n  timeoutInterval: any;\n\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\n\n  signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){\n    const params={\n      firstname: firstname,\n      lastname: lastname, \n      contact: contact, \n      email: email, \n      password: password, \n      retype_password: retype_password\n    };\n    console.log(params);\n    return this.http.post(`http://localhost:3000/users`, params);\n  }\n\n  login(email:string, password:string){\n    console.log(email, password);\n    // return this.http.post<AuthResponseData>(\n    //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,\n    //   { email, password, returnSecureToken: true }\n    // );\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  formatUser(data: AuthResponseData) {\n    const expirationDate = new Date(\n      new Date().getTime() + +data.expiresIn * 1000\n    );\n    const user = new User(\n      data.email,\n      data.idToken,\n      data.localId,\n      expirationDate\n    );\n    return user;\n  }\n  getErrorMessage(message: string) {\n    switch (message) {\n      case 'EMAIL_NOT_FOUND':\n        return 'Email Not Found';\n      case 'INVALID_PASSWORD':\n        return 'Invalid Password';\n      case 'EMAIL_EXISTS':\n        return 'Email already exists';\n      default:\n        return 'Unknown error occurred. Please try again';\n    }\n  }\n\n  setUserInLocalStorage(user: User) {\n    localStorage.setItem('userData', JSON.stringify(user));\n\n    this.runTimeoutInterval(user);\n  }\n\n  runTimeoutInterval(user: User) {\n    const todaysDate = new Date().getTime();\n    const expirationDate = user.expireDate.getTime();\n    const timeInterval = expirationDate - todaysDate;\n\n    this.timeoutInterval = setTimeout(() => {\n      //this.store.dispatch(autoLogout());\n      //logout functionality or get the refresh token\n    }, timeInterval);\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -807,6 +797,38 @@
                         }
                     }
                 ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "HomepageService",
+            "id": "injectable-HomepageService-ad138b8de030f9bd1cb909743d5e1eb0",
+            "file": "src/app/homepage/homepage.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getProducts",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "{}",
+                    "typeParameters": [],
+                    "line": 6,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\n\r\n@Injectable()\r\nexport class HomepageService {\r\n    constructor() { }\r\n    getProducts(){\r\n        return [\r\n            { name: 'Product 1', price: '100$', desc: 'Product1 Description to be enter here.', src: 'https://images.unsplash.com/photo-1618221639244-c1a8502c0eb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fGhvbWUlMjBkZWNvcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60' },\r\n            { name: 'Product 2', price: '200$', desc: 'Product2 Description to be enter here.', src: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=650' },\r\n            { name: 'Product 3', price: '300$', desc: 'Product3 Description to be enter here.', src: 'https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?w=650' },\r\n            { name: 'Product 4', price: '400$', desc: 'Product4 Description to be enter here.', src: 'https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGhvbWUlMjBkZWNvcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60' },\r\n            { name: 'Product 5', price: '500$', desc: 'Product5 Description to be enter here.', src: 'https://images.unsplash.com/photo-1540492649367-c8565a571e4b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fGZsb3dlciUyMHBvdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60' },\r\n            { name: 'Product 6', price: '600$', desc: 'Product6 Description to be enter here.', src: 'https://images.unsplash.com/photo-1617326033821-449e82ca23d9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDZ8fGhvbWUlMjBkZWNvcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60' }\r\n        ]\r\n    }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 4
             },
             "type": "injectable"
         }
@@ -1174,7 +1196,7 @@
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-5983ec8b66f5b82b23db59221d91b8ea",
+            "id": "component-AppComponent-d934f773545db12541f5576a36df1862",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1194,6 +1216,15 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "currentUser",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
                     "name": "title",
                     "defaultValue": "'assignment'",
                     "deprecated": false,
@@ -1206,12 +1237,22 @@
             ],
             "methodsClass": [
                 {
+                    "name": "logout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 11,
+                    "line": 12,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1223,16 +1264,16 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'assignment';\n\n  ngOnInit(){\n    console.log(\"app component\");\n  }\n  \n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'assignment';\n  currentUser: string | null;\n\n  ngOnInit(){\n    console.log(\"app component\");\n    console.log(localStorage.getItem(\"user\"));\n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  logout(){\n    localStorage.removeItem(\"user\");\n  }\n  \n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n    font-family: Roboto;\r\n    font-size: 16px;\r\n    color: #333;\r\n    box-sizing: border-box;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n  }\r\n\r\n  h1,\r\n  h2,\r\n  h3,\r\n  h4,\r\n  h5,\r\n  h6 {\r\n    margin: 8px 0;\r\n  }\r\n\r\n  p {\r\n    margin: 0;\r\n  }\r\n\r\n  .spacer {\r\n    flex: 1;\r\n  }\r\n\r\n  .toolbar {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #1976d2;\r\n    color: white;\r\n    font-weight: 600;\r\n  }\r\n\r\n  .toolbar img {\r\n    margin: 0 16px;\r\n  }\r\n\r\n  .toolbar #twitter-logo {\r\n    height: 40px;\r\n    margin: 0 8px;\r\n  }\r\n\r\n  .toolbar #youtube-logo {\r\n    height: 40px;\r\n    margin: 0 16px;\r\n  }\r\n\r\n  .toolbar #twitter-logo:hover,\r\n  .toolbar #youtube-logo:hover {\r\n    opacity: 0.8;\r\n  }\r\n\r\n  .content {\r\n    display: flex;\r\n    margin: 82px auto 32px;\r\n    padding: 0 16px;\r\n    max-width: 960px;\r\n    flex-direction: column;\r\n    align-items: center;\r\n  }\r\n\r\n  svg.material-icons {\r\n    height: 24px;\r\n    width: auto;\r\n  }\r\n\r\n  svg.material-icons:not(:last-child) {\r\n    margin-right: 8px;\r\n  }\r\n\r\n  .card svg.material-icons path {\r\n    fill: #888;\r\n  }\r\n\r\n  .card-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    margin-top: 16px;\r\n  }\r\n\r\n  .card {\r\n    border-radius: 4px;\r\n    border: 1px solid #eee;\r\n    background-color: #fafafa;\r\n    height: 40px;\r\n    width: 200px;\r\n    margin: 0 8px 16px;\r\n    padding: 16px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    align-items: center;\r\n    transition: all 0.2s ease-in-out;\r\n    line-height: 24px;\r\n  }\r\n\r\n  .card-container .card:not(:last-child) {\r\n    margin-right: 0;\r\n  }\r\n\r\n  .card.card-small {\r\n    height: 16px;\r\n    width: 168px;\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card) {\r\n    cursor: pointer;\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card):hover {\r\n    transform: translateY(-3px);\r\n    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card):hover .material-icons path {\r\n    fill: rgb(105, 103, 103);\r\n  }\r\n\r\n  .card.highlight-card {\r\n    background-color: #1976d2;\r\n    color: white;\r\n    font-weight: 600;\r\n    border: none;\r\n    width: auto;\r\n    min-width: 30%;\r\n    position: relative;\r\n  }\r\n\r\n  .card.card.highlight-card span {\r\n    margin-left: 60px;\r\n  }\r\n\r\n  svg#rocket {\r\n    width: 80px;\r\n    position: absolute;\r\n    left: -10px;\r\n    top: -24px;\r\n  }\r\n\r\n  svg#rocket-smoke {\r\n    height: calc(100vh - 95px);\r\n    position: absolute;\r\n    top: 10px;\r\n    right: 180px;\r\n    z-index: -10;\r\n  }\r\n\r\n  a,\r\n  a:visited,\r\n  a:hover {\r\n    color: #fff;\r\n    text-decoration: none;\r\n    padding: 10px;\r\n  }\r\n\r\n  a:hover {\r\n    color: #fff;\r\n  }\r\n\r\n  .terminal {\r\n    position: relative;\r\n    width: 80%;\r\n    max-width: 600px;\r\n    border-radius: 6px;\r\n    padding-top: 45px;\r\n    margin-top: 8px;\r\n    overflow: hidden;\r\n    background-color: rgb(15, 15, 16);\r\n  }\r\n\r\n  .terminal::before {\r\n    content: \"\\2022 \\2022 \\2022\";\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    height: 4px;\r\n    background: rgb(58, 58, 58);\r\n    color: #c2c3c4;\r\n    width: 100%;\r\n    font-size: 2rem;\r\n    line-height: 0;\r\n    padding: 14px 0;\r\n    text-indent: 4px;\r\n  }\r\n\r\n  .terminal pre {\r\n    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;\r\n    color: white;\r\n    padding: 0 1rem 1rem;\r\n    margin: 0;\r\n  }\r\n\r\n  .circle-link {\r\n    height: 40px;\r\n    width: 40px;\r\n    border-radius: 40px;\r\n    margin: 8px;\r\n    background-color: white;\r\n    border: 1px solid #eeeeee;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\r\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\r\n    transition: 1s ease-out;\r\n  }\r\n\r\n  .circle-link:hover {\r\n    transform: translateY(-0.25rem);\r\n    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);\r\n  }\r\n\r\n  footer {\r\n    margin-top: 8px;\r\n    display: flex;\r\n    align-items: center;\r\n    line-height: 20px;\r\n  }\r\n\r\n  footer a {\r\n    display: flex;\r\n    align-items: center;\r\n  }\r\n\r\n  .github-star-badge {\r\n    color: #24292e;\r\n    display: flex;\r\n    align-items: center;\r\n    font-size: 12px;\r\n    padding: 3px 10px;\r\n    border: 1px solid rgba(27,31,35,.2);\r\n    border-radius: 3px;\r\n    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);\r\n    margin-left: 4px;\r\n    font-weight: 600;\r\n    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;\r\n  }\r\n\r\n  .github-star-badge:hover {\r\n    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);\r\n    border-color: rgba(27,31,35,.35);\r\n    background-position: -.5em;\r\n  }\r\n\r\n  .github-star-badge .material-icons {\r\n    height: 16px;\r\n    width: 16px;\r\n    margin-right: 4px;\r\n  }\r\n\r\n  svg#clouds {\r\n    position: fixed;\r\n    bottom: -160px;\r\n    left: -230px;\r\n    z-index: -10;\r\n    width: 1920px;\r\n  }\r\n\r\n\r\n  /* Responsive Styles */\r\n  @media screen and (max-width: 767px) {\r\n\r\n    .card-container > *:not(.circle-link) ,\r\n    .terminal {\r\n      width: 100%;\r\n    }\r\n\r\n    .card:not(.highlight-card) {\r\n      height: 16px;\r\n      margin: 8px 0;\r\n    }\r\n\r\n    .card.highlight-card span {\r\n      margin-left: 72px;\r\n    }\r\n\r\n    svg#rocket-smoke {\r\n      right: 120px;\r\n      transform: rotate(-5deg);\r\n    }\r\n  }\r\n\r\n  @media screen and (max-width: 575px) {\r\n    svg#rocket-smoke {\r\n      display: none;\r\n      visibility: hidden;\r\n    }\r\n  }",
+                    "data": ":host {\r\n    font-family: Roboto;\r\n    font-size: 14px;\r\n    color: #333;\r\n    box-sizing: border-box;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n  }\r\n\r\n  h1,\r\n  h2,\r\n  h3,\r\n  h4,\r\n  h5,\r\n  h6 {\r\n    margin: 8px 0;\r\n  }\r\n\r\n  p {\r\n    margin: 0;\r\n  }\r\n\r\n  .spacer {\r\n    flex: 1;\r\n  }\r\n\r\n  .toolbar {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #1976d2;\r\n    color: white;\r\n    font-weight: 600;\r\n  }\r\n\r\n  .toolbar img {\r\n    margin: 0 16px;\r\n  }\r\n\r\n  .toolbar #twitter-logo {\r\n    height: 40px;\r\n    margin: 0 8px;\r\n  }\r\n\r\n  .toolbar #youtube-logo {\r\n    height: 40px;\r\n    margin: 0 16px;\r\n  }\r\n\r\n  .toolbar #twitter-logo:hover,\r\n  .toolbar #youtube-logo:hover {\r\n    opacity: 0.8;\r\n  }\r\n\r\n  .content {\r\n    display: flex;\r\n    margin: 82px auto 32px;\r\n    padding: 0 16px;\r\n    max-width: 960px;\r\n    flex-direction: column;\r\n    align-items: center;\r\n  }\r\n\r\n  svg.material-icons {\r\n    height: 24px;\r\n    width: auto;\r\n  }\r\n\r\n  svg.material-icons:not(:last-child) {\r\n    margin-right: 8px;\r\n  }\r\n\r\n  .card svg.material-icons path {\r\n    fill: #888;\r\n  }\r\n\r\n  .card-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    margin-top: 16px;\r\n  }\r\n\r\n  .card {\r\n    border-radius: 4px;\r\n    border: 1px solid #eee;\r\n    background-color: #fafafa;\r\n    height: 40px;\r\n    width: 200px;\r\n    margin: 0 8px 16px;\r\n    padding: 16px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    align-items: center;\r\n    transition: all 0.2s ease-in-out;\r\n    line-height: 24px;\r\n  }\r\n\r\n  .card-container .card:not(:last-child) {\r\n    margin-right: 0;\r\n  }\r\n\r\n  .card.card-small {\r\n    height: 16px;\r\n    width: 168px;\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card) {\r\n    cursor: pointer;\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card):hover {\r\n    transform: translateY(-3px);\r\n    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card):hover .material-icons path {\r\n    fill: rgb(105, 103, 103);\r\n  }\r\n\r\n  .card.highlight-card {\r\n    background-color: #1976d2;\r\n    color: white;\r\n    font-weight: 600;\r\n    border: none;\r\n    width: auto;\r\n    min-width: 30%;\r\n    position: relative;\r\n  }\r\n\r\n  .card.card.highlight-card span {\r\n    margin-left: 60px;\r\n  }\r\n\r\n  svg#rocket {\r\n    width: 80px;\r\n    position: absolute;\r\n    left: -10px;\r\n    top: -24px;\r\n  }\r\n\r\n  svg#rocket-smoke {\r\n    height: calc(100vh - 95px);\r\n    position: absolute;\r\n    top: 10px;\r\n    right: 180px;\r\n    z-index: -10;\r\n  }\r\n\r\n  a,\r\n  a:visited,\r\n  a:hover {\r\n    color: #fff;\r\n    text-decoration: none;\r\n    padding: 10px;\r\n  }\r\n\r\n  a:hover {\r\n    color: #fff;\r\n  }\r\n\r\n  .terminal {\r\n    position: relative;\r\n    width: 80%;\r\n    max-width: 600px;\r\n    border-radius: 6px;\r\n    padding-top: 45px;\r\n    margin-top: 8px;\r\n    overflow: hidden;\r\n    background-color: rgb(15, 15, 16);\r\n  }\r\n\r\n  .terminal::before {\r\n    content: \"\\2022 \\2022 \\2022\";\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    height: 4px;\r\n    background: rgb(58, 58, 58);\r\n    color: #c2c3c4;\r\n    width: 100%;\r\n    font-size: 2rem;\r\n    line-height: 0;\r\n    padding: 14px 0;\r\n    text-indent: 4px;\r\n  }\r\n\r\n  .terminal pre {\r\n    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;\r\n    color: white;\r\n    padding: 0 1rem 1rem;\r\n    margin: 0;\r\n  }\r\n\r\n  .circle-link {\r\n    height: 40px;\r\n    width: 40px;\r\n    border-radius: 40px;\r\n    margin: 8px;\r\n    background-color: white;\r\n    border: 1px solid #eeeeee;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\r\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\r\n    transition: 1s ease-out;\r\n  }\r\n\r\n  .circle-link:hover {\r\n    transform: translateY(-0.25rem);\r\n    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);\r\n  }\r\n\r\n  footer {\r\n    margin-top: 8px;\r\n    display: flex;\r\n    align-items: center;\r\n    line-height: 20px;\r\n    background-color: blueviolet;\r\n  }\r\n\r\n  footer a {\r\n    display: flex;\r\n    align-items: center;\r\n  }\r\n\r\n  .github-star-badge {\r\n    color: #24292e;\r\n    display: flex;\r\n    align-items: center;\r\n    font-size: 12px;\r\n    padding: 3px 10px;\r\n    border: 1px solid rgba(27,31,35,.2);\r\n    border-radius: 3px;\r\n    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);\r\n    margin-left: 4px;\r\n    font-weight: 600;\r\n    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;\r\n  }\r\n\r\n  .github-star-badge:hover {\r\n    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);\r\n    border-color: rgba(27,31,35,.35);\r\n    background-position: -.5em;\r\n  }\r\n\r\n  .github-star-badge .material-icons {\r\n    height: 16px;\r\n    width: 16px;\r\n    margin-right: 4px;\r\n  }\r\n\r\n  svg#clouds {\r\n    position: fixed;\r\n    bottom: -160px;\r\n    left: -230px;\r\n    z-index: -10;\r\n    width: 1920px;\r\n  }\r\n\r\n\r\n  /* Responsive Styles */\r\n  @media screen and (max-width: 767px) {\r\n\r\n    .card-container > *:not(.circle-link) ,\r\n    .terminal {\r\n      width: 100%;\r\n    }\r\n\r\n    .card:not(.highlight-card) {\r\n      height: 16px;\r\n      margin: 8px 0;\r\n    }\r\n\r\n    .card.highlight-card span {\r\n      margin-left: 72px;\r\n    }\r\n\r\n    svg#rocket-smoke {\r\n      right: 120px;\r\n      transform: rotate(-5deg);\r\n    }\r\n  }\r\n\r\n  @media screen and (max-width: 575px) {\r\n    svg#rocket-smoke {\r\n      display: none;\r\n      visibility: hidden;\r\n    }\r\n  }",
                     "styleUrl": "./app.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"toolbar\" role=\"banner\">\n  <img\n    width=\"40\"\n    alt=\"Angular Logo\"\n    src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"\n  />\n  <span>PRODUCTS</span>\n    <div class=\"spacer\"></div>\n    <a href=\"/\" title=\"Home\">HOME</a>\n    <a href=\"/products-list\" title=\"Products\">PRODUCTS</a>\n    <a rel=\"noopener\" href=\"/posts\" title=\"posts\">POSTS</a>\n    <a rel=\"noopener\" href=\"/login\" title=\"Login\">LOGIN</a>\n    <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\">SIGNUP</a>\n    <a rel=\"noopener\" href=\"/\" title=\"Logout\">LOGOUT</a>\n</div>\n\n\n<router-outlet></router-outlet>\n"
+            "templateData": "<!-- <div class=\"content\" role=\"main\"> -->\n<div class=\"toolbar\" role=\"banner\">\n  <img\n    width=\"40\"\n    alt=\"Angular Logo\"\n    src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"\n  />\n  <span>PRODUCTS</span>\n    <div class=\"spacer\"></div>\n    <a href=\"/\" title=\"Home\">HOME</a>\n    <!-- <a href=\"/products-list\" title=\"Products\">PRODUCTS</a> -->\n    <a rel=\"noopener\" href=\"/posts\" title=\"posts\">POSTS</a>\n    <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n    <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\">SIGNUP</a>\n    <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 30px;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n</div>\n\n\n<footer>\n  Love Angular?&nbsp;\n  <a href=\"https://github.com/angular/angular\" target=\"_blank\" rel=\"noopener\"> Give our repo a star.\n    <div class=\"github-star-badge\">\n        <svg class=\"material-icons\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z\"/></svg>\n      Star\n    </div>\n  </a>\n  <a href=\"https://github.com/angular/angular\" target=\"_blank\" rel=\"noopener\">\n    <svg class=\"material-icons\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\" fill=\"#1976d2\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>\n  </a>\n</footer>\n\n<!-- <svg id=\"clouds\" xmlns=\"http://www.w3.org/2000/svg\" width=\"2611.084\" height=\"485.677\" viewBox=\"0 0 2611.084 485.677\">\n  <title>Gray Clouds Background</title>\n  <path id=\"Path_39\" data-name=\"Path 39\" d=\"M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z\" transform=\"translate(142.69 -634.312)\" fill=\"#eee\"/>\n</svg> -->\n<!-- </div> -->\n<router-outlet></router-outlet>\n"
         },
         {
             "name": "ButtonComponent",
@@ -1356,7 +1397,7 @@
         },
         {
             "name": "CardComponent",
-            "id": "component-CardComponent-da90c58e44ba5f9c73bbb03dc596ce5c",
+            "id": "component-CardComponent-51c863650589b3973bcf0fbe89553751",
             "file": "src/app/story-components/card/card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1375,7 +1416,7 @@
             "inputsClass": [
                 {
                     "name": "content",
-                    "defaultValue": "'😄'",
+                    "defaultValue": "'Card Content'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 12,
@@ -1436,7 +1477,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent implements OnInit {\n  @Input('title') title:any;\n  @Input('subtitle') subtitle:any;\n  @Input('content') content = '😄';\n  @Output() btnClicked = new EventEmitter();\n\n  constructor() {}\n\n  ngOnInit(): void {\n  }\n\n  handleBtnClick(){}\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent implements OnInit {\n  @Input('title') title:any;\n  @Input('subtitle') subtitle:any;\n  @Input('content') content = 'Card Content';\n  @Output() btnClicked = new EventEmitter();\n\n  constructor() {}\n\n  ngOnInit(): void {\n  }\n\n  handleBtnClick(){}\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1886,7 +1927,7 @@
         },
         {
             "name": "HomepageComponent",
-            "id": "component-HomepageComponent-883e887c6e20ab6db9fdba2d5bdc96ed",
+            "id": "component-HomepageComponent-5f60bd3db621e610b7af04d0cd07ba65",
             "file": "src/app/homepage/homepage.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1907,13 +1948,13 @@
             "propertiesClass": [
                 {
                     "name": "products",
-                    "defaultValue": "[1,2,3]",
+                    "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 11
+                    "line": 10
                 }
             ],
             "methodsClass": [
@@ -1926,6 +1967,16 @@
                     "line": 12,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "viewProduct",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
                 }
             ],
             "deprecated": false,
@@ -1935,11 +1986,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-homepage',\n  templateUrl: './homepage.component.html',\n  styleUrls: ['./homepage.component.scss']\n})\nexport class HomepageComponent implements OnInit {\n\n  constructor() { }\n  products = [1,2,3];\n  ngOnInit(): void {\n    console.log(\"homepage\");\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { HomepageService } from './homepage.service';\n\n@Component({\n  selector: 'app-homepage',\n  templateUrl: './homepage.component.html',\n  styleUrls: ['./homepage.component.scss']\n})\nexport class HomepageComponent implements OnInit {\n  products :any = [];\n  constructor(private homepageService: HomepageService) { }\n  ngOnInit(): void {\n    console.log(\"homepage\");\n    this.products = this.homepageService.getProducts();\n    console.log(this.products);\n  }\n\n  viewProduct(){}\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "h1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.container {\r\n    display: grid;\r\n    \r\n    grid-template-columns: repeat(3, 1fr);\r\n    grid-auto-rows: 300px;\r\n    grid-gap: 30px;\r\n    grid-row-gap: 80px;\r\n\r\n    .card{\r\n        border: 1px solid #000;\r\n        border-radius: 5px;\r\n        padding: 10px;\r\n        row-gap: 20px;\r\n        margin-bottom: 40px;\r\n\r\n        .card-image{\r\n            height: 200px;\r\n            width: 100%;\r\n        }\r\n\r\n        button{\r\n            \r\n            background-color: #1976d2;\r\n            color :#fff;\r\n            border-radius: 20px;\r\n            font-size: 16px;\r\n            padding:3px 5px 4px 5px;\r\n        }\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 800px) and (min-width: 550px){\r\n    .container{\r\n        grid-template-columns: repeat(2, 1fr);\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 550px){\r\n    .container{\r\n        grid-template-columns: 2fr;\r\n    }\r\n}\r\n",
                     "styleUrl": "./homepage.component.scss"
                 }
             ],
@@ -1949,13 +2000,31 @@
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "homepageService",
+                        "type": "HomepageService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "homepageService",
+                        "type": "HomepageService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<br><br><br><br><br><h1>homepage works!</h1>\n\n"
+            "templateData": "<br><br><br><br><br>\n\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let p of products\">\n            <img [src]=\"p.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>\n            <p>{{p.desc}}</p>\n\n            <button (click)=\"viewProduct()\">Details</button>\n        </div>\n    </div>\n    <!-- <ngu-carousel #myCarousel [inputs]=\"worksCarouselConfig\" [dataSource]=\"works\">\n        <ngu-tile *nguCarouselDef=\"let work; let j = index\">\n           <mat-card>                   \n                <img mat-card-image [src]=\"work.src\" alt=\"image\">\n                <mat-card-content>\n                    <h3>{{work.name}}</h3>\n                    <p class=\"secondary-text-color mt-2\">{{work.desc}}</p>\n                </mat-card-content>\n                <mat-divider></mat-divider>\n                <mat-card-actions fxLayoutAlign=\"end center\" class=\"secondary-text-color\">                               \n                    <button mat-icon-button><mat-icon>favorite</mat-icon></button>\n                    <button mat-icon-button><mat-icon>share</mat-icon></button>\n                </mat-card-actions>\n            </mat-card>\n        </ngu-tile>\n        <button mat-mini-fab NguCarouselPrev class=\"arrow-btn prev\"><mat-icon>keyboard_arrow_left</mat-icon></button>\n        <button mat-mini-fab NguCarouselNext class=\"arrow-btn next\"><mat-icon>keyboard_arrow_right</mat-icon></button>\n    </ngu-carousel> -->\n</div>"
         },
         {
             "name": "ImageComponent",
@@ -2054,7 +2123,7 @@
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-ad47a76e6b1ea66e91c76351006d7e9e",
+            "id": "component-LoginComponent-a7c9bed6d21cb5957f38b21c25aa39d8",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2080,10 +2149,19 @@
                     "type": "AuthService",
                     "optional": false,
                     "description": "",
-                    "line": 19,
+                    "line": 20,
                     "modifierKind": [
                         122
                     ]
+                },
+                {
+                    "name": "currentUser",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
                 },
                 {
                     "name": "fb",
@@ -2092,7 +2170,7 @@
                     "type": "FormBuilder",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 19,
                     "modifierKind": [
                         122
                     ]
@@ -2116,7 +2194,7 @@
                     "type": "Router",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 21,
                     "modifierKind": [
                         122
                     ]
@@ -2139,7 +2217,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 75,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2149,7 +2227,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2159,7 +2237,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -2171,7 +2249,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from 'src/app/app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"login\");\n  }\n\n  onSubmit(){\n    console.log(this.form.value.email, this.form.value.password);\n    // const email = this.form.value.email;\n    // const password = this.form.value.password;\n    // this.store.dispatch(loginStart({email, password}));\n\n    this.authService.login(this.form.value.email, this.form.value.password).subscribe(\n      data => {\n        let successFlag = false;\n        console.log(data);\n        if(data){\n          this.users = data;\n          for(let i=0; i<this.users.length; i++){\n            if(this.form.value.email = this.users[i][\"email\"] && this.form.value.password == this.users[i][\"password\"]){\n              console.log(\"if\");\n              this.authService.setLoginSubscription();\n              this.router.navigate(['/']);\n              this.toastr.success('Login Success');\n              successFlag = true;\n            }else{\n              successFlag = false;\n            }\n          }\n          console.log(successFlag);\n          if(!successFlag){\n            console.log(successFlag);\n            this.toastr.error('Invalid email or password');\n          }\n        }else{\n          console.log(\"Users not found\");\n        }\n      },\n      error => {\n        error='Bad email';\n      });\n  }\n\n\n  forgotPassword(){}\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from 'src/app/app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"login\");\n  }\n\n  onSubmit(){\n    console.log(this.form.value.email, this.form.value.password);\n    // const email = this.form.value.email;\n    // const password = this.form.value.password;\n    // this.store.dispatch(loginStart({email, password}));\n    this.currentUser = this.form.value.email;\n\n    this.authService.login(this.form.value.email, this.form.value.password).subscribe(\n      data => {\n        let successFlag = false;\n        console.log(data);\n        if(data){\n          this.users = data;\n          for(let i=0; i<this.users.length; i++){\n            if(this.form.value.email = this.users[i][\"email\"] && this.form.value.password == this.users[i][\"password\"]){\n              console.log(\"if\");\n              console.log(this.currentUser);\n              localStorage.setItem('user', this.currentUser);\n              console.log(localStorage.getItem(\"user\"));\n              this.router.navigate(['/']);\n              this.toastr.success('Login Success');\n              successFlag = true;\n            }else{\n              successFlag = false;\n            }\n          }\n          console.log(successFlag);\n          if(!successFlag){\n            console.log(successFlag);\n            this.toastr.error('Invalid email or password');\n          }\n        }else{\n          console.log(\"Users not found\");\n        }\n      },\n      error => {\n        error='Bad email';\n      });\n  }\n\n\n  forgotPassword(){}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2217,7 +2295,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 17,
+                "line": 18,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -2753,7 +2831,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@keyframes spinner {\r\n    0% {\r\n      transform: translate3d(-50%, -50%, 0) rotate(0deg);\r\n    }\r\n    100% {\r\n      transform: translate3d(-50%, -50%, 0) rotate(360deg);\r\n    }\r\n  }\r\n  .spin::before {\r\n    animation: 1.5s linear infinite spinner;\r\n    animation-play-state: inherit;\r\n    border: solid 5px #cfd0d1;\r\n    //border-bottom-color: #1c87c9;\r\n    border-radius: 50%;\r\n    content: \"\";\r\n    height: 40px;\r\n    width: 40px;\r\n    position: absolute;\r\n    top: 10%;\r\n    left: 10%;\r\n    transform: translate3d(-50%, -50%, 0);\r\n    will-change: transform;\r\n  }",
+                    "data": "@keyframes spinner {\r\n    0% {\r\n      transform: translate3d(-50%, -50%, 0) rotate(0deg);\r\n    }\r\n    100% {\r\n      transform: translate3d(-50%, -50%, 0) rotate(360deg);\r\n    }\r\n  }\r\n  .spin::before {\r\n    animation: 1.5s linear infinite spinner;\r\n    animation-play-state: inherit;\r\n    border: solid 5px #cfd0d1;\r\n    border-bottom-color: #1c87c9;\r\n    border-radius: 50%;\r\n    content: \"\";\r\n    height: 40px;\r\n    width: 40px;\r\n    position: absolute;\r\n    top: 10%;\r\n    left: 10%;\r\n    transform: translate3d(-50%, -50%, 0);\r\n    will-change: transform;\r\n  }",
                     "styleUrl": "./spinner.component.scss"
                 }
             ],
@@ -2769,23 +2847,27 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<!-- <div class=\"spin\"></div> -->\n\n<span class=\"spin\nds-u-color--{{color}}\nds-c-spinner--{{size}}\" [attr.aria-valuetext]=\"'Loading'\" role=\"progressbar\">\n</span>\n"
+            "templateData": "<div class=\"spin\"\n\n></div>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-eb33b67eb5d2a726f03ee4f64790635c",
+            "id": "module-AppModule-3ea35a234e6f1560265f8210f2597033",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\n\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent\n      \n  ],\n  imports: [\n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\nimport { HomepageService } from './homepage/homepage.service';\n\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent\n      \n  ],\n  imports: [\n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  providers: [HomepageService],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "HomepageService"
+                        }
+                    ]
                 },
                 {
                     "type": "declarations",
@@ -2832,13 +2914,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-3c128d69c65327a0d69c4ab252acd9e2",
+            "id": "module-AppRoutingModule-14a0c44d3e3b85fbfb58aa9467e4689a",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport HeaderComponent from 'src/stories/header.component';\nimport { HomepageComponent } from './homepage/homepage.component';\nimport { PostsModule } from './posts/posts.module';\nimport { AddProductComponent } from './products/add-product/add-product.component';\nimport { ProductsListComponent } from './products/products-list/products-list.component';\n\nexport const routes: Routes = [\n  { path: '', component: HomepageComponent },\n  //{ path: 'login', component: LoginComponent },\n  { path: 'login', loadChildren: () => \"import('./login/login.module').then(m => m.LoginModule)\" },\n  \n  // { path: 'products-list', component: ProductsListComponent },\n  // { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule), \n  //   children:[{path:'add', component: AddProductComponent}]\n  // },\n  {path: '', component: ProductsListComponent,\n    children: [\n      {path: '', redirectTo: 'products-list', pathMatch: 'full'},\n      { path: 'products-list', loadChildren: () => \"import('./products/products.module').then(m => m.ProductsModule)\" },\n      \n    ]\n  },\n  { path: 'posts', \n    loadChildren: () => \"import('./posts/posts.module').then((m)=>m.PostsModule)\"\n  },\n  // { path: 'header', component: HeaderComponent },\n  \n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n\n }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport HeaderComponent from 'src/stories/header.component';\nimport { HomepageComponent } from './homepage/homepage.component';\nimport { PostsModule } from './posts/posts.module';\nimport { AddProductComponent } from './products/add-product/add-product.component';\nimport { ProductsListComponent } from './products/products-list/products-list.component';\n\nexport const routes: Routes = [\n  //{ path: '', component: HomepageComponent },\n  { path: '', \n    loadChildren: () => \"import('./homepage/homepage.module').then((m)=>m.HomepageModule)\"\n  },\n  //{ path: 'login', component: LoginComponent },\n  { path: 'login', loadChildren: () => \"import('./login/login.module').then(m => m.LoginModule)\" },\n  \n  // { path: 'products-list', component: ProductsListComponent },\n  // { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule), \n  //   children:[{path:'add', component: AddProductComponent}]\n  // },\n  {path: '', component: ProductsListComponent,\n    children: [\n      {path: '', redirectTo: 'products-list', pathMatch: 'full'},\n      { path: 'products-list', loadChildren: () => \"import('./products/products.module').then(m => m.ProductsModule)\" },\n      \n    ]\n  },\n  { path: 'posts', \n    loadChildren: () => \"import('./posts/posts.module').then((m)=>m.PostsModule)\"\n  },\n  // { path: 'header', component: HeaderComponent },\n  \n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n\n }\n",
             "children": [
                 {
                     "type": "providers",
@@ -2868,17 +2950,21 @@
         },
         {
             "name": "HomepageModule",
-            "id": "module-HomepageModule-516c940e80458a85374e4193604b5d8b",
+            "id": "module-HomepageModule-772b69304e7ac34c521d4a64766a247d",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/homepage/homepage.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { RouterModule } from '@angular/router';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { HomepageComponent } from './homepage.component';\r\n\r\nexport const routes = [\r\n  { path: '', component: HomepageComponent, pathMatch: 'full' }\r\n];\r\n\r\n@NgModule({\r\n    declarations: [\r\n        HomepageComponent\r\n    ],\r\n  imports: [\r\n    CommonModule,\r\n    RouterModule.forChild(routes),\r\n    FormsModule, \r\n    ReactiveFormsModule,\r\n  ],\r\n  \r\n})\r\nexport class HomepageModule { }",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { RouterModule } from '@angular/router';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { HomepageComponent } from './homepage.component';\r\nimport { HomepageService } from './homepage.service';\r\n\r\nexport const routes = [\r\n  { path: '', component: HomepageComponent, pathMatch: 'full' }\r\n];\r\n\r\n@NgModule({\r\n  declarations: [\r\n    HomepageComponent\r\n  ],\r\n  imports: [\r\n    CommonModule,\r\n    RouterModule.forChild(routes),\r\n    FormsModule, \r\n    ReactiveFormsModule,\r\n  ],\r\n  providers:[HomepageService]\r\n})\r\nexport class HomepageModule { }",
             "children": [
                 {
                     "type": "providers",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "HomepageService"
+                        }
+                    ]
                 },
                 {
                     "type": "declarations",
@@ -3659,16 +3745,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Posts",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/posts.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -3907,16 +3983,6 @@
                 "deprecationMessage": "",
                 "type": "Story<Page>",
                 "defaultValue": "(args: Page) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/posts.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<PostListComponent>",
-                "defaultValue": "() => ({\r\n  component: PostListComponent,\r\n  template: `<app-post-list></app-post-list>`,\r\n})"
             },
             {
                 "name": "Template",
@@ -5070,28 +5136,6 @@
                     "defaultValue": "Template.bind({})"
                 }
             ],
-            "src/stories/posts.stories.ts": [
-                {
-                    "name": "Posts",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/posts.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/posts.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<PostListComponent>",
-                    "defaultValue": "() => ({\r\n  component: PostListComponent,\r\n  template: `<app-post-list></app-post-list>`,\r\n})"
-                }
-            ],
             "src/app/homepage/homepage.module.ts": [
                 {
                     "name": "routes",
@@ -5394,7 +5438,14 @@
                 "children": [
                     {
                         "path": "",
-                        "component": "HomepageComponent"
+                        "loadChildren": "./homepage/homepage.module#HomepageModule",
+                        "children": [
+                            {
+                                "kind": "module",
+                                "children": [],
+                                "module": "HomepageModule"
+                            }
+                        ]
                     },
                     {
                         "path": "login",
@@ -5478,7 +5529,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -5515,7 +5566,7 @@
                 "linktype": "component",
                 "name": "HomepageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -5526,6 +5577,15 @@
                 "name": "routes",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/homepage/homepage.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "HomepageService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -5672,7 +5732,7 @@
                 "linktype": "injectable",
                 "name": "AuthService",
                 "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -5700,7 +5760,7 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coverageCount": "0/11",
                 "status": "low"
             },
             {
@@ -6630,26 +6690,6 @@
                 "name": "PageComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/posts.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Posts",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/posts.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
                 "status": "low"
             },
             {

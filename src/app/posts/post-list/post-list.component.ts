@@ -13,11 +13,16 @@ import { getPosts } from '../state/posts.selector';
   styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
-  posts: Observable<Post[]>
+  posts: Observable<Post[]>;
+  products:any;
+  NoProducts: boolean=false;
   constructor(private store : Store<AppState>, private router: Router) { }
 
   ngOnInit(): void {
     this.posts = this.store.select(getPosts);
+    this.products = this.posts;
+    console.log(this.products);
+    
   }
 
   deletePost(id:any){
@@ -25,8 +30,17 @@ export class PostListComponent implements OnInit {
     if(confirm("Are you sure you want to delete?")){
       console.log(id);
       this.store.dispatch(deletePost({id}));
-      
+      this.router.navigate(['/posts']);
     }
+
+    console.log(this.products.length);
+    if(!this.products){
+      this.NoProducts = true;
+    }
+  }
+
+  viewProduct(){
+
   }
 
 }

@@ -79,7 +79,4 @@ export class AuthService {
     }, timeInterval);
   }
 
-  setLoginSubscription(){
-    return
-  }
 }

@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 export class LoginComponent implements OnInit {
   public form:FormGroup;
   users :any= [];
+  currentUser: any;
   constructor(public fb: FormBuilder, 
     public authService:AuthService, 
     public router: Router, 
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
     // const email = this.form.value.email;
     // const password = this.form.value.password;
     // this.store.dispatch(loginStart({email, password}));
+    this.currentUser = this.form.value.email;
 
     this.authService.login(this.form.value.email, this.form.value.password).subscribe(
       data => {
@@ -45,7 +47,9 @@ export class LoginComponent implements OnInit {
           for(let i=0; i<this.users.length; i++){
             if(this.form.value.email = this.users[i]["email"] && this.form.value.password == this.users[i]["password"]){
               console.log("if");
-              this.authService.setLoginSubscription();
+              console.log(this.currentUser);
+              localStorage.setItem('user', this.currentUser);
+              console.log(localStorage.getItem("user"));
               this.router.navigate(['/']);
               this.toastr.success('Login Success');
               successFlag = true;
