@@ -7,7 +7,10 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { ProductsListComponent } from './products/products-list/products-list.component';
 
 export const routes: Routes = [
-  { path: '', component: HomepageComponent },
+  //{ path: '', component: HomepageComponent },
+  { path: '', 
+    loadChildren: () => import('./homepage/homepage.module').then((m)=>m.HomepageModule)
+  },
   //{ path: 'login', component: LoginComponent },
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   

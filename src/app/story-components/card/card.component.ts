@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-card',
@@ -6,9 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  constructor() { }
+  @Input('title') title:any;
+  @Input('subtitle') subtitle:any;
+  @Input('content') content = 'Card Content';
+  @Output() btnClicked = new EventEmitter();
+
+  constructor() {}
 
   ngOnInit(): void {
   }
+
+  handleBtnClick(){}
 
 }

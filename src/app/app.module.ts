@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageComponent } from './story-components/image/image.component';
 import { CardComponent } from './story-components/card/card.component';
 import { CheckboxComponent } from './story-components/checkbox/checkbox.component';
+import { HomepageService } from './homepage/homepage.service';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { CheckboxComponent } from './story-components/checkbox/checkbox.componen
       // autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
   ],
-  providers: [],
+  providers: [HomepageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

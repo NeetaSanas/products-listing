@@ -1356,7 +1356,7 @@
         },
         {
             "name": "CardComponent",
-            "id": "component-CardComponent-b19a4ceaed154b8d06699a7c07859a97",
+            "id": "component-CardComponent-da90c58e44ba5f9c73bbb03dc596ce5c",
             "file": "src/app/story-components/card/card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1374,58 +1374,57 @@
             "viewProviders": [],
             "inputsClass": [
                 {
-                    "name": "color",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 11,
-                    "type": "string"
-                },
-                {
-                    "name": "dataAutoId",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "string"
-                },
-                {
-                    "name": "filled",
+                    "name": "content",
+                    "defaultValue": "'😄'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 12,
-                    "type": "boolean"
+                    "type": "string"
                 },
                 {
-                    "name": "hide",
+                    "name": "subtitle",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
-                    "type": "boolean"
+                    "line": 11,
+                    "type": "any"
                 },
                 {
-                    "name": "inversed",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "boolean"
-                },
-                {
-                    "name": "size",
+                    "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 10,
-                    "type": "string"
+                    "type": "any"
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "btnClicked",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
             "methodsClass": [
+                {
+                    "name": "handleBtnClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19,
+                    "line": 17,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1437,11 +1436,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent implements OnInit {\n\n  @Input() size: string;\n  @Input() color: string;\n  @Input() filled: boolean;\n  @Input() inversed: boolean;\n  @Input() hide: boolean;\n  @Input() dataAutoId: string;\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent implements OnInit {\n  @Input('title') title:any;\n  @Input('subtitle') subtitle:any;\n  @Input('content') content = '😄';\n  @Output() btnClicked = new EventEmitter();\n\n  constructor() {}\n\n  ngOnInit(): void {\n  }\n\n  handleBtnClick(){}\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ":host {\r\n    text-align: center;\r\n    background: white;\r\n    display: block;\r\n    padding: .45rem .65rem;\r\n    border-radius: 3px;\r\n    max-width: 325px;\r\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);\r\n  }\r\nh2 {\r\ncolor: #c85f7f;\r\n}\r\n\r\np {\r\ntext-align: center;\r\n}  ",
                     "styleUrl": "./card.component.scss"
                 }
             ],
@@ -1452,12 +1451,111 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 15
+                "line": 13
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<span *ngIf=\"!hide\" attr.data-auto-id=\"{{dataAutoId}}_spinner\" class=\"ds-c-spinner\nds-u-fill--{{ inversed ? 'background-inverse' : null }}\nds-c-spinner--{{ filled ?  'filled' : null }}\nds-u-color--{{color}}\nds-c-spinner--{{size}}\" [attr.aria-valuetext]=\"'Loading'\" role=\"progressbar\">\n</span>\n"
+            "templateData": "<h1>{{ title }}</h1>\n<h2>{{ subtitle }}</h2>\n\n<hr *ngIf=\"title || subtitle\">\n\n<p>{{ content }}</p>\n\n<button (click)=\"handleBtnClick()\">Click me!</button>"
+        },
+        {
+            "name": "CheckboxComponent",
+            "id": "component-CheckboxComponent-5693cb52e890d7e6e4d21197cb11a743",
+            "file": "src/app/story-components/checkbox/checkbox.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-checkbox",
+            "styleUrls": [
+                "./checkbox.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./checkbox.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "boolean"
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Checkbox'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string"
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "boolean"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-checkbox',\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss']\n})\nexport class CheckboxComponent implements OnInit {\n\n  @Input() label = 'Checkbox';\n  @Input() primary = false;\n  @Input() disabled = true;\n\n\n    public get classes(): string[] {\n        const mode = this.primary ? 'btn-primary' : 'btn-secondary';\n        const disble = this.disabled ? 'disabled' : '';\n\n        return ['form-check-input', mode, disble];\n      }\n\n      public get class(): string[] {\n        const mode = this.primary ? 'btn-primary' : 'btn-secondary';\n       \n\n        return ['form-check-input', mode];\n      }\n\n      ngOnInit(){}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".disabled{\r\n    cursor: not-allowed !important;\r\n}",
+                    "styleUrl": "./checkbox.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 15
+                    }
+                },
+                "class": {
+                    "name": "class",
+                    "getSignature": {
+                        "name": "class",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 22
+                    }
+                }
+            },
+            "templateData": "<div class=\"form-check\" >\n    <input  type=\"checkbox\"  [ngClass]=\"classes\" value=\"\" disabled>\n    <label>{{ label }}</label>\n</div>\n<div class=\"form-check\" >\n    <input  type=\"checkbox\"  [ngClass]=\"class\" value=\"\">\n    <label>{{ label }}</label>\n</div>"
         },
         {
             "name": "EditPostComponent",
@@ -2597,7 +2695,7 @@
         },
         {
             "name": "SpinnerComponent",
-            "id": "component-SpinnerComponent-af2e47ac3912bf5615daf33afff96b89",
+            "id": "component-SpinnerComponent-60f0841efc82ff3c4994ace63d3761b8",
             "file": "src/app/story-components/spinner/spinner.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2616,43 +2714,10 @@
             "inputsClass": [
                 {
                     "name": "color",
-                    "defaultValue": "\"black\"",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 10,
                     "type": "string"
-                },
-                {
-                    "name": "dataAutoId",
-                    "defaultValue": "'123'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 14,
-                    "type": "string"
-                },
-                {
-                    "name": "filled",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 11,
-                    "type": "boolean"
-                },
-                {
-                    "name": "hide",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "boolean"
-                },
-                {
-                    "name": "inversed",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 12,
-                    "type": "boolean"
                 },
                 {
                     "name": "size",
@@ -2672,7 +2737,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 14,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -2684,11 +2749,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent implements OnInit {\n  @Input() size: string = \"small\";\n  @Input() color: string = \"black\";\n  @Input() filled: boolean = true;\n  @Input() inversed: boolean = true;\n  @Input() hide: boolean = false;\n  @Input() dataAutoId: string = '123';\n\n  // @Input()\n  // imgSrc:string = '/assets/flower.jpg';\n\n  // @Input()\n  // altTxt?:string = 'Testing Image';\n  \n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent implements OnInit {\n  @Input() size: string = \"small\";\n  @Input() color: string;\n  \n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n  \n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "@keyframes spinner {\r\n    0% {\r\n      transform: translate3d(-50%, -50%, 0) rotate(0deg);\r\n    }\r\n    100% {\r\n      transform: translate3d(-50%, -50%, 0) rotate(360deg);\r\n    }\r\n  }\r\n  .spin::before {\r\n    animation: 1.5s linear infinite spinner;\r\n    animation-play-state: inherit;\r\n    border: solid 5px #cfd0d1;\r\n    //border-bottom-color: #1c87c9;\r\n    border-radius: 50%;\r\n    content: \"\";\r\n    height: 40px;\r\n    width: 40px;\r\n    position: absolute;\r\n    top: 10%;\r\n    left: 10%;\r\n    transform: translate3d(-50%, -50%, 0);\r\n    will-change: transform;\r\n  }",
                     "styleUrl": "./spinner.component.scss"
                 }
             ],
@@ -2699,24 +2764,24 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 14
+                "line": 10
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<!-- \n\n<span *ngIf=\"!hide\" attr.data-auto-id=\"{{dataAutoId}}_spinner\" class=\"ds-c-spinner\nds-u-fill--{{ inversed ? 'background-inverse' : null }}\nds-c-spinner--{{ filled ?  'filled' : null }}\nds-u-color--{{color}}\nds-c-spinner--{{size}}\" [attr.aria-valuetext]=\"'Loading'\" role=\"progressbar\">\n</span> -->\n\n\n<cds-progress-circle\n      size=\"xl\"\n      aria-label=\"Demonstration of indeterminate progress circle spinning to show work is in progress\"\n    ></cds-progress-circle>\n"
+            "templateData": "<!-- <div class=\"spin\"></div> -->\n\n<span class=\"spin\nds-u-color--{{color}}\nds-c-spinner--{{size}}\" [attr.aria-valuetext]=\"'Loading'\" role=\"progressbar\">\n</span>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-40bfa67cf5ef94efab790db1fa19f638",
+            "id": "module-AppModule-eb33b67eb5d2a726f03ee4f64790635c",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n      \n  ],\n  imports: [\n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\n\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent\n      \n  ],\n  imports: [\n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -2730,6 +2795,9 @@
                         },
                         {
                             "name": "CardComponent"
+                        },
+                        {
+                            "name": "CheckboxComponent"
                         },
                         {
                             "name": "ImageComponent"
@@ -3179,6 +3247,26 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createReducer(initialState)"
+            },
+            {
+                "name": "Checkbox",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "color",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/spinner.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "DELETE_POST_ACTION",
@@ -3779,6 +3867,16 @@
                 "deprecationMessage": "",
                 "type": "Story<Button>",
                 "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CheckboxComponent>",
+                "defaultValue": "(args: CheckboxComponent) => ({\r\n  component: CheckboxComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -4418,6 +4516,60 @@
                     "defaultValue": "createReducer(initialState)"
                 }
             ],
+            "src/stories/Checkbox.stories.ts": [
+                {
+                    "name": "Checkbox",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<CheckboxComponent>",
+                    "defaultValue": "(args: CheckboxComponent) => ({\r\n  component: CheckboxComponent,\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/stories/spinner.stories.ts": [
+                {
+                    "name": "color",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/spinner.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "size",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/spinner.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/spinner.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SpinnerComponent>",
+                    "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
+                }
+            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -5016,28 +5168,6 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "createAction(\r\n  SET_LOADING_ACTION,\r\n  props<{ status: boolean }>()\r\n)"
-                }
-            ],
-            "src/stories/spinner.stories.ts": [
-                {
-                    "name": "size",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/spinner.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/spinner.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<SpinnerComponent>",
-                    "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
                 }
             ]
         },
@@ -6245,7 +6375,16 @@
                 "linktype": "component",
                 "name": "CardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/story-components/checkbox/checkbox.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CheckboxComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -6263,7 +6402,7 @@
                 "linktype": "component",
                 "name": "SpinnerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -6328,6 +6467,26 @@
             },
             {
                 "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Checkbox",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Checkbox.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6489,6 +6648,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/spinner.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "color",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

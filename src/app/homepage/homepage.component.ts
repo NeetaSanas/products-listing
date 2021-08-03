@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomepageService } from './homepage.service';
 
 @Component({
   selector: 'app-homepage',
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-
-  constructor() { }
-  products = [1,2,3];
+  products :any = [];
+  constructor(private homepageService: HomepageService) { }
   ngOnInit(): void {
     console.log("homepage");
+    this.products = this.homepageService.getProducts();
+    console.log(this.products);
   }
 
 }
