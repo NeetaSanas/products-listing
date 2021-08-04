@@ -5,12 +5,21 @@
         <p class="secondary-text-color">Explore products of your choice...</p>
     </div> 
     <div class="container">
-        <div class="card" *ngFor="let p of products">
-            <img [src]="p.src" alt="image" class="card-image">
-            <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>
-            <p>{{p.desc}}</p>
+        <div class="card" *ngFor="let prod of products | paginate: { itemsPerPage: 3, currentPage: p}">
+            <img [src]="prod.src" alt="image" class="card-image">
+            <h2>{{prod.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{prod.price}} </h2>
+            <p>{{prod.desc}}</p>
 
             <button (click)="viewProduct()">More Details</button>
         </div>
+        
     </div>
+    
 </div>
+
+<div class="pagination">
+    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+</div>
+
+
+<app-footer></app-footer>

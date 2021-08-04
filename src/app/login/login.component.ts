@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private store: Store<AppState>) { 
     this.form = this.fb.group({
-      'email': [null, Validators.compose([Validators.required])],
+      'email': [null, Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
     });
   }

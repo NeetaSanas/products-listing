@@ -185,12 +185,12 @@
         },
         {
             "name": "PostsState",
-            "id": "interface-PostsState-a4f85092071316c985137466538db291",
+            "id": "interface-PostsState-b968c09c558bf7e810c90e533ed052d9",
             "file": "src/app/posts/state/posts.state.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Post } from \"../posts.model\";\r\n\r\nexport interface PostsState{\r\n    posts: Post[];\r\n}\r\n\r\nexport const initialState = {\r\n    posts : [\r\n        {id : '1', title:'title1', description:'description1'},\r\n        {id : '2', title:'title2', description:'description2'}\r\n    ]\r\n}",
+            "sourceCode": "import { Post } from \"../posts.model\";\r\n\r\nexport interface PostsState{\r\n    posts: Post[];\r\n}\r\n\r\nexport const initialState = {\r\n    posts : [\r\n        {id : '1', title:'title1', description:'description1'},\r\n        {id : '2', title:'title2', description:'description2'},\r\n        {id : '3', title:'title3', description:'description3'},\r\n        {id : '4', title:'title4', description:'description4'},\r\n    ]\r\n}",
             "properties": [
                 {
                     "name": "posts",
@@ -339,7 +339,7 @@
     "injectables": [
         {
             "name": "AuthEffects",
-            "id": "injectable-AuthEffects-d1193cecd8d7c816483374580f1130e9",
+            "id": "injectable-AuthEffects-9a6390f80a625c445eb8e45c229f0ae5",
             "file": "src/app/login/auth.effects.ts",
             "properties": [
                 {
@@ -370,11 +370,11 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 86
+                    "line": 78
                 },
                 {
                     "name": "signupRedirect$",
-                    "defaultValue": "createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          // this.store.dispatch(setErrorMessage({ message: '' }));\r\n          // if (action.redirect) {\r\n          //   this.toastr.success('Success');\r\n          //   this.router.navigate(['/']);\r\n            \r\n          // }else{\r\n          //   this.toastr.error('Failed');\r\n          // }\r\n          this.router.navigate(['/']);\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  )",
+                    "defaultValue": "createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/']);\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  )",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -388,7 +388,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from \"@angular/core\";\r\nimport { Router } from \"@angular/router\";\r\nimport { Actions, createEffect, ofType } from \"@ngrx/effects\";\r\nimport { Store } from \"@ngrx/store\";\r\nimport { ToastrModule, ToastrService } from \"ngx-toastr\";\r\nimport { of } from \"rxjs\";\r\nimport { catchError, exhaustMap, map, tap } from \"rxjs/operators\";\r\nimport { AppState } from \"../app.state\";\r\nimport { setErrorMessage, } from \"../store/Shared/shared.actions\";\r\nimport { loginStart, loginSuccess, signupStart, signupSuccess } from \"./auth.actions\";\r\nimport { AuthService } from \"./auth.service\";\r\n\r\n@Injectable()\r\nexport class AuthEffects {\r\n  constructor(\r\n    private actions$: Actions,\r\n    private authService: AuthService,\r\n    private store: Store<AppState>,\r\n    private router: Router,\r\n    private toastr: ToastrService\r\n  ) {}\r\n\r\n  login$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(loginStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.login(action.email, action.password).pipe(\r\n          map((data:any) => {\r\n            // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            this.store.dispatch(setErrorMessage({ message: '' }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return loginSuccess({ user, redirect: true });\r\n          }),\r\n          catchError((errResp) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const errorMessage = this.authService.getErrorMessage(\r\n              errResp.error.error.message\r\n            );\r\n            return of(setErrorMessage({ message: errorMessage }));\r\n          })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  loginRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[loginSuccess]),\r\n        tap((action) => {\r\n          this.store.dispatch(setErrorMessage({ message: '' }));\r\n          if (action.redirect) {\r\n            this.toastr.success('Login Success');\r\n            this.router.navigate(['/']);\r\n            \r\n          }else{\r\n            this.toastr.error('Login Failed');\r\n          }\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signupRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          // this.store.dispatch(setErrorMessage({ message: '' }));\r\n          // if (action.redirect) {\r\n          //   this.toastr.success('Success');\r\n          //   this.router.navigate(['/']);\r\n            \r\n          // }else{\r\n          //   this.toastr.error('Failed');\r\n          // }\r\n          this.router.navigate(['/']);\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signUp$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(signupStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.signUp(action.firstname, \r\n          action.lastname, \r\n          action.contact,\r\n          action.email, \r\n          action.password,\r\n          action.retype_password).pipe(\r\n          map((data:any) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return signupSuccess({ user });\r\n          }),\r\n          // catchError((errResp) => {\r\n          //  // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n          //   const errorMessage = this.authService.getErrorMessage(\r\n          //     errResp.error.error.message\r\n          //   );\r\n          //   return of(setErrorMessage({ message: errorMessage }));\r\n          // })\r\n        );\r\n      })\r\n    );\r\n  });\r\n}\r\n",
+            "sourceCode": "import { Injectable } from \"@angular/core\";\r\nimport { Router } from \"@angular/router\";\r\nimport { Actions, createEffect, ofType } from \"@ngrx/effects\";\r\nimport { Store } from \"@ngrx/store\";\r\nimport { ToastrModule, ToastrService } from \"ngx-toastr\";\r\nimport { of } from \"rxjs\";\r\nimport { catchError, exhaustMap, map, tap } from \"rxjs/operators\";\r\nimport { AppState } from \"../app.state\";\r\nimport { setErrorMessage, } from \"../store/Shared/shared.actions\";\r\nimport { loginStart, loginSuccess, signupStart, signupSuccess } from \"./auth.actions\";\r\nimport { AuthService } from \"./auth.service\";\r\n\r\n@Injectable()\r\nexport class AuthEffects {\r\n  constructor(\r\n    private actions$: Actions,\r\n    private authService: AuthService,\r\n    private store: Store<AppState>,\r\n    private router: Router,\r\n    private toastr: ToastrService\r\n  ) {}\r\n\r\n  login$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(loginStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.login(action.email, action.password).pipe(\r\n          map((data:any) => {\r\n            // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            this.store.dispatch(setErrorMessage({ message: '' }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return loginSuccess({ user, redirect: true });\r\n          }),\r\n          catchError((errResp) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const errorMessage = this.authService.getErrorMessage(\r\n              errResp.error.error.message\r\n            );\r\n            return of(setErrorMessage({ message: errorMessage }));\r\n          })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  loginRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[loginSuccess]),\r\n        tap((action) => {\r\n          this.store.dispatch(setErrorMessage({ message: '' }));\r\n          if (action.redirect) {\r\n            this.toastr.success('Login Success');\r\n            this.router.navigate(['/']);\r\n            \r\n          }else{\r\n            this.toastr.error('Login Failed');\r\n          }\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signupRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/']);\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signUp$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(signupStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.signUp(action.firstname, \r\n          action.lastname, \r\n          action.contact,\r\n          action.email, \r\n          action.password,\r\n          action.retype_password).pipe(\r\n          map((data:any) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return signupSuccess({ user });\r\n          }),\r\n          // catchError((errResp) => {\r\n          //  // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n          //   const errorMessage = this.authService.getErrorMessage(\r\n          //     errResp.error.error.message\r\n          //   );\r\n          //   return of(setErrorMessage({ message: errorMessage }));\r\n          // })\r\n        );\r\n      })\r\n    );\r\n  });\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1058,7 +1058,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "h3, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\np{\r\n    font-size: 12px;\r\n    color:red;\r\n    justify-content: left;\r\n}",
                     "styleUrl": "./add-post.component.scss"
                 }
             ],
@@ -1092,7 +1092,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "\n<div>\n    <div>\n        <h3>Add Post</h3>\n        <hr>\n        <form [formGroup]=\"postForm\" (ngSubmit) = \"onAddPost()\">\n            <div>\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\">\n                <div *ngIf=\"postForm.controls.title.errors?.required && postForm.controls.title.touched\">Required</div>\n            </div>\n            <div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"description\">\n                <div *ngIf=\"postForm.controls.description.errors?.required && postForm.controls.description.touched\">Required</div>\n            </div>\n            <div>\n                <button type=\"submit\" [disabled]=\"!postForm.valid\">Add Post</button>\n            </div>\n        </form>\n    </div>\n</div>"
+            "templateData": "\n<!-- <div>\n    <div>\n        <h3>Add Post</h3>\n        <hr>\n        <form [formGroup]=\"postForm\" (ngSubmit) = \"onAddPost()\">\n            <div>\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\">\n                <div *ngIf=\"postForm.controls.title.errors?.required && postForm.controls.title.touched\">Required</div>\n            </div>\n            <div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"description\">\n                <div *ngIf=\"postForm.controls.description.errors?.required && postForm.controls.description.touched\">Required</div>\n            </div>\n            <div>\n                <button type=\"submit\" [disabled]=\"!postForm.valid\">Add Post</button>\n            </div>\n        </form>\n    </div>\n</div> -->\n\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"postForm\" (ngSubmit)=\"onAddPost()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <!-- <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'ADD PRODUCT'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>             -->\n             <h3>ADD POST</h3><hr>\n           <div class=\"card-inner\" style=\"margin-top: -20px;\">\n                <div class=\"form-control\">\n                    <label>Title</label>\n                    <input type=\"text\" formControlName=\"title\">\n                    <div *ngIf=\"postForm.controls.title.errors?.required && postForm.controls.title.touched\"><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Description</label>\n                    <input type=\"text\" formControlName=\"description\">\n                    <div *ngIf=\"postForm.controls.description.errors?.required && postForm.controls.description.touched\"><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"submit-button-container\">\n                    <br>\n                    <button class=\"w-100 submit-button\" type=\"submit\" [disabled]=\"!postForm.valid\">Add Post</button>\n                </div> \n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "AddProductComponent",
@@ -1196,7 +1196,7 @@
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-d934f773545db12541f5576a36df1862",
+            "id": "component-AppComponent-ba2b1a68d8bd2f0ba90d2e99c956cfc7",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1225,6 +1225,26 @@
                     "line": 10
                 },
                 {
+                    "name": "darkTheme",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "themeText",
+                    "defaultValue": "\"Dark\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
                     "name": "title",
                     "defaultValue": "'assignment'",
                     "deprecated": false,
@@ -1242,7 +1262,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1252,7 +1272,17 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12,
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleTheme",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1264,7 +1294,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'assignment';\n  currentUser: string | null;\n\n  ngOnInit(){\n    console.log(\"app component\");\n    console.log(localStorage.getItem(\"user\"));\n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  logout(){\n    localStorage.removeItem(\"user\");\n  }\n  \n}\n",
+            "sourceCode": "import { Component, ElementRef, Renderer2 } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'assignment';\n  currentUser: string | null;\n  darkTheme = false;\n  themeText: string =\"Dark\";\n\n  constructor(private el: ElementRef, private renderer: Renderer2){}\n\n  ngOnInit(){\n    console.log(\"app component\");\n    console.log(localStorage.getItem(\"user\"));\n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  logout(){\n    localStorage.removeItem(\"user\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'Dark'){\n      this.themeText = \"Light\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n    }else{\n      this.themeText = \"Dark\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n    }\n  }\n  \n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1273,7 +1303,48 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<!-- <div class=\"content\" role=\"main\"> -->\n<div class=\"toolbar\" role=\"banner\">\n  <img\n    width=\"40\"\n    alt=\"Angular Logo\"\n    src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"\n  />\n  <span>PRODUCTS</span>\n    <div class=\"spacer\"></div>\n    <a href=\"/\" title=\"Home\">HOME</a>\n    <!-- <a href=\"/products-list\" title=\"Products\">PRODUCTS</a> -->\n    <a rel=\"noopener\" href=\"/posts\" title=\"posts\">POSTS</a>\n    <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n    <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\">SIGNUP</a>\n    <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 30px;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n</div>\n\n\n<footer>\n  Love Angular?&nbsp;\n  <a href=\"https://github.com/angular/angular\" target=\"_blank\" rel=\"noopener\"> Give our repo a star.\n    <div class=\"github-star-badge\">\n        <svg class=\"material-icons\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z\"/></svg>\n      Star\n    </div>\n  </a>\n  <a href=\"https://github.com/angular/angular\" target=\"_blank\" rel=\"noopener\">\n    <svg class=\"material-icons\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\" fill=\"#1976d2\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>\n  </a>\n</footer>\n\n<!-- <svg id=\"clouds\" xmlns=\"http://www.w3.org/2000/svg\" width=\"2611.084\" height=\"485.677\" viewBox=\"0 0 2611.084 485.677\">\n  <title>Gray Clouds Background</title>\n  <path id=\"Path_39\" data-name=\"Path 39\" d=\"M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z\" transform=\"translate(142.69 -634.312)\" fill=\"#eee\"/>\n</svg> -->\n<!-- </div> -->\n<router-outlet></router-outlet>\n"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "el",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "el",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<!-- <div class=\"content\" role=\"main\"> -->\n<div class=\"toolbar\" role=\"banner\">\n  <!-- <img\n    width=\"40\"\n    alt=\"Angular Logo\"\n    src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"\n  /> --><div style=\"width:30px\"> </div>\n  <span>PRODUCTS</span>\n    <div class=\"spacer\"></div>\n    <a href=\"/\" title=\"Home\">HOME</a>\n    <!-- <a href=\"/products-list\" title=\"Products\">PRODUCTS</a> -->\n    <a rel=\"noopener\" href=\"/posts\" title=\"Products\">PRODUCTS</a>\n    <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n    <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\" *ngIf=\"!currentUser\">SIGNUP</a>\n    <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 30px;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n    <button id=\"mode\" (click)=\"toggleTheme()\">{{themeText}}</button>\n  </div>\n\n\n<!-- <footer>\n  Love Angular?&nbsp;\n  <a href=\"https://github.com/angular/angular\" target=\"_blank\" rel=\"noopener\"> Give our repo a star.\n    <div class=\"github-star-badge\">\n        <svg class=\"material-icons\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z\"/></svg>\n      Star\n    </div>\n  </a>\n  <a href=\"https://github.com/angular/angular\" target=\"_blank\" rel=\"noopener\">\n    <svg class=\"material-icons\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\" fill=\"#1976d2\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>\n  </a>\n</footer> -->\n\n<!-- <svg id=\"clouds\" xmlns=\"http://www.w3.org/2000/svg\" width=\"2611.084\" height=\"485.677\" viewBox=\"0 0 2611.084 485.677\">\n  <title>Gray Clouds Background</title>\n  <path id=\"Path_39\" data-name=\"Path 39\" d=\"M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z\" transform=\"translate(142.69 -634.312)\" fill=\"#eee\"/>\n</svg> -->\n<!-- </div> -->\n<router-outlet></router-outlet>\n"
         },
         {
             "name": "ButtonComponent",
@@ -1700,7 +1771,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "h1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}",
                     "styleUrl": "./edit-post.component.scss"
                 }
             ],
@@ -1749,7 +1820,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "\n<div>\n    <div>\n        <h3>Update Post</h3>\n        <hr>\n        <form [formGroup]=\"postForm\" (ngSubmit) = \"onUpdatePost()\">\n            <div>\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\">\n                <div *ngIf=\"postForm.controls.title.errors?.required && postForm.controls.title.touched\">Required</div>\n            </div>\n            <div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"description\">\n                <div *ngIf=\"postForm.controls.description.errors?.required && postForm.controls.description.touched\">Required</div>\n            </div>\n            <div>\n                <button type=\"submit\" [disabled]=\"!postForm.valid\">Update Post</button>\n            </div>\n        </form>\n    </div>\n</div>"
+            "templateData": "\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"postForm\" (ngSubmit)=\"onUpdatePost()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n             <h1>EDIT POST</h1><hr>\n           <div class=\"card-inner\" style=\"margin-top: -20px;\">\n                <div class=\"form-control\">\n                    <label>Title</label>\n                    <input type=\"text\" formControlName=\"title\">\n                    <div *ngIf=\"postForm.controls.title.errors?.required && postForm.controls.title.touched\">Required</div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Description</label>\n                    <input type=\"text\" formControlName=\"description\">\n                    <div *ngIf=\"postForm.controls.description.errors?.required && postForm.controls.description.touched\">Required</div>\n                </div>\n                <br>\n                <div class=\"submit-button-container\">\n                    <br>\n                    <button class=\"w-100 submit-button\" type=\"submit\" [disabled]=\"!postForm.valid\">Update Post</button>\n                    <!-- <button class=\"w-100 submit-button\" type=\"submit\" [disabled]=\"!postForm.valid\">Add Post</button> -->\n                </div> \n            </div>        \n     </form>\n     \n</div>\n\n<!-- \n<div>\n    <div>\n        <h3>Update Post</h3>\n        <hr>\n        <form [formGroup]=\"postForm\" (ngSubmit) = \"onUpdatePost()\">\n            <div>\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\">\n                <div *ngIf=\"postForm.controls.title.errors?.required && postForm.controls.title.touched\">Required</div>\n            </div>\n            <div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"description\">\n                <div *ngIf=\"postForm.controls.description.errors?.required && postForm.controls.description.touched\">Required</div>\n            </div>\n            <div>\n                <button type=\"submit\" [disabled]=\"!postForm.valid\">Update Post</button>\n            </div>\n        </form>\n    </div>\n</div> -->"
         },
         {
             "name": "HeaderComponent",
@@ -1904,7 +1975,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".content-header{\r\n    color: #fff !important;\r\n    text-align: center;\r\n    img{\r\n        width: 230px;\r\n        height: 130px;\r\n        border-radius: 50%;\r\n    }\r\n    h1{\r\n        font-size: 36px;\r\n        font-weight: 400;\r\n        margin: 0;\r\n    } \r\n    h4{\r\n        font-size: 16px;\r\n        font-weight: 300;\r\n        max-width: 580px;\r\n        text-align: center;\r\n        margin: 0 auto;\r\n    }\r\n    &.bg-image{\r\n        background-image: url(\"/assets/header-bg.png\");     \r\n        background-blend-mode: overlay;\r\n        background-size: 600px; \r\n        // background-color: purple;\r\n    }\r\n    \r\n}\r\n\r\n@media screen and (min-width: 960px) {    \r\n    .content-header{\r\n        img{\r\n            width: 150px;\r\n            height: 150px;\r\n        }\r\n        h1{\r\n            font-size: 48px;\r\n        } \r\n        h4{\r\n            font-size: 18px;\r\n        }\r\n        &.has-bg-image{\r\n            background-size: 480px; \r\n        }\r\n    }\r\n}\r\n\r\n",
+                    "data": ".content-header{\r\n    color: #fff !important;\r\n    width: 350px !important;\r\n    text-align: center;\r\n    img{\r\n        width: 230px;\r\n        height: 130px;\r\n        border-radius: 50%;\r\n    }\r\n    h1{\r\n        font-size: 36px;\r\n        font-weight: 400;\r\n        margin: 0;\r\n    } \r\n    h4{\r\n        font-size: 16px;\r\n        font-weight: 300;\r\n        max-width: 580px;\r\n        text-align: center;\r\n        margin: 0 auto;\r\n    }\r\n    &.bg-image{\r\n        background-image: url(\"/assets/header-bg.png\");     \r\n        background-blend-mode: overlay;\r\n        background-size: 600px; \r\n        // background-color: purple;\r\n    }\r\n    \r\n}\r\n\r\n@media screen and (min-width: 960px) {    \r\n    .content-header{\r\n        img{\r\n            width: 150px;\r\n            height: 150px;\r\n        }\r\n        h1{\r\n            font-size: 48px;\r\n        } \r\n        h4{\r\n            font-size: 18px;\r\n        }\r\n        &.has-bg-image{\r\n            background-size: 480px; \r\n        }\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 400px){\r\n    .container{\r\n        width: 300px !important;\r\n    }\r\n}\r\n\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -1990,7 +2061,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "h1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.container {\r\n    display: grid;\r\n    \r\n    grid-template-columns: repeat(3, 1fr);\r\n    grid-auto-rows: 300px;\r\n    grid-gap: 30px;\r\n    grid-row-gap: 80px;\r\n\r\n    .card{\r\n        border: 1px solid #000;\r\n        border-radius: 5px;\r\n        padding: 10px;\r\n        row-gap: 20px;\r\n        margin-bottom: 40px;\r\n\r\n        .card-image{\r\n            height: 200px;\r\n            width: 100%;\r\n        }\r\n\r\n        button{\r\n            \r\n            background-color: #1976d2;\r\n            color :#fff;\r\n            border-radius: 20px;\r\n            font-size: 16px;\r\n            padding:3px 5px 4px 5px;\r\n        }\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 800px) and (min-width: 550px){\r\n    .container{\r\n        grid-template-columns: repeat(2, 1fr);\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 550px){\r\n    .container{\r\n        grid-template-columns: 2fr;\r\n    }\r\n}\r\n",
+                    "data": "h1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.container {\r\n    display: grid;\r\n    \r\n    grid-template-columns: repeat(3, 1fr);\r\n    grid-auto-rows: 300px;\r\n    grid-gap: 30px;\r\n    grid-row-gap: 80px;\r\n\r\n    .card{\r\n        transition: all 0.5s ease-out;\r\n        border: 1px solid #000;\r\n        border-radius: 5px;\r\n        padding: 10px;\r\n        row-gap: 20px;\r\n        margin-bottom: 40px;\r\n\r\n        .card-image{\r\n            height: 200px;\r\n            width: 100%;\r\n        }\r\n\r\n        button{\r\n            cursor: pointer;\r\n            background-color: #1976d2;\r\n            color :#fff;\r\n            border-radius: 20px;\r\n            font-size: 16px;\r\n            padding:5px 7px 5px 7px;\r\n            border: 0px;\r\n            \r\n        } \r\n    }\r\n    .card:hover{\r\n        margin-top: -20px;\r\n    }\r\n    \r\n}\r\n\r\n\r\n\r\n@media only screen and (max-width: 800px) and (min-width: 550px){\r\n    .container{\r\n        grid-template-columns: repeat(2, 1fr);\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 550px){\r\n    .container{\r\n        grid-template-columns: 2fr;\r\n    }\r\n}\r\n",
                     "styleUrl": "./homepage.component.scss"
                 }
             ],
@@ -2024,7 +2095,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<br><br><br><br><br>\n\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let p of products\">\n            <img [src]=\"p.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>\n            <p>{{p.desc}}</p>\n\n            <button (click)=\"viewProduct()\">Details</button>\n        </div>\n    </div>\n    <!-- <ngu-carousel #myCarousel [inputs]=\"worksCarouselConfig\" [dataSource]=\"works\">\n        <ngu-tile *nguCarouselDef=\"let work; let j = index\">\n           <mat-card>                   \n                <img mat-card-image [src]=\"work.src\" alt=\"image\">\n                <mat-card-content>\n                    <h3>{{work.name}}</h3>\n                    <p class=\"secondary-text-color mt-2\">{{work.desc}}</p>\n                </mat-card-content>\n                <mat-divider></mat-divider>\n                <mat-card-actions fxLayoutAlign=\"end center\" class=\"secondary-text-color\">                               \n                    <button mat-icon-button><mat-icon>favorite</mat-icon></button>\n                    <button mat-icon-button><mat-icon>share</mat-icon></button>\n                </mat-card-actions>\n            </mat-card>\n        </ngu-tile>\n        <button mat-mini-fab NguCarouselPrev class=\"arrow-btn prev\"><mat-icon>keyboard_arrow_left</mat-icon></button>\n        <button mat-mini-fab NguCarouselNext class=\"arrow-btn next\"><mat-icon>keyboard_arrow_right</mat-icon></button>\n    </ngu-carousel> -->\n</div>"
+            "templateData": "<br><br><br>\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let p of products\">\n            <img [src]=\"p.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>\n            <p>{{p.desc}}</p>\n\n            <button (click)=\"viewProduct()\">More Details</button>\n        </div>\n    </div>\n</div>"
         },
         {
             "name": "ImageComponent",
@@ -2103,7 +2174,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "figcaption{\r\n    background-color: #ddd;\r\n    color: #000;\r\n    font-style: italic;\r\n    padding: 5px;\r\n    text-align: center;\r\n    font-size: 18px;\r\n}",
+                    "data": "figcaption{\r\n    background-color: #ddd;\r\n    color: #000;\r\n    font-style: italic;\r\n    padding: 5px;\r\n    text-align: center;\r\n    font-size: 18px;\r\n}\r\nimg{\r\n    height: 300px;\r\n    width: auto;\r\n}",
                     "styleUrl": "./image.component.scss"
                 }
             ],
@@ -2123,7 +2194,7 @@
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-a7c9bed6d21cb5957f38b21c25aa39d8",
+            "id": "component-LoginComponent-181682d4665d9b6acfef8feb7056082e",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2249,11 +2320,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from 'src/app/app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"login\");\n  }\n\n  onSubmit(){\n    console.log(this.form.value.email, this.form.value.password);\n    // const email = this.form.value.email;\n    // const password = this.form.value.password;\n    // this.store.dispatch(loginStart({email, password}));\n    this.currentUser = this.form.value.email;\n\n    this.authService.login(this.form.value.email, this.form.value.password).subscribe(\n      data => {\n        let successFlag = false;\n        console.log(data);\n        if(data){\n          this.users = data;\n          for(let i=0; i<this.users.length; i++){\n            if(this.form.value.email = this.users[i][\"email\"] && this.form.value.password == this.users[i][\"password\"]){\n              console.log(\"if\");\n              console.log(this.currentUser);\n              localStorage.setItem('user', this.currentUser);\n              console.log(localStorage.getItem(\"user\"));\n              this.router.navigate(['/']);\n              this.toastr.success('Login Success');\n              successFlag = true;\n            }else{\n              successFlag = false;\n            }\n          }\n          console.log(successFlag);\n          if(!successFlag){\n            console.log(successFlag);\n            this.toastr.error('Invalid email or password');\n          }\n        }else{\n          console.log(\"Users not found\");\n        }\n      },\n      error => {\n        error='Bad email';\n      });\n  }\n\n\n  forgotPassword(){}\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from 'src/app/app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"login\");\n  }\n\n  onSubmit(){\n    console.log(this.form.value.email, this.form.value.password);\n    // const email = this.form.value.email;\n    // const password = this.form.value.password;\n    // this.store.dispatch(loginStart({email, password}));\n    this.currentUser = this.form.value.email;\n\n    this.authService.login(this.form.value.email, this.form.value.password).subscribe(\n      data => {\n        let successFlag = false;\n        console.log(data);\n        if(data){\n          this.users = data;\n          for(let i=0; i<this.users.length; i++){\n            if(this.form.value.email = this.users[i][\"email\"] && this.form.value.password == this.users[i][\"password\"]){\n              console.log(\"if\");\n              console.log(this.currentUser);\n              localStorage.setItem('user', this.currentUser);\n              console.log(localStorage.getItem(\"user\"));\n              this.toastr.success('Login Success');\n              successFlag = true;\n              this.router.navigate(['/']);\n            }else{\n              successFlag = false;\n            }\n          }\n          console.log(successFlag);\n          if(!successFlag){\n            console.log(successFlag);\n            this.toastr.error('Invalid email or password');\n          }\n        }else{\n          console.log(\"Users not found\");\n        }\n      },\n      error => {\n        error='Bad email';\n      });\n  }\n\n\n  forgotPassword(){}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".icon {\r\n    padding: 5px;\r\n    background: dodgerblue;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  ",
+                    "data": "html{\r\n    // background-image: url('../../assets/login-bg.jpg');\r\n    background-image: url('https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');\r\n}\r\n.icon {\r\n    padding: 5px;\r\n    background: dodgerblue;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  \r\n\r\n@media only screen and (max-width: 780px){\r\n    .container{\r\n        margin-top:100px;\r\n    }\r\n}",
                     "styleUrl": "./login.component.scss"
                 }
             ],
@@ -2347,7 +2418,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'LOGIN'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <!-- <label for=\"email\">Email</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                    \n                    <!-- <span *ngIf=\"form.controls.email.hasError('invalidEmail')\">email is invalid</span> -->\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Email is required</span>\n                <div class=\"form-control\">\n                    <!-- <label for=\"password\">Password &nbsp;</label> -->\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Password is required</span>\n                    <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Password isn't long enough, minimum of 6 characters</span>\n                <div class=\"submit-button-container\">\n                    <button class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/forgot-password\" class=\"w-100 link\">Forgot Password?</a>\n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'LOGIN'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <!-- <label for=\"email\">Email</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                    \n                    <!-- <span *ngIf=\"form.controls.email.hasError('invalidEmail')\">email is invalid</span> -->\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Email is required</span>\n                <div class=\"form-control\">\n                    <!-- <label for=\"password\">Password &nbsp;</label> -->\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Password is required</span>\n                    <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Password should be minimum of 6 characters</span>\n                <div class=\"submit-button-container\">\n                    <button class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/forgot-password\" class=\"w-100 link\">Forgot Password?</a>\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "PageComponent",
@@ -2423,7 +2494,7 @@
         },
         {
             "name": "PostListComponent",
-            "id": "component-PostListComponent-145fdcb92bcf7dc532b3fabd1c145994",
+            "id": "component-PostListComponent-b750958ccedd9732e178e232a2834c8c",
             "file": "src/app/posts/post-list/post-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2443,6 +2514,16 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "NoProducts",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
                     "name": "posts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -2450,6 +2531,15 @@
                     "optional": false,
                     "description": "",
                     "line": 16
+                },
+                {
+                    "name": "products",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
                 }
             ],
             "methodsClass": [
@@ -2466,7 +2556,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2487,7 +2577,17 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19,
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "viewProduct",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -2499,11 +2599,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from 'src/app/app.state';\nimport { Post } from '../posts.model';\nimport { deletePost } from '../state/posts.actions';\nimport { getPosts } from '../state/posts.selector';\n\n@Component({\n  selector: 'app-post-list',\n  templateUrl: './post-list.component.html',\n  styleUrls: ['./post-list.component.scss']\n})\nexport class PostListComponent implements OnInit {\n  posts: Observable<Post[]>\n  constructor(private store : Store<AppState>, private router: Router) { }\n\n  ngOnInit(): void {\n    this.posts = this.store.select(getPosts);\n  }\n\n  deletePost(id:any){\n    console.log(id);\n    if(confirm(\"Are you sure you want to delete?\")){\n      console.log(id);\n      this.store.dispatch(deletePost({id}));\n      \n    }\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from 'src/app/app.state';\nimport { Post } from '../posts.model';\nimport { deletePost } from '../state/posts.actions';\nimport { getPosts } from '../state/posts.selector';\n\n@Component({\n  selector: 'app-post-list',\n  templateUrl: './post-list.component.html',\n  styleUrls: ['./post-list.component.scss']\n})\nexport class PostListComponent implements OnInit {\n  posts: Observable<Post[]>;\n  products:any;\n  NoProducts: boolean=false;\n  constructor(private store : Store<AppState>, private router: Router) { }\n\n  ngOnInit(): void {\n    this.posts = this.store.select(getPosts);\n    this.products = this.posts;\n    console.log(this.products);\n    \n  }\n\n  deletePost(id:any){\n    console.log(id);\n    if(confirm(\"Are you sure you want to delete?\")){\n      console.log(id);\n      this.store.dispatch(deletePost({id}));\n      this.router.navigate(['/posts']);\n    }\n\n    console.log(this.products.length);\n    if(!this.products){\n      this.NoProducts = true;\n    }\n  }\n\n  viewProduct(){\n\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".outer{\r\n    display: flex;\r\n    .list-col1{\r\n        width:70%;\r\n    }\r\n    .list-col2{\r\n        width:30%;\r\n    }\r\n}",
+                    "data": ".outer{\r\n    display: flex;\r\n    flex-direction: row;\r\n    .list-col1{\r\n        width:100%;\r\n        flex-direction: column;\r\n    }\r\n    \r\n}\r\n.list-col2{\r\n    margin-top: -40px !important;\r\n    width:100%;\r\n    flex-direction: row;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\nh1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\n.container {\r\n    display: grid;\r\n    \r\n    grid-template-columns: repeat(4, 1fr);\r\n    grid-auto-rows: 150px;\r\n    grid-gap: 30px;\r\n    grid-row-gap: 40px;\r\n    margin-top:0px;\r\n    .card{\r\n        transition: all 0.5s ease-out;\r\n        border: 1px solid #000;\r\n        border-radius: 5px;\r\n        padding: 10px;\r\n        row-gap: 20px;\r\n        margin-bottom: 10px;\r\n\r\n        .card-image{\r\n            height: 100px;\r\n            width: 100%;\r\n        }\r\n\r\n        button{\r\n            cursor: pointer;\r\n            background-color: #1976d2;\r\n            color :#fff;\r\n            border-radius: 20px;\r\n            font-size: 16px;\r\n            padding:5px 7px 5px 7px;\r\n            border: 0px;\r\n            \r\n        } \r\n    }\r\n    .card:hover{\r\n        margin-top: -20px;\r\n    }\r\n    \r\n}\r\n\r\n\r\n\r\n@media only screen and (max-width: 800px) and (min-width: 550px){\r\n    .container{\r\n        grid-template-columns: repeat(2, 1fr);\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 550px){\r\n    .container{\r\n        grid-template-columns: 2fr;\r\n    }\r\n}\r\n\r\n",
                     "styleUrl": "./post-list.component.scss"
                 }
             ],
@@ -2527,7 +2627,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 16,
+                "line": 18,
                 "jsdoctags": [
                     {
                         "name": "store",
@@ -2552,7 +2652,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<br><br><br><br>\n\n<div class=\"outer\"> \n    <div class=\"list-col1\">\n        <h3>Posts List</h3>\n        <div>\n            <a href=\"#\" button [routerLink]=\"['/posts/add']\">Add Post</a>\n        </div>\n        <table style=\"width:100%\" class=\"table table-striped\">\n            <thead>\n                <tr style=\"text-align:left;\">\n                    <th>Id</th>\n                    <th>Title</th>\n                    <th>Description</th>\n                    <th>Actions</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let p of posts | async\">\n                    <td>{{p.id}}</td>\n                    <td>{{p.title}}</td>\n                    <td>{{p.description}}</td>\n                    <td>\n                        <a href=\"\" button [routerLink]=\"['edit', p.id]\"> Update</a> &nbsp;&nbsp;\n                        <a href=\"\" button (click)=\"deletePost(p.id)\">Delete</a>\n                    </td>\n                </tr>\n            </tbody>\n            \n        </table>\n    </div>\n    <div class=\"list-col2\">\n        <router-outlet></router-outlet>\n    </div>\n</div>"
+            "templateData": "<br><br>\n<div class=\"outer\"> \n    <div class=\"list-col1\">\n        <div id=\"products\" class=\"mt-2 pt-3\">\n            <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n                <h1>PRODUCTS LIST</h1>             \n                <p class=\"secondary-text-color\">Explore products of your choice...</p>\n            </div> \n            <div style=\"margin-bottom: 10px;\">\n                <button [routerLink]=\"['/posts/add']\">Add Post</button>\n            </div>\n            <div class=\"container\">\n                <div class=\"card\" *ngFor=\"let p of products | async\">\n                    <!-- <img [src]=\"p.src\" alt=\"image\" class=\"card-image\"> -->\n                    <h2>{{p.title}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>\n                    <p>{{p.description}}</p>\n                    <button [routerLink]=\"['edit', p.id]\">Update</button>&nbsp;&nbsp;\n                    <button (click)=\"deletePost(p.id)\">Delete</button>\n                </div>\n            </div>\n            <div class=\"card\" *ngIf=\"NoProducts\">\n                <h1>No Products added</h1>\n            </div>\n        </div>\n        \n        <!-- <table style=\"width:100%\" class=\"table table-striped\">\n            <thead>\n                <tr style=\"text-align:left;\">\n                    <th>Id</th>\n                    <th>Title</th>\n                    <th>Description</th>\n                    <th>Actions</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"let p of posts | async\">\n                    <td>{{p.id}}</td>\n                    <td>{{p.title}}</td>\n                    <td>{{p.description}}</td>\n                    <td>\n                        <a href=\"\" button [routerLink]=\"['edit', p.id]\"> Update</a> &nbsp;&nbsp;\n                        <a href=\"\" button (click)=\"deletePost(p.id)\">Delete</a>\n                    </td>\n                </tr>\n            </tbody>\n            \n        </table> -->\n    </div>\n    \n</div>\n\n<div class=\"list-col2\">\n    <div style=\"width:30%\"></div>\n    <router-outlet></router-outlet>\n    <div style=\"width:30%\"></div>\n</div>"
         },
         {
             "name": "ProductsListComponent",
@@ -2646,7 +2746,7 @@
         },
         {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-2857391c45fb15a40aafb01041d81341",
+            "id": "component-SignupComponent-e1005065b832602e9c9a77b62a95f00e",
             "file": "src/app/login/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2716,11 +2816,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.state';\nimport { signupStart } from '../auth.actions';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  constructor(public fb: FormBuilder, private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required])],\n      'email': [null, Validators.compose([Validators.required])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"In signup\");\n  }\n\n  onSubmit(){\n    console.log(this.form.value);\n    if(!this.form.valid){\n      return;\n    }\n    const firstname= this.form.value.firstname;\n    const lastname= this.form.value.lastname;\n    const contact= this.form.value.contact;\n    const email= this.form.value.email;\n    const password= this.form.value.password;\n    const retype_password= this.form.value.retype_password;\n    this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n    \n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.state';\nimport { signupStart } from '../auth.actions';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  constructor(public fb: FormBuilder, private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required])],\n      'email': [null, Validators.compose([Validators.required])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"In signup\");\n  }\n\n  onSubmit(){\n    console.log(this.form.value);\n    if(!this.form.valid){\n      return;\n    }\n    const firstname= this.form.value.firstname;\n    const lastname= this.form.value.lastname;\n    const contact= this.form.value.contact;\n    const email= this.form.value.email;\n    const password= this.form.value.password;\n    const retype_password= this.form.value.retype_password;\n    \n    this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n    \n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".icon {\r\n    padding: 5px;\r\n    background: dodgerblue;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  ",
+                    "data": "\r\n.icon {\r\n    padding: 5px;\r\n    background: dodgerblue;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  \r\n\r\n@media only screen and (max-width: 780px){\r\n    .container{\r\n        margin-top:100px;\r\n    }\r\n}",
                     "styleUrl": "./signup.component.scss"
                 }
             ],
@@ -2769,11 +2869,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'SIGNUP'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login\" color=\"accent\" class=\"w-100 link\">Already have an account? login now!</a>\n                <div class=\"form-control\">\n                    <!-- <label for=\"firstname\">First Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"firstname\" placeholder=\"First Name\" name=\"firstname\" formControlName=\"firstname\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.firstname.errors?.required && form.controls.firstname.touched\">firstname is required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"lastname\">Last Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"lastname\" placeholder=\"Last Name\" name=\"lastname\" formControlName=\"lastname\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.lastname.errors?.required && form.controls.lastname.touched\">lastname is required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"contact\">Contact</label> -->\n                    <i class=\"fa fa-phone icon\"></i>\n                    <input type=\"text\" id=\"contact\" placeholder=\"Contact\" name=\"contact\" formControlName=\"contact\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.required && form.controls.contact.touched\">contact is required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"email\">Email</label> -->\n                    <i class=\"fa fa-envelope icon\"></i>\n                    <input type=\"text\" id=\"email\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"><br>\n                    <!-- <span *ngIf=\"form.controls.email.hasError('invalidEmail')\">email is invalid</span> -->\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">email is required</span>\n\n                <div class=\"form-control\">\n                    <!-- <label for=\"password\">Password &nbsp;</label> -->\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" placeholder=\"Password\" id=\"password\" name=\"password\" formControlName=\"password\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Password is required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Password isn't long enough, minimum of 6 characters</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"retype_password\">Retype Password &nbsp;</label> -->\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" placeholder=\"Retype Password\" id=\"retype_password\" name=\"retype_password\" formControlName=\"retype_password\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.errors?.required && form.controls.retype_password.touched\">Password is required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('minlength')\">Password isn't long enough, minimum of 6 characters</span>\n                \n                <div class=\"submit-button-container\">\n                    <button class=\"w-100 submit-button\" type=\"submit\" [disabled]=\"!form.valid\">SIGNUP</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/\" class=\"w-100 link\">Back to Homepage</a>\n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'SIGNUP'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login\" color=\"accent\" class=\"w-100 link\">Already have an account? login now!</a>\n                <div class=\"form-control\">\n                    <!-- <label for=\"firstname\">First Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"firstname\" placeholder=\"First Name\" name=\"firstname\" formControlName=\"firstname\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.firstname.errors?.required && form.controls.firstname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"lastname\">Last Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"lastname\" placeholder=\"Last Name\" name=\"lastname\" formControlName=\"lastname\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.lastname.errors?.required && form.controls.lastname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"contact\">Contact</label> -->\n                    <i class=\"fa fa-phone icon\"></i>\n                    <input type=\"text\" id=\"contact\" placeholder=\"Contact\" name=\"contact\" formControlName=\"contact\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.required && form.controls.contact.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"email\">Email</label> -->\n                    <i class=\"fa fa-envelope icon\"></i>\n                    <input type=\"text\" id=\"email\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"><br>\n                    <!-- <span *ngIf=\"form.controls.email.hasError('invalidEmail')\">email is invalid</span> -->\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n\n                <div class=\"form-control\">\n                    <!-- <label for=\"password\">Password &nbsp;</label> -->\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" placeholder=\"Password\" id=\"password\" name=\"password\" formControlName=\"password\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Enter minimum 6 characters</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"retype_password\">Retype Password &nbsp;</label> -->\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" placeholder=\"Retype Password\" id=\"retype_password\" name=\"retype_password\" formControlName=\"retype_password\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.errors?.required && form.controls.retype_password.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('minlength')\">Enter minimum 6 characters</span>\n                \n                <div class=\"submit-button-container\">\n                    <button class=\"w-100 submit-button\" type=\"submit\" [disabled]=\"!form.valid\">SIGNUP</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/\" class=\"w-100 link\">Back to Homepage</a>\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "SpinnerComponent",
-            "id": "component-SpinnerComponent-60f0841efc82ff3c4994ace63d3761b8",
+            "id": "component-SpinnerComponent-5c2c4177687641cc7ba7f49327a0d422",
             "file": "src/app/story-components/spinner/spinner.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2791,7 +2891,7 @@
             "viewProviders": [],
             "inputsClass": [
                 {
-                    "name": "color",
+                    "name": "border",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 10,
@@ -2815,7 +2915,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 14,
+                    "line": 15,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -2827,7 +2927,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent implements OnInit {\n  @Input() size: string = \"small\";\n  @Input() color: string;\n  \n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n  \n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent implements OnInit {\n  @Input() size: string = \"small\";\n  @Input() border: string;\n  //@Input() border-top: string;\n  \n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n  public get classes(): string[] {\n    const mode = this.border ? 'app-spinner--red' : 'app-spinner--pink';\n\n    return ['app-spinner', `app-spinner--${this.border}`, mode];\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2847,7 +2947,18 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"spin\"\n\n></div>\n"
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 18
+                    }
+                }
+            },
+            "templateData": "<div class=\"spin\"></div>\n\n<div\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    \n</div>\n"
         }
     ],
     "modules": [
@@ -2914,13 +3025,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-14a0c44d3e3b85fbfb58aa9467e4689a",
+            "id": "module-AppRoutingModule-4593f929a8cb33c91ec56380a4b91fbe",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport HeaderComponent from 'src/stories/header.component';\nimport { HomepageComponent } from './homepage/homepage.component';\nimport { PostsModule } from './posts/posts.module';\nimport { AddProductComponent } from './products/add-product/add-product.component';\nimport { ProductsListComponent } from './products/products-list/products-list.component';\n\nexport const routes: Routes = [\n  //{ path: '', component: HomepageComponent },\n  { path: '', \n    loadChildren: () => \"import('./homepage/homepage.module').then((m)=>m.HomepageModule)\"\n  },\n  //{ path: 'login', component: LoginComponent },\n  { path: 'login', loadChildren: () => \"import('./login/login.module').then(m => m.LoginModule)\" },\n  \n  // { path: 'products-list', component: ProductsListComponent },\n  // { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule), \n  //   children:[{path:'add', component: AddProductComponent}]\n  // },\n  {path: '', component: ProductsListComponent,\n    children: [\n      {path: '', redirectTo: 'products-list', pathMatch: 'full'},\n      { path: 'products-list', loadChildren: () => \"import('./products/products.module').then(m => m.ProductsModule)\" },\n      \n    ]\n  },\n  { path: 'posts', \n    loadChildren: () => \"import('./posts/posts.module').then((m)=>m.PostsModule)\"\n  },\n  // { path: 'header', component: HeaderComponent },\n  \n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n\n }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport HeaderComponent from 'src/stories/header.component';\nimport { HomepageComponent } from './homepage/homepage.component';\nimport { PostsModule } from './posts/posts.module';\nimport { AddProductComponent } from './products/add-product/add-product.component';\nimport { ProductsListComponent } from './products/products-list/products-list.component';\n\nexport const routes: Routes = [\n\n  { path: '', \n    loadChildren: () => \"import('./homepage/homepage.module').then((m)=>m.HomepageModule)\"\n  },\n  { path: 'login', loadChildren: () => \"import('./login/login.module').then(m => m.LoginModule)\" },\n  \n  {path: '', component: ProductsListComponent,\n    children: [\n      {path: '', redirectTo: 'products-list', pathMatch: 'full'},\n      { path: 'products-list', loadChildren: () => \"import('./products/products.module').then(m => m.ProductsModule)\" },\n    ]\n  },\n  { path: 'posts', \n    loadChildren: () => \"import('./posts/posts.module').then((m)=>m.PostsModule)\"\n  },\n  \n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n\n }\n",
             "children": [
                 {
                     "type": "providers",
@@ -3345,7 +3456,7 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "color",
+                "name": "Color",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/spinner.stories.ts",
@@ -3572,7 +3683,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n    posts : [\r\n        {id : '1', title:'title1', description:'description1'},\r\n        {id : '2', title:'title2', description:'description2'}\r\n    ]\r\n}"
+                "defaultValue": "{\r\n    posts : [\r\n        {id : '1', title:'title1', description:'description1'},\r\n        {id : '2', title:'title2', description:'description2'},\r\n        {id : '3', title:'title3', description:'description3'},\r\n        {id : '4', title:'title4', description:'description4'},\r\n    ]\r\n}"
             },
             {
                 "name": "initialState",
@@ -3915,7 +4026,7 @@
                 "defaultValue": "createAction(\r\n  SIGNUP_SUCCESS,\r\n  props<{ user: User }>()\r\n)"
             },
             {
-                "name": "size",
+                "name": "Size",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/spinner.stories.ts",
@@ -3992,7 +4103,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<SpinnerComponent>",
-                "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
+                "defaultValue": "(args: SpinnerComponent) => ({\r\n    // component: SpinnerComponent,\r\n    props: args,\r\n})"
             },
             {
                 "name": "UPDATE_POST_ACTION",
@@ -4606,7 +4717,7 @@
             ],
             "src/stories/spinner.stories.ts": [
                 {
-                    "name": "color",
+                    "name": "Color",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/stories/spinner.stories.ts",
@@ -4616,7 +4727,7 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
-                    "name": "size",
+                    "name": "Size",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/stories/spinner.stories.ts",
@@ -4633,7 +4744,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<SpinnerComponent>",
-                    "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
+                    "defaultValue": "(args: SpinnerComponent) => ({\r\n    // component: SpinnerComponent,\r\n    props: args,\r\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -4839,7 +4950,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n    posts : [\r\n        {id : '1', title:'title1', description:'description1'},\r\n        {id : '2', title:'title2', description:'description2'}\r\n    ]\r\n}"
+                    "defaultValue": "{\r\n    posts : [\r\n        {id : '1', title:'title1', description:'description1'},\r\n        {id : '2', title:'title2', description:'description2'},\r\n        {id : '3', title:'title3', description:'description3'},\r\n        {id : '4', title:'title4', description:'description4'},\r\n    ]\r\n}"
                 }
             ],
             "src/app/products/state/products.state.ts": [
@@ -5529,7 +5640,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -5815,7 +5926,7 @@
                 "linktype": "component",
                 "name": "PostListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -6697,7 +6808,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "color",
+                "name": "Color",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -6707,7 +6818,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "size",
+                "name": "Size",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

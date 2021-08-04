@@ -27,35 +27,33 @@
                     <!-- <label for="contact">Contact</label> -->
                     <i class="fa fa-phone icon"></i>
                     <input type="text" id="contact" placeholder="Contact" name="contact" formControlName="contact"><br>
-                    
                 </div>
                 <span class="error-message" *ngIf="form.controls.contact.errors?.required && form.controls.contact.touched">Required</span>
+                <span class="error-message" *ngIf="form.controls.contact.errors?.pattern">Enter only numbers</span>
                 
                 <div class="form-control">
-                    <!-- <label for="email">Email</label> -->
                     <i class="fa fa-envelope icon"></i>
                     <input type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
-                    <!-- <span *ngIf="form.controls.email.hasError('invalidEmail')">email is invalid</span> -->
                 </div>
                 <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Required</span>
+                <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid email</span>
 
                 <div class="form-control">
-                    <!-- <label for="password">Password &nbsp;</label> -->
                     <i class="fa fa-key icon"></i>
-                    <input type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
+                    <input (input)="validateForm()" type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
                 </div>
                 <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Enter minimum 6 characters</span>
                 
                 <div class="form-control">
-                    <!-- <label for="retype_password">Retype Password &nbsp;</label> -->
                     <i class="fa fa-key icon"></i>
-                    <input type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
+                    <input (input)="validateForm()" type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
                     
                 </div>
                 <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength')">Enter minimum 6 characters</span>
-                
+                <span class="error-message" *ngIf="form.controls.retype_password.hasError('mismatchedPasswords')">Password  not matching</span>
+
                 <div class="submit-button-container">
                     <button class="w-100 submit-button" type="submit" [disabled]="!form.valid">SIGNUP</button>
                 </div> 

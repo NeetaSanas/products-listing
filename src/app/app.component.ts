@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'assignment';
   currentUser: string | null;
+  
+  themeText: string ="Dark";
+
+  constructor(private el: ElementRef, private renderer: Renderer2){}
 
   ngOnInit(){
     console.log("app component");
@@ -17,6 +21,17 @@ export class AppComponent {
 
   logout(){
     localStorage.removeItem("user");
+  }
+
+  toggleTheme() {
+    //INCOMPLETE NEEDS IMPROVEMENTS
+    if(this.themeText == 'Dark'){
+      this.themeText = "Light";
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');
+    }else{
+      this.themeText = "Dark";
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');
+    }
   }
   
 }

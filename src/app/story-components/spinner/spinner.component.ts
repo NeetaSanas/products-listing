@@ -7,13 +7,19 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
   @Input() size: string = "small";
-  @Input() color: string;
+  @Input() borderColor: string;
+  //@Input() border-top: string;
   
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.borderColor);
   }
 
-  
+  // public get classes(): string[] {
+  //   const mode = this.border ? 'app-spinner--red' : 'app-spinner--pink';
+
+  //   return ['app-spinner', `app-spinner--${this.border}`, mode];
+  // }
 
 }

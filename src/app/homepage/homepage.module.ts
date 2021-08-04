@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomepageComponent } from './homepage.component';
 import { HomepageService } from './homepage.service';
+import { FooterComponent } from '../global/footer/footer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export const routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' }
@@ -11,14 +13,17 @@ export const routes = [
 
 @NgModule({
   declarations: [
-    HomepageComponent
+    HomepageComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule, 
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
+  
   providers:[HomepageService]
 })
 export class HomepageModule { }

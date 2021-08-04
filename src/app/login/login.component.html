@@ -9,21 +9,18 @@
            <div class="card-inner">
                 <a routerLink="/login/signup" color="accent" class="w-100 link">Don't have an account? Sign up now!</a>
                 <div class="form-control">
-                    <!-- <label for="email">Email</label> -->
                     <i class="fa fa-user icon"></i>
                     <input type="text" id="email" name="email" placeholder="Email" formControlName="email">
-                    
-                    <!-- <span *ngIf="form.controls.email.hasError('invalidEmail')">email is invalid</span> -->
                 </div>
                 <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Email is required</span>
+                <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid email</span>
+                
                 <div class="form-control">
-                    <!-- <label for="password">Password &nbsp;</label> -->
                     <i class="fa fa-key icon"></i>
                     <input type="password" id="password" placeholder="Password" name="password" formControlName="password">
-                    
                 </div>
                 <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Password is required</span>
-                    <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Password should be minimum of 6 characters</span>
+                <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Enter minimum 6 characters</span>
                 <div class="submit-button-container">
                     <button class="w-100 submit-button" type="submit">LOGIN</button>
                 </div> 
