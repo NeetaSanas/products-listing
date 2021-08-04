@@ -37,6 +37,7 @@ export class SignupComponent implements OnInit {
     const email= this.form.value.email;
     const password= this.form.value.password;
     const retype_password= this.form.value.retype_password;
+    
     this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));
     
   }

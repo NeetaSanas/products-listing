@@ -1,3 +1,4 @@
+
 .icon {
     padding: 5px;
     background: dodgerblue;
@@ -14,3 +15,9 @@
         min-width: 74%;
     }
 }  
+
+@media only screen and (max-width: 780px){
+    .container{
+        margin-top:100px;
+    }
+}

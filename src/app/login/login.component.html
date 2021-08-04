@@ -23,7 +23,7 @@
                     
                 </div>
                 <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Password is required</span>
-                    <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
+                    <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Password should be minimum of 6 characters</span>
                 <div class="submit-button-container">
                     <button class="w-100 submit-button" type="submit">LOGIN</button>
                 </div> 

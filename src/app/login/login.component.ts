@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
               console.log(this.currentUser);
               localStorage.setItem('user', this.currentUser);
               console.log(localStorage.getItem("user"));
-              this.router.navigate(['/']);
               this.toastr.success('Login Success');
               successFlag = true;
+              this.router.navigate(['/']);
             }else{
               successFlag = false;
             }

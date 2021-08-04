@@ -14,14 +14,14 @@
                     <input type="text" id="firstname" placeholder="First Name" name="firstname" formControlName="firstname"><br>
                     
                 </div>
-                <span class="error-message" *ngIf="form.controls.firstname.errors?.required && form.controls.firstname.touched">firstname is required</span>
+                <span class="error-message" *ngIf="form.controls.firstname.errors?.required && form.controls.firstname.touched">Required</span>
                 
                 <div class="form-control">
                     <!-- <label for="lastname">Last Name</label> -->
                     <i class="fa fa-user icon"></i>
                     <input type="text" id="lastname" placeholder="Last Name" name="lastname" formControlName="lastname"><br> 
                 </div>
-                <span class="error-message" *ngIf="form.controls.lastname.errors?.required && form.controls.lastname.touched">lastname is required</span>
+                <span class="error-message" *ngIf="form.controls.lastname.errors?.required && form.controls.lastname.touched">Required</span>
                 
                 <div class="form-control">
                     <!-- <label for="contact">Contact</label> -->
@@ -29,7 +29,7 @@
                     <input type="text" id="contact" placeholder="Contact" name="contact" formControlName="contact"><br>
                     
                 </div>
-                <span class="error-message" *ngIf="form.controls.contact.errors?.required && form.controls.contact.touched">contact is required</span>
+                <span class="error-message" *ngIf="form.controls.contact.errors?.required && form.controls.contact.touched">Required</span>
                 
                 <div class="form-control">
                     <!-- <label for="email">Email</label> -->
@@ -37,15 +37,15 @@
                     <input type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
                     <!-- <span *ngIf="form.controls.email.hasError('invalidEmail')">email is invalid</span> -->
                 </div>
-                <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">email is required</span>
+                <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Required</span>
 
                 <div class="form-control">
                     <!-- <label for="password">Password &nbsp;</label> -->
                     <i class="fa fa-key icon"></i>
                     <input type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
                 </div>
-                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Password is required</span>
-                <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
+                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Required</span>
+                <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Enter minimum 6 characters</span>
                 
                 <div class="form-control">
                     <!-- <label for="retype_password">Retype Password &nbsp;</label> -->
@@ -53,8 +53,8 @@
                     <input type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
                     
                 </div>
-                <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched">Password is required</span>
-                <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
+                <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched">Required</span>
+                <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength')">Enter minimum 6 characters</span>
                 
                 <div class="submit-button-container">
                     <button class="w-100 submit-button" type="submit" [disabled]="!form.valid">SIGNUP</button>

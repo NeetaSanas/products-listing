@@ -1,3 +1,7 @@
+html{
+    // background-image: url('../../assets/login-bg.jpg');
+    background-image: url('https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');
+}
 .icon {
     padding: 5px;
     background: dodgerblue;
@@ -14,3 +18,9 @@
         min-width: 74%;
     }
 }  
+
+@media only screen and (max-width: 780px){
+    .container{
+        margin-top:100px;
+    }
+}

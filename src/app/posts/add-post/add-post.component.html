@@ -34,13 +34,13 @@
                 <div class="form-control">
                     <label>Title</label>
                     <input type="text" formControlName="title">
-                    <div *ngIf="postForm.controls.title.errors?.required && postForm.controls.title.touched">Required</div>
+                    <div *ngIf="postForm.controls.title.errors?.required && postForm.controls.title.touched"><p>Required</p></div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Description</label>
                     <input type="text" formControlName="description">
-                    <div *ngIf="postForm.controls.description.errors?.required && postForm.controls.description.touched">Required</div>
+                    <div *ngIf="postForm.controls.description.errors?.required && postForm.controls.description.touched"><p>Required</p></div>
                 </div>
                 <br>
                 <div class="submit-button-container">

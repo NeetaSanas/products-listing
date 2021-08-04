@@ -1,19 +1,9 @@
 {
   "users": [
     {
-      "id": "1",
-      "email": "neeta",
-      "password": "neeta123"
-    },
-    {
-      "email": "admin",
-      "password": "admin123",
-      "id": "VX_a9jD"
-    },
-    {
-      "firstname": "aaa",
-      "lastname": "bbb",
-      "contact": "942201",
+      "firstname": "Neeta",
+      "lastname": "Sanas",
+      "contact": "9422015306",
       "email": "neeta@techspian.com",
       "password": "123456",
       "retype_password": "123456",
@@ -21,30 +11,12 @@
     },
     {
       "firstname": "aaa",
-      "lastname": "sds",
-      "contact": "dsf",
-      "email": "sdfsdfd",
-      "password": "qqqqqqqqqq",
-      "retype_password": "qqqqqqqqqqqqq",
-      "id": "2Li-SyE"
-    },
-    {
-      "firstname": "test",
-      "lastname": "test1",
-      "contact": "942201",
-      "email": "test@test.com",
+      "lastname": "bbb",
+      "contact": "1234567890",
+      "email": "neeta@gamutbizsol.com",
       "password": "123456",
       "retype_password": "123456",
-      "id": "7EyogGU"
-    },
-    {
-      "firstname": "a",
-      "lastname": "b",
-      "contact": "1234567890",
-      "email": "admin!a.com",
-      "password": "1356733",
-      "retype_password": "1234567",
-      "id": "L6HVs2O"
+      "id": "71yKBwm"
     }
   ]
 }

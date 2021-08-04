@@ -1,5 +1,6 @@
 .content-header{
     color: #fff !important;
+    width: 350px !important;
     text-align: center;
     img{
         width: 230px;
@@ -42,6 +43,12 @@
         &.has-bg-image{
             background-size: 480px; 
         }
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .container{
+        width: 300px !important;
     }
 }
 
