@@ -6,6 +6,7 @@ import { HomepageComponent } from './homepage.component';
 import { HomepageService } from './homepage.service';
 import { FooterComponent } from '../global/footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 export const routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' }
@@ -21,7 +22,8 @@ export const routes = [
     RouterModule.forChild(routes),
     FormsModule, 
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   
   providers:[HomepageService]

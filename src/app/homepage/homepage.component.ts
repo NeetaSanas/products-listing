@@ -9,6 +9,7 @@ import { HomepageService } from './homepage.service';
 export class HomepageComponent implements OnInit {
   products :any = [];
   p: any;
+  public searchText: string;
   constructor(private homepageService: HomepageService) { }
   ngOnInit(): void {
     console.log("homepage");

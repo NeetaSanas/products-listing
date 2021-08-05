@@ -8,20 +8,17 @@ a {
     }
   }
   
-  .nav {
-    // .toolbar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        background-color: #1976d2;
-        color: white;
-        font-weight: 600;
-    //   }
-
+  .nav{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 500;
 
     background-color: #1976d2;
     height: 60px;
@@ -37,9 +34,13 @@ a {
       background-color: var(--greyapple);
       display: grid;
       grid-auto-flow: column;
-      place-items: center;
+      place-items: left;
       position: relative;
       z-index: 10;
+
+      .logo-img{
+        margin-left: 10px;
+      }
     }
     .dropdown {
       background-color: #1976d2;
@@ -92,11 +93,11 @@ a {
         z-index: 2;
       }
       label {
-        color: #000;
+        color: #fff;
         font-size: 32px;
         left: -8px;
         position: relative;
-        top: -10px;
+        top: 0px;
       }
       &:hover {
         opacity: 0.5;

@@ -10,7 +10,7 @@ import { filter, throttleTime } from 'rxjs/operators';
 export class NavbarComponent implements OnInit, OnDestroy {
   isOpen = false;
   resize: Subscription;
-  themeText: string ="Dark";
+  themeText: string ="DARK";
   currentUser: string | null;
   /**
    * Listens for a click in document and then check for isOpen to be true.
@@ -32,11 +32,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   toggleTheme() {
     //INCOMPLETE NEEDS IMPROVEMENTS
-    if(this.themeText == 'Dark'){
-      this.themeText = "Light";
+    if(this.themeText == 'DARK'){
+      this.themeText = "LIGHT";
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');
     }else{
-      this.themeText = "Dark";
+      this.themeText = "DARK";
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');
     }
   }

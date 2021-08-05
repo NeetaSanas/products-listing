@@ -4,8 +4,11 @@
         <h1>PRODUCTS LIST</h1>             
         <p class="secondary-text-color">Explore products of your choice...</p>
     </div> 
+    <div class="search-product">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search Products">
+    </div>
     <div class="container">
-        <div class="card" *ngFor="let prod of products | paginate: { itemsPerPage: 3, currentPage: p}">
+        <div class="card" *ngFor="let prod of products | filter:searchText | paginate: { itemsPerPage: 3, currentPage: p}">
             <img [src]="prod.src" alt="image" class="card-image">
             <h2>{{prod.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{prod.price}} </h2>
             <p>{{prod.desc}}</p>
