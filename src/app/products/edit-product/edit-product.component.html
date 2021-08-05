@@ -1,0 +1,31 @@
+
+<div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
+    <form [formGroup]="productForm" (ngSubmit)="onUpdateProduct()"
+        style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
+             <h1>EDIT PRODUCT</h1><hr>
+           <div class="card-inner" style="margin-top: -20px;">
+                <div class="form-control">
+                    <label>Name</label>
+                    <input type="text" formControlName="name">
+                    <div *ngIf="productForm.controls.name.errors?.required && productForm.controls.name.touched">Required</div>
+                </div>
+                <br>
+                <div class="form-control">
+                    <label>Price</label>
+                    <input type="text" formControlName="price">
+                    <div *ngIf="productForm.controls.price.errors?.required && productForm.controls.price.touched">Required</div>
+                </div>
+                <br>
+                <div class="form-control">
+                    <label>Description</label>
+                    <input type="text" formControlName="description">
+                    <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched">Required</div>
+                </div>
+                <br>
+                <div class="submit-button-container">
+                    <br>
+                    <button class="w-100 submit-button" type="submit" [disabled]="!productForm.valid">Update Product</button>
+                </div> 
+            </div>        
+    </form>
+</div>

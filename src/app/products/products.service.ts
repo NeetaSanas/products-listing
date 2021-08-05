@@ -17,32 +17,34 @@ export class ProductsService {
     return this.http.get<Product[]>(`http://localhost:3000/products`)
     .pipe(map(data => {
         const products: Product[] = [];
+        console.log(data);
         for(let key in data){
             products.push({...data[key], id: key});
         }
+        console.log(products);
         return products;
     })
     );
   }
 
   addProduct(product: Product): Observable<{name:string}>{
+    console.log(product);
     return this.http.post<{name:string}>(`http://localhost:3000/products`, product);
   }
-//   signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){
-//     const params={
-//       firstname: firstname,
-//       lastname: lastname, 
-//       contact: contact, 
-//       email: email, 
-//       password: password, 
-//       retype_password: retype_password
-//     };
-//     console.log(params);
-//     return this.http.post(`http://localhost:3000/users`, params);
-//   }
-
-  
-
-  
+  updateProduct(product: Product): Observable<{name:string}>{
+    const productData = {
+        [product.id] : {
+            name: product.name, 
+            description: product.description, 
+            price: product.price
+        }
+    }
+    console.log(productData);
+    return this.http.patch<{name:string}>(`http://localhost:3000/products`, productData);
+  }
+ 
+  deleteProduct(id: string){
+    return this.http.delete<{name:string}>(`http://localhost:3000/products/${id}.json`);
+  }
 
 }

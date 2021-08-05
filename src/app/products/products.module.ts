@@ -7,6 +7,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductsService } from './products.service';
 import { ProductsEffects } from './state/products.effects';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -14,15 +15,15 @@ const routes: Routes = [
     component: ProductsListComponent,
     children: [
       { path: 'add', component: AddProductComponent },
-    //   {
-    //     path: 'edit/:id',
-    //     component: EditPostComponent,
-    //   },
+      {
+        path: 'edit/:id',
+        component: EditProductComponent,
+      },
     ],
   },
 ];
 @NgModule({ 
-  declarations: [ProductsListComponent, AddProductComponent],
+  declarations: [ProductsListComponent, AddProductComponent, EditProductComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
