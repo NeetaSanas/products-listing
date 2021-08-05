@@ -1,34 +1,14 @@
-import { createEntityAdapter, EntityState } from "@ngrx/entity";
-import { Products } from "../products.model";
+import { Product } from "../products.model";
 
-export interface ProductsState extends EntityState<Products>{
-    products: Products[]
-    //count: 0
+export interface ProductsState{
+    products: Product[];
 }
-export const productsAdapter = createEntityAdapter<Products>({
-    sortComparer: sortByName,
-  });
 
-  // export const initialState: ProductsState = productsAdapter.getInitialState({
-  //   count: 0,
-  // });
-
-export const initialState: ProductsState = productsAdapter.getInitialState({
-  products : [
-    {id: 1, title:'title1', description: 'description1'},
-    {id: 2, title:'title2', description: 'description2'}
-  ]
-});
-
-export function sortByName(a: Products, b: Products): number {
-  const compare = a.title.localeCompare(b.title);
-  if (compare > 0) {
-    return -1;
-  }
-
-  if (compare < 0) {
-    return 1;
-  }
-
-  return compare;
+export const initialState = {
+    products : [
+        // {id : '1', name: 'Product 1', price: '100$', desc: 'Product1 Description to be enter here.', },
+        // {id : '2', name:'title2', price: '200$', description:'description2'},
+        // {id : '3', name:'title3', price: '300$', description:'description3'},
+        // {id : '4', name:'title4', price: '400$', description:'description4'},
+    ]
 }

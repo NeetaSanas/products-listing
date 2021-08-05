@@ -1,27 +1,37 @@
-<div class="row my-4">
-    <div class="col-md-12">
-      <h3>Add Product</h3>
-      <hr />
-      <form [formGroup]="form" (ngSubmit)="onAddProduct()">
-        <div>
-          <label>Title</label>
-          <input type="text" class="form-control" formControlName="title" />
-            <span *ngIf="form.controls.title.touched && form.controls.title.errors?.required">Title is required</span>
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea class="form-control" formControlName="description"></textarea>
-        </div>
-  
-        <div class="my-3">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            [disabled]="!form.valid">
-            Add Product
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
+
+<div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
+    <form [formGroup]="productForm" (ngSubmit)="onAddProduct()"
+        style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
+         <!-- <app-header 
+             [icon]="'exit_to_app'" 
+             [title]="'ADD PRODUCT'" 
+             [hasBgImage]="true" 
+             [class]="'card-spacing'"></app-header>             -->
+             <h3>ADD PRODUCT</h3><hr>
+           <div class="card-inner" style="margin-top: -20px;">
+                <div class="form-control">
+                    <label>Name</label>
+                    <input type="text" formControlName="name">
+                    <div *ngIf="productForm.controls.name.errors?.required && productForm.controls.name.touched"><p>Required</p></div>
+                </div>
+                <br>
+                <div class="form-control">
+                    <label>Price</label>
+                    <input type="text" formControlName="price">
+                    <div *ngIf="productForm.controls.price.errors?.required && productForm.controls.price.touched"><p>Required</p></div>
+                </div>
+                <br>
+                <div class="form-control">
+                    <label>Description</label>
+                    <input type="text" formControlName="description">
+                    <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched"><p>Required</p></div>
+                </div>
+                <br>
+                <div class="submit-button-container">
+                    <br>
+                    <button class="w-100 submit-button" type="submit" [disabled]="!productForm.valid">Add Product</button>
+                </div> 
+            </div>        
+     </form>
+     
+</div>

@@ -4,7 +4,8 @@
 		<!-- <span class="site-title">PRODUCTS</span> -->
 		<div class="links nav-items">
 			<a href="/" title="Home">HOME</a>
-            <a rel="noopener" href="/posts" title="Products">PRODUCTS</a>
+            <!-- <a rel="noopener" href="/posts" title="Posts">POSTS</a> -->
+            <a rel="noopener" href="/products" title="Products">PRODUCTS</a>
             <a rel="noopener" href="/login" title="Login" *ngIf="!currentUser">LOGIN</a>
             <a rel="noopener" href="/login/signup" title="posts" *ngIf="!currentUser">SIGNUP</a>
             <a rel="noopener" href="/" title="Logout" style="font-size: 30px;" *ngIf="currentUser" (click)="logout()"><i class="fa fa-sign-out icon"></i></a>
@@ -18,7 +19,8 @@
 		</div>
 		<div class="dropdown" id="dropdown" [class.show]="isOpen">
 			<a href="/" title="Home">HOME</a>
-            <a rel="noopener" href="/posts" title="Products">PRODUCTS</a>
+            <!-- <a rel="noopener" href="/posts" title="Posts">POSTS</a> -->
+            <a rel="noopener" href="/products" title="Products">PRODUCTS</a>
             <a rel="noopener" href="/login" title="Login" *ngIf="!currentUser">LOGIN</a>
             <a rel="noopener" href="/login/signup" title="posts" *ngIf="!currentUser">SIGNUP</a>
             <a rel="noopener" href="/" title="Logout" style="font-size: 30px;" *ngIf="currentUser" (click)="logout()"><i class="fa fa-sign-out icon"></i></a>

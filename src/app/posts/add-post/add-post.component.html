@@ -1,26 +1,4 @@
 
-<!-- <div>
-    <div>
-        <h3>Add Post</h3>
-        <hr>
-        <form [formGroup]="postForm" (ngSubmit) = "onAddPost()">
-            <div>
-                <label>Title</label>
-                <input type="text" formControlName="title">
-                <div *ngIf="postForm.controls.title.errors?.required && postForm.controls.title.touched">Required</div>
-            </div>
-            <div>
-                <label>Description</label>
-                <input type="text" formControlName="description">
-                <div *ngIf="postForm.controls.description.errors?.required && postForm.controls.description.touched">Required</div>
-            </div>
-            <div>
-                <button type="submit" [disabled]="!postForm.valid">Add Post</button>
-            </div>
-        </form>
-    </div>
-</div> -->
-
 <div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
     <form [formGroup]="postForm" (ngSubmit)="onAddPost()"
         style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">

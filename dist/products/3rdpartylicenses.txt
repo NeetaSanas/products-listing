@@ -19,9 +19,6 @@ MIT
 @ngrx/effects
 MIT
 
-@ngrx/entity
-MIT
-
 @ngrx/router-store
 MIT
 

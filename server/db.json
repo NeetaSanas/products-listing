@@ -18,5 +18,37 @@
       "retype_password": "123456",
       "id": "71yKBwm"
     }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Product1",
+      "price": "100$",
+      "description": "Product1 Description to be enter here."
+    },
+    {
+      "id": "2",
+      "name": "title2",
+      "price": "200$",
+      "description": "description2"
+    },
+    {
+      "id": "R0YcZqP",
+      "name": "qq",
+      "description": "qq",
+      "price": "qq"
+    },
+    {
+      "id": "gTyaFrj",
+      "name": "aa",
+      "description": "as",
+      "price": "sa"
+    },
+    {
+      "id": "fLSzgnf",
+      "name": "new",
+      "description": "testing",
+      "price": "test"
+    }
   ]
 }

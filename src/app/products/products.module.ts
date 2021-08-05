@@ -1,34 +1,35 @@
+import { EffectsModule } from '@ngrx/effects';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ProductsService } from './products.service';
+import { ProductsEffects } from './state/products.effects';
 
-export const routes = [
-  { path: '', component: ProductsListComponent,
+const routes: Routes = [
+  {
+    path: '',
+    component: ProductsListComponent,
     children: [
       { path: 'add', component: AddProductComponent },
-      // {
-      //   path: 'edit/:id',
-      //   component: EditProductComponent,
-      // },
+    //   {
+    //     path: 'edit/:id',
+    //     component: EditPostComponent,
+    //   },
     ],
-  }
+  },
 ];
-
-@NgModule({
-  declarations: [
-    ProductsListComponent,
-    AddProductComponent
-  ],
+@NgModule({ 
+  declarations: [ProductsListComponent, AddProductComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule, 
     ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    //StoreModule.forFeature(POST_STATE_NAME, postsReducer),
+    EffectsModule.forFeature([ProductsEffects]),
   ],
-  exports:[CommonModule],
-  providers:[]
+  providers:[ProductsService]
 })
-export class ProductsModule { }
+export class ProductsModule {}

@@ -7,8 +7,8 @@ import { AUTH_STATE_NAME } from './login/auth.selector';
 import { AuthState } from './login/auth.state';
 import { postsReducer } from './posts/state/posts.reducer';
 import { PostsState } from './posts/state/posts.state';
-import { productsReducer } from './products/state/products.reducer';
 import { ProductsState } from './products/state/products.state';
+import { productReducer } from './products/state/products.reducer';
 
 export interface AppState {
 //   [SHARED_STATE_NAME]: SharedState;
@@ -22,6 +22,6 @@ export const appReducer = {
 //   [SHARED_STATE_NAME]: SharedReducer,
   [AUTH_STATE_NAME]: AuthReducer,
   router: routerReducer,
-  products: productsReducer,
+  products: productReducer,
   posts: postsReducer
 };

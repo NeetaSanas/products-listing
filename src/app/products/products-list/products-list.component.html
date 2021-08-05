@@ -1,33 +1,32 @@
- <br><br><br><br><br>
- <div class="outer">
-     <div class="list-col1">
-        <h2>Product list</h2>
-            <div>
-                <a href="#" [routerLink] = "['/products-list/add']">Add</a>
+<br><br>
+<div class="outer"> 
+    <div class="list-col1">
+        <div id="products" class="mt-2 pt-3">
+            <div fxLayout="column" fxLayoutAlign="center center" class="title-section p-2 mb-2">  
+                <h1>PRODUCTS LIST</h1>             
+                <p class="secondary-text-color">Explore products of your choice...</p>
+            </div> 
+            <div style="margin-bottom: 10px;">
+                <button [routerLink]="['/products/add']">Add Product</button>
             </div>
-        <div class="table">
-            <table style="width: 100%;" *ngIf="products | async as productsData">
-                <tr>
-                    <!-- <th>ID</th> -->
-                    <th>Title</th>
-                    <th>Description</th>
-                </tr>
-                <tr *ngFor="let p of productsData">
-                    <!-- <td>{{p.id}}</td> -->
-                    <td>{{p.title}}</td>
-                    <td>{{p.description}}</td>
-                </tr>
-            </table>
-        </div> 
-     </div>
-    <div class="list-col2">
-        <router-outlet></router-outlet>
+            <div class="container">
+                <div class="card" *ngFor="let p of products | async">
+                    <!-- <img [src]="p.src" alt="image" class="card-image"> -->
+                    <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>
+                    <p>{{p.description}}</p>
+                    <button [routerLink]="['edit', p.id]">Update</button>&nbsp;&nbsp;
+                    <button (click)="deleteProduct(p.id)">Delete</button>
+                </div>
+            </div>
+            <div class="card" *ngIf="NoProducts">
+                <h1>No Products added</h1>
+            </div>
+        </div>
     </div>
 </div>
- 
 
-
-
-
-
-
+<div class="list-col2">
+    <div style="width:30%"></div>
+    <router-outlet></router-outlet>
+    <div style="width:30%"></div>
+</div>
