@@ -21,52 +21,28 @@
   ],
   "products": [
     {
+      "1": {
+        "id": "1",
+        "name": "Product1",
+        "description": "Product1 Description to be enter here.",
+        "price": "1000$"
+      },
       "id": "1",
       "name": "Product1",
       "price": "100$",
       "description": "Product1 Description to be enter here."
     },
     {
-      "id": "2",
-      "name": "title2",
-      "price": "200$",
-      "description": "description2"
-    },
-    {
-      "id": "3",
-      "name": "qq",
-      "description": "qq",
-      "price": "qq"
-    },
-    {
-      "id": "4",
-      "name": "aa",
-      "description": "as",
-      "price": "sa"
-    },
-    {
-      "id": "zAZ5BLx",
-      "name": "1",
-      "description": "3",
-      "price": "2"
-    },
-    {
-      "id": "AcnVzy_",
-      "name": "1",
-      "description": "3",
-      "price": "2"
-    },
-    {
-      "id": "QVouoti",
-      "name": "as",
-      "description": "asd",
-      "price": "asd"
-    },
-    {
-      "id": "NgYjxYM",
-      "name": "z",
-      "description": "z",
-      "price": "a"
+      "id": "jKYI9q7",
+      "name": "v",
+      "description": "v",
+      "price": "v",
+      "jKYI9q7": {
+        "id": "jKYI9q7",
+        "name": "vvv",
+        "description": "vvv",
+        "price": "vvv"
+      }
     }
   ]
 }

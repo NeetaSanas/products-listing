@@ -1,5 +1,5 @@
 import { Store } from '@ngrx/store';
-import {map,mergeMap, switchMap} from 'rxjs/operators';
+import {map,mergeMap, switchMap, tap} from 'rxjs/operators';
 import {addProduct, addProductSuccess, deleteProduct, deleteProductSuccess, loadProducts, loadProductsSuccess, updateProduct, updateProductSuccess} from './products.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -8,13 +8,17 @@ import { ProductsService } from '../products.service';
 import { AppState } from 'src/app/app.state';
 import { Update } from '@ngrx/entity';
 import { Product } from '../products.model';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ProductsEffects {
   constructor(
     private actions$: Actions,
     private productsService: ProductsService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   loadProducts$ = createEffect(():any => {
@@ -38,10 +42,8 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(addProduct),
       mergeMap((action) => {
-        console.log(action.product);
         return this.productsService.addProduct(action.product).pipe(
           map((data) => {
-            console.log(data);
             const product = { ...action.product, id: data.name };
             return addProductSuccess({ product });
           })
@@ -81,5 +83,44 @@ export class ProductsEffects {
       })
     );
   });
+
+  productRedirect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(...[deleteProductSuccess]),
+        tap((action) => {
+          this.router.navigate(['/products']);
+          this.toastr.success("Success");
+          window.location.reload();
+        })
+      );
+    },
+    { dispatch: false }
+  );
+  productRedirect1$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(...[addProductSuccess],),
+        tap((action) => {
+          this.toastr.success("Success");
+          this.router.navigate(['/products']);
+          //window.location.reload();
+        })
+      );
+    },
+    { dispatch: false }
+  );
+  productRedirect2$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(...[updateProductSuccess]),
+        tap((action) => {
+          this.router.navigate(['/products']);
+          this.toastr.success("Success");
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
 }

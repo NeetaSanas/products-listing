@@ -21,7 +21,6 @@ export class EditPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) =>{
-      console.log(params);
       const id = params.get('id');
       this.store.select(getPostById,{id}).subscribe((data) => {
         this.post = data;

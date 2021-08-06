@@ -20,13 +20,10 @@ export class ProductsListComponent implements OnInit {
   ngOnInit(): void {
     this.products = this.store.select(getProducts);
     this.store.dispatch(loadProducts());
-    console.log(this.products);
   }
 
   deleteProduct(id:string){
-    console.log(id);
     if(confirm("Are you sure you want to delete?")){
-      console.log(id);
       this.store.dispatch(deleteProduct({id}));
       this.router.navigate(['/products']);
     }

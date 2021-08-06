@@ -7,7 +7,6 @@ const _productsReducer = createReducer(
     on(addProductSuccess, (state:any, action)=>{
         let product = {...action.product};
         //product.id = (state.products.length +1).toString();
-        console.log(product);
         return{
             ...state, 
             products: [...state.products, product]
@@ -24,7 +23,6 @@ const _productsReducer = createReducer(
     }), 
     on(deleteProductSuccess, (state, { id }:any)=>{
         const updatedProduct = state.products.filter(product =>{
-            console.log(product);
             //return product.id !== id;
         });
         return {
