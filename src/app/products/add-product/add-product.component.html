@@ -2,12 +2,12 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
     <form [formGroup]="productForm" (ngSubmit)="onAddProduct()"
         style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
-         <!-- <app-header 
+         <app-header 
              [icon]="'exit_to_app'" 
              [title]="'ADD PRODUCT'" 
              [hasBgImage]="true" 
-             [class]="'card-spacing'"></app-header>             -->
-             <h3>ADD PRODUCT</h3><hr>
+             [class]="'card-spacing'"></app-header>            
+             <!-- <h3>ADD PRODUCT</h3><hr> -->
            <div class="card-inner" style="margin-top: -20px;">
                 <div class="form-control">
                     <label>Name</label>
@@ -26,10 +26,12 @@
                     <input type="text" formControlName="description">
                     <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched"><p>Required</p></div>
                 </div>
-                <br>
-                <div class="submit-button-container">
+                <br><br>
+                <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
                     <br>
-                    <button class="w-100 submit-button" type="submit" [disabled]="!productForm.valid">Add Product</button>
+                    <button class="w-30 submit-button" type="submit" [disabled]="!productForm.valid">Add</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="w-30 cancel-button" (click)="cancel()">Cancel</button>
                 </div> 
             </div>        
      </form>

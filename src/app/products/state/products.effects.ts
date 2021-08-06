@@ -91,7 +91,6 @@ export class ProductsEffects {
         tap((action) => {
           this.router.navigate(['/products']);
           this.toastr.success("Success");
-          window.location.reload();
         })
       );
     },
@@ -104,7 +103,6 @@ export class ProductsEffects {
         tap((action) => {
           this.toastr.success("Success");
           this.router.navigate(['/products']);
-          //window.location.reload();
         })
       );
     },

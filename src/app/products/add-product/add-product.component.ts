@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
+import { DialogRef } from 'src/app/global/dialog/dialog-ref';
 import { Product } from '../products.model';
 import { addProduct } from '../state/products.actions';
+import { getProducts } from '../state/products.selector';
 
 @Component({
   selector: 'app-add-product',
@@ -11,10 +14,10 @@ import { addProduct } from '../state/products.actions';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
-
+  products: Observable<Product[]>;
   productForm: FormGroup;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, public dialogRef: DialogRef) { }
 
   ngOnInit(): void {
     this.productForm = new FormGroup({
@@ -38,6 +41,11 @@ export class AddProductComponent implements OnInit {
     }
     //console.log(product);
     this.store.dispatch(addProduct({product}));
+    this.dialogRef.close();
+  }
+
+  cancel(){
+    this.dialogRef.close();
   }
 
 }

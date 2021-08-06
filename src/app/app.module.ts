@@ -24,8 +24,7 @@ import { NavbarComponent } from './global/navbar/navbar.component';
     ImageComponent,
     CardComponent,
     CheckboxComponent,
-    NavbarComponent,
-    
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

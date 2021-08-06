@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/app.state';
+import { DialogConfig } from 'src/app/global/dialog/dialog-config';
+import { DialogInjector } from 'src/app/global/dialog/dialog-injector';
+import { DialogRef } from 'src/app/global/dialog/dialog-ref';
 import { Product } from '../products.model';
 import { updateProduct } from '../state/products.actions';
 import { getProductById } from '../state/products.selector';
@@ -17,9 +20,13 @@ export class EditProductComponent implements OnInit {
   product:Product;
   productForm: FormGroup;
   productSubscription : Subscription;
-  constructor(private route:ActivatedRoute, private store:Store<AppState>) { }
+  productData: any;
+  constructor(private route:ActivatedRoute, private store:Store<AppState>,
+    public dialogRef: DialogRef, public config: DialogConfig) { }
 
   ngOnInit(): void {
+    console.log(this.config);
+    this.productData = this.config.data;
     this.route.paramMap.subscribe((params) =>{
       const id = params.get('id');
       this.store.select(getProductById,{id}).subscribe((data) => {
@@ -30,10 +37,11 @@ export class EditProductComponent implements OnInit {
   }
 
   createForm(){
+    console.log(this.productData['name']);
     this.productForm = new FormGroup({
-      name: new FormControl(this.product.name, Validators.required),
-      description: new FormControl(this.product.description, Validators.required),
-      price: new FormControl(this.product.price, Validators.required),
+      name: new FormControl(this.productData.name, Validators.required),
+      description: new FormControl(this.productData.description, Validators.required),
+      price: new FormControl(this.productData.price, Validators.required),
     });
   }
 
@@ -53,13 +61,18 @@ export class EditProductComponent implements OnInit {
     const price = this.productForm.value.price;
 
     const product: Product = {
-      id:this.product.id,
+      id:this.productData.id,
       name,
       description,
       price
     }
 
     this.store.dispatch(updateProduct({ product }));
+    this.dialogRef.close();
+  }
+
+  cancel(){
+    this.dialogRef.close();
   }
 
 }

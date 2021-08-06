@@ -3,7 +3,6 @@ import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
-import { HeaderComponent } from '../global/header/header.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthService } from './auth.service';
@@ -11,6 +10,7 @@ import { AuthEffects } from './auth.effects';
 import { AUTH_STATE_NAME } from './auth.selector';
 import { AuthReducer } from './auth.reducer';
 import { SignupComponent } from './signup/signup.component';
+import { HeaderModule } from '../global/header/header.module';
 
 export const routes = [
   {
@@ -26,11 +26,11 @@ export const routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    HeaderComponent,
     SignupComponent
   ],
   imports: [
     CommonModule,
+    HeaderModule,
     RouterModule.forChild(routes),
     FormsModule, 
     ReactiveFormsModule,

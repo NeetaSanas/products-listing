@@ -7,16 +7,18 @@
                 <p class="secondary-text-color">Explore products of your choice...</p>
             </div> 
             <div style="margin-bottom: 10px;">
-                <button [routerLink]="['/products/add']">Add Product</button>
+                <!-- <button [routerLink]="['/products/add']">Add Product</button> -->
+                <button (click)="openAddDialog()">Add Product</button>
             </div>
+            <br><br>
             <div class="container">
                 <div class="card" *ngFor="let p of products | async">
                     <!-- <img [src]="p.src" alt="image" class="card-image"> -->
                     <p>{{p.id}}</p>
                     <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>
                     <p>{{p.description}}</p>
-                    <button [routerLink]="['edit', p.id]">Update</button>&nbsp;&nbsp;
-                    <button (click)="deleteProduct(p.id)">Delete</button>
+                    <button (click)="openUpdateDialog(p)">Update</button>&nbsp;&nbsp; <!--[routerLink]="['edit', p.id]"-->
+                    <button (click)="deleteProduct(p.id)">Delete</button> 
                 </div>
             </div>
             <div class="card" *ngIf="NoProducts">
