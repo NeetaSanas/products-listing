@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { DialogConfig } from 'src/app/global/dialog/dialog-config';
-import { DialogInjector } from 'src/app/global/dialog/dialog-injector';
 import { DialogRef } from 'src/app/global/dialog/dialog-ref';
 import { Product } from '../products.model';
 import { updateProduct } from '../state/products.actions';
@@ -25,7 +24,6 @@ export class EditProductComponent implements OnInit {
     public dialogRef: DialogRef, public config: DialogConfig) { }
 
   ngOnInit(): void {
-    console.log(this.config);
     this.productData = this.config.data;
     this.route.paramMap.subscribe((params) =>{
       const id = params.get('id');
@@ -37,11 +35,11 @@ export class EditProductComponent implements OnInit {
   }
 
   createForm(){
-    console.log(this.productData['name']);
     this.productForm = new FormGroup({
       name: new FormControl(this.productData.name, Validators.required),
       description: new FormControl(this.productData.description, Validators.required),
       price: new FormControl(this.productData.price, Validators.required),
+      image: new FormControl(this.productData.image, Validators.required),
     });
   }
 
@@ -59,12 +57,14 @@ export class EditProductComponent implements OnInit {
     const name = this.productForm.value.name;
     const description = this.productForm.value.description;
     const price = this.productForm.value.price;
+    const image = this.productForm.value.image;
 
     const product: Product = {
       id:this.productData.id,
       name,
       description,
-      price
+      price,
+      image
     }
 
     this.store.dispatch(updateProduct({ product }));

@@ -38,21 +38,21 @@
                 <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid email</span>
 
-                <div class="form-control">
+                <div class="form-control" *ngIf="newUser">
                     <i class="fa fa-key icon"></i>
                     <input (input)="validateForm()" type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
                 </div>
-                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Required</span>
-                <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Enter minimum 6 characters</span>
+                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched && newUser">Required</span>
+                <span class="error-message" *ngIf="form.controls.password.hasError('minlength') && newUser">Enter minimum 6 characters</span>
                 
-                <div class="form-control">
+                <div class="form-control" *ngIf="newUser">
                     <i class="fa fa-key icon"></i>
                     <input (input)="validateForm()" type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
                     
                 </div>
-                <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched">Required</span>
-                <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength')">Enter minimum 6 characters</span>
-                <span class="error-message" *ngIf="form.controls.retype_password.hasError('mismatchedPasswords')">Password  not matching</span>
+                <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched && newUser">Required</span>
+                <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength') && newUser">Enter minimum 6 characters</span>
+                <span class="error-message" *ngIf="form.controls.retype_password.hasError('mismatchedPasswords') && newUser">Password  not matching</span>
 
                 <div class="submit-button-container">
                     <button class="w-100 submit-button" type="submit" [disabled]="!form.valid">SIGNUP</button>

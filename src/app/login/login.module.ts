@@ -11,6 +11,9 @@ import { AUTH_STATE_NAME } from './auth.selector';
 import { AuthReducer } from './auth.reducer';
 import { SignupComponent } from './signup/signup.component';
 import { HeaderModule } from '../global/header/header.module';
+import { DialogService } from '../global/dialog/dialog.service';
+import { DialogModule } from '../global/dialog/dialog.module';
+import { DialogConfig } from '../global/dialog/dialog-config';
 
 export const routes = [
   {
@@ -29,14 +32,17 @@ export const routes = [
     SignupComponent
   ],
   imports: [
+    DialogModule,
     CommonModule,
     HeaderModule,
     RouterModule.forChild(routes),
     FormsModule, 
     ReactiveFormsModule,
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer)
-  ],
-  providers:[AuthService, { provide: APP_BASE_HREF, useValue: "/" }]
+    StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
+    
+  ], 
+  providers:[AuthService, { provide: APP_BASE_HREF, useValue: "/" },DialogService,
+  { provide: DialogConfig, useValue: DialogConfig }]
 })
 export class LoginModule { }

@@ -17,6 +17,8 @@ import { CardComponent } from './story-components/card/card.component';
 import { CheckboxComponent } from './story-components/checkbox/checkbox.component';
 import { HomepageService } from './homepage/homepage.service';
 import { NavbarComponent } from './global/navbar/navbar.component';
+import { DialogService } from './global/dialog/dialog.service';
+import { DialogModule } from './global/dialog/dialog.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { NavbarComponent } from './global/navbar/navbar.component';
     CheckboxComponent,
     NavbarComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -44,7 +46,7 @@ import { NavbarComponent } from './global/navbar/navbar.component';
     }),
   ],
   
-  providers: [HomepageService],
+  providers: [HomepageService, DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

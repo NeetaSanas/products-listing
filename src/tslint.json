@@ -1,0 +1,44 @@
+[
+    {
+        "endPosition": {
+            "character": 26,
+            "line": 8,
+            "position": 214
+        },
+        "failure": "\" should be '",
+        "fix": {
+            "innerStart": 198,
+            "innerLength": 16,
+            "innerText": "'int-issue-json'"
+        },
+        "name": "/Users/alan/git/lint-issue-json/src/app/app.component.ts",
+        "ruleName": "quotemark",
+        "ruleSeverity": "ERROR",
+        "startPosition": {
+            "character": 10,
+            "line": 8,
+            "position": 198
+        }
+    },
+    {
+        "endPosition": {
+            "character": 26,
+            "line": 8,
+            "position": 214
+        },
+        "failure": "Missing semicolon",
+        "fix": {
+            "innerStart": 214,
+            "innerLength": 0,
+            "innerText": ";"
+        },
+        "name": "/Users/alan/git/lint-issue-json/src/app/app.component.ts",
+        "ruleName": "semicolon",
+        "ruleSeverity": "ERROR",
+        "startPosition": {
+            "character": 26,
+            "line": 8,
+            "position": 214
+        }
+    }
+]

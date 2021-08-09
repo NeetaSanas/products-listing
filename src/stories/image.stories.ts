@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { ImageComponent } from 'src/app/story-components/image/image.component';
 
 export default {
-  title: 'Example/Image Component',
+  title: 'Image Component',
   component: ImageComponent
 } as Meta;
 

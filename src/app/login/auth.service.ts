@@ -28,8 +28,7 @@ export class AuthService {
     return this.http.post(`http://localhost:3000/users`, params);
   }
 
-  login(email:string, password:string){
-    console.log(email, password);
+  login(){
     // return this.http.post<AuthResponseData>(
     //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
     //   { email, password, returnSecureToken: true }

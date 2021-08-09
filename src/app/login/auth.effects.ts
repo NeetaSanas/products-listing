@@ -24,7 +24,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(loginStart),
       exhaustMap((action) => {
-        return this.authService.login(action.email, action.password).pipe(
+        return this.authService.login().pipe( //action.email, action.password
           map((data:any) => {
             // this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessage({ message: '' }));

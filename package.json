@@ -9,7 +9,9 @@
     "test": "jest --coverage",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "build-storybook": "npm run docs:json && build-storybook",
+    "sass-lint": "./node_modules/sass-lint/bin/sass-lint.js -c src/sass-lint.yml -v -q",
+    "lint": "npm run saas-lint && ng lint"
   },
   "private": true,
   "dependencies": {
@@ -54,7 +56,7 @@
     "@types/node": "^12.11.1",
     "@webcomponents/custom-elements": "^1.4.3",
     "babel-loader": "^8.2.2",
-    "jest": "^25.4.0",
+    "jest": "^25.5.4",
     "jest-preset-angular": "^9.0.5",
     "typescript": "~4.2.3"
   }

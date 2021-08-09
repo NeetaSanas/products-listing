@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
+import { DialogConfig } from 'src/app/global/dialog/dialog-config';
+import { DialogRef } from 'src/app/global/dialog/dialog-ref';
 import { emailValidator, matchingPasswords } from 'src/app/global/validators';
 import { signupStart } from '../auth.actions';
 
@@ -12,7 +14,9 @@ import { signupStart } from '../auth.actions';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
-  constructor(public fb: FormBuilder, private store: Store<AppState>) { 
+  newUser = true;
+  constructor(public fb: FormBuilder, private store: Store<AppState>,
+     public config: DialogConfig) { 
     this.form = this.fb.group({
       'firstname': [null, Validators.compose([Validators.required])],
       'lastname': [null, Validators.compose([Validators.required])],
@@ -25,6 +29,22 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("In signup");
+    console.log(this.config);
+    if(this.config){
+      this.updateForm();
+      this.newUser = false;
+    }else{
+      this.newUser = true;
+    }
+  }
+
+  updateForm(){
+    this.form = new FormGroup({
+      firstname: new FormControl(this.config.data.firstname, Validators.required),
+      lastname: new FormControl(this.config.data.lastname, Validators.required),
+      email: new FormControl(this.config.data.email, Validators.required),
+      contact: new FormControl(this.config.data.contact, Validators.required),
+    });
   }
 
   onSubmit(){

@@ -1,0 +1,1 @@
+(self.webpackChunkassignment=self.webpackChunkassignment||[]).push([[592],{9880:(e,n,s)=>{"use strict";s.d(n,{O:()=>c});var t=s(8583),a=s(7716);let c=(()=>{class e{}return e.\u0275fac=function(n){return new(n||e)},e.\u0275mod=a.oAB({type:e}),e.\u0275inj=a.cJS({imports:[[t.ez]]}),e})()}}]);

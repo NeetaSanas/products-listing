@@ -26,6 +26,13 @@
                     <input type="text" formControlName="description">
                     <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched"><p>Required</p></div>
                 </div>
+                <br>
+                <div class="form-control">
+                    <label>Image Url</label>
+                    <input type="text" formControlName="image">
+                    <div *ngIf="productForm.controls.image.errors?.required && productForm.controls.image.touched"><p>Required</p></div>
+                </div>
+
                 <br><br>
                 <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
                     <br>

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     // this.store.dispatch(loginStart({email, password}));
     this.currentUser = this.form.value.email;
 
-    this.authService.login(this.form.value.email, this.form.value.password).subscribe(
+    this.authService.login().subscribe(
       data => {
         let successFlag = false;
         console.log(data);

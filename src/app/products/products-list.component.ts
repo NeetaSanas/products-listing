@@ -54,7 +54,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   openUpdateDialog(product){
-    console.log(product);
+    // console.log(product);
     const ref = this.dialog.open(EditProductComponent, {
       data: product
     });

@@ -5,7 +5,7 @@ import { CheckboxComponent } from 'src/app/story-components/checkbox/checkbox.co
 // import CheckBox from './checkbox.component';
 
 export default {
-  title: 'Example/Checkbox',
+  title: 'Checkbox',
   component: CheckboxComponent,
   argTypes: {
     backgroundColor: { control: 'color' },

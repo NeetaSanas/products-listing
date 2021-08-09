@@ -54,8 +54,29 @@ a {
         color: #fff;
         padding: 20px;
         &:hover {
-          color: var(--greyapple);
-          background-color: #fff;
+          color: #000;
+          background-color: #1976d2;
+        }
+      }
+      &.show {
+        display: grid;
+      }
+    }
+    .profile {
+      background-color: #1976d2;
+      display: none;
+      margin-top: 60px;
+      position: absolute;
+      text-align: center;
+      top: 0;
+      width: 20%;
+      left:80%;
+      a {
+        color: #fff;
+        padding: 20px;
+        &:hover {
+          color: #000;
+          background-color: #1976d2;
         }
       }
       &.show {
@@ -70,7 +91,7 @@ a {
       place-items: center;
       &.nav-items {
         justify-self: right;
-        padding-right: 15px;
+        padding-right: 1px;
       }
     }
     .menu {
@@ -115,6 +136,13 @@ a {
           display: initial;
         }
       }
+      .profile{
+        margin-top: 350px;
+        margin-right: 20px !important;
+        width: 20%;
+      }
     }
+
+    
   }
   

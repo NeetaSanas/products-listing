@@ -13,10 +13,10 @@
             <br><br>
             <div class="container">
                 <div class="card" *ngFor="let p of products | async">
-                    <!-- <img [src]="p.src" alt="image" class="card-image"> -->
-                    <p>{{p.id}}</p>
-                    <h2>{{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h2>
-                    <p>{{p.description}}</p>
+                    <img [src]="p.image" alt="image" class="card-image">
+                    <!-- <p>{{p.id}}</p> -->
+                    <h3>Name: {{p.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{p.price}} </h3>
+                    <p>Description: {{p.description}}</p>
                     <button (click)="openUpdateDialog(p)">Update</button>&nbsp;&nbsp; <!--[routerLink]="['edit', p.id]"-->
                     <button (click)="deleteProduct(p.id)">Delete</button> 
                 </div>
@@ -33,3 +33,4 @@
     <router-outlet></router-outlet>
     <div style="width:30%"></div>
 </div>
+

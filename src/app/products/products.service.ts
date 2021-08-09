@@ -35,15 +35,14 @@ export class ProductsService {
             id: product.id,
             name: product.name, 
             description: product.description, 
-            price: product.price
+            price: product.price,
+            image: product.image
         }
     }
-    console.log(product.id, productData);
     return this.http.patch<{name:string}>(`http://localhost:3000/products/${product.id}`, productData);
   }
  
   deleteProduct(id: string){
-    console.log(id);
     return this.http.delete<{name:string}>(`http://localhost:3000/products/${id}`);
   }
 
