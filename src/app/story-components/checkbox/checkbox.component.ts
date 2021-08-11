@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss']
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent {
 
   @Input() label = 'Checkbox';
   @Input() primary = false;
@@ -25,6 +25,4 @@ export class CheckboxComponent implements OnInit {
 
         return ['form-check-input', mode];
       }
-
-      ngOnInit(){}
 }

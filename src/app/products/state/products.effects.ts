@@ -89,7 +89,7 @@ export class ProductsEffects {
       return this.actions$.pipe(
         ofType(...[deleteProductSuccess]),
         tap((action) => {
-          this.router.navigate(['/products']);
+          this.router.navigate(['/']);
           this.toastr.success("Success");
         })
       );
@@ -102,7 +102,7 @@ export class ProductsEffects {
         ofType(...[addProductSuccess],),
         tap((action) => {
           this.toastr.success("Success");
-          this.router.navigate(['/products']);
+          this.router.navigate(['/']);
         })
       );
     },
@@ -113,7 +113,7 @@ export class ProductsEffects {
       return this.actions$.pipe(
         ofType(...[updateProductSuccess]),
         tap((action) => {
-          this.router.navigate(['/products']);
+          this.router.navigate(['/']);
           this.toastr.success("Success");
         })
       );

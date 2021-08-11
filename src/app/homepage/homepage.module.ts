@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,8 @@ import { HomepageService } from './homepage.service';
 import { FooterComponent } from '../global/footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ProductsModule } from '../products/products.module';
+import { ProductsService } from '../products/products.service';
 
 export const routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' }
@@ -15,17 +17,18 @@ export const routes = [
 @NgModule({
   declarations: [
     HomepageComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
+    ProductsModule,
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule, 
     ReactiveFormsModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
-  ],
+    Ng2SearchPipeModule,
   
-  providers:[HomepageService]
+  ],
+  providers:[HomepageService, ProductsService]
 })
 export class HomepageModule { }

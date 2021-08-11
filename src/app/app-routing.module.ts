@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-  { path: '', 
-    loadChildren: () => import('./homepage/homepage.module').then((m)=>m.HomepageModule)
-  },
+  // { path: '', 
+  //   loadChildren: () => import('./homepage/homepage.module').then((m)=>m.HomepageModule)
+  // },
+  { path: '', loadChildren: () => import('./products/products.module').then((m)=>m.ProductsModule)},
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   // {path: '', component: ProductsListComponent,
   //   children: [
@@ -13,12 +14,8 @@ export const routes: Routes = [
   //     { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   //   ]
   // },
-  { path: 'posts', 
-    loadChildren: () => import('./posts/posts.module').then((m)=>m.PostsModule)
-  },
-  { path: 'products', 
-    loadChildren: () => import('./products/products.module').then((m)=>m.ProductsModule)
-  },
+  { path: 'posts', loadChildren: () => import('./posts/posts.module').then((m)=>m.PostsModule)},
+  { path: 'cart', loadChildren: () => import('./cart/cart.module').then((m)=>m.CartModule)},
   
 ];
 

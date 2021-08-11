@@ -1,0 +1,47 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center">  
+  <div class="cart-dialog" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
+    <app-header style="width: 100% !important;"
+             [icon]="'exit_to_app'" 
+             [title]="'Checkout'" 
+             [hasBgImage]="true" 
+             [class]="'card-spacing'"></app-header>
+    <!-- <h3 style="text-align: center;">My Cart</h3> -->
+    
+
+    <table width="100%" class="cart-details">
+      <tr *ngFor="let item of myCartItems; let i=index" class="border-bottom">
+          <td><h3>{{i+1}}.</h3></td>
+          <td><h3>{{item.name}}</h3></td>
+          <td style="text-align: right;"><h3>{{item.price}}</h3></td>
+          <td style="vertical-align: top;"><button style="background-color: red;" (click)="removeItem(item,i)" class="delete-cart" title="Delete">
+            <i style="font-size: 20px;" class="fa fa-trash icon" ></i>
+          </button></td>
+      </tr>
+      <tr *ngIf="myCartItems.length > 0">
+        <td></td>
+        <td style="text-align: right;"><h3>Total:</h3></td>
+        <td style="text-align: right;"><h3 style="text-align: right;" >{{cartTotal}}</h3></td>
+      </tr>
+    </table>
+
+    <!-- <div>
+      <button (click)="checkout()">Checkout</button>
+    </div> -->
+    <div style="margin-top: 0px;" class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="myCartItems.length > 0">
+      <br>
+      <button class="w-40 submit-button" (click)="checkout()">Checkout</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="w-40 cancel-button" (click)="cancel()">Cancel</button>
+    </div> 
+
+    <div class="empty" *ngIf="myCartItems.length  == 0" >
+      <h3>Cart is empty <br>Please add products to continue...</h3>
+      <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="w-40 cancel-button" (click)="cancel()">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

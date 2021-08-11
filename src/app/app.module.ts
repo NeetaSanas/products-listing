@@ -19,6 +19,7 @@ import { HomepageService } from './homepage/homepage.service';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { DialogService } from './global/dialog/dialog.service';
 import { DialogModule } from './global/dialog/dialog.module';
+import { CartService } from './cart/cart.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DialogModule } from './global/dialog/dialog.module';
     ImageComponent,
     CardComponent,
     CheckboxComponent,
-    NavbarComponent
+    NavbarComponent,
+    
   ],
   imports: [    
     BrowserModule,
@@ -46,7 +48,7 @@ import { DialogModule } from './global/dialog/dialog.module';
     }),
   ],
   
-  providers: [HomepageService, DialogService],
+  providers: [HomepageService, DialogService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

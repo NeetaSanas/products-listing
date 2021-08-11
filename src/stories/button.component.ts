@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'storybook-button',
+  selector: 'app-storybook-button',
   template: ` <button
     type="button"
-    (click)="onClick.emit($event)"
+    (click)="Click.emit($event)"
     [ngClass]="classes"
     [ngStyle]="{ 'background-color': backgroundColor }"
   >
@@ -43,11 +43,11 @@ export default class ButtonComponent {
    * Optional click handler
    */
   @Output()
-  onClick = new EventEmitter<Event>();
+  Click = new EventEmitter<Event>();
 
   public get classes(): string[] {
-    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+    const mode = this.primary ? 'app-storybook-button--primary' : 'app-storybook-button--secondary';
 
-    return ['storybook-button', `storybook-button--${this.size}`, mode];
+    return ['app-storybook-button', `app-storybook-button--${this.size}`, mode];
   }
 }

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { DialogService } from 'src/app/global/dialog/dialog.service';
+import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../cart/cart.service';
+import { NavbarComponent } from '../global/navbar/navbar.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { Product } from './products.model';
@@ -18,11 +21,20 @@ import { getProducts } from './state/products.selector';
 export class ProductsListComponent implements OnInit {
   products: Observable<Product[]>;
   NoProducts: boolean=false;
-  constructor(private store : Store<AppState>, private router: Router, public dialog: DialogService) { }
+  p: any;
+  public searchText: any;
+  cartProductList = [];
+  @Output() comp1Out = new EventEmitter();
+  public cartItems:any[]=new Array();
+  public cartProductCount: number = 0;
+  
+  constructor(private store : Store<AppState>, private router: Router, 
+    public dialog: DialogService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.products = this.store.select(getProducts);
     this.store.dispatch(loadProducts());
+    
   }
 
   deleteProduct(id:string){
@@ -63,4 +75,22 @@ export class ProductsListComponent implements OnInit {
       console.log('Dialog closed', result);      
     });
   }
+
+  public addToCart(product): void {
+      this.cartItems.push(product);
+      console.log(this.cartItems);
+      this.cartProductCount = this.cartItems.length;
+  }
+
+  openCartDialog(){
+    //this.router.navigate(['/cart']);
+    const ref = this.dialog.open(CartComponent, {
+      data: this.cartItems
+     });
+ 
+     ref.afterClosed.subscribe(result => {
+       console.log('Dialog closed', result);      
+     }); 
+  }
+  
 }

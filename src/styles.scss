@@ -56,9 +56,14 @@
 .submit-button-container{
     margin: 20px 0 20px 0;
     display: flex;
+    justify-content: center;
     .w-30{
         width:30%;
     }
+    .w-40{
+        width:40%;
+    }
+
     .submit-button {
         font-size: 14px;
         font-weight: bold;
@@ -102,3 +107,9 @@ button{
     border: 0px;
     
 } 
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 14px;
+    vertical-align: middle;
+}

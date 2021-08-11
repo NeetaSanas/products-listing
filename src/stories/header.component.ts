@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'storybook-header',
+  selector: 'app-storybook-header',
   template: `<header>
     <!--<div class="wrapper">
       <div>
@@ -27,20 +27,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         <storybook-button
           *ngIf="user"
           size="small"
-          (onClick)="onLogout.emit($event)"
+          (onClick)="Logout.emit($event)"
           label="Log out"
         ></storybook-button>
         <storybook-button
           *ngIf="!user"
           size="small"
-          (onClick)="onLogin.emit($event)"
+          (onClick)="Login.emit($event)"
           label="Log in"
         ></storybook-button>
         <storybook-button
           *ngIf="!user"
           primary
           size="small"
-          (onClick)="onCreateAccount.emit($event)"
+          (onClick)="CreateAccount.emit($event)"
           label="Sign up"
         ></storybook-button>
       </div>
@@ -53,11 +53,11 @@ export default class HeaderComponent {
   user: unknown = null;
 
   @Output()
-  onLogin = new EventEmitter<Event>();
+  Login = new EventEmitter<Event>();
 
   @Output()
-  onLogout = new EventEmitter<Event>();
+  Logout = new EventEmitter<Event>();
 
   @Output()
-  onCreateAccount = new EventEmitter<Event>();
+  CreateAccount = new EventEmitter<Event>();
 }

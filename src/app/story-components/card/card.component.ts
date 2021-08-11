@@ -6,17 +6,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
-  @Input('title') title:any;
-  @Input('subtitle') subtitle:any;
-  @Input('content') content = 'Card Content';
+export class CardComponent {
+  @Input() title:any;
+  @Input() subtitle:any;
+  @Input() content = 'Card Content';
   @Output() btnClicked = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit(): void {
+  handleBtnClick(){
+    console.log("clicked");
   }
-
-  handleBtnClick(){}
 
 }

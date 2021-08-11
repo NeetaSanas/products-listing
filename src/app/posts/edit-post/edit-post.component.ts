@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,7 @@ import { getPostById } from '../state/posts.selector';
   templateUrl: './edit-post.component.html',
   styleUrls: ['./edit-post.component.scss']
 })
-export class EditPostComponent implements OnInit {
+export class EditPostComponent implements OnInit, OnDestroy {
   post:Post;
   postForm: FormGroup;
   postSubscription : Subscription;

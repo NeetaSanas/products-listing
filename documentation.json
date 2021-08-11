@@ -2385,7 +2385,7 @@
         },
         {
             "name": "CardComponent",
-            "id": "component-CardComponent-51c863650589b3973bcf0fbe89553751",
+            "id": "component-CardComponent-56b2135797f75de10346699aadfb92c3",
             "file": "src/app/story-components/card/card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2403,38 +2403,15 @@
             "viewProviders": [],
             "inputsClass": [
                 {
-                    "name": "content",
-                    "defaultValue": "'Card Content'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 12,
-                    "type": "string"
-                },
-                {
-                    "name": "subtitle",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 11,
-                    "type": "any"
-                },
-                {
                     "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 10,
-                    "type": "any"
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "btnClicked",
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 13,
-                    "type": "EventEmitter"
+                    "type": "any"
                 }
             ],
+            "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [
                 {
@@ -2465,7 +2442,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent implements OnInit {\n  @Input('title') title:any;\n  @Input('subtitle') subtitle:any;\n  @Input('content') content = 'Card Content';\n  @Output() btnClicked = new EventEmitter();\n\n  constructor() {}\n\n  ngOnInit(): void {\n  }\n\n  handleBtnClick(){}\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent implements OnInit {\n  @Input('title')\n  @Input('subtitle')\n  @Input('content')\n  @Output() btnClicked = new EventEmitter();\n\n  constructor() {}\n\n  ngOnInit(): void {\n  }\n\n  handleBtnClick(){}\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2489,7 +2466,7 @@
         },
         {
             "name": "CheckboxComponent",
-            "id": "component-CheckboxComponent-5693cb52e890d7e6e4d21197cb11a743",
+            "id": "component-CheckboxComponent-9e901fbad91c855b1dd9710338ae26d9",
             "file": "src/app/story-components/checkbox/checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2533,18 +2510,7 @@
             ],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 29,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -2552,7 +2518,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-checkbox',\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss']\n})\nexport class CheckboxComponent implements OnInit {\n\n  @Input() label = 'Checkbox';\n  @Input() primary = false;\n  @Input() disabled = true;\n\n\n    public get classes(): string[] {\n        const mode = this.primary ? 'btn-primary' : 'btn-secondary';\n        const disble = this.disabled ? 'disabled' : '';\n\n        return ['form-check-input', mode, disble];\n      }\n\n      public get class(): string[] {\n        const mode = this.primary ? 'btn-primary' : 'btn-secondary';\n       \n\n        return ['form-check-input', mode];\n      }\n\n      ngOnInit(){}\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-checkbox',\n  templateUrl: './checkbox.component.html',\n  styleUrls: ['./checkbox.component.scss']\n})\nexport class CheckboxComponent {\n\n  @Input() label = 'Checkbox';\n  @Input() primary = false;\n  @Input() disabled = true;\n\n\n    public get classes(): string[] {\n        const mode = this.primary ? 'btn-primary' : 'btn-secondary';\n        const disble = this.disabled ? 'disabled' : '';\n\n        return ['form-check-input', mode, disble];\n      }\n\n      public get class(): string[] {\n        const mode = this.primary ? 'btn-primary' : 'btn-secondary';\n       \n\n        return ['form-check-input', mode];\n      }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2561,9 +2527,6 @@
                 }
             ],
             "stylesData": "",
-            "implements": [
-                "OnInit"
-            ],
             "accessors": {
                 "classes": {
                     "name": "classes",
@@ -3600,7 +3563,7 @@
         },
         {
             "name": "ImageComponent",
-            "id": "component-ImageComponent-6d7b51887a306e40ec0546bde1e02b83",
+            "id": "component-ImageComponent-403e5c82ee10a198586de7686e7a5c87",
             "file": "src/app/story-components/image/image.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3652,18 +3615,7 @@
             ],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 23,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -3671,7 +3623,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-image',\n  templateUrl: './image.component.html',\n  styleUrls: ['./image.component.scss']\n})\nexport class ImageComponent implements OnInit {\n  @Input()\n  imgSrc:string = '/assets/flower.jpg';\n\n  @Input()\n  altTxt?:string = 'Testing Image';\n\n  @Input()\n  figCaptionTxt?: string = 'Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......';\n\n  @Input()\n  imgOpacity?: number=1;\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-image',\n  templateUrl: './image.component.html',\n  styleUrls: ['./image.component.scss']\n})\nexport class ImageComponent {\n  @Input()\n  imgSrc:string = '/assets/flower.jpg';\n\n  @Input()\n  altTxt?:string = 'Testing Image';\n\n  @Input()\n  figCaptionTxt?: string = 'Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......Testing image description text......';\n\n  @Input()\n  imgOpacity?: number=1;\n\n  constructor() { }\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3688,9 +3640,6 @@
                 "args": [],
                 "line": 19
             },
-            "implements": [
-                "OnInit"
-            ],
             "templateData": "<figure>\n    <img \n        [ngStyle]=\"{opacity : imgOpacity}\"\n        src=\"{{imgSrc}}\"\n        alt=\"{{altTxt}}\"\n        style=\"width: 100%;\"\n    />\n\n    <figcaption *ngIf=\"figCaptionTxt && figCaptionTxt.trim().length > 0\">\n        {{figCaptionTxt}}\n    </figcaption>\n</figure>"
         },
         {
@@ -3923,7 +3872,7 @@
         },
         {
             "name": "NavbarComponent",
-            "id": "component-NavbarComponent-fa3150402a0f4dae48a296fae6f4aa5e",
+            "id": "component-NavbarComponent-4fc5fc4812cc555422954d7edd689e28",
             "file": "src/app/global/navbar/navbar.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4091,6 +4040,16 @@
                     "deprecationMessage": ""
                 },
                 {
+                    "name": "onProfileSetting",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 89,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "onSettings",
                     "args": [],
                     "optional": false,
@@ -4138,11 +4097,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';\nimport { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthEffects } from 'src/app/login/auth.effects';\nimport { AuthService } from 'src/app/login/auth.service';\nimport { SignupComponent } from 'src/app/login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService) {}\n\n  \n\n  logout(){\n    localStorage.removeItem(\"user\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n\n      console.log(\"app component\");\n      console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n  }\n  onSettings(){\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  // onProfileSetting(){\n  //     const ref = this.dialog.open(ProfileComponent, {\n  //       data: user\n  //     });\n  \n  //     ref.afterClosed.subscribe(result => {\n  //       console.log('Dialog closed', result);      \n  //     });\n  // }\n\n}\n",
+            "sourceCode": "import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';\nimport { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthEffects } from 'src/app/login/auth.effects';\nimport { AuthService } from 'src/app/login/auth.service';\nimport { SignupComponent } from 'src/app/login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService) {}\n\n  \n\n  logout(){\n    localStorage.removeItem(\"user\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n\n      console.log(\"app component\");\n      console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n  }\n  onSettings(){\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    console.log(this.currentUser);\n    this.authService.login().subscribe(data=>{\n      console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i]\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      ref.afterClosed.subscribe(result => {\n        console.log('Dialog closed', result);      \n      });\n    });\n    \n  \n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "a {\r\n    color: #fff;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    transition: color 0.3s ease;\r\n    &:hover {\r\n      color: #000;\r\n    }\r\n  }\r\n  \r\n  .nav{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #1976d2;\r\n    color: white;\r\n    font-weight: 500;\r\n\r\n    background-color: #1976d2;\r\n    height: 60px;\r\n    display: grid;\r\n    grid-template-rows: minmax(min-content, 60px);\r\n    .brand {\r\n      cursor: pointer;\r\n      justify-self: left;\r\n      margin-left: 15px;\r\n    }\r\n    .content {\r\n      align-content: space-evenly;\r\n      background-color: var(--greyapple);\r\n      display: grid;\r\n      grid-auto-flow: column;\r\n      place-items: left;\r\n      position: relative;\r\n      z-index: 10;\r\n\r\n      .logo-img{\r\n        margin-left: 10px;\r\n      }\r\n    }\r\n    .dropdown {\r\n      background-color: #1976d2;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 100%;\r\n      a {\r\n        color: #fff;\r\n        padding: 20px;\r\n        &:hover {\r\n          color: #000;\r\n          background-color: #1976d2;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .profile {\r\n      background-color: #1976d2;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 20%;\r\n      left:80%;\r\n      a {\r\n        color: #fff;\r\n        padding: 20px;\r\n        &:hover {\r\n          color: #000;\r\n          background-color: #1976d2;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .links {\r\n      display: grid;\r\n      grid-auto-columns: minmax(min-content, 50px);\r\n      grid-auto-flow: column;\r\n      grid-gap: 15px;\r\n      place-items: center;\r\n      &.nav-items {\r\n        justify-self: right;\r\n        padding-right: 15px;\r\n      }\r\n    }\r\n    .menu {\r\n      -webkit-user-select: none;\r\n      display: none;\r\n      justify-self: right;\r\n      margin-right: 15px;\r\n      position: relative;\r\n      user-select: none;\r\n      input {\r\n        -webkit-touch-callout: none;\r\n        cursor: pointer;\r\n        display: block;\r\n        height: 24px;\r\n        left: -5px;\r\n        opacity: 0;\r\n        position: absolute;\r\n        top: 0;\r\n        width: 24px;\r\n        z-index: 2;\r\n      }\r\n      label {\r\n        color: #fff;\r\n        font-size: 32px;\r\n        left: -8px;\r\n        position: relative;\r\n        top: 0px;\r\n      }\r\n      &:hover {\r\n        opacity: 0.5;\r\n      }\r\n    }\r\n  }\r\n  \r\n  @media only screen and (max-width: 768px) {\r\n    .nav {\r\n      .content {\r\n        .links {\r\n          display: none;\r\n        }\r\n        .menu {\r\n          display: initial;\r\n        }\r\n      }\r\n      .profile{\r\n        margin-top: 350px;\r\n        margin-right: 20px !important;\r\n        width: 20%;\r\n      }\r\n    }\r\n\r\n    \r\n  }\r\n  ",
+                    "data": "a {\r\n    color: #fff;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    transition: color 0.3s ease;\r\n    &:hover {\r\n      color: #000;\r\n    }\r\n  }\r\n  \r\n  .nav{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #1976d2;\r\n    color: white;\r\n    font-weight: 500;\r\n\r\n    background-color: #1976d2;\r\n    height: 60px;\r\n    display: grid;\r\n    grid-template-rows: minmax(min-content, 60px);\r\n    .brand {\r\n      cursor: pointer;\r\n      justify-self: left;\r\n      margin-left: 15px;\r\n    }\r\n    .content {\r\n      align-content: space-evenly;\r\n      background-color: var(--greyapple);\r\n      display: grid;\r\n      grid-auto-flow: column;\r\n      place-items: left;\r\n      position: relative;\r\n      z-index: 10;\r\n\r\n      .logo-img{\r\n        margin-left: 10px;\r\n      }\r\n    }\r\n    .dropdown {\r\n      background-color: #1976d2;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 100%;\r\n      a {\r\n        color: #fff;\r\n        padding: 20px;\r\n        &:hover {\r\n          color: #000;\r\n          background-color: #1976d2;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .profile {\r\n      background-color: #1976d2;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 20%;\r\n      left:80%;\r\n      a {\r\n        color: #fff;\r\n        padding: 20px;\r\n        &:hover {\r\n          color: #000;\r\n          background-color: #1976d2;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .links {\r\n      display: grid;\r\n      grid-auto-columns: minmax(min-content, 50px);\r\n      grid-auto-flow: column;\r\n      grid-gap: 15px;\r\n      place-items: center;\r\n      &.nav-items {\r\n        justify-self: right;\r\n        padding-right: 1px;\r\n      }\r\n    }\r\n    .menu {\r\n      -webkit-user-select: none;\r\n      display: none;\r\n      justify-self: right;\r\n      margin-right: 15px;\r\n      position: relative;\r\n      user-select: none;\r\n      input {\r\n        -webkit-touch-callout: none;\r\n        cursor: pointer;\r\n        display: block;\r\n        height: 24px;\r\n        left: -5px;\r\n        opacity: 0;\r\n        position: absolute;\r\n        top: 0;\r\n        width: 24px;\r\n        z-index: 2;\r\n      }\r\n      label {\r\n        color: #fff;\r\n        font-size: 32px;\r\n        left: -8px;\r\n        position: relative;\r\n        top: 0px;\r\n      }\r\n      &:hover {\r\n        opacity: 0.5;\r\n      }\r\n    }\r\n  }\r\n  \r\n  @media only screen and (max-width: 768px) {\r\n    .nav {\r\n      .content {\r\n        .links {\r\n          display: none;\r\n        }\r\n        .menu {\r\n          display: initial;\r\n        }\r\n      }\r\n      .profile{\r\n        margin-top: 350px;\r\n        margin-right: 20px !important;\r\n        width: 20%;\r\n      }\r\n    }\r\n\r\n    \r\n  }\r\n  ",
                     "styleUrl": "./navbar.component.scss"
                 }
             ],
@@ -4237,18 +4196,18 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<div class=\"nav\">\n\t<div class=\"content\">\n        <img width=\"70\" class=\"logo-img\" alt=\"Products\" src=\"assets/logo.png\"/>\n\t\t<!-- <span class=\"site-title\">PRODUCTS</span> -->\n\t\t<div class=\"links nav-items\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <!-- <a rel=\"noopener\" href=\"/posts\" title=\"Posts\">POSTS</a> -->\n            <a rel=\"noopener\" href=\"/products\" title=\"Products\">PRODUCTS</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a><button id=\"mode\" (click)=\"toggleTheme()\" style=\"font-size: 14px; font-weight: 500;\">{{themeText}}</button></a>\n\t\t\t<a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 30px;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n\t\t\t<!-- <button *ngIf=\"currentUser\" (click)=\"onSettings()\"><i class=\"fa fa-user-circle\"></i></button> -->\n\t\t\t\n\t\t</div>\n\n\t\t<!-- <div class=\"profile\" id=\"profile\" [class.show]=\"isOpenMenu\">\n\t\t\t<a  title=\"Profile\" *ngIf=\"currentUser\" (click)=\"onProfileSetting()\">Profile</a>\n\t\t</div> -->\n\n\t\t<div class=\"menu\" (click)=\"onMenu()\">\n\t\t\t<input type=\"checkbox\" hidden id=\"hamburger\" />\n\t\t\t<label for=\"hamburger\" [hidden]=\"isOpen\">&#9776;</label>\n\t\t\t<label for=\"hamburger\" [hidden]=\"!isOpen\">&#10006;</label>\n\t\t</div>\n\t\t<div class=\"dropdown\" id=\"dropdown\" [class.show]=\"isOpen\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <a rel=\"noopener\" href=\"/products\" title=\"Products\">PRODUCTS</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 30px;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n            <button id=\"mode\" (click)=\"toggleTheme()\">{{themeText}}</button>\n\t\t\t<!-- <button *ngIf=\"currentUser\" (click)=\"onSettings()\"><i class=\"fa fa-user-circle\"></i></button> -->\n\t\t\t\n\t\t</div>\n\t</div>\n</div>"
+            "templateData": "<div class=\"nav\">\n\t<div class=\"content\">\n        <img width=\"70\" class=\"logo-img\" alt=\"Products\" src=\"assets/logo.png\"/>\n\t\t<!-- <span class=\"site-title\">PRODUCTS</span> -->\n\t\t<div class=\"links nav-items\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <!-- <a rel=\"noopener\" href=\"/posts\" title=\"Posts\">POSTS</a> -->\n            <a rel=\"noopener\" href=\"/products\" title=\"Products\">PRODUCTS</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a><button id=\"mode\" (click)=\"toggleTheme()\" style=\"font-size: 14px; font-weight: 500;\">{{themeText}}</button></a>\n\t\t\t<a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 25px; grid-gap: 0px !important;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n\t\t\t<button *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i></button>\n\t\t\t\n\t\t</div>\n\n\t\t<div class=\"profile\" id=\"profile\" [class.show]=\"isOpenMenu\">\n\t\t\t<a  title=\"Profile\" *ngIf=\"currentUser\" (click)=\"onProfileSetting()\">Profile</a>\n\t\t</div>\n\n\t\t<div class=\"menu\" (click)=\"onMenu()\">\n\t\t\t<input type=\"checkbox\" hidden id=\"hamburger\" />\n\t\t\t<label for=\"hamburger\" [hidden]=\"isOpen\">&#9776;</label>\n\t\t\t<label for=\"hamburger\" [hidden]=\"!isOpen\">&#10006;</label>\n\t\t</div>\n\t\t<div class=\"dropdown\" id=\"dropdown\" [class.show]=\"isOpen\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <a rel=\"noopener\" href=\"/products\" title=\"Products\">PRODUCTS</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"posts\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 30px;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a>\n            <button id=\"mode\" (click)=\"toggleTheme()\">{{themeText}}</button>\n\t\t\t<!-- <button *ngIf=\"currentUser\" (click)=\"onSettings()\"><i class=\"fa fa-user-circle\"></i></button> -->\n\t\t\t\n\t\t</div>\n\t</div>\n</div>"
         },
         {
             "name": "PageComponent",
-            "id": "component-PageComponent-8f196770333aa216860a88c0b6b221aa",
+            "id": "component-PageComponent-868ba9f405e0276aa62703fbcf08347f",
             "file": "src/stories/page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "storybook-page",
+            "selector": "app-storybook-page",
             "styleUrls": [
                 "./page.css"
             ],
@@ -4301,7 +4260,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'app-storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4693,7 +4652,7 @@
         },
         {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-7e9b7311a0986541d1954aa5519208e8",
+            "id": "component-SignupComponent-7bdfcb3c0bf4bc3a55246eec5ae50e87",
             "file": "src/app/login/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4712,6 +4671,18 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DialogConfig",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "modifierKind": [
+                        122
+                    ]
+                },
                 {
                     "name": "fb",
                     "deprecated": false,
@@ -4735,7 +4706,7 @@
                 },
                 {
                     "name": "newUser",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -4751,7 +4722,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4761,7 +4732,17 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateForm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4771,7 +4752,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4783,7 +4764,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.state';\nimport { DialogConfig } from 'src/app/global/dialog/dialog-config';\nimport { DialogRef } from 'src/app/global/dialog/dialog-ref';\nimport { emailValidator, matchingPasswords } from 'src/app/global/validators';\nimport { signupStart } from '../auth.actions';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = false;\n  constructor(public fb: FormBuilder, private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"In signup\");\n    // console.log(this.config);\n    // if(this.config){\n    //   this.updateForm();\n    // }else{\n    //   this.newUser = true;\n    // }\n  }\n\n  // updateForm(){\n  //   this.form = new FormGroup({\n  //     firstname: new FormControl(this.config.data.firstname, Validators.required),\n  //     lastname: new FormControl(this.config.data.lastname, Validators.required),\n  //     email: new FormControl(this.config.data.email, Validators.required),\n  //     contact: new FormControl(this.config.data.contact, Validators.required),\n  //   });\n\n  // }\n\n  onSubmit(){\n    console.log(this.form.value);\n    if(!this.form.valid){\n      return;\n    }\n    const firstname= this.form.value.firstname;\n    const lastname= this.form.value.lastname;\n    const contact= this.form.value.contact;\n    const email= this.form.value.email;\n    const password= this.form.value.password;\n    const retype_password= this.form.value.retype_password;\n    \n    this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.state';\nimport { DialogConfig } from 'src/app/global/dialog/dialog-config';\nimport { DialogRef } from 'src/app/global/dialog/dialog-ref';\nimport { emailValidator, matchingPasswords } from 'src/app/global/validators';\nimport { signupStart } from '../auth.actions';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,\n     public config: DialogConfig) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"In signup\");\n    console.log(this.config);\n    if(this.config){\n      this.updateForm();\n      this.newUser = false;\n    }else{\n      this.newUser = true;\n    }\n  }\n\n  updateForm(){\n    this.form = new FormGroup({\n      firstname: new FormControl(this.config.data.firstname, Validators.required),\n      lastname: new FormControl(this.config.data.lastname, Validators.required),\n      email: new FormControl(this.config.data.email, Validators.required),\n      contact: new FormControl(this.config.data.contact, Validators.required),\n    });\n  }\n\n  onSubmit(){\n    console.log(this.form.value);\n    if(!this.form.valid){\n      return;\n    }\n    const firstname= this.form.value.firstname;\n    const lastname= this.form.value.lastname;\n    const contact= this.form.value.contact;\n    const email= this.form.value.email;\n    const password= this.form.value.password;\n    const retype_password= this.form.value.retype_password;\n    \n    this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4809,6 +4790,12 @@
                         "type": "Store<AppState>",
                         "deprecated": false,
                         "deprecationMessage": ""
+                    },
+                    {
+                        "name": "config",
+                        "type": "DialogConfig",
+                        "deprecated": false,
+                        "deprecationMessage": ""
                     }
                 ],
                 "line": 17,
@@ -4825,6 +4812,15 @@
                     {
                         "name": "store",
                         "type": "Store<AppState>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "config",
+                        "type": "DialogConfig",
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
@@ -5153,13 +5149,13 @@
         },
         {
             "name": "LoginModule",
-            "id": "module-LoginModule-704da9ac2a0e08288af471f841218b00",
+            "id": "module-LoginModule-a665c88a0d314e86388d3a2de059aebb",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/login/login.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { APP_BASE_HREF, CommonModule } from '@angular/common';\r\nimport { RouterModule } from '@angular/router';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { LoginComponent } from './login.component';\r\nimport { StoreModule } from '@ngrx/store';\r\nimport { EffectsModule } from '@ngrx/effects';\r\nimport { AuthService } from './auth.service';\r\nimport { AuthEffects } from './auth.effects';\r\nimport { AUTH_STATE_NAME } from './auth.selector';\r\nimport { AuthReducer } from './auth.reducer';\r\nimport { SignupComponent } from './signup/signup.component';\r\nimport { HeaderModule } from '../global/header/header.module';\r\nimport { DialogService } from '../global/dialog/dialog.service';\r\nimport { DialogModule } from '../global/dialog/dialog.module';\r\n\r\nexport const routes = [\r\n  {\r\n    path:'',\r\n    children:[\r\n      { path: '', redirectTo: 'login' },\r\n      { path: 'login', component: LoginComponent },\r\n      { path: 'signup', component: SignupComponent }\r\n    ]\r\n  }\r\n];\r\n\r\n@NgModule({\r\n  declarations: [\r\n    LoginComponent,\r\n    SignupComponent\r\n  ],\r\n  imports: [\r\n    DialogModule,\r\n    CommonModule,\r\n    HeaderModule,\r\n    RouterModule.forChild(routes),\r\n    FormsModule, \r\n    ReactiveFormsModule,\r\n    EffectsModule.forFeature([AuthEffects]),\r\n    StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),\r\n    \r\n  ],\r\n  providers:[AuthService, { provide: APP_BASE_HREF, useValue: \"/\" },DialogService]\r\n})\r\nexport class LoginModule { }",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { APP_BASE_HREF, CommonModule } from '@angular/common';\r\nimport { RouterModule } from '@angular/router';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { LoginComponent } from './login.component';\r\nimport { StoreModule } from '@ngrx/store';\r\nimport { EffectsModule } from '@ngrx/effects';\r\nimport { AuthService } from './auth.service';\r\nimport { AuthEffects } from './auth.effects';\r\nimport { AUTH_STATE_NAME } from './auth.selector';\r\nimport { AuthReducer } from './auth.reducer';\r\nimport { SignupComponent } from './signup/signup.component';\r\nimport { HeaderModule } from '../global/header/header.module';\r\nimport { DialogService } from '../global/dialog/dialog.service';\r\nimport { DialogModule } from '../global/dialog/dialog.module';\r\nimport { DialogConfig } from '../global/dialog/dialog-config';\r\n\r\nexport const routes = [\r\n  {\r\n    path:'',\r\n    children:[\r\n      { path: '', redirectTo: 'login' },\r\n      { path: 'login', component: LoginComponent },\r\n      { path: 'signup', component: SignupComponent }\r\n    ]\r\n  }\r\n];\r\n\r\n@NgModule({\r\n  declarations: [\r\n    LoginComponent,\r\n    SignupComponent\r\n  ],\r\n  imports: [\r\n    DialogModule,\r\n    CommonModule,\r\n    HeaderModule,\r\n    RouterModule.forChild(routes),\r\n    FormsModule, \r\n    ReactiveFormsModule,\r\n    EffectsModule.forFeature([AuthEffects]),\r\n    StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),\r\n    \r\n  ], \r\n  providers:[AuthService, { provide: APP_BASE_HREF, useValue: \"/\" },DialogService,\r\n  { provide: DialogConfig, useValue: DialogConfig }]\r\n})\r\nexport class LoginModule { }",
             "children": [
                 {
                     "type": "providers",
@@ -5431,7 +5427,7 @@
                 "name": "add",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/add-product.stories.ts",
+                "file": "src/app/products/add-product/add-product.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -5611,7 +5607,7 @@
                 "name": "edit",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/add-product.stories.ts",
+                "file": "src/app/products/edit-product/edit-product.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -5636,6 +5632,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: false,\n  FIRBASE_API_KEY: 'AIzaSyA9HEOZrRHZP026VQObeDz2PVD_GLpMV50',\n}"
+            },
+            {
+                "name": "footer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/footer/footer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "getCurrentRoute",
@@ -5878,6 +5884,16 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "login",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/login/login.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "LOGIN_FAIL",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5928,6 +5944,16 @@
                 "defaultValue": "createAction(\r\n    LOGIN_SUCCESS,\r\n    props<{ user: User; redirect: boolean }>()\r\n  )"
             },
             {
+                "name": "navbar",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/navbar/navbar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "NoImageCaption",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5942,6 +5968,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "products",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/homepage/homepage.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -6028,6 +6064,16 @@
                 "defaultValue": "'shared'"
             },
             {
+                "name": "signup",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/login/signup/signup.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "SIGNUP_START",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -6076,16 +6122,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/add-product.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<AddProductComponent>",
-                "defaultValue": "(args: AddProductComponent) => ({\r\n  component: AddProductComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -6146,6 +6182,76 @@
                 "deprecationMessage": "",
                 "type": "Story<SpinnerComponent>",
                 "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/homepage/homepage.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<HomepageComponent>",
+                "defaultValue": "(args: HomepageComponent) => ({\r\n  component: HomepageComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/login/login.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<LoginComponent>",
+                "defaultValue": "(args: LoginComponent) => ({\r\n  component: LoginComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/footer/footer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<FooterComponent>",
+                "defaultValue": "(args: FooterComponent) => ({\r\n  component: FooterComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/navbar/navbar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<NavbarComponent>",
+                "defaultValue": "(args: NavbarComponent) => ({\r\n  component: NavbarComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/login/signup/signup.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SignupComponent>",
+                "defaultValue": "(args: SignupComponent) => ({\r\n  component: SignupComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/products/add-product/add-product.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<AddProductComponent>",
+                "defaultValue": "(args: AddProductComponent) => ({\r\n  component: AddProductComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/products/edit-product/edit-product.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<EditProductComponent>",
+                "defaultValue": "(args: EditProductComponent) => ({\r\n  component: EditProductComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "UPDATE_POST_ACTION",
@@ -6528,22 +6634,12 @@
                     "defaultValue": "createReducer(\n  initialState,\n  on(setLoadingSpinner, (state, action) => {\n    return {\n      ...state,\n      showLoading: action.status,\n    };\n  }),\n  on(setErrorMessage, (state, action) => {\n    return {\n      ...state,\n      errorMessage: action.message,\n    };\n  })\n)"
                 }
             ],
-            "src/stories/add-product.stories.ts": [
+            "src/app/products/add-product/add-product.stories.ts": [
                 {
                     "name": "add",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/add-product.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "edit",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/add-product.stories.ts",
+                    "file": "src/app/products/add-product/add-product.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -6553,7 +6649,7 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/add-product.stories.ts",
+                    "file": "src/app/products/add-product/add-product.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<AddProductComponent>",
@@ -6864,6 +6960,28 @@
                     "defaultValue": "(args: CheckboxComponent) => ({\r\n  component: CheckboxComponent,\r\n  props: args,\r\n})"
                 }
             ],
+            "src/app/products/edit-product/edit-product.stories.ts": [
+                {
+                    "name": "edit",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/products/edit-product/edit-product.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/products/edit-product/edit-product.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<EditProductComponent>",
+                    "defaultValue": "(args: EditProductComponent) => ({\r\n  component: EditProductComponent,\r\n  props: args,\r\n})"
+                }
+            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -6886,6 +7004,28 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: false,\n  FIRBASE_API_KEY: 'AIzaSyA9HEOZrRHZP026VQObeDz2PVD_GLpMV50',\n}"
+                }
+            ],
+            "src/app/global/footer/footer.stories.ts": [
+                {
+                    "name": "footer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/footer/footer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/footer/footer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<FooterComponent>",
+                    "defaultValue": "(args: FooterComponent) => ({\r\n  component: FooterComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/store/router/router.selector.ts": [
@@ -7180,6 +7320,28 @@
                     "defaultValue": "(args: Page) => ({\n  props: args,\n})"
                 }
             ],
+            "src/app/login/login.stories.ts": [
+                {
+                    "name": "login",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/login/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/login/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<LoginComponent>",
+                    "defaultValue": "(args: LoginComponent) => ({\r\n  component: LoginComponent,\r\n  props: args,\r\n})"
+                }
+            ],
             "src/app/login/auth.actions.ts": [
                 {
                     "name": "LOGIN_FAIL",
@@ -7272,6 +7434,28 @@
                     "defaultValue": "createAction(\r\n  SIGNUP_SUCCESS,\r\n  props<{ user: User }>()\r\n)"
                 }
             ],
+            "src/app/global/navbar/navbar.stories.ts": [
+                {
+                    "name": "navbar",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/navbar/navbar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/navbar/navbar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<NavbarComponent>",
+                    "defaultValue": "(args: NavbarComponent) => ({\r\n  component: NavbarComponent,\r\n  props: args,\r\n})"
+                }
+            ],
             "src/stories/image.stories.ts": [
                 {
                     "name": "NoImageCaption",
@@ -7322,6 +7506,28 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/app/homepage/homepage.stories.ts": [
+                {
+                    "name": "products",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/homepage/homepage.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/homepage/homepage.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<HomepageComponent>",
+                    "defaultValue": "(args: HomepageComponent) => ({\r\n  component: HomepageComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/homepage/homepage.module.ts": [
@@ -7388,6 +7594,28 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "createAction(\r\n  SET_LOADING_ACTION,\r\n  props<{ status: boolean }>()\r\n)"
+                }
+            ],
+            "src/app/login/signup/signup.stories.ts": [
+                {
+                    "name": "signup",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/login/signup/signup.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/login/signup/signup.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SignupComponent>",
+                    "defaultValue": "(args: SignupComponent) => ({\r\n  component: SignupComponent,\r\n  props: args,\r\n})"
                 }
             ]
         },
@@ -7833,6 +8061,26 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/global/footer/footer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "footer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/global/footer/footer.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/global/header/header.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -7847,7 +8095,27 @@
                 "linktype": "component",
                 "name": "NavbarComponent",
                 "coveragePercent": 11,
-                "coverageCount": "2/17",
+                "coverageCount": "2/18",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/global/navbar/navbar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "navbar",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/global/navbar/navbar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -7906,6 +8174,26 @@
                 "name": "HomepageService",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/homepage/homepage.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "products",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/homepage/homepage.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -8094,12 +8382,52 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/login/login.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "login",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/login/login.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/login/signup/signup.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "SignupComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/login/signup/signup.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "signup",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/login/signup/signup.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -8286,12 +8614,52 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/products/add-product/add-product.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "add",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/products/add-product/add-product.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/products/edit-product/edit-product.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "EditProductComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/products/edit-product/edit-product.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "edit",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/products/edit-product/edit-product.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -8722,7 +9090,7 @@
                 "linktype": "component",
                 "name": "CardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -8731,7 +9099,7 @@
                 "linktype": "component",
                 "name": "CheckboxComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -8740,7 +9108,7 @@
                 "linktype": "component",
                 "name": "ImageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -8894,36 +9262,6 @@
             },
             {
                 "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/add-product.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "add",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/add-product.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "edit",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/add-product.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",

@@ -13,11 +13,11 @@ export class AppComponent {
 
   constructor(private el: ElementRef, private renderer: Renderer2){}
 
-  ngOnInit(){
-    console.log("app component");
-    // console.log(localStorage.getItem("user"));
-    // this.currentUser = localStorage.getItem("user");
-  }
+  // ngOnInit(){
+  //   console.log("app component");
+  //   // console.log(localStorage.getItem("user"));
+  //   // this.currentUser = localStorage.getItem("user");
+  // }
 
   // logout(){
   //   localStorage.removeItem("user");

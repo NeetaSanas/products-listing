@@ -93,9 +93,21 @@
           "options": {
             "browserTarget": "products:build"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "products"
+  "defaultProject": "products",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

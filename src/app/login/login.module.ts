@@ -42,7 +42,7 @@ export const routes = [
     StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
     
   ], 
-  providers:[AuthService, { provide: APP_BASE_HREF, useValue: "/" },DialogService,
+  providers:[AuthService, { provide: APP_BASE_HREF, useValue: "/" }, DialogService,
   { provide: DialogConfig, useValue: DialogConfig }]
 })
 export class LoginModule { }

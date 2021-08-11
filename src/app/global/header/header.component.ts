@@ -5,17 +5,15 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  @Input('icon') icon:any;
-  @Input('title') title:any;
-  @Input('desc') desc:any;
-  @Input('hasBgImage') hasBgImage:boolean = false;
-  @Input('class') class:any;
+export class HeaderComponent {
+  @Input() icon:any;
+  @Input() title:any;
+  @Input() desc:any;
+  @Input() hasBgImage:boolean = false;
+  @Input() class:any;
   
   constructor() { }
 
-  ngOnInit(): void {
-    // console.log(this.title, this.hasBgImage);
-  }
+ 
 
 }
