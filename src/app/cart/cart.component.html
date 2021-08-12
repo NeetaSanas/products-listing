@@ -12,7 +12,7 @@
       <tr *ngFor="let item of myCartItems; let i=index" class="border-bottom">
           <td><h3>{{i+1}}.</h3></td>
           <td><h3>{{item.name}}</h3></td>
-          <td style="text-align: right;"><h3>{{item.price}}</h3></td>
+          <td style="text-align: right;"><h3>${{item.price}}</h3></td>
           <td style="vertical-align: top;"><button style="background-color: red;" (click)="removeItem(item,i)" class="delete-cart" title="Delete">
             <i style="font-size: 20px;" class="fa fa-trash icon" ></i>
           </button></td>
@@ -20,7 +20,7 @@
       <tr *ngIf="myCartItems.length > 0">
         <td></td>
         <td style="text-align: right;"><h3>Total:</h3></td>
-        <td style="text-align: right;"><h3 style="text-align: right;" >{{cartTotal}}</h3></td>
+        <td style="text-align: right;"><h3 style="text-align: right;" >${{cartTotal}}</h3></td>
       </tr>
     </table>
 

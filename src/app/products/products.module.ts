@@ -14,7 +14,6 @@ import { HeaderModule } from '../global/header/header.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FooterComponent } from '../global/footer/footer.component';
-import { CartService } from '../cart/cart.service';
 
 const routes: Routes = [
   {
@@ -38,13 +37,12 @@ const routes: Routes = [
     HeaderModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    //StoreModule.forFeature(POST_STATE_NAME, postsReducer),
     EffectsModule.forFeature([ProductsEffects]),
     DialogModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
-  providers:[ProductsService, DialogService, CartService],
+  providers:[ProductsService, DialogService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductsModule {}

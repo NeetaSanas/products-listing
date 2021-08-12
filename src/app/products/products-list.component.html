@@ -1,5 +1,5 @@
 <br><br><br>
-<div class="outer"> 
+<div class="outer" style="margin: 0 10px 0 10px"> 
     <div fxLayout="column" fxLayoutAlign="center center" class="title-section p-2 mb-2">  
         <h1>PRODUCTS LIST</h1>             
         <p class="secondary-text-color">Explore products of your choice</p>
@@ -9,11 +9,10 @@
             <input class="form-control" style="margin: 0px !important; border-radius: 5px; border: 1px solid #000;" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search Products">
         </div>
         <div style="margin-bottom: 0px; margin-left:auto">
-            <!-- <button [routerLink]="['/products/add']">Add Product</button> -->
-            <button (click)="openAddDialog()" style="margin-top: -20px;" class="add-product-button">Add Product</button> &nbsp;&nbsp;&nbsp;
+            <button *ngIf="currentUser" (click)="openAddDialog()" style="margin-top: -20px;" class="add-product-button">Add Product</button> &nbsp;&nbsp;&nbsp;
             <button (click)="openCartDialog()" title="Cart">
 				<span class="cart-count">
-					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 19.25 19.25" style="enable-background:new 0 0 19.25 19.25;" xml:space="preserve" width="20px" height="25px">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 19.25 19.25" style="enable-background:new 0 0 19.25 19.25;" xml:space="preserve" width="15px" height="20px">
 					<g>
 						<g id="Layer_1_107_">
 						<g>
@@ -39,9 +38,9 @@
                     <img [src]="p.image" alt="image" class="card-image">
                     <h3>{{p.name}} <span style="float:right">Price: {{p.price}} $</span>  </h3>
                     <p>Description: {{p.description}}</p>
-                    <button (click)="openUpdateDialog(p)">Update</button>&nbsp;&nbsp; <!--[routerLink]="['edit', p.id]"-->
-                    <button (click)="deleteProduct(p.id)">Delete</button> &nbsp;&nbsp;
-                    <button (click)="addToCart(p)">Add To Cart</button>
+                    <span *ngIf="currentUser"><button (click)="openUpdateDialog(p)">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]="['edit', p.id]"-->
+                    <span *ngIf="currentUser"><button  (click)="deleteProduct(p.id)">Delete</button> &nbsp;&nbsp;</span>
+                    <button (click)="addToCart(p)" >Add To Cart</button>
                 </div>
             </div>
             <div class="card" *ngIf="NoProducts">
@@ -81,7 +80,7 @@
     <div class="footer-box">
         <h3>Contact</h3>
         <p><i class="fa fa-phone icon"></i>Customer Care: 1234567890</p>
-        <p><i class="fa fa-whatsapp icon"></i>Customer Care: 1234567890</p>
+        <p><i class="fa fa-whatsapp icon"></i>Whatsapp: 1234567890</p>
         <p><i class="fa fa-envelope icon"></i>Email: order@products.com</p>
         <p><i class="fa fa-map-marker icon"></i>Address: Pune, Maharashtra, India</p>
     </div>

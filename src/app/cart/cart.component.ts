@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { DialogConfig } from '../global/dialog/dialog-config';
 import { DialogRef } from '../global/dialog/dialog-ref';
-import { CartService } from './cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,8 +12,8 @@ export class CartComponent implements OnInit {
   @Input() values: any;
   myCartItems :any= [];
   cartTotal: number = 0;
-  constructor(private cartService: CartService, public dialogRef: DialogRef, 
-    public config: DialogConfig) {}
+  constructor( public dialogRef: DialogRef, 
+    public config: DialogConfig, private toastr: ToastrService) {}
 
   ngOnInit(){
     this.myCartItems = this.config.data;
@@ -42,14 +42,32 @@ export class CartComponent implements OnInit {
         // Get the token ID to your server-side code for use.
         console.log(token);
         console.log(token.id);
+        if(token.id){
+          console.log("payment done");
+          //this.toastr.success("Order Placed Successfully");
+          localStorage.removeItem("cartItems");
+          localStorage.setItem("token",token.id);
+        }else{
+          //this.toastr.error("ERROR");
+        }
         this.token = token.id;
       },
     });
+    
     handler.open({
       name: 'Testing payment',
-      description: 'Card No: 4242 4242 4242 4242',
+      description: 'Enter Card No: 4242 4242 4242 4242',
       amount: this.cartTotal * 100,
     });
+
+  }
+
+  onSuccess() {
+    if(localStorage.getItem("token")){
+      this.toastr.success("Order Placed Successfully");
+      this.dialogRef.close();
+    }
+    localStorage.removeItem("token");
   }
 
   cancel(){

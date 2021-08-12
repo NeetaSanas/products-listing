@@ -3,8 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { DialogConfig } from 'src/app/global/dialog/dialog-config';
-import { DialogRef } from 'src/app/global/dialog/dialog-ref';
-import { emailValidator, matchingPasswords } from 'src/app/global/validators';
 import { signupStart } from '../auth.actions';
 
 @Component({
@@ -15,6 +13,7 @@ import { signupStart } from '../auth.actions';
 export class SignupComponent implements OnInit {
   form: FormGroup;
   newUser = true;
+  submitted = false;
   constructor(public fb: FormBuilder, private store: Store<AppState>,
      public config: DialogConfig) { 
     this.form = this.fb.group({
@@ -48,6 +47,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
     console.log(this.form.value);
     if(!this.form.valid){
       return;

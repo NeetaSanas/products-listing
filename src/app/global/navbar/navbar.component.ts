@@ -1,11 +1,7 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
-import { CartComponent } from 'src/app/cart/cart.component';
-import { CartService } from 'src/app/cart/cart.service';
-import { AuthEffects } from 'src/app/login/auth.effects';
 import { AuthService } from 'src/app/login/auth.service';
 import { SignupComponent } from 'src/app/login/signup/signup.component';
 import { DialogService } from '../dialog/dialog.service';
@@ -21,10 +17,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   resize: Subscription;
   themeText: string ="DARK";
   currentUser: string | null;
-  public cartProductCount: number = 0;
-  public name :string;
-  cartItems;
-  count;
 
   @Input() config: any = {};
   /**
@@ -39,11 +31,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(private elementRef: ElementRef, private el: ElementRef, 
     private renderer: Renderer2, public dialog: DialogService, 
-    private authService: AuthService, public cartService: CartService,
+    private authService: AuthService, 
     private router: Router) {}
 
   logout(){
     localStorage.removeItem("user");
+    localStorage.removeItem("cartItems");
   }
 
   toggleTheme() {
@@ -51,7 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if(this.themeText == 'DARK'){
       this.themeText = "LIGHT";
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');
-      // this.renderer.setStyle(this.el.nativeElement, 'color', 'white');
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body.host, 'color', 'white');
     }else{
       this.themeText = "DARK";
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');
@@ -78,19 +71,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(() => this.checkIfNavDropDown());
       console.log(localStorage.getItem("user"));
       this.currentUser = localStorage.getItem("user");
-      
-      //this.updateCart();
-
-      // this.cartService.getProducts().subscribe(data => {
-      //   console.log(data);
-      //   this.cartProductCount = data.length;
-      //   console.log(this.cartProductCount);
-      // });
-  }
-
-  updateCart(cartItems){
-    //this.cartProductCount = cartItems.length;
-    //return this.cartProductCount;
   }
 
   ngOnChanges(changes:SimpleChanges){
@@ -105,8 +85,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onMenu() {
     this.isOpen = !this.isOpen;
+    
   }
   onSettings(){
+    console.log(this.isOpenMenu);
     this.isOpenMenu = !this.isOpenMenu;
   }
 
@@ -130,8 +112,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         console.log('Dialog closed', result);      
       });
     });
-    
-  
   }
 
   

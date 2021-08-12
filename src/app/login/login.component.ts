@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   public form:FormGroup;
   users :any= [];
   currentUser: any;
+  submitted = false;
   constructor(public fb: FormBuilder, 
     public authService:AuthService, 
     public router: Router, 
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
     console.log(this.form.value.email, this.form.value.password);
     // const email = this.form.value.email;
     // const password = this.form.value.password;

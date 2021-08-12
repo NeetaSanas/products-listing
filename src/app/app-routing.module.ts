@@ -14,7 +14,6 @@ export const routes: Routes = [
   //     { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   //   ]
   // },
-  { path: 'posts', loadChildren: () => import('./posts/posts.module').then((m)=>m.PostsModule)},
   { path: 'cart', loadChildren: () => import('./cart/cart.module').then((m)=>m.CartModule)},
   
 ];

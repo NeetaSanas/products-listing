@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { DialogService } from 'src/app/global/dialog/dialog.service';
 import { CartComponent } from '../cart/cart.component';
-import { CartService } from '../cart/cart.service';
 import { NavbarComponent } from '../global/navbar/navbar.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
@@ -27,14 +26,24 @@ export class ProductsListComponent implements OnInit {
   @Output() comp1Out = new EventEmitter();
   public cartItems:any[]=new Array();
   public cartProductCount: number = 0;
+  currentUser: string | null;
   
   constructor(private store : Store<AppState>, private router: Router, 
-    public dialog: DialogService, private cartService: CartService) { }
+    public dialog: DialogService) { }
 
   ngOnInit(): void {
     this.products = this.store.select(getProducts);
     this.store.dispatch(loadProducts());
+
+    if(localStorage.getItem("cartItems")){
+      let localItems:any = localStorage.getItem("cartItems");
+      this.cartItems = JSON.parse(localItems);
+      this.cartProductCount = this.cartItems.length;
+    }else{
+      console.log("Cart is empty");
+    }
     
+    this.currentUser = localStorage.getItem("user");
   }
 
   deleteProduct(id:string){
@@ -80,6 +89,7 @@ export class ProductsListComponent implements OnInit {
       this.cartItems.push(product);
       console.log(this.cartItems);
       this.cartProductCount = this.cartItems.length;
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
   openCartDialog(){
@@ -89,7 +99,13 @@ export class ProductsListComponent implements OnInit {
      });
  
      ref.afterClosed.subscribe(result => {
-       console.log('Dialog closed', result);      
+       console.log('Dialog closed', result);
+       if(localStorage.getItem("token")){
+        this.cartItems = [];
+        this.cartProductCount = this.cartItems.length;
+        localStorage.removeItem("token");
+       }
+          
      }); 
   }
   

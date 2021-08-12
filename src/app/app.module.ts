@@ -18,8 +18,7 @@ import { CheckboxComponent } from './story-components/checkbox/checkbox.componen
 import { HomepageService } from './homepage/homepage.service';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { DialogService } from './global/dialog/dialog.service';
-import { DialogModule } from './global/dialog/dialog.module';
-import { CartService } from './cart/cart.service';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +47,7 @@ import { CartService } from './cart/cart.service';
     }),
   ],
   
-  providers: [HomepageService, DialogService, CartService],
+  providers: [HomepageService, DialogService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
