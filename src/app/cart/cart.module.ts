@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsModule } from '../products/products.module';
 import { CartComponent } from './cart.component';
-import { CartService } from './cart.service';
 import { FooterComponent } from '../global/footer/footer.component';
 import { HeaderModule } from '../global/header/header.module';
 
@@ -23,6 +22,6 @@ export const routes = [
     ReactiveFormsModule,
     HeaderModule
   ],
-  providers:[CartService]
+  providers:[]
 })
 export class CartModule { }

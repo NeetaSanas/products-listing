@@ -9,6 +9,6 @@ import { DialogService } from './dialog.service';
   imports: [CommonModule],
   declarations: [DialogComponent, InsertionDirective],
   entryComponents: [DialogComponent],
-  providers:[{ provide: DialogConfig, useValue: DialogConfig }, DialogService]
+  providers:[{ provide: DialogConfig, useValue: DialogConfig }]
 })
 export class DialogModule { }

@@ -6,10 +6,10 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
-import { AddProductComponent } from 'src/app/products/add-product/add-product.component';
-import { SharedReducer } from 'src/app/store/Shared/shared.reducer';
-import { DialogRef } from 'src/app/global/dialog/dialog-ref';
-import { HeaderModule } from 'src/app/global/header/header.module';
+import { AddProductComponent } from '../../products/add-product/add-product.component';
+import { SharedReducer } from '../../store/Shared/shared.reducer';
+import { DialogRef } from '../../global/dialog/dialog-ref';
+import { HeaderModule } from '../../global/header/header.module';
 
 export default {
   title: 'Add-Product',

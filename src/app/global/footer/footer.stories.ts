@@ -6,7 +6,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedReducer } from 'src/app/store/Shared/shared.reducer';
+import { SharedReducer } from '../../store/Shared/shared.reducer';
 import { DialogService } from '../dialog/dialog.service';
 import { FooterComponent } from './footer.component';
 

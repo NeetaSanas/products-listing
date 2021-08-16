@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Update } from "@ngrx/entity";
 import { Store } from "@ngrx/store";
 import { ToastrModule, ToastrService } from "ngx-toastr";
 import { of } from "rxjs";
-import { catchError, exhaustMap, map, tap } from "rxjs/operators";
+import { catchError, exhaustMap, map, switchMap, tap } from "rxjs/operators";
 import { AppState } from "../app.state";
 import { setErrorMessage, } from "../store/Shared/shared.actions";
-import { loginStart, loginSuccess, signupStart, signupSuccess } from "./auth.actions";
+import { loginStart, loginSuccess, signupStart, signupSuccess, updateUser, updateUserSuccess } from "./auth.actions";
 import { AuthService } from "./auth.service";
+import { User } from "./user.model";
 
 @Injectable()
 export class AuthEffects {
@@ -102,4 +104,49 @@ export class AuthEffects {
       })
     );
   });
+
+  updateUser$ = createEffect(():any => {
+    return this.actions$.pipe(
+      ofType(updateUser),
+      switchMap((action) => {
+        return this.authService.updateUser(action.user).pipe(
+          map((data) => {
+            const updatedUser: Update<User> = {
+              id: action.user.id,
+              changes: {
+                ...action.user,
+              },
+            };
+            return updateUserSuccess({ user: action.user });
+          })
+        );
+      })
+    );
+  });
+
+  userRedirect2$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(...[updateUserSuccess]),
+        tap((action) => {
+          this.router.navigate(['/']);
+          this.toastr.success("Success");
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  signupRedirect2$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(...[signupSuccess]),
+        tap((action) => {
+          this.router.navigate(['/login']);
+          this.toastr.success("Signup Success");
+        })
+      );
+    },
+    { dispatch: false }
+  );
 }

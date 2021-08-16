@@ -7,6 +7,9 @@ export const LOGIN_FAIL = '[auth page] login Fail';
 
 export const SIGNUP_START = '[auth page] signup start';
 export const SIGNUP_SUCCESS = '[auth page] signup Success';
+export const UPDATE_USER_ACTION = '[signup page] update user';
+
+export const UPDATE_SUCCESS = '[auth page] update Success';
 
 export const loginStart = createAction(
     LOGIN_START,
@@ -29,8 +32,15 @@ export const signupStart = createAction(
   }>()
 );
 
+export const updateUser = createAction(UPDATE_USER_ACTION, props<{user:User}>());
+
 export const signupSuccess = createAction(
   SIGNUP_SUCCESS,
+  props<{ user: User }>()
+);
+
+export const updateUserSuccess = createAction(
+  UPDATE_SUCCESS,
   props<{ user: User }>()
 );
   

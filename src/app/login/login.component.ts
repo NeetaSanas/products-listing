@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { AppState } from 'src/app/app.state';
+import { AppState } from '../app.state';
 import { loginStart } from './auth.actions';
 import { AuthService } from './auth.service';
 
@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    console.log(this.form.value.email, this.form.value.password);
     // const email = this.form.value.email;
     // const password = this.form.value.password;
     // this.store.dispatch(loginStart({email, password}));
@@ -47,10 +46,11 @@ export class LoginComponent implements OnInit {
         if(data){
           this.users = data;
           for(let i=0; i<this.users.length; i++){
-            if(this.form.value.email = this.users[i]["email"] && this.form.value.password == this.users[i]["password"]){
+            if(this.form.value.email === this.users[i]["email"] && this.form.value.password === this.users[i]["password"]){
               console.log("if");
               console.log(this.currentUser);
               localStorage.setItem('user', this.currentUser);
+              localStorage.setItem('firstname', this.users[i].firstname);
               console.log(localStorage.getItem("user"));
               this.toastr.success('Login Success');
               successFlag = true;

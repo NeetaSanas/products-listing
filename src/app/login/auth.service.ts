@@ -28,6 +28,20 @@ export class AuthService {
     return this.http.post(`http://localhost:3000/users`, params);
   }
 
+  updateUser(user: User): Observable<{name:string}>{
+    const userData = {
+        [user.id] : {
+            id: user.id,
+            firstname: user.firstname, 
+            lastname: user.lastname, 
+            email: user.email,
+            contact: user.contact,
+        }
+    }
+    console.log(userData);
+    return this.http.patch<{name:string}>(`http://localhost:3000/users/${user.id}`, userData);
+  }
+
   login(){
     // return this.http.post<AuthResponseData>(
     //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
@@ -36,7 +50,12 @@ export class AuthService {
     return this.http.get(`http://localhost:3000/users`);
   }
 
+  getUsers(){
+    return this.http.get(`http://localhost:3000/users`);
+  }
+
   formatUser(data: AuthResponseData) {
+    
     const expirationDate = new Date(
       new Date().getTime() + +data.expiresIn * 1000
     );

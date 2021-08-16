@@ -19,7 +19,6 @@ import { HomepageService } from './homepage/homepage.service';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { DialogService } from './global/dialog/dialog.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

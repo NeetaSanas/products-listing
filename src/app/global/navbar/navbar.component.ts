@@ -1,9 +1,9 @@
-import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/login/auth.service';
-import { SignupComponent } from 'src/app/login/signup/signup.component';
+import { AuthService } from '../../login/auth.service';
+import { SignupComponent } from '../../login/signup/signup.component';
 import { DialogService } from '../dialog/dialog.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DialogService } from '../dialog/dialog.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
   isOpen = false;
   isOpenMenu = false;
   resize: Subscription;
@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   currentUser: string | null;
 
   @Input() config: any = {};
+  username: string | null;
   /**
    * Listens for a click in document and then check for isOpen to be true.
    * If so, then close it
@@ -36,6 +37,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout(){
     localStorage.removeItem("user");
+    localStorage.removeItem("firstname");
     localStorage.removeItem("cartItems");
   }
 
@@ -44,10 +46,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if(this.themeText == 'DARK'){
       this.themeText = "LIGHT";
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');
-      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body.host, 'color', 'white');
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');
     }else{
       this.themeText = "DARK";
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');
     }
   }
 
@@ -71,6 +74,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(() => this.checkIfNavDropDown());
       console.log(localStorage.getItem("user"));
       this.currentUser = localStorage.getItem("user");
+      this.username = localStorage.getItem("firstname");
   }
 
   ngOnChanges(changes:SimpleChanges){
@@ -94,13 +98,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onProfileSetting(){
     console.log(this.currentUser);
-    this.authService.login().subscribe(data=>{
+    this.authService.getUsers().subscribe(data=>{
       console.log(data);
       let usersData:any = data;
       let user ;
       for(let i=0; i<usersData.length;i++){
         if(this.currentUser == usersData[i]["email"]){
-          user = usersData[i]
+          user = usersData[i];
         }
       }
 

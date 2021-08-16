@@ -1,13 +1,15 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
     <form [formGroup]="form" (ngSubmit)="onSubmit()"
         style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
-         <app-header 
-             [icon]="'exit_to_app'" 
-             [title]="'SIGNUP'" 
-             [hasBgImage]="true" 
-             [class]="'card-spacing'"></app-header>            
+        <app-header 
+            [icon]="'exit_to_app'" 
+            [title]="title" 
+            [hasBgImage]="true" 
+            [class]="'card-spacing'">
+        </app-header>            
            <div class="card-inner">
-                <a routerLink="/login" color="accent" class="w-100 link">Already have an account? login now!</a>
+                <a *ngIf="newUser" routerLink="/login" color="accent" class="w-100 link">Already have an account? login now!</a>
+                <!-- <h2 *ngIf="!newUser" style="font-family: Roboto;">Update Profile</h2> -->
                 <div class="form-control">
                     <!-- <label for="firstname">First Name</label> -->
                     <i class="fa fa-user icon"></i>
@@ -33,10 +35,11 @@
                 
                 <div class="form-control">
                     <i class="fa fa-envelope icon"></i>
-                    <input type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
+                    <input (input)="validateForm()" type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
                 </div>
                 <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid email</span>
+                <span class="error-message" *ngIf="form.controls.email.errors?.exist">Already Exists</span>
 
                 <div class="form-control" *ngIf="newUser">
                     <i class="fa fa-key icon"></i>
@@ -55,9 +58,10 @@
                 <span class="error-message" *ngIf="form.controls.retype_password.hasError('mismatchedPasswords') && newUser">Password  not matching</span>
 
                 <div class="submit-button-container">
-                    <button class="w-100 submit-button" type="submit" [disabled]="!form.valid">SIGNUP</button>
+                    <button class="w-100 submit-button" type="submit">Submit</button> <!--[disabled]="!form.valid"-->
                 </div> 
-                <a color="accent" routerLink="/" class="w-100 link">Back to Homepage</a>
+
+                <a *ngIf="newUser" color="accent" routerLink="/" class="w-100 link">Back to Homepage</a>
             </div>        
      </form>
      

@@ -6,12 +6,12 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedReducer } from 'src/app/store/Shared/shared.reducer';
-import { DialogRef } from 'src/app/global/dialog/dialog-ref';
-import { HeaderModule } from 'src/app/global/header/header.module';
+import { SharedReducer } from '../../store/Shared/shared.reducer';
+import { DialogRef } from '../../global/dialog/dialog-ref';
+import { HeaderModule } from '../../global/header/header.module';
 import { EditProductComponent } from './edit-product.component';
-import { DialogConfig } from 'src/app/global/dialog/dialog-config';
-import { DialogModule } from 'src/app/global/dialog/dialog.module';
+import { DialogConfig } from '../../global/dialog/dialog-config';
+import { DialogModule } from '../../global/dialog/dialog.module';
 
 export default {
   title: 'Example/Edit-Product',

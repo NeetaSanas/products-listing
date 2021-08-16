@@ -7,7 +7,8 @@
             <a rel="noopener" href="/login/signup" title="Signup" *ngIf="!currentUser">SIGNUP</a>
             <a><button id="mode" (click)="toggleTheme()" style="font-size: 14px; font-weight: 500;">{{themeText}}</button></a>
 			<!-- <a rel="noopener" href="/" title="Logout" style="font-size: 25px; grid-gap: 0px !important;" *ngIf="currentUser" (click)="logout()"><i class="fa fa-sign-out icon"></i></a> -->
-			<button *ngIf="currentUser" (click)="onSettings()" style="font-size: 20px; grid-gap: 0px !important;"><i class="fa fa-user-circle"></i></button>
+			<button *ngIf="currentUser" (click)="onSettings()" style="font-size: 20px; grid-gap: 0px !important;"><i class="fa fa-user-circle"></i> </button> 
+			<span *ngIf="currentUser" style="margin-right: 10px;">Welcome {{username}}</span>
 		</div>
 
 		<div class="profile" id="profile" [class.show]="isOpenMenu">
@@ -29,7 +30,7 @@
             <button id="mode" (click)="toggleTheme()"
 			[ngClass]="{'light-mode': themeText === 'LIGHT', 'dark-mode' : themeText === 'DARK' }">{{themeText}}</button>
 			<button *ngIf="currentUser" (click)="onSettings()" style="font-size: 20px; grid-gap: 0px !important;"><i class="fa fa-user-circle"></i></button>
-			
+			<span *ngIf="currentUser" style="margin-right: 10px;">Welcome {{username}}</span>
 		</div>
 
 		

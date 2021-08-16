@@ -48,6 +48,8 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
+  // test.skip('skip', () => {});
+
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;

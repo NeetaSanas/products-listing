@@ -2,8 +2,8 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from 'src/app/app.state';
-import { DialogService } from 'src/app/global/dialog/dialog.service';
+import { AppState } from '../app.state';
+import { DialogService } from '../global/dialog/dialog.service';
 import { CartComponent } from '../cart/cart.component';
 import { NavbarComponent } from '../global/navbar/navbar.component';
 import { AddProductComponent } from './add-product/add-product.component';

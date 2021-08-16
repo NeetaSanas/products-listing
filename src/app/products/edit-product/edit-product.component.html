@@ -4,7 +4,7 @@
         style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
         <app-header 
         [icon]="'exit_to_app'" 
-        [title]="'UPDATE PRODUCT'" 
+        [title]="'Update Product'" 
         [hasBgImage]="true" 
         [class]="'card-spacing'"></app-header>   
              <!-- <h1>EDIT PRODUCT</h1><hr> -->
@@ -26,11 +26,14 @@
                     <input type="text" formControlName="description">
                     <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched">Required</div>
                 </div>
+                <br>
+                <div class="form-control">
+                    <label>Image Url</label>
+                    <input type="text" formControlName="image">
+                    <div *ngIf="productForm.controls.image.errors?.required && productForm.controls.image.touched"><p>Required</p></div>
+                </div>
                 <br><br>
-                <!-- <div class="submit-button-container">
-                    <br>
-                    <button class="w-100 submit-button" type="submit" [disabled]="!productForm.valid">Update Product</button>
-                </div>  -->
+                
                 <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
                     <br>
                     <button class="w-30 submit-button" type="submit" [disabled]="!productForm.valid">Update</button>

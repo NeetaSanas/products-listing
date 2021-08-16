@@ -5,7 +5,7 @@ import {addProduct, addProductSuccess, deleteProduct, deleteProductSuccess, load
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { ProductsService } from '../products.service';
-import { AppState } from 'src/app/app.state';
+import { AppState } from '../../app.state';
 import { Update } from '@ngrx/entity';
 import { Product } from '../products.model';
 import { Router } from '@angular/router';

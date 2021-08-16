@@ -6,11 +6,11 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedReducer } from 'src/app/store/Shared/shared.reducer';
-import { HeaderModule } from 'src/app/global/header/header.module';
+import { SharedReducer } from '../../store/Shared/shared.reducer';
+import { HeaderModule } from '../../global/header/header.module';
 import { ToastrService } from 'ngx-toastr';
 import { SignupComponent } from './signup.component';
-import { DialogConfig } from 'src/app/global/dialog/dialog-config';
+import { DialogConfig } from '../../global/dialog/dialog-config';
 
 export default {
   title: 'Signup',
