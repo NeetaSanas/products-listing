@@ -1,10 +1,8 @@
 import 'zone.js/dist/zone';
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogConfig } from '../../global/dialog/dialog-config';
@@ -12,13 +10,13 @@ import { DialogModule } from '../../global/dialog/dialog.module';
 import { DialogService } from '../../global/dialog/dialog.service';
 import { FooterComponent } from '../../global/footer/footer.component';
 import { HeaderModule } from '../../global/header/header.module';
-import { routes } from '../../login/login.module';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { ProductsListComponent } from '../products-list.component';
 import { ProductsService } from '../products.service';
-import { ProductsEffects } from '../state/products.effects';
-
 import { EditProductComponent } from './edit-product.component';
+import { Store, StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('EditProductComponent', () => {
   let component: EditProductComponent;
@@ -26,23 +24,24 @@ describe('EditProductComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      // declarations: [ EditProductComponent ],
-      // providers: [DialogService]
       declarations: [ProductsListComponent, AddProductComponent, EditProductComponent,
         FooterComponent],
-        imports: [
-          CommonModule,
-          FormsModule,
-          HeaderModule,
-          ReactiveFormsModule,
-          RouterModule.forChild(routes),
-          EffectsModule.forFeature([ProductsEffects]),
-          DialogModule,
-          NgxPaginationModule,
-          Ng2SearchPipeModule,
-        ],
-        providers:[ProductsService, DialogService, ], //{ provide: DialogConfig, useValue: DialogConfig }
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [
+            CommonModule,
+            FormsModule,
+            HeaderModule,
+            ReactiveFormsModule,
+            DialogModule,
+            NgxPaginationModule,
+            Ng2SearchPipeModule,
+            // EffectsModule.forRoot([]),
+            StoreModule.forRoot({}),
+            HttpClientModule,
+            RouterTestingModule,
+            
+      ],
+      providers:[ProductsService, Store, DialogService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   });
@@ -52,9 +51,9 @@ describe('EditProductComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  test.skip('skip', () => {});
+  //test.skip('skip', () => {});
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

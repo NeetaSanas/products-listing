@@ -17,7 +17,7 @@
             <i style="font-size: 20px;" class="fa fa-trash icon" ></i>
           </button></td>
       </tr>
-      <tr *ngIf="myCartItems.length > 0">
+      <tr *ngIf="myCartItems"><!--*ngIf="myCartItems.length > 0"-->
         <td></td>
         <td style="text-align: right;"><h3>Total:</h3></td>
         <td style="text-align: right;"><h3 style="text-align: right;" >${{cartTotal}}</h3></td>
@@ -27,14 +27,14 @@
     <!-- <div>
       <button (click)="checkout()">Checkout</button>
     </div> -->
-    <div style="margin-top: 0px;" class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="myCartItems.length > 0">
+    <div style="margin-top: 0px;" class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="myCartItems"><!--*ngIf="myCartItems.length > 0"-->
       <br>
       <button class="w-40 submit-button" (click)="checkout()">Checkout</button>
       &nbsp;&nbsp;&nbsp;&nbsp;
       <button class="w-40 cancel-button" (click)="cancel()">Cancel</button>
     </div> 
 
-    <div class="empty" *ngIf="myCartItems.length  === 0" >
+    <div class="empty" *ngIf="myCartItems" > <!--*ngIf="myCartItems.length > 0"-->
       <h3>Cart is empty <br>Please add products to continue...</h3>
       <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
         <button class="w-40 cancel-button" (click)="cancel()">Close</button>

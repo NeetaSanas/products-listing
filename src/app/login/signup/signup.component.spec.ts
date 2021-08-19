@@ -2,22 +2,15 @@ import 'zone.js/dist/zone';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { DialogConfig } from '../../global/dialog/dialog-config';
+import { Store, StoreModule } from '@ngrx/store';
 import { DialogModule } from '../../global/dialog/dialog.module';
-import { DialogService } from '../../global/dialog/dialog.service';
 import { HeaderModule } from '../../global/header/header.module';
-import { AuthEffects } from '../auth.effects';
-import { AuthReducer } from '../auth.reducer';
-import { AUTH_STATE_NAME } from '../auth.selector';
 import { AuthService } from '../auth.service';
-import { LoginComponent } from '../login.component';
-import { routes } from '../login.module';
 import { SignupComponent } from './signup.component';
-
-
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -25,20 +18,23 @@ describe('SignupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent, SignupComponent ],
+      declarations: [ SignupComponent ],
       imports: [
         DialogModule,
         CommonModule,
         HeaderModule,
-        RouterModule.forChild(routes),
         FormsModule, 
         ReactiveFormsModule,
-        EffectsModule.forFeature([AuthEffects]),
-        StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
-        
+        // EffectsModule.forFeature([AuthEffects]),
+        // StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
+        StoreModule.forRoot({}),
+        // EffectsModule.forRoot([]),
+        RouterTestingModule,
+        HttpClientTestingModule,
+        ToastrModule.forRoot({})
       ], 
-      providers:[AuthService, { provide: APP_BASE_HREF, useValue: "/" }, DialogService,
-      { provide: DialogConfig, useValue: DialogConfig }]
+      providers:[AuthService, Store],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
@@ -49,11 +45,43 @@ describe('SignupComponent', () => {
     fixture.detectChanges();
   });
 
-  //test.skip('skip', () => {});
+  // test.skip('skip', () => {});
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Required Validation', () => {
+    let firstname = component.form.controls['firstname'];
+    expect(firstname.valid).toBeFalsy();
+    firstname.setValue("");
+    expect(firstname.hasError('required')).toBeTruthy();
+
+    let lastname = component.form.controls['lastname'];
+    expect(lastname.valid).toBeFalsy();
+    lastname.setValue("");
+    expect(lastname.hasError('required')).toBeTruthy();
+
+    let contact = component.form.controls['contact'];
+    expect(contact.valid).toBeFalsy();
+    contact.setValue("");
+    expect(contact.hasError('required')).toBeTruthy();
+
+    let email = component.form.controls['email'];
+    expect(email.valid).toBeFalsy();
+    email.setValue("");
+    expect(email.hasError('required')).toBeTruthy();
+
+    let password = component.form.controls['password'];
+    expect(password.valid).toBeFalsy();
+    password.setValue("");
+    expect(password.hasError('required')).toBeTruthy();
+
+    let retype_password = component.form.controls['retype_password'];
+    expect(retype_password.valid).toBeFalsy();
+    retype_password.setValue("");
+    expect(retype_password.hasError('required')).toBeTruthy();
+  });
 
   it('should onSubmit user', () => {
     const spy = jest.fn();

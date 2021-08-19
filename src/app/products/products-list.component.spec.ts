@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { EffectsModule } from '@ngrx/effects';
+import { Store, StoreModule } from '@ngrx/store';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogConfig } from '../global/dialog/dialog-config';
@@ -11,7 +13,6 @@ import { DialogModule } from '../global/dialog/dialog.module';
 import { DialogService } from '../global/dialog/dialog.service';
 import { FooterComponent } from '../global/footer/footer.component';
 import { HeaderModule } from '../global/header/header.module';
-import { routes } from '../login/login.module';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
@@ -25,8 +26,6 @@ describe('ProductsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      // declarations: [ ProductsListComponent ],
-      // providers: [DialogService]
       declarations: [ProductsListComponent, AddProductComponent, EditProductComponent,
         FooterComponent],
         imports: [
@@ -34,14 +33,16 @@ describe('ProductsListComponent', () => {
           FormsModule,
           HeaderModule,
           ReactiveFormsModule,
-          RouterModule.forChild(routes),
-          EffectsModule.forFeature([ProductsEffects]),
           DialogModule,
           NgxPaginationModule,
           Ng2SearchPipeModule,
+          // EffectsModule.forRoot([]),
+          StoreModule.forRoot({}),
+          HttpClientModule,
+          RouterTestingModule,
         ],
-        providers:[ProductsService, DialogService, { provide: DialogConfig, useValue: DialogConfig }],
-        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        providers:[ProductsService, Store],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   });
@@ -52,9 +53,9 @@ describe('ProductsListComponent', () => {
     fixture.detectChanges();
   });
 
-  test.skip('skip', () => {});
+  // test.skip('skip', () => {});
   
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

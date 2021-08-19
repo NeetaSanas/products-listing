@@ -13,7 +13,7 @@ export class SpinnerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.borderColor);
+    //console.log(this.borderColor);
   }
 
   // public get classes(): string[] {

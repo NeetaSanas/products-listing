@@ -40,7 +40,7 @@ export class ProductsListComponent implements OnInit {
       this.cartItems = JSON.parse(localItems);
       this.cartProductCount = this.cartItems.length;
     }else{
-      console.log("Cart is empty");
+      // console.log("Cart is empty");
     }
     
     this.currentUser = localStorage.getItem("user");

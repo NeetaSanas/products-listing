@@ -1,9 +1,13 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
+import { ToastrModule } from 'ngx-toastr';
 import { DialogConfig } from '../global/dialog/dialog-config';
 import { DialogModule } from '../global/dialog/dialog.module';
 import { DialogService } from '../global/dialog/dialog.service';
@@ -23,20 +27,25 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent, SignupComponent ],
+      declarations: [
+        LoginComponent
+      ],
       imports: [
         DialogModule,
         CommonModule,
         HeaderModule,
-        RouterModule.forChild(routes),
         FormsModule, 
         ReactiveFormsModule,
-        EffectsModule.forFeature([AuthEffects]),
-        StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
-        
+        // EffectsModule.forFeature([AuthEffects]),
+        // StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
+        StoreModule.forRoot({}),
+        // EffectsModule.forRoot([]),
+        RouterTestingModule,
+        HttpClientTestingModule,
+        ToastrModule.forRoot({})
       ], 
-      providers:[AuthService, { provide: APP_BASE_HREF, useValue: "/" }, DialogService,
-      { provide: DialogConfig, useValue: DialogConfig }]
+      providers:[AuthService, Store],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
@@ -47,11 +56,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  test.skip('skip', () => {});
+  // test.skip('skip', () => {});
   
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
   // it('should onSubmit user', () => {
   //   const spy = jest.fn();

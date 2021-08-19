@@ -25,8 +25,7 @@ import { DialogService } from './global/dialog/dialog.service';
     ImageComponent,
     CardComponent,
     CheckboxComponent,
-    NavbarComponent,
-    
+    NavbarComponent
   ],
   imports: [    
     BrowserModule,

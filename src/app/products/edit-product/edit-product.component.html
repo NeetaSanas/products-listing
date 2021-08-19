@@ -7,29 +7,29 @@
         [title]="'Update Product'" 
         [hasBgImage]="true" 
         [class]="'card-spacing'"></app-header>   
-             <!-- <h1>EDIT PRODUCT</h1><hr> -->
+
            <div class="card-inner" style="margin-top: -20px;">
                 <div class="form-control">
                     <label>Name</label>
-                    <input type="text" formControlName="name">
+                    <input type="text" formControlName="name" id="name" placeholder="Product Name" name="name">
                     <div *ngIf="productForm.controls.name.errors?.required && productForm.controls.name.touched">Required</div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Price</label>
-                    <input type="text" formControlName="price">
+                    <input type="text" formControlName="price" id="price" placeholder="Price" name="price">
                     <div *ngIf="productForm.controls.price.errors?.required && productForm.controls.price.touched">Required</div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Description</label>
-                    <input type="text" formControlName="description">
+                    <input type="text" formControlName="description" id="description" placeholder="description" name="description">
                     <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched">Required</div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Image Url</label>
-                    <input type="text" formControlName="image">
+                    <input type="text" formControlName="image" id="image" placeholder="image" name="image">
                     <div *ngIf="productForm.controls.image.errors?.required && productForm.controls.image.touched"><p>Required</p></div>
                 </div>
                 <br><br>

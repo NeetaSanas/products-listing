@@ -1,5 +1,8 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+import { DialogRef } from '../dialog-ref';
+import { DialogModule } from '../dialog.module';
 
 import { DialogComponent } from './dialog.component';
 
@@ -8,11 +11,13 @@ describe('DialogComponent', () => {
   let fixture: ComponentFixture<DialogComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DialogComponent ],
-      schemas: [NO_ERRORS_SCHEMA]
+    return await TestBed.configureTestingModule({
+      declarations: [DialogComponent],
+      imports: [StoreModule.forRoot({})],
+      providers: [Store, DialogRef],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

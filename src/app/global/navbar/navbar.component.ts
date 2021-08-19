@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         filter(() => !!this.elementRef)
       )
       .subscribe(() => this.checkIfNavDropDown());
-      console.log(localStorage.getItem("user"));
+      // console.log(localStorage.getItem("user"));
       this.currentUser = localStorage.getItem("user");
       this.username = localStorage.getItem("firstname");
   }

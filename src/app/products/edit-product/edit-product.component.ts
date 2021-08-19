@@ -16,12 +16,19 @@ import { getProductById } from '../state/products.selector';
   styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent implements OnInit, OnDestroy {
-  product:Product;
-  productForm: FormGroup;
-  productSubscription : Subscription;
+  product:Product |any;
+  productForm: FormGroup |any ;
+  productSubscription : Subscription |any;
   productData: any;
   constructor(private route:ActivatedRoute, private store:Store<AppState>,
-    public dialogRef: DialogRef, public config: DialogConfig) { }
+    public dialogRef: DialogRef, public config: DialogConfig) {
+      this.productForm = new FormGroup({
+        name: new FormControl('', Validators.required),
+        description: new FormControl('', Validators.required),
+        price: new FormControl('', Validators.required),
+        image: new FormControl('', Validators.required),
+      });
+     }
 
   ngOnInit(): void {
     this.productData = this.config.data;
@@ -29,7 +36,14 @@ export class EditProductComponent implements OnInit, OnDestroy {
       const id = params.get('id');
       this.store.select(getProductById,{id}).subscribe((data) => {
         this.product = data;
-        this.createForm();
+        //this.createForm();
+        // this.productForm = new FormGroup({
+        //   name: new FormControl(this.productData.name, Validators.required),
+        //   description: new FormControl(this.productData.description, Validators.required),
+        //   price: new FormControl(this.productData.price, Validators.required),
+        //   image: new FormControl(this.productData.image, Validators.required),
+        // });
+        this.productForm.controls.setValue(this.productData.name);
       })
     })
   }
