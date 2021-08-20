@@ -10,6 +10,6 @@ import { DialogRef } from './dialog-ref';
   imports: [CommonModule],
   declarations: [DialogComponent, InsertionDirective],
   entryComponents: [DialogComponent],
-  providers:[{ provide: DialogConfig, useValue: DialogConfig }, DialogService, DialogRef]
+  providers:[{ provide: DialogConfig, useValue: DialogConfig }, DialogRef]
 })
 export class DialogModule { }

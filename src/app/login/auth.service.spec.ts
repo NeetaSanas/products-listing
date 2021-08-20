@@ -1,14 +1,15 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule, StoreRootModule } from '@ngrx/store';
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from '../../environments/environment';
 import { DialogConfig } from '../global/dialog/dialog-config';
 import { DialogModule } from '../global/dialog/dialog.module';
 import { DialogService } from '../global/dialog/dialog.service';
@@ -24,6 +25,8 @@ import { SignupComponent } from './signup/signup.component';
 
 describe('AuthService', () => {
   let service: AuthService;
+  let injector: TestBed;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,7 +51,9 @@ describe('AuthService', () => {
       providers:[AuthService, Store],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
+    injector = getTestBed();
     service = TestBed.inject(AuthService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   // test.skip('skip', () => {});
@@ -56,4 +61,30 @@ describe('AuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should login user', () => {
+    const spy = jest.fn();
+    service.login().subscribe(spy);
+    const mockReq = httpMock.expectOne(req => req.url.includes(`${environment.usersUrl}`));
+    mockReq.flush({});
+    expect(spy).toHaveBeenCalledWith({});
+  });
+
+  it('should signup user', () => {
+    const spy = jest.fn();
+    const firstname: string = '';
+    const lastname: string = '';
+    const contact: string = ''; 
+    const email: string = ''; 
+    const password: string = ''; 
+    const retype_password: string = '';
+
+    service.signUp(firstname, lastname, contact, email, password, retype_password).subscribe(spy);
+    const mockReq = httpMock.expectOne(req => req.url.includes(`${environment.usersUrl}`));
+    mockReq.flush({});
+    expect(spy).toHaveBeenCalledWith({});
+
+  });
+
+
 });

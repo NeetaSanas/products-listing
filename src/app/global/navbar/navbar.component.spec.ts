@@ -34,4 +34,14 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should logout user', () => {
+    const spy = jest.fn();
+    localStorage.removeItem('user');
+    localStorage.removeItem("firstname");
+    localStorage.removeItem("cartItems");
+    component.logout();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
 });

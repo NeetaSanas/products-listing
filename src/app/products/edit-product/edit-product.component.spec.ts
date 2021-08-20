@@ -56,4 +56,28 @@ describe('EditProductComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Required Validation', () => {
+    let name = component.productForm.controls['name'];
+    expect(name.valid).toBeFalsy();
+    name.setValue("");
+    expect(name.hasError('required')).toBeTruthy();
+
+    let price = component.productForm.controls['price'];
+    expect(price.valid).toBeFalsy();
+    price.setValue("");
+    expect(price.hasError('required')).toBeTruthy();
+
+    let description = component.productForm.controls['description'];
+    expect(description.valid).toBeFalsy();
+    description.setValue("");
+    expect(description.hasError('required')).toBeTruthy();
+
+    let image = component.productForm.controls['image'];
+    expect(image.valid).toBeFalsy();
+    image.setValue("");
+    expect(image.hasError('required')).toBeTruthy();
+  });
+
+  
 });

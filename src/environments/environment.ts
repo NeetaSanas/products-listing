@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  FIRBASE_API_KEY: 'AIzaSyA9HEOZrRHZP026VQObeDz2PVD_GLpMV50',
+  productsUrl: 'http://localhost:3000/products',
+  usersUrl: 'http://localhost:3000/users'
 };
 
 /*

@@ -68,5 +68,12 @@ describe('LoginComponent', () => {
   //   expect(component.submitted).toEqual(true);
   //   expect(spy).toHaveBeenCalledTimes(0);
   // });
+
+  it('should onSubmit user', () => {
+    const spy = jest.fn();
+    component.onSubmit();
+    expect(component.submitted).toEqual(true);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
   
 });

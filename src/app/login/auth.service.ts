@@ -24,7 +24,7 @@ export class AuthService {
       password: password, 
       retype_password: retype_password
     };
-    console.log(params);
+    //console.log(params);
     return this.http.post(`http://localhost:3000/users`, params);
   }
 

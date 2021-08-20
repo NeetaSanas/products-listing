@@ -32,18 +32,20 @@ export class ProductsListComponent implements OnInit {
     public dialog: DialogService) { }
 
   ngOnInit(): void {
-    this.products = this.store.select(getProducts);
-    this.store.dispatch(loadProducts());
-
+    this.getProducts();
     if(localStorage.getItem("cartItems")){
       let localItems:any = localStorage.getItem("cartItems");
       this.cartItems = JSON.parse(localItems);
       this.cartProductCount = this.cartItems.length;
     }else{
       // console.log("Cart is empty");
-    }
-    
+    }    
     this.currentUser = localStorage.getItem("user");
+  }
+
+  getProducts(){
+    this.products = this.store.select(getProducts);
+    this.store.dispatch(loadProducts());
   }
 
   deleteProduct(id:string){

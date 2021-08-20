@@ -34,6 +34,12 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('products-listing');
   });
 
+  it(`should not have as title other than 'products-listing`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).not.toEqual('products-listing1');
+  });
+
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
+import { MockStore } from '@ngrx/store/testing';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogConfig } from '../global/dialog/dialog-config';
@@ -15,10 +16,8 @@ import { FooterComponent } from '../global/footer/footer.component';
 import { HeaderModule } from '../global/header/header.module';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
-
 import { ProductsListComponent } from './products-list.component';
 import { ProductsService } from './products.service';
-import { ProductsEffects } from './state/products.effects';
 
 describe('ProductsListComponent', () => {
   let component: ProductsListComponent;
@@ -58,4 +57,6 @@ describe('ProductsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });
