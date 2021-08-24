@@ -75,6 +75,14 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ],
+    "scripts": {
+      "test": "jest  --coverage"
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/setupJest.ts"
     ],

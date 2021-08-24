@@ -10,15 +10,14 @@
       "id": "MBvXyIW"
     },
     {
-      "firstname": "a",
-      "lastname": "b",
-      "contact": "971234454",
-      "email": "neeta@techspin.com",
+      "firstname": "aaa",
+      "lastname": "bbb",
+      "contact": "9422015308",
+      "email": "neetasanas1995@gmail.com",
       "password": "123456",
       "retype_password": "123456",
-      "id": "gOQG9JG"
+      "id": "VPjUCn9"
     }
-    
   ],
   "products": [
     {
@@ -32,15 +31,8 @@
       "id": "W7zvn2L",
       "name": "Javascript & Jquery",
       "description": "Javascript & Jquery Description to be enter here.",
-      "price": "400",
-      "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=650",
-      "W7zvn2L": {
-        "id": "W7zvn2L",
-        "name": "Javascript & Jquery",
-        "description": "Javascript & Jquery Description to be enter here.",
-        "price": "400",
-        "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=650"
-      }
+      "price": "500",
+      "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=650"
     },
     {
       "id": "Ht39HxU",
@@ -111,6 +103,13 @@
         "price": "30000",
         "image": "https://images.unsplash.com/photo-1613837436145-9135b995eb90?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJsYWNrJTIwY2FtZXJhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
       }
+    },
+    {
+      "id": "01LF0pM",
+      "name": null,
+      "description": null,
+      "price": null,
+      "image": null
     }
   ]
 }

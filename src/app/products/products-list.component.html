@@ -37,13 +37,10 @@
                     <img [src]="p.image" alt="image" class="card-image">
                     <h3>{{p.name}} <span style="float:right">Price: {{p.price}} $</span>  </h3>
                     <p>Description: {{p.description}}</p>
-                    <span *ngIf="currentUser"><button (click)="openUpdateDialog(p)">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]="['edit', p.id]"-->
-                    <span *ngIf="currentUser"><button  (click)="deleteProduct(p.id)">Delete</button> &nbsp;&nbsp;</span>
-                    <button (click)="addToCart(p)" >Add To Cart</button>
+                    <span *ngIf="currentUser"><button class="card-actions" (click)="openUpdateDialog(p)">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]="['edit', p.id]"-->
+                    <span *ngIf="currentUser"><button class="card-actions" (click)="deleteProduct(p.id)">Delete</button> &nbsp;&nbsp;</span>
+                    <button (click)="addToCart(p)" class="card-actions">Add To Cart</button>
                 </div>
-            </div>
-            <div class="card" *ngIf="NoProducts">
-                <h1>No Products added</h1>
             </div>
         </div>
     </div>

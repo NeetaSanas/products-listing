@@ -11,7 +11,7 @@ import { DialogService } from '../dialog/dialog.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
+export class NavbarComponent implements OnInit, OnDestroy {
   isOpen = false;
   isOpenMenu = false;
   resize: Subscription;
@@ -77,9 +77,6 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
       this.username = localStorage.getItem("firstname");
   }
 
-  ngOnChanges(changes:SimpleChanges){
-    console.log(changes);
-  }
 
   checkIfNavDropDown() {
     if (this.isOpen) {
@@ -92,14 +89,14 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     
   }
   onSettings(){
-    console.log(this.isOpenMenu);
+    // console.log(this.isOpenMenu);
     this.isOpenMenu = !this.isOpenMenu;
   }
 
   onProfileSetting(){
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
     this.authService.getUsers().subscribe(data=>{
-      console.log(data);
+      // console.log(data);
       let usersData:any = data;
       let user ;
       for(let i=0; i<usersData.length;i++){
@@ -112,9 +109,9 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         data: user
       });
   
-      ref.afterClosed.subscribe(result => {
-        console.log('Dialog closed', result);      
-      });
+      // ref.afterClosed.subscribe(result => {
+      //   console.log('Dialog closed', result);      
+      // });
     });
   }
 

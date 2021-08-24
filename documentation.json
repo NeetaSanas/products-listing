@@ -462,7 +462,7 @@
         },
         {
             "name": "AuthService",
-            "id": "injectable-AuthService-b52e84ecf3b8c8b0680e5dd612769d51",
+            "id": "injectable-AuthService-9a65fdbfa86c5e8daea00ad04d6aec05",
             "file": "src/app/login/auth.service.ts",
             "properties": [
                 {
@@ -489,7 +489,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -517,7 +517,7 @@
                     "optional": false,
                     "returnType": "\"Email Not Found\" | \"Invalid Password\" | \"Email already exists\" | \"Unknown error occurred. Please try again\"",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -538,7 +538,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -565,7 +565,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 89,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -593,7 +593,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 83,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -744,7 +744,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AuthResponseData } from './AuthResponseDate.model';\nimport { environment } from 'src/environments/environment';\nimport { User } from './user.model';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.state';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n  timeoutInterval: any;\n\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\n\n  signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){\n    const params={\n      firstname: firstname,\n      lastname: lastname, \n      contact: contact, \n      email: email, \n      password: password, \n      retype_password: retype_password\n    };\n    console.log(params);\n    return this.http.post(`http://localhost:3000/users`, params);\n  }\n\n  updateUser(user: User): Observable<{name:string}>{\n    const userData = {\n        [user.id] : {\n            id: user.id,\n            firstname: user.firstname, \n            lastname: user.lastname, \n            email: user.email,\n            contact: user.contact,\n        }\n    }\n    console.log(userData);\n    return this.http.patch<{name:string}>(`http://localhost:3000/users/${user.id}`, userData);\n  }\n\n  login(){\n    // return this.http.post<AuthResponseData>(\n    //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,\n    //   { email, password, returnSecureToken: true }\n    // );\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  getUsers(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  formatUser(data: AuthResponseData) {\n    \n    const expirationDate = new Date(\n      new Date().getTime() + +data.expiresIn * 1000\n    );\n    const user = new User(\n      data.email,\n      data.idToken,\n      data.localId,\n      expirationDate\n    );\n    return user;\n  }\n  getErrorMessage(message: string) {\n    switch (message) {\n      case 'EMAIL_NOT_FOUND':\n        return 'Email Not Found';\n      case 'INVALID_PASSWORD':\n        return 'Invalid Password';\n      case 'EMAIL_EXISTS':\n        return 'Email already exists';\n      default:\n        return 'Unknown error occurred. Please try again';\n    }\n  }\n\n  setUserInLocalStorage(user: User) {\n    localStorage.setItem('userData', JSON.stringify(user));\n\n    this.runTimeoutInterval(user);\n  }\n\n  runTimeoutInterval(user: User) {\n    const todaysDate = new Date().getTime();\n    const expirationDate = user.expireDate.getTime();\n    const timeInterval = expirationDate - todaysDate;\n\n    this.timeoutInterval = setTimeout(() => {\n      //this.store.dispatch(autoLogout());\n      //logout functionality or get the refresh token\n    }, timeInterval);\n  }\n\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AuthResponseData } from './AuthResponseDate.model';\nimport { environment } from 'src/environments/environment';\nimport { User } from './user.model';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.state';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n  timeoutInterval: any;\n\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\n\n  signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){\n    const params={\n      firstname: firstname,\n      lastname: lastname, \n      contact: contact, \n      email: email, \n      password: password, \n      retype_password: retype_password\n    };\n    //console.log(params);\n    return this.http.post(`http://localhost:3000/users`, params);\n  }\n\n  updateUser(user: User): Observable<{name:string}>{\n    const userData = {\n        [user.id] : {\n            id: user.id,\n            firstname: user.firstname, \n            lastname: user.lastname, \n            email: user.email,\n            contact: user.contact,\n        }\n    }\n    console.log(userData);\n    return this.http.patch<{name:string}>(`http://localhost:3000/users/${user.id}`, userData);\n  }\n\n  login(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  getUsers(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  formatUser(data: AuthResponseData) {\n    \n    const expirationDate = new Date(\n      new Date().getTime() + +data.expiresIn * 1000\n    );\n    const user = new User(\n      data.email,\n      data.idToken,\n      data.localId,\n      expirationDate\n    );\n    return user;\n  }\n  getErrorMessage(message: string) {\n    switch (message) {\n      case 'EMAIL_NOT_FOUND':\n        return 'Email Not Found';\n      case 'INVALID_PASSWORD':\n        return 'Invalid Password';\n      case 'EMAIL_EXISTS':\n        return 'Email already exists';\n      default:\n        return 'Unknown error occurred. Please try again';\n    }\n  }\n\n  setUserInLocalStorage(user: User) {\n    localStorage.setItem('userData', JSON.stringify(user));\n\n    this.runTimeoutInterval(user);\n  }\n\n  runTimeoutInterval(user: User) {\n    const todaysDate = new Date().getTime();\n    const expirationDate = user.expireDate.getTime();\n    const timeInterval = expirationDate - todaysDate;\n\n    this.timeoutInterval = setTimeout(() => {\n      //this.store.dispatch(autoLogout());\n      //logout functionality or get the refresh token\n    }, timeInterval);\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -790,14 +790,14 @@
         },
         {
             "name": "DialogService",
-            "id": "injectable-DialogService-a09e510838c2eb2b2f01d35ff5046595",
+            "id": "injectable-DialogService-3d104845bb5990584d8c2ad6cd92baa8",
             "file": "src/app/global/dialog/dialog.service.ts",
             "properties": [
                 {
                     "name": "dialogComponentRef",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "ComponentRef<DialogComponent>",
+                    "type": "ComponentRef<DialogComponent> | any",
                     "optional": false,
                     "description": "",
                     "line": 22
@@ -912,7 +912,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {\r\n    Injectable,\r\n    ComponentFactoryResolver,\r\n    ApplicationRef,\r\n    Injector,\r\n    EmbeddedViewRef,\r\n    ComponentRef,\r\n    Type\r\n  } from '@angular/core';\r\n  import { DialogModule } from './dialog.module';\r\n\r\n  import { DialogConfig } from './dialog-config';\r\n  import { DialogInjector } from './dialog-injector';\r\n  import { DialogRef } from './dialog-ref';\r\nimport { DialogComponent } from './dialog/dialog.component';\r\n  \r\n  @Injectable({\r\n    providedIn: DialogModule\r\n  })\r\n  export class DialogService {\r\n    dialogComponentRef: ComponentRef<DialogComponent>;\r\n  \r\n    constructor(\r\n      private componentFactoryResolver: ComponentFactoryResolver,\r\n      private appRef: ApplicationRef,\r\n      private injector: Injector\r\n    ) {}\r\n  \r\n    public open(componentType: Type<any>, config: DialogConfig): DialogRef {\r\n      const dialogRef = this.appendDialogComponentToBody(config);\r\n  \r\n      this.dialogComponentRef.instance.childComponentType = componentType;\r\n  \r\n      return dialogRef;\r\n    }\r\n  \r\n    private appendDialogComponentToBody(config: DialogConfig): DialogRef {\r\n      const map = new WeakMap();\r\n      map.set(DialogConfig, config);\r\n  \r\n      const dialogRef = new DialogRef();\r\n      map.set(DialogRef, dialogRef);\r\n  \r\n      const sub = dialogRef.afterClosed.subscribe(() => {\r\n        // close the dialog\r\n        this.removeDialogComponentFromBody();\r\n        sub.unsubscribe();\r\n      });\r\n  \r\n      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);\r\n      const componentRef = componentFactory.create(new DialogInjector(this.injector, map));\r\n      this.appRef.attachView(componentRef.hostView);\r\n  \r\n      const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;\r\n      document.body.appendChild(domElem);\r\n  \r\n      this.dialogComponentRef = componentRef;\r\n  \r\n      this.dialogComponentRef.instance.onClose.subscribe(() => {\r\n        this.removeDialogComponentFromBody();\r\n      });\r\n      \r\n      return dialogRef;\r\n    }\r\n  \r\n    private removeDialogComponentFromBody(): void {\r\n      this.appRef.detachView(this.dialogComponentRef.hostView);\r\n      this.dialogComponentRef.destroy();\r\n    }\r\n\r\n    public close(): void {\r\n        this.dialogComponentRef.instance.onClose.subscribe(() => {\r\n          this.removeDialogComponentFromBody();\r\n        });\r\n        \r\n      }\r\n  }",
+            "sourceCode": "import {\r\n    Injectable,\r\n    ComponentFactoryResolver,\r\n    ApplicationRef,\r\n    Injector,\r\n    EmbeddedViewRef,\r\n    ComponentRef,\r\n    Type\r\n  } from '@angular/core';\r\n  import { DialogModule } from './dialog.module';\r\n\r\n  import { DialogConfig } from './dialog-config';\r\n  import { DialogInjector } from './dialog-injector';\r\n  import { DialogRef } from './dialog-ref';\r\nimport { DialogComponent } from './dialog/dialog.component';\r\n  \r\n  @Injectable({\r\n    providedIn: DialogModule\r\n  })\r\n  export class DialogService {\r\n    dialogComponentRef: ComponentRef<DialogComponent> | any;\r\n  \r\n    constructor(\r\n      private componentFactoryResolver: ComponentFactoryResolver,\r\n      private appRef: ApplicationRef,\r\n      private injector: Injector\r\n    ) {}\r\n  \r\n    public open(componentType: Type<any>, config: DialogConfig): DialogRef {\r\n      const dialogRef = this.appendDialogComponentToBody(config);\r\n  \r\n      this.dialogComponentRef.instance.childComponentType = componentType;\r\n  \r\n      return dialogRef;\r\n    }\r\n  \r\n    private appendDialogComponentToBody(config: DialogConfig): DialogRef {\r\n      const map = new WeakMap();\r\n      map.set(DialogConfig, config);\r\n  \r\n      const dialogRef = new DialogRef();\r\n      map.set(DialogRef, dialogRef);\r\n  \r\n      const sub = dialogRef.afterClosed.subscribe(() => {\r\n        // close the dialog\r\n        this.removeDialogComponentFromBody();\r\n        sub.unsubscribe();\r\n      });\r\n  \r\n      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DialogComponent);\r\n      const componentRef = componentFactory.create(new DialogInjector(this.injector, map));\r\n      this.appRef.attachView(componentRef.hostView);\r\n  \r\n      const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;\r\n      document.body.appendChild(domElem);\r\n  \r\n      this.dialogComponentRef = componentRef;\r\n  \r\n      this.dialogComponentRef.instance.onClose.subscribe(() => {\r\n        this.removeDialogComponentFromBody();\r\n      });\r\n      \r\n      return dialogRef;\r\n    }\r\n  \r\n    private removeDialogComponentFromBody(): void {\r\n      this.appRef.detachView(this.dialogComponentRef.hostView);\r\n      this.dialogComponentRef.destroy();\r\n    }\r\n\r\n    public close(): void {\r\n        this.dialogComponentRef.instance.onClose.subscribe(() => {\r\n          this.removeDialogComponentFromBody();\r\n        });\r\n        \r\n      }\r\n  }",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1175,7 +1175,7 @@
         },
         {
             "name": "ProductsService",
-            "id": "injectable-ProductsService-eac75967776721a640a2e9eddae8b8d4",
+            "id": "injectable-ProductsService-8b3fdac9232db720cfa89e64c49bdfb3",
             "file": "src/app/products/products.service.ts",
             "properties": [],
             "methods": [
@@ -1278,7 +1278,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from '../app.state';\r\nimport { Observable } from 'rxjs';\r\nimport { Product } from './products.model';\r\nimport { combineAll, map } from 'rxjs/operators';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class ProductsService {\r\n\r\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\r\n\r\n  getProducts() : Observable<Product[]>{\r\n    return this.http.get<Product[]>(`http://localhost:3000/products`)\r\n    .pipe(map(data => {\r\n        const products: Product[] = [];\r\n        for(let key in data){\r\n          let key1 = data[key]['id'];\r\n          products.push({...data[key], id: key1});\r\n        }\r\n        return products;\r\n    })\r\n    );\r\n  }\r\n\r\n  addProduct(product: Product): Observable<{name:string}>{\r\n    return this.http.post<{name:string}>(`http://localhost:3000/products`, product);\r\n  }\r\n  updateProduct(product: Product): Observable<{name:string}>{\r\n    const productData = {\r\n        [product.id] : {\r\n            id: product.id,\r\n            name: product.name, \r\n            description: product.description, \r\n            price: product.price,\r\n            image: product.image\r\n        }\r\n    }\r\n    return this.http.patch<{name:string}>(`http://localhost:3000/products/${product.id}`, productData);\r\n  }\r\n \r\n  deleteProduct(id: string){\r\n    return this.http.delete<{name:string}>(`http://localhost:3000/products/${id}`);\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from '../app.state';\r\nimport { Observable } from 'rxjs';\r\nimport { Product } from './products.model';\r\nimport { combineAll, map } from 'rxjs/operators';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class ProductsService {\r\n\r\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\r\n\r\n  getProducts() : Observable<Product[]>{\r\n    return this.http.get<Product[]>(`http://localhost:3000/products`)\r\n    .pipe(map(data => {\r\n        const products: Product[] = [];\r\n        for(let key in data){\r\n          let key1 = data[key]['id'];\r\n          products.push({...data[key], id: key1});\r\n        }\r\n        return products;\r\n    })\r\n    );\r\n  }\r\n\r\n  addProduct(product: Product): Observable<{name:string}>{\r\n    return this.http.post<{name:string}>(`http://localhost:3000/products`, product);\r\n  }\r\n  updateProduct(product: Product): Observable<{name:string}>{\r\n    const productData = {\r\n        [product.id] : {\r\n            id: product.id,\r\n            name: product.name, \r\n            description: product.description, \r\n            price: product.price,\r\n            image: product.image\r\n        }\r\n    }\r\n    return this.http.patch<{name:string}>(`http://localhost:3000/products/${product.id}`, productData);\r\n  }\r\n \r\n  deleteProduct(id: string){\r\n    // console.log(`http://localhost:3000/products/${id}`)\r\n    return this.http.delete<{name:string}>(`http://localhost:3000/products/${id}`);\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2014,7 +2014,7 @@
     "components": [
         {
             "name": "AddProductComponent",
-            "id": "component-AddProductComponent-6bbe10836e83ef85323d00d2f14560e1",
+            "id": "component-AddProductComponent-91a00882473c3e4e6fe8e563715b886c",
             "file": "src/app/products/add-product/add-product.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2071,7 +2071,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 48,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2103,11 +2103,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { addProduct } from '../state/products.actions';\nimport { getProducts } from '../state/products.selector';\n\n@Component({\n  selector: 'app-add-product',\n  templateUrl: './add-product.component.html',\n  styleUrls: ['./add-product.component.scss']\n})\nexport class AddProductComponent implements OnInit {\n  products: Observable<Product[]>;\n  productForm: FormGroup;\n\n  constructor(private store: Store<AppState>, public dialogRef: DialogRef) { }\n\n  ngOnInit(): void {\n    this.productForm = new FormGroup({\n      name: new FormControl(null, Validators.required),\n      description: new FormControl(null, Validators.required),\n      price: new FormControl(null, Validators.required),\n      image: new FormControl(null, Validators.required),\n    })\n  }\n\n  onAddProduct(){\n    if(!this.productForm.valid){\n      return;\n    }\n\n    const product: Product = {\n      id:'',\n      name: this.productForm.value.name,\n      description: this.productForm.value.description,\n      price: this.productForm.value.price,\n      image: this.productForm.value.image,\n    }\n    //console.log(product);\n    this.store.dispatch(addProduct({product}));\n    this.dialogRef.close();\n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { addProduct } from '../state/products.actions';\nimport { getProducts } from '../state/products.selector';\n\n@Component({\n  selector: 'app-add-product',\n  templateUrl: './add-product.component.html',\n  styleUrls: ['./add-product.component.scss']\n})\nexport class AddProductComponent implements OnInit {\n  products: Observable<Product[]>;\n  productForm: FormGroup;\n\n  constructor(private store: Store<AppState>, public dialogRef: DialogRef) { }\n\n  ngOnInit(): void {\n    this.productForm = new FormGroup({\n      name: new FormControl(null, Validators.required),\n      description: new FormControl(null, Validators.required),\n      price: new FormControl(null, Validators.required),\n      image: new FormControl(null, Validators.required),\n    })\n  }\n\n  onAddProduct(){\n    if(!this.productForm.valid){\n      // return;\n      //console.log(this.productForm);\n      //if(this.productForm.status == \"INVALID\"){\n        this.productForm.controls.name.markAsTouched();\n        this.productForm.controls.description.markAsTouched();\n        this.productForm.controls.price.markAsTouched();\n        this.productForm.controls.image.markAsTouched();\n      //}\n    }else{\n      const product: Product = {\n        id:'',\n        name: this.productForm.value.name,\n        description: this.productForm.value.description,\n        price: this.productForm.value.price,\n        image: this.productForm.value.image,\n      }\n      //console.log(product);\n      this.store.dispatch(addProduct({product}));\n      this.dialogRef.close();\n    }\n\n    \n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "h3, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\np{\r\n    font-size: 12px;\r\n    color:red;\r\n    justify-content: left;\r\n}\r\n\r\n",
+                    "data": "h3, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\np{\r\n    font-size: 12px;\r\n    color:red;\r\n    justify-content: left;\r\n    margin: 0px;\r\n}\r\n\r\n.form-control{\r\n    div{\r\n        margin: 0px 0 -50px 0;\r\n    }\r\n}\r\n\r\n",
                     "styleUrl": "./add-product.component.scss"
                 }
             ],
@@ -2156,11 +2156,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"productForm\" (ngSubmit)=\"onAddProduct()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Add Product'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n             <!-- <h3>ADD PRODUCT</h3><hr> -->\n           <div class=\"card-inner\" style=\"margin-top: -20px;\">\n                <div class=\"form-control\">\n                    <label>Name</label>\n                    <input type=\"text\" formControlName=\"name\">\n                    <div *ngIf=\"productForm.controls.name.errors?.required && productForm.controls.name.touched\"><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Price</label>\n                    <input type=\"text\" formControlName=\"price\">\n                    <div *ngIf=\"productForm.controls.price.errors?.required && productForm.controls.price.touched\"><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Description</label>\n                    <input type=\"text\" formControlName=\"description\">\n                    <div *ngIf=\"productForm.controls.description.errors?.required && productForm.controls.description.touched\"><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Image Url</label>\n                    <input type=\"text\" formControlName=\"image\">\n                    <div *ngIf=\"productForm.controls.image.errors?.required && productForm.controls.image.touched\"><p>Required</p></div>\n                </div>\n\n                <br><br>\n                <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n                    <br>\n                    <button class=\"w-30 submit-button\" type=\"submit\" [disabled]=\"!productForm.valid\">Add</button>\n                    &nbsp;&nbsp;&nbsp;&nbsp;\n                    <button class=\"w-30 cancel-button\" (click)=\"cancel()\">Cancel</button>\n                </div> \n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"productForm\" (ngSubmit)=\"onAddProduct()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Add Product'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\" style=\"margin-top: -20px;\">\n                <div class=\"form-control\">\n                    <label>Name</label>\n                    <input aria-label=\"Name\" type=\"text\" formControlName=\"name\">\n                    <div *ngIf=\"productForm.controls.name.errors?.required && productForm.controls.name.touched\"><br><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Price</label>\n                    <input aria-label=\"Price\" type=\"text\" formControlName=\"price\">\n                    <div *ngIf=\"productForm.controls.price.errors?.required && productForm.controls.price.touched\"><br><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Description</label>\n                    <input aria-label=\"Description\" type=\"text\" formControlName=\"description\">\n                    <div *ngIf=\"productForm.controls.description.errors?.required && productForm.controls.description.touched\"><br><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Image Url</label>\n                    <input aria-label=\"Image\" type=\"text\" formControlName=\"image\">\n                    <div *ngIf=\"productForm.controls.image.errors?.required && productForm.controls.image.touched\"><br><p>Required</p></div>\n                </div>\n\n                <br><br>\n                <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n                    <br>\n                    <button aria-label=\"Submit\" class=\"w-30 submit-button\" type=\"submit\" >Add</button> <!--[disabled]=\"!productForm.valid\"-->\n                    &nbsp;&nbsp;&nbsp;&nbsp;\n                    <button aria-label=\"Cancel\" class=\"w-30 cancel-button\" (click)=\"cancel()\">Cancel</button>\n                </div> \n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-6b98fa2f4824d49f977de651e0d9bcdd",
+            "id": "component-AppComponent-dd787932d220061b561d8d5588b16ae9",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2181,7 +2181,7 @@
             "propertiesClass": [
                 {
                     "name": "title",
-                    "defaultValue": "'assignment'",
+                    "defaultValue": "'products-listing'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
@@ -2198,11 +2198,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'assignment';\n\n  constructor(\n   \n  ) { }\n\n  \n\n  \n  \n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'products-listing';\n\n  constructor(\n   \n  ) { }\n\n  \n\n  \n  \n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n    font-family: Roboto;\r\n    font-size: 14px;\r\n    color: #333;\r\n    box-sizing: border-box;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n  }\r\n\r\n  h1,\r\n  h2,\r\n  h3,\r\n  h4,\r\n  h5,\r\n  h6 {\r\n    margin: 8px 5px;\r\n    font-family: Roboto;\r\n  }\r\n\r\n  p {\r\n    margin: 0;\r\n  }\r\n\r\n  .spacer {\r\n    flex: 1;\r\n  }\r\n\r\n  .toolbar {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #283593;\r\n    color: white;\r\n    font-weight: 600;\r\n  }\r\n\r\n  .toolbar img {\r\n    margin: 0 16px;\r\n  }\r\n\r\n  .toolbar #twitter-logo {\r\n    height: 40px;\r\n    margin: 0 8px;\r\n  }\r\n\r\n  .toolbar #youtube-logo {\r\n    height: 40px;\r\n    margin: 0 16px;\r\n  }\r\n\r\n  .toolbar #twitter-logo:hover,\r\n  .toolbar #youtube-logo:hover {\r\n    opacity: 0.8;\r\n  }\r\n\r\n  .content {\r\n    display: flex;\r\n    margin: 82px auto 32px;\r\n    padding: 0 16px;\r\n    max-width: 960px;\r\n    flex-direction: column;\r\n    align-items: center;\r\n  }\r\n\r\n  svg.material-icons {\r\n    height: 24px;\r\n    width: auto;\r\n  }\r\n\r\n  svg.material-icons:not(:last-child) {\r\n    margin-right: 8px;\r\n  }\r\n\r\n  .card svg.material-icons path {\r\n    fill: #888;\r\n  }\r\n\r\n  .card-container {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    margin-top: 16px;\r\n  }\r\n\r\n  .card {\r\n    border-radius: 4px;\r\n    border: 1px solid #eee;\r\n    background-color: #fafafa;\r\n    height: 40px;\r\n    width: 200px;\r\n    margin: 0 8px 16px;\r\n    padding: 16px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    align-items: center;\r\n    transition: all 0.2s ease-in-out;\r\n    line-height: 24px;\r\n  }\r\n\r\n  .card-container .card:not(:last-child) {\r\n    margin-right: 0;\r\n  }\r\n\r\n  .card.card-small {\r\n    height: 16px;\r\n    width: 168px;\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card) {\r\n    cursor: pointer;\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card):hover {\r\n    transform: translateY(-3px);\r\n    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);\r\n  }\r\n\r\n  .card-container .card:not(.highlight-card):hover .material-icons path {\r\n    fill: rgb(105, 103, 103);\r\n  }\r\n\r\n  .card.highlight-card {\r\n    background-color: #283593;\r\n    color: white;\r\n    font-weight: 600;\r\n    border: none;\r\n    width: auto;\r\n    min-width: 30%;\r\n    position: relative;\r\n  }\r\n\r\n  .card.card.highlight-card span {\r\n    margin-left: 60px;\r\n  }\r\n\r\n  // svg#rocket {\r\n  //   width: 80px;\r\n  //   position: absolute;\r\n  //   left: -10px;\r\n  //   top: -24px;\r\n  // }\r\n\r\n  // svg#rocket-smoke {\r\n  //   height: calc(100vh - 95px);\r\n  //   position: absolute;\r\n  //   top: 10px;\r\n  //   right: 180px;\r\n  //   z-index: -10;\r\n  // }\r\n\r\n  a,\r\n  a:visited,\r\n  a:hover {\r\n    color: #fff;\r\n    text-decoration: none;\r\n    padding: 10px;\r\n  }\r\n\r\n  a:hover {\r\n    color: #fff;\r\n  }\r\n\r\n  // .terminal {\r\n  //   position: relative;\r\n  //   width: 80%;\r\n  //   max-width: 600px;\r\n  //   border-radius: 6px;\r\n  //   padding-top: 45px;\r\n  //   margin-top: 8px;\r\n  //   overflow: hidden;\r\n  //   background-color: rgb(15, 15, 16);\r\n  // }\r\n\r\n  // .terminal::before {\r\n  //   content: \"\\2022 \\2022 \\2022\";\r\n  //   position: absolute;\r\n  //   top: 0;\r\n  //   left: 0;\r\n  //   height: 4px;\r\n  //   background: rgb(58, 58, 58);\r\n  //   color: #c2c3c4;\r\n  //   width: 100%;\r\n  //   font-size: 2rem;\r\n  //   line-height: 0;\r\n  //   padding: 14px 0;\r\n  //   text-indent: 4px;\r\n  // }\r\n\r\n  // .terminal pre {\r\n  //   font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;\r\n  //   color: white;\r\n  //   padding: 0 1rem 1rem;\r\n  //   margin: 0;\r\n  // }\r\n\r\n  // .circle-link {\r\n  //   height: 40px;\r\n  //   width: 40px;\r\n  //   border-radius: 40px;\r\n  //   margin: 8px;\r\n  //   background-color: white;\r\n  //   border: 1px solid #eeeeee;\r\n  //   display: flex;\r\n  //   justify-content: center;\r\n  //   align-items: center;\r\n  //   cursor: pointer;\r\n  //   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\r\n  //   transition: 1s ease-out;\r\n  // }\r\n\r\n  // .circle-link:hover {\r\n  //   transform: translateY(-0.25rem);\r\n  //   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);\r\n  // }\r\n\r\n  // .footer {\r\n  //   margin-top: 88px;\r\n  //   display: flex;\r\n  //   align-items: center;\r\n  //   line-height: 20px;\r\n  //   background-color: #283593;\r\n  // }\r\n\r\n  // .footer a {\r\n  //   display: flex;\r\n  //   align-items: center;\r\n  // }\r\n\r\n  // .github-star-badge {\r\n  //   color: #24292e;\r\n  //   display: flex;\r\n  //   align-items: center;\r\n  //   font-size: 12px;\r\n  //   padding: 3px 10px;\r\n  //   border: 1px solid rgba(27,31,35,.2);\r\n  //   border-radius: 3px;\r\n  //   background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);\r\n  //   margin-left: 4px;\r\n  //   font-weight: 600;\r\n  //   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;\r\n  // }\r\n\r\n  // .github-star-badge:hover {\r\n  //   background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);\r\n  //   border-color: rgba(27,31,35,.35);\r\n  //   background-position: -.5em;\r\n  // }\r\n\r\n  // .github-star-badge .material-icons {\r\n  //   height: 16px;\r\n  //   width: 16px;\r\n  //   margin-right: 4px;\r\n  // }\r\n\r\n  // svg#clouds {\r\n  //   position: fixed;\r\n  //   bottom: -160px;\r\n  //   left: -230px;\r\n  //   z-index: -10;\r\n  //   width: 1920px;\r\n  // }\r\n\r\n\r\n  /* Responsive Styles */\r\n  @media screen and (max-width: 767px) {\r\n\r\n    .card-container > *:not(.circle-link) ,\r\n    .terminal {\r\n      width: 100%;\r\n    }\r\n\r\n    .card:not(.highlight-card) {\r\n      height: 16px;\r\n      margin: 8px 0;\r\n    }\r\n\r\n    .card.highlight-card span {\r\n      margin-left: 72px;\r\n    }\r\n\r\n    svg#rocket-smoke {\r\n      right: 120px;\r\n      transform: rotate(-5deg);\r\n    }\r\n  }\r\n\r\n  @media screen and (max-width: 575px) {\r\n    svg#rocket-smoke {\r\n      display: none;\r\n      visibility: hidden;\r\n    }\r\n  }",
+                    "data": ":host {\r\n  font-family: Roboto;\r\n  font-size: 14px;\r\n  color: #333;\r\n  box-sizing: border-box;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\nh1,\r\nh2,\r\nh3,\r\nh4,\r\nh5,\r\nh6 {\r\n  margin: 8px 5px;\r\n  font-family: Roboto;\r\n}\r\n\r\np {\r\n  margin: 0;\r\n}\r\n\r\n.spacer {\r\n  flex: 1;\r\n}\r\n\r\n.toolbar {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 60px;\r\n  display: flex;\r\n  align-items: center;\r\n  background-color: #283593;\r\n  color: white;\r\n  font-weight: 600;\r\n}\r\n\r\n.toolbar img {\r\n  margin: 0 16px;\r\n}\r\n\r\n.toolbar #twitter-logo {\r\n  height: 40px;\r\n  margin: 0 8px;\r\n}\r\n\r\n.toolbar #youtube-logo {\r\n  height: 40px;\r\n  margin: 0 16px;\r\n}\r\n\r\n.toolbar #twitter-logo:hover,\r\n.toolbar #youtube-logo:hover {\r\n  opacity: 0.8;\r\n}\r\n\r\n.content {\r\n  display: flex;\r\n  margin: 82px auto 32px;\r\n  padding: 0 16px;\r\n  max-width: 960px;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\nsvg.material-icons {\r\n  height: 24px;\r\n  width: auto;\r\n}\r\n\r\nsvg.material-icons:not(:last-child) {\r\n  margin-right: 8px;\r\n}\r\n\r\n.card svg.material-icons path {\r\n  fill: #888;\r\n}\r\n\r\n.card-container {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  margin-top: 16px;\r\n}\r\n\r\n.card {\r\n  border-radius: 4px;\r\n  border: 1px solid #eee;\r\n  background-color: #fafafa;\r\n  height: 40px;\r\n  width: 200px;\r\n  margin: 0 8px 16px;\r\n  padding: 16px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\r\n  transition: all 0.2s ease-in-out;\r\n  line-height: 24px;\r\n}\r\n\r\n.card-container .card:not(:last-child) {\r\n  margin-right: 0;\r\n}\r\n\r\n.card.card-small {\r\n  height: 16px;\r\n  width: 168px;\r\n}\r\n\r\n.card-container .card:not(.highlight-card) {\r\n  cursor: pointer;\r\n}\r\n\r\n.card-container .card:not(.highlight-card):hover {\r\n  transform: translateY(-3px);\r\n  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);\r\n}\r\n\r\n.card-container .card:not(.highlight-card):hover .material-icons path {\r\n  fill: rgb(105, 103, 103);\r\n}\r\n\r\n.card.highlight-card {\r\n  background-color: #283593;\r\n  color: white;\r\n  font-weight: 600;\r\n  border: none;\r\n  width: auto;\r\n  min-width: 30%;\r\n  position: relative;\r\n}\r\n\r\n.card.card.highlight-card span {\r\n  margin-left: 60px;\r\n}\r\n\r\n// svg#rocket {\r\n//   width: 80px;\r\n//   position: absolute;\r\n//   left: -10px;\r\n//   top: -24px;\r\n// }\r\n\r\n// svg#rocket-smoke {\r\n//   height: calc(100vh - 95px);\r\n//   position: absolute;\r\n//   top: 10px;\r\n//   right: 180px;\r\n//   z-index: -10;\r\n// }\r\n\r\na,\r\na:visited,\r\na:hover {\r\n  color: #fff;\r\n  text-decoration: none;\r\n  padding: 10px;\r\n}\r\n\r\na:hover {\r\n  color: #fff;\r\n}\r\n\r\n// .terminal {\r\n//   position: relative;\r\n//   width: 80%;\r\n//   max-width: 600px;\r\n//   border-radius: 6px;\r\n//   padding-top: 45px;\r\n//   margin-top: 8px;\r\n//   overflow: hidden;\r\n//   background-color: rgb(15, 15, 16);\r\n// }\r\n\r\n// .terminal::before {\r\n//   content: \"\\2022 \\2022 \\2022\";\r\n//   position: absolute;\r\n//   top: 0;\r\n//   left: 0;\r\n//   height: 4px;\r\n//   background: rgb(58, 58, 58);\r\n//   color: #c2c3c4;\r\n//   width: 100%;\r\n//   font-size: 2rem;\r\n//   line-height: 0;\r\n//   padding: 14px 0;\r\n//   text-indent: 4px;\r\n// }\r\n\r\n// .terminal pre {\r\n//   font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;\r\n//   color: white;\r\n//   padding: 0 1rem 1rem;\r\n//   margin: 0;\r\n// }\r\n\r\n// .circle-link {\r\n//   height: 40px;\r\n//   width: 40px;\r\n//   border-radius: 40px;\r\n//   margin: 8px;\r\n//   background-color: white;\r\n//   border: 1px solid #eeeeee;\r\n//   display: flex;\r\n//   justify-content: center;\r\n//   align-items: center;\r\n//   cursor: pointer;\r\n//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\r\n//   transition: 1s ease-out;\r\n// }\r\n\r\n// .circle-link:hover {\r\n//   transform: translateY(-0.25rem);\r\n//   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);\r\n// }\r\n\r\n// .footer {\r\n//   margin-top: 88px;\r\n//   display: flex;\r\n//   align-items: center;\r\n//   line-height: 20px;\r\n//   background-color: #283593;\r\n// }\r\n\r\n// .footer a {\r\n//   display: flex;\r\n//   align-items: center;\r\n// }\r\n\r\n// .github-star-badge {\r\n//   color: #24292e;\r\n//   display: flex;\r\n//   align-items: center;\r\n//   font-size: 12px;\r\n//   padding: 3px 10px;\r\n//   border: 1px solid rgba(27,31,35,.2);\r\n//   border-radius: 3px;\r\n//   background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);\r\n//   margin-left: 4px;\r\n//   font-weight: 600;\r\n//   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;\r\n// }\r\n\r\n// .github-star-badge:hover {\r\n//   background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);\r\n//   border-color: rgba(27,31,35,.35);\r\n//   background-position: -.5em;\r\n// }\r\n\r\n// .github-star-badge .material-icons {\r\n//   height: 16px;\r\n//   width: 16px;\r\n//   margin-right: 4px;\r\n// }\r\n\r\n// svg#clouds {\r\n//   position: fixed;\r\n//   bottom: -160px;\r\n//   left: -230px;\r\n//   z-index: -10;\r\n//   width: 1920px;\r\n// }\r\n\r\n\r\n/* Responsive Styles */\r\n@media screen and (max-width: 767px) {\r\n\r\n  .card-container > *:not(.circle-link) ,\r\n  .terminal {\r\n    width: 100%;\r\n  }\r\n\r\n  .card:not(.highlight-card) {\r\n    height: 16px;\r\n    margin: 8px 0;\r\n  }\r\n\r\n  .card.highlight-card span {\r\n    margin-left: 72px;\r\n  }\r\n\r\n  svg#rocket-smoke {\r\n    right: 120px;\r\n    transform: rotate(-5deg);\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 575px) {\r\n  svg#rocket-smoke {\r\n    display: none;\r\n    visibility: hidden;\r\n  }\r\n}",
                     "styleUrl": "./app.component.scss"
                 }
             ],
@@ -2215,7 +2215,7 @@
                 "args": [],
                 "line": 9
             },
-            "templateData": "<div class=\"content\" role=\"main\">\n    <span>products-listing</span>\n  </div>\n    <app-navbar></app-navbar>\n  \n    <router-outlet></router-outle1t>\n    "
+            "templateData": "<div class=\"content\" role=\"main\" ><span hidden>products-listing app is running!</span></div>\n<app-navbar></app-navbar>\n  \n<router-outlet></router-outlet>\n    "
         },
         {
             "name": "ButtonComponent",
@@ -2430,7 +2430,7 @@
         },
         {
             "name": "CartComponent",
-            "id": "component-CartComponent-3315ef85c0652a462a910ef1029bcf66",
+            "id": "component-CartComponent-18536f1c813aedf6594210c4e78f8baf",
             "file": "src/app/cart/cart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2509,7 +2509,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 73,
+                    "line": 83,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2519,7 +2519,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2536,7 +2536,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 26,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2567,7 +2567,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 75,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2590,7 +2590,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 36,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2622,7 +2622,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';\nimport { ToastrService } from 'ngx-toastr';\nimport { DialogConfig } from '../global/dialog/dialog-config';\nimport { DialogRef } from '../global/dialog/dialog-ref';\n\n@Component({\n  selector: 'app-cart',\n  templateUrl: './cart.component.html',\n  styleUrls: ['./cart.component.scss']\n})\nexport class CartComponent implements OnInit {\n  @Input() values: any;\n  myCartItems :any= [];\n  cartTotal: number = 0;\n  constructor( public dialogRef: DialogRef, \n    public config: DialogConfig, private toastr: ToastrService) {}\n\n  ngOnInit(){\n    this.myCartItems = this.config.data;\n    this.getTotalAmount(this.myCartItems);\n  }\n  \n  getTotalAmount(items){\n    this.cartTotal = 0;\n    for(let i=0; i<items.length;i++){\n      this.cartTotal = Number(this.cartTotal) + Number(items[i][\"price\"]); \n    }\n  }\n\n  removeItem(item,index){\n    console.log(item);\n    this.myCartItems.splice(index,1);\n    this.getTotalAmount(this.myCartItems);\n  }\n\n  checkout(){\n    var handler = (<any>window).StripeCheckout.configure({\n      key: 'pk_test_51IudUaSJYmBu1ez60Gerwee2ob0K7dlbbryng5XOeZLehSllKhjcZKC6YIa9mcsjMVD1L4DgU4qPOF30OjhAerny00xeLagm23',\n      locale: 'auto',\n      token: function (token: any) {\n        // You can access the token ID with `token.id`.\n        // Get the token ID to your server-side code for use.\n        console.log(token);\n        console.log(token.id);\n        if(token.id){\n          console.log(\"payment done\");\n          //this.toastr.success(\"Order Placed Successfully\");\n          localStorage.removeItem(\"cartItems\");\n          localStorage.setItem(\"token\",token.id);\n        }else{\n          //this.toastr.error(\"ERROR\");\n        }\n        this.token = token.id;\n      },\n    });\n    \n    handler.open({\n      name: 'Testing payment',\n      description: 'Enter Card No: 4242 4242 4242 4242',\n      amount: this.cartTotal * 100,\n    });\n\n  }\n\n  onSuccess() {\n    if(localStorage.getItem(\"token\")){\n      this.toastr.success(\"Order Placed Successfully\");\n      this.dialogRef.close();\n    }\n    localStorage.removeItem(\"token\");\n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';\nimport { ToastrService } from 'ngx-toastr';\nimport { DialogConfig } from '../global/dialog/dialog-config';\nimport { DialogRef } from '../global/dialog/dialog-ref';\n\n@Component({\n  selector: 'app-cart',\n  templateUrl: './cart.component.html',\n  styleUrls: ['./cart.component.scss']\n})\nexport class CartComponent implements OnInit {\n  @Input() values: any;\n  myCartItems :any= [];\n  cartTotal: number = 0;\n  constructor( public dialogRef: DialogRef, \n    public config: DialogConfig, private toastr: ToastrService) {}\n\n  ngOnInit(){\n    this.myCartItems = this.config.data;\n    if(this.myCartItems){\n      this.getTotalAmount(this.myCartItems);\n    }\n      \n  }\n  \n  getTotalAmount(items){\n    this.cartTotal = 0;\n    let itemsArray: any[] = [];\n    itemsArray = items;\n    let itemsLength: number = itemsArray?.length;\n    for(let i=0; i<itemsLength; i++){\n      this.cartTotal = Number(this.cartTotal) + Number(items[i][\"price\"]); \n    }\n  }\n\n  removeItem(item,index){\n    //console.log(item);\n    this.myCartItems.splice(index,1);\n    if(this.myCartItems){\n      this.getTotalAmount(this.myCartItems);\n    }else{\n      this.myCartItems = [];\n    }\n  }\n\n  checkout(){\n    var handler = (<any>window).StripeCheckout.configure({\n      key: 'pk_test_51IudUaSJYmBu1ez60Gerwee2ob0K7dlbbryng5XOeZLehSllKhjcZKC6YIa9mcsjMVD1L4DgU4qPOF30OjhAerny00xeLagm23',\n      locale: 'auto',\n      token: function (token: any) {\n        // You can access the token ID with `token.id`.\n        // Get the token ID to your server-side code for use.\n        // console.log(token);\n        // console.log(token.id);\n        if(token.id){\n          //console.log(\"payment done\");\n          //this.toastr.success(\"Order Placed Successfully\");\n          localStorage.removeItem(\"cartItems\");\n          localStorage.setItem(\"token\",token.id);\n        }else{\n          //this.toastr.error(\"ERROR\");\n        }\n        this.token = token.id;\n      },\n    });\n    \n    handler.open({\n      name: 'Testing payment',\n      description: 'Enter Card No: 4242 4242 4242 4242',\n      amount: this.cartTotal * 100,\n    });\n\n  }\n\n  onSuccess() {\n    if(localStorage.getItem(\"token\")){\n      this.toastr.success(\"Order Placed Successfully\");\n      this.dialogRef.close();\n    }\n    localStorage.removeItem(\"token\");\n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2690,7 +2690,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">  \n  <div class=\"cart-dialog\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n    <app-header style=\"width: 100% !important;\"\n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Checkout'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>\n    <!-- <h3 style=\"text-align: center;\">My Cart</h3> -->\n    \n\n    <table width=\"100%\" class=\"cart-details\">\n      <tr *ngFor=\"let item of myCartItems; let i=index\" class=\"border-bottom\">\n          <td><h3>{{i+1}}.</h3></td>\n          <td><h3>{{item.name}}</h3></td>\n          <td style=\"text-align: right;\"><h3>${{item.price}}</h3></td>\n          <td style=\"vertical-align: top;\"><button style=\"background-color: red;\" (click)=\"removeItem(item,i)\" class=\"delete-cart\" title=\"Delete\">\n            <i style=\"font-size: 20px;\" class=\"fa fa-trash icon\" ></i>\n          </button></td>\n      </tr>\n      <tr *ngIf=\"myCartItems.length > 0\">\n        <td></td>\n        <td style=\"text-align: right;\"><h3>Total:</h3></td>\n        <td style=\"text-align: right;\"><h3 style=\"text-align: right;\" >${{cartTotal}}</h3></td>\n      </tr>\n    </table>\n\n    <!-- <div>\n      <button (click)=\"checkout()\">Checkout</button>\n    </div> -->\n    <div style=\"margin-top: 0px;\" class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\" *ngIf=\"myCartItems.length > 0\">\n      <br>\n      <button class=\"w-40 submit-button\" (click)=\"checkout()\">Checkout</button>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Cancel</button>\n    </div> \n\n    <div class=\"empty\" *ngIf=\"myCartItems.length  === 0\" >\n      <h3>Cart is empty <br>Please add products to continue...</h3>\n      <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Close</button>\n      </div>\n    </div>\n  </div>\n\n\n</div>\n\n"
+            "templateData": "<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">  \n  <div class=\"cart-dialog\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n    <app-header style=\"width: 100% !important;\"\n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Checkout'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>\n    <!-- <h3 style=\"text-align: center;\">My Cart</h3> -->\n    \n\n    <table width=\"100%\" class=\"cart-details\">\n      <tr *ngFor=\"let item of myCartItems; let i=index\" class=\"border-bottom\">\n          <td><h3>{{i+1}}.</h3></td>\n          <td><h3>{{item.name}}</h3></td>\n          <td style=\"text-align: right;\"><h3>${{item.price}}</h3></td>\n          <td style=\"vertical-align: top;\"><button style=\"background-color: red;\" (click)=\"removeItem(item,i)\" class=\"delete-cart\" title=\"Delete\">\n            <i style=\"font-size: 20px;\" class=\"fa fa-trash icon\" ></i>\n          </button></td>\n      </tr>\n      <tr *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n        <td></td>\n        <td style=\"text-align: right;\"><h3>Total:</h3></td>\n        <td style=\"text-align: right;\"><h3 style=\"text-align: right;\" >${{cartTotal}}</h3></td>\n      </tr>\n    </table>\n\n    <!-- <div>\n      <button (click)=\"checkout()\">Checkout</button>\n    </div> -->\n    <div style=\"margin-top: 0px;\" class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\" *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n      <br>\n      <button class=\"w-40 submit-button\" (click)=\"checkout()\">Checkout</button>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Cancel</button>\n    </div> \n\n    <div class=\"empty\" *ngIf=\"!myCartItems\"> <!--*ngIf=\"myCartItems.length > 0\"-->\n      <h3>Cart is empty <br>Please add products to continue...</h3>\n      <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Close</button>\n      </div>\n    </div>\n  </div>\n\n\n</div>\n\n"
         },
         {
             "name": "CheckboxComponent",
@@ -2779,7 +2779,7 @@
         },
         {
             "name": "DialogComponent",
-            "id": "component-DialogComponent-8ecc0f670ee5d8f2dcb6e3460a9e6d1f",
+            "id": "component-DialogComponent-b0f6f19edb63e1d04dfbc812c8fb9ac8",
             "file": "src/app/global/dialog/dialog/dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2815,7 +2815,7 @@
                     "name": "childComponentType",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Type<any>",
+                    "type": "Type<any> | any",
                     "optional": false,
                     "description": "",
                     "line": 23
@@ -2824,7 +2824,7 @@
                     "name": "componentRef",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "ComponentRef<any>",
+                    "type": "ComponentRef<any> | any",
                     "optional": false,
                     "description": "",
                     "line": 22
@@ -2833,7 +2833,7 @@
                     "name": "insertionPoint",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "InsertionDirective",
+                    "type": "InsertionDirective | any",
                     "optional": false,
                     "description": "",
                     "line": 25,
@@ -2981,7 +2981,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  Type,\n  OnDestroy,\n  AfterViewInit,\n  ComponentRef,\n  ViewChild,\n  ComponentFactoryResolver,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { Subject } from 'rxjs';\nimport { DialogRef } from '../dialog-ref';\nimport { InsertionDirective } from '../insertion.directive';\n\n\n@Component({\n  templateUrl: './dialog.component.html',\n  styleUrls: ['./dialog.component.scss']\n})\nexport class DialogComponent implements AfterViewInit, OnDestroy {\n\n  componentRef: ComponentRef<any>;\n  childComponentType: Type<any>;\n\n  @ViewChild(InsertionDirective) insertionPoint: InsertionDirective;\n\n  private readonly _onClose = new Subject<any>();\n  public onClose = this._onClose.asObservable();\n\n  constructor(\n    private componentFactoryResolver: ComponentFactoryResolver,\n    private cd: ChangeDetectorRef,\n    private dialogRef: DialogRef\n  ) { }\n\n  ngAfterViewInit(): void {\n    this.loadChildComponent(this.childComponentType);\n    this.cd.detectChanges();\n  }\n\n  ngOnDestroy(): void {\n    if (this.componentRef) {\n      this.componentRef.destroy();\n    }\n  }\n\n  onOverlayClicked(evt: MouseEvent): void {\n    this.dialogRef.close();\n  }\n\n  onDialogClicked(evt: MouseEvent): void {\n    evt.stopPropagation();\n  }\n\n  loadChildComponent(componentType: Type<any>): void {\n    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);\n\n    let viewContainerRef = this.insertionPoint.viewContainerRef;\n    viewContainerRef.clear();\n\n    this.componentRef = viewContainerRef.createComponent(componentFactory);\n  }\n\n  close(): void {\n    this._onClose.next();\n  }\n}",
+            "sourceCode": "import {\n  Component,\n  Type,\n  OnDestroy,\n  AfterViewInit,\n  ComponentRef,\n  ViewChild,\n  ComponentFactoryResolver,\n  ChangeDetectorRef\n} from '@angular/core';\nimport { Subject } from 'rxjs';\nimport { DialogRef } from '../dialog-ref';\nimport { InsertionDirective } from '../insertion.directive';\n\n\n@Component({\n  templateUrl: './dialog.component.html',\n  styleUrls: ['./dialog.component.scss']\n})\nexport class DialogComponent implements AfterViewInit, OnDestroy {\n\n  componentRef: ComponentRef<any> |any;\n  childComponentType: Type<any> | any;\n\n  @ViewChild(InsertionDirective) insertionPoint: InsertionDirective | any;\n\n  private readonly _onClose = new Subject<any>();\n  public onClose = this._onClose.asObservable();\n\n  constructor(\n    private componentFactoryResolver: ComponentFactoryResolver,\n    private cd: ChangeDetectorRef,\n    private dialogRef: DialogRef\n  ) { }\n\n  ngAfterViewInit(): void {\n    this.loadChildComponent(this.childComponentType);\n    this.cd.detectChanges();\n  }\n\n  ngOnDestroy(): void {\n    if (this.componentRef) {\n      this.componentRef.destroy();\n    }\n  }\n\n  onOverlayClicked(evt: MouseEvent): void {\n    this.dialogRef.close();\n  }\n\n  onDialogClicked(evt: MouseEvent): void {\n    evt.stopPropagation();\n  }\n\n  loadChildComponent(componentType: Type<any>): void {\n    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentType);\n\n    let viewContainerRef = this.insertionPoint.viewContainerRef;\n    viewContainerRef.clear();\n\n    this.componentRef = viewContainerRef.createComponent(componentFactory);\n  }\n\n  close(): void {\n    this._onClose.next();\n  }\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3054,7 +3054,7 @@
         },
         {
             "name": "EditProductComponent",
-            "id": "component-EditProductComponent-791a0e09be5a32f25594dccf9e84470b",
+            "id": "component-EditProductComponent-2aa4fbaf098cf356bdf25c75b50b25a4",
             "file": "src/app/products/edit-product/edit-product.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3101,7 +3101,7 @@
                     "name": "product",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Product",
+                    "type": "Product | any",
                     "optional": false,
                     "description": "",
                     "line": 19
@@ -3119,7 +3119,7 @@
                     "name": "productForm",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "FormGroup",
+                    "type": "FormGroup | any",
                     "optional": false,
                     "description": "",
                     "line": 20
@@ -3128,7 +3128,7 @@
                     "name": "productSubscription",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Subscription",
+                    "type": "Subscription | any",
                     "optional": false,
                     "description": "",
                     "line": 21
@@ -3141,17 +3141,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 74,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "createForm",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 37,
+                    "line": 96,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3161,7 +3151,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 62,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3171,7 +3161,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3181,7 +3171,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 68,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3193,11 +3183,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Inject, OnDestroy, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { ActivatedRoute } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Subscription } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { updateProduct } from '../state/products.actions';\nimport { getProductById } from '../state/products.selector';\n\n@Component({\n  selector: 'app-edit-product',\n  templateUrl: './edit-product.component.html',\n  styleUrls: ['./edit-product.component.scss']\n})\nexport class EditProductComponent implements OnInit, OnDestroy {\n  product:Product;\n  productForm: FormGroup;\n  productSubscription : Subscription;\n  productData: any;\n  constructor(private route:ActivatedRoute, private store:Store<AppState>,\n    public dialogRef: DialogRef, public config: DialogConfig) { }\n\n  ngOnInit(): void {\n    this.productData = this.config.data;\n    this.route.paramMap.subscribe((params) =>{\n      const id = params.get('id');\n      this.store.select(getProductById,{id}).subscribe((data) => {\n        this.product = data;\n        this.createForm();\n      })\n    })\n  }\n\n  createForm(){\n    this.productForm = new FormGroup({\n      name: new FormControl(this.productData.name, Validators.required),\n      description: new FormControl(this.productData.description, Validators.required),\n      price: new FormControl(this.productData.price, Validators.required),\n      image: new FormControl(this.productData.image, Validators.required),\n    });\n  }\n\n  ngOnDestroy(){\n    if(this.productSubscription){\n      this.productSubscription.unsubscribe();\n    }\n  }\n\n  onUpdateProduct(){\n    if(!this.productForm.valid){\n      return;\n    }\n\n    const name = this.productForm.value.name;\n    const description = this.productForm.value.description;\n    const price = this.productForm.value.price;\n    const image = this.productForm.value.image;\n\n    const product: Product = {\n      id:this.productData.id,\n      name,\n      description,\n      price,\n      image\n    }\n\n    this.store.dispatch(updateProduct({ product }));\n    this.dialogRef.close();\n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, Inject, OnDestroy, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { ActivatedRoute } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Subscription } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { updateProduct } from '../state/products.actions';\nimport { getProductById } from '../state/products.selector';\n\n@Component({\n  selector: 'app-edit-product',\n  templateUrl: './edit-product.component.html',\n  styleUrls: ['./edit-product.component.scss']\n})\nexport class EditProductComponent implements OnInit, OnDestroy {\n  product:Product |any;\n  productForm: FormGroup |any ;\n  productSubscription : Subscription |any;\n  productData: any;\n  constructor(private route:ActivatedRoute, private store:Store<AppState>,\n    public dialogRef: DialogRef, public config: DialogConfig) {\n      this.productForm = new FormGroup({\n        name: new FormControl('', Validators.required),\n        description: new FormControl('', Validators.required),\n        price: new FormControl('', Validators.required),\n        image: new FormControl('', Validators.required),\n      });\n     }\n\n  ngOnInit(): void {\n    this.productData = this.config.data;\n    this.route.paramMap.subscribe((params) =>{\n      const id = params.get('id');\n      this.store.select(getProductById,{id}).subscribe((data) => {\n        this.product = data;\n        //this.createForm();\n        this.productForm.controls.name.setValue(this.productData.name);\n        this.productForm.controls.description.setValue(this.productData.description);\n        this.productForm.controls.price.setValue(this.productData.price);\n        this.productForm.controls.image.setValue(this.productData.image);\n      })\n    })\n  }\n\n  //createForm(){\n    \n    // this.productForm.controls.name.setValue(this.productData.name);\n    // this.productForm.controls.description.setValue(this.productData.description);\n    // this.productForm.controls.price.setValue(this.productData.price);\n    // this.productForm.controls.image.setValue(this.productData.image);\n    // this.productForm = new FormGroup({\n    //   name: new FormControl(this.productData.name, Validators.required),\n    //   description: new FormControl(this.productData.description, Validators.required),\n    //   price: new FormControl(this.productData.price, Validators.required),\n    //   image: new FormControl(this.productData.image, Validators.required),\n    // });\n  //}\n\n  ngOnDestroy(){\n    if(this.productSubscription){\n      this.productSubscription.unsubscribe();\n    }\n  }\n\n  onUpdateProduct(){\n    if(!this.productForm.valid){\n      // return;\n      this.productForm.controls.name.markAsTouched();\n      this.productForm.controls.description.markAsTouched();\n      this.productForm.controls.price.markAsTouched();\n      this.productForm.controls.image.markAsTouched();\n    }else{\n      const name = this.productForm.value.name;\n      const description = this.productForm.value.description;\n      const price = this.productForm.value.price;\n      const image = this.productForm.value.image;\n  \n      const product: Product = {\n        id:this.productData.id,\n        name,\n        description,\n        price,\n        image\n      }\n  \n      this.store.dispatch(updateProduct({ product }));\n      this.dialogRef.close();\n    }\n\n    \n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "h3, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n\r\np{\r\n    font-size: 12px;\r\n    color:red;\r\n    justify-content: left;\r\n    margin: 0px;\r\n}\r\n\r\n.form-control{\r\n    div{\r\n        margin: 0px 0 -50px 0;\r\n    }\r\n}",
                     "styleUrl": "./edit-product.component.scss"
                 }
             ],
@@ -3277,7 +3267,7 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"productForm\" (ngSubmit)=\"onUpdateProduct()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n        <app-header \n        [icon]=\"'exit_to_app'\" \n        [title]=\"'Update Product'\" \n        [hasBgImage]=\"true\" \n        [class]=\"'card-spacing'\"></app-header>   \n             <!-- <h1>EDIT PRODUCT</h1><hr> -->\n           <div class=\"card-inner\" style=\"margin-top: -20px;\">\n                <div class=\"form-control\">\n                    <label>Name</label>\n                    <input type=\"text\" formControlName=\"name\">\n                    <div *ngIf=\"productForm.controls.name.errors?.required && productForm.controls.name.touched\">Required</div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Price</label>\n                    <input type=\"text\" formControlName=\"price\">\n                    <div *ngIf=\"productForm.controls.price.errors?.required && productForm.controls.price.touched\">Required</div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Description</label>\n                    <input type=\"text\" formControlName=\"description\">\n                    <div *ngIf=\"productForm.controls.description.errors?.required && productForm.controls.description.touched\">Required</div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Image Url</label>\n                    <input type=\"text\" formControlName=\"image\">\n                    <div *ngIf=\"productForm.controls.image.errors?.required && productForm.controls.image.touched\"><p>Required</p></div>\n                </div>\n                <br><br>\n                \n                <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n                    <br>\n                    <button class=\"w-30 submit-button\" type=\"submit\" [disabled]=\"!productForm.valid\">Update</button>\n                    &nbsp;&nbsp;&nbsp;&nbsp;\n                    <button class=\"w-30 cancel-button\" (click)=\"cancel()\">Cancel</button>\n                </div> \n            </div>        \n    </form>\n</div>"
+            "templateData": "\n<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"productForm\" (ngSubmit)=\"onUpdateProduct()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n        <app-header \n        [icon]=\"'exit_to_app'\" \n        [title]=\"'Update Product'\" \n        [hasBgImage]=\"true\" \n        [class]=\"'card-spacing'\"></app-header>   \n\n           <div class=\"card-inner\" style=\"margin-top: -20px;\">\n                <div class=\"form-control\">\n                    <label>Name</label>\n                    <input aria-label=\"Name\" type=\"text\" formControlName=\"name\" id=\"name\" placeholder=\"Product Name\" name=\"name\">\n                    <div *ngIf=\"productForm.controls.name.errors?.required && productForm.controls.name.touched\"><br><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Price</label>\n                    <input aria-label=\"Price\" type=\"text\" formControlName=\"price\" id=\"price\" placeholder=\"Price\" name=\"price\">\n                    <div *ngIf=\"productForm.controls.price.errors?.required && productForm.controls.price.touched\"><br><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Description</label>\n                    <input aria-label=\"Description\" type=\"text\" formControlName=\"description\" id=\"description\" placeholder=\"description\" name=\"description\">\n                    <div *ngIf=\"productForm.controls.description.errors?.required && productForm.controls.description.touched\"><br><p>Required</p></div>\n                </div>\n                <br>\n                <div class=\"form-control\">\n                    <label>Image Url</label>\n                    <input aria-label=\"Image\" type=\"text\" formControlName=\"image\" id=\"image\" placeholder=\"image\" name=\"image\">\n                    <div *ngIf=\"productForm.controls.image.errors?.required && productForm.controls.image.touched\"><br><p>Required</p></div>\n                </div>\n                <br><br>\n                \n                <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n                    <br>\n                    <button aria-label=\"Submit\" class=\"w-30 submit-button\" type=\"submit\" >Update</button> <!--[disabled]=\"!productForm.valid\"-->\n                    &nbsp;&nbsp;&nbsp;&nbsp;\n                    <button aria-label=\"Cancel\" class=\"w-30 cancel-button\" (click)=\"cancel()\">Cancel</button>\n                </div> \n            </div>        \n    </form>\n</div>"
         },
         {
             "name": "FooterComponent",
@@ -3469,7 +3459,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".content-header{\r\n    color: #fff !important;\r\n    width: 350px !important;\r\n    text-align: center;\r\n    img{\r\n        width: 30px;\r\n        height: 130px;\r\n        border-radius: 50%;\r\n    }\r\n    h2{\r\n        font-size: 36px;\r\n        font-weight: 400;\r\n        margin: 0;\r\n        font-family: Roboto;\r\n    } \r\n    h3{\r\n        font-size: 32px;\r\n        font-weight: 500;\r\n        margin: 0;\r\n        font-family: Roboto;\r\n    } \r\n    h4{\r\n        font-size: 16px;\r\n        font-weight: 300;\r\n        max-width: 580px;\r\n        text-align: center;\r\n        margin: 0 auto;\r\n    }\r\n    &.bg-image{\r\n        background-image: url(\"/assets/header-bg.png\");     \r\n        background-blend-mode: overlay;\r\n        background-size: 300px; \r\n        background-color: #283593;\r\n    }\r\n    \r\n}\r\n\r\n@media screen and (min-width: 960px) {    \r\n    .content-header{\r\n        img{\r\n            width: 150px;\r\n            height: 150px;\r\n        }\r\n        h1{\r\n            font-size: 48px;\r\n        } \r\n        h4{\r\n            font-size: 18px;\r\n        }\r\n        &.has-bg-image{\r\n            background-size: 480px; \r\n        }\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 400px){\r\n    .container{\r\n        width: 300px !important;\r\n    }\r\n}\r\n\r\n",
+                    "data": ".content-header{\r\n    color: #fff !important;\r\n    width: 370px !important;\r\n    text-align: center;\r\n    img{\r\n        width: 30px;\r\n        height: 130px;\r\n        border-radius: 50%;\r\n    }\r\n    h2{\r\n        font-size: 36px;\r\n        font-weight: 400;\r\n        margin: 0;\r\n        font-family: Roboto;\r\n    } \r\n    h3{\r\n        font-size: 32px;\r\n        font-weight: 500;\r\n        margin: 0;\r\n        font-family: Roboto;\r\n    } \r\n    h4{\r\n        font-size: 16px;\r\n        font-weight: 300;\r\n        max-width: 580px;\r\n        text-align: center;\r\n        margin: 0 auto;\r\n    }\r\n    &.bg-image{\r\n        background-image: url(\"/assets/header-bg.png\");     \r\n        background-blend-mode: overlay;\r\n        background-size: 150px; \r\n        background-color: #283593;\r\n    }\r\n    \r\n}\r\n\r\n@media screen and (min-width: 960px) {    \r\n    .content-header{\r\n        img{\r\n            width: 150px;\r\n            height: 150px;\r\n        }\r\n        h1{\r\n            font-size: 48px;\r\n        } \r\n        h4{\r\n            font-size: 18px;\r\n        }\r\n        &.has-bg-image{\r\n            background-size: 480px; \r\n        }\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 400px){\r\n    .container{\r\n        width: 300px !important;\r\n    }\r\n}\r\n\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -3607,7 +3597,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<br><br><br>\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"search-product\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n    </div>\n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let prod of products | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n            <img [src]=\"prod.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{prod.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{prod.price}} </h2>\n            <p>{{prod.desc}}</p>\n\n            <button (click)=\"viewProduct()\">More Details</button>\n        </div>\n        \n    </div>\n    \n</div>\n\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n\n<!-- <app-products-list></app-products-list> -->\n<app-footer></app-footer>"
+            "templateData": "<!-- <br><br><br>\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"search-product\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n    </div>\n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let prod of products | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n            <img [src]=\"prod.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{prod.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{prod.price}} </h2>\n            <p>{{prod.desc}}</p>\n\n            <button (click)=\"viewProduct()\">More Details</button>\n        </div>\n        \n    </div>\n    \n</div>\n\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n\n<app-footer></app-footer> -->"
         },
         {
             "name": "ImageComponent",
@@ -3692,7 +3682,7 @@
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-39bfc2acd045e7ce84d302cb11139646",
+            "id": "component-LoginComponent-d1aae78725797d3bd1dd9e258962825f",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3796,17 +3786,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 77,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 31,
+                    "line": 76,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3816,7 +3796,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3828,11 +3808,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from '../app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  submitted = false;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    console.log(\"login\");\n  }\n\n  onSubmit(){\n    this.submitted = true;\n    // const email = this.form.value.email;\n    // const password = this.form.value.password;\n    // this.store.dispatch(loginStart({email, password}));\n    this.currentUser = this.form.value.email;\n\n    this.authService.login().subscribe(\n      data => {\n        let successFlag = false;\n        console.log(data);\n        if(data){\n          this.users = data;\n          for(let i=0; i<this.users.length; i++){\n            if(this.form.value.email === this.users[i][\"email\"] && this.form.value.password === this.users[i][\"password\"]){\n              console.log(\"if\");\n              console.log(this.currentUser);\n              localStorage.setItem('user', this.currentUser);\n              localStorage.setItem('firstname', this.users[i].firstname);\n              console.log(localStorage.getItem(\"user\"));\n              this.toastr.success('Login Success');\n              successFlag = true;\n              this.router.navigate(['/']);\n            }else{\n              successFlag = false;\n            }\n          }\n          console.log(successFlag);\n          if(!successFlag){\n            console.log(successFlag);\n            this.toastr.error('Invalid email or password');\n          }\n        }else{\n          console.log(\"Users not found\");\n        }\n      },\n      error => {\n        error='Bad email';\n      });\n  }\n\n\n  forgotPassword(){}\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from '../app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  submitted = false;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  onSubmit(){\n\n    if(this.form.invalid){\n      this.form.controls.email.markAsTouched();\n      this.form.controls.password.markAsTouched();\n    }else{\n      this.submitted = true;\n      this.currentUser = this.form.value.email;\n      this.authService.login().subscribe(\n        data => {\n          let successFlag = false;\n          console.log(data);\n          if(data){\n            this.users = data;\n            for(let i=0; i<this.users.length; i++){\n              if(this.form.value.email === this.users[i][\"email\"] && this.form.value.password === this.users[i][\"password\"]){\n                console.log(\"if\");\n                console.log(this.currentUser);\n                localStorage.setItem('user', this.currentUser);\n                localStorage.setItem('firstname', this.users[i].firstname);\n                console.log(localStorage.getItem(\"user\"));\n                this.toastr.success('Login Success');\n                successFlag = true;\n                this.router.navigate(['/']);\n              }else{\n                successFlag = false;\n              }\n            }\n            console.log(successFlag);\n            if(!successFlag){\n              console.log(successFlag);\n              this.toastr.error('Invalid email or password');\n            }\n          }else{\n            console.log(\"Users not found\");\n          }\n        },\n        error => {\n          error='Bad email';\n        });\n    }\n    \n  }\n\n\n  forgotPassword(){\n    this.toastr.info(\"Not Implemented\");\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "html{\r\n    // background-image: url('../../assets/login-bg.jpg');\r\n    background-image: url('https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');\r\n}\r\n.container{\r\n    margin-top: 0px !important;\r\n}\r\n.icon {\r\n    padding: 5px;\r\n    background: #283593;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  \r\n\r\n@media only screen and (max-width: 780px){\r\n    .container{\r\n        margin-top:100px;\r\n    }\r\n}",
+                    "data": "html{\r\n    // background-image: url('../../assets/login-bg.jpg');\r\n    background-image: url('https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9naW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60');\r\n}\r\n.container{\r\n    margin-top: -50px !important;\r\n}\r\n.icon {\r\n    padding: 5px;\r\n    background: #283593;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n}\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  \r\n\r\n@media only screen and (max-width: 780px){\r\n    .container{\r\n        margin-top:50px;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 500px){\r\n    .container{\r\n        margin-top:0px;\r\n    }\r\n}",
                     "styleUrl": "./login.component.scss"
                 }
             ],
@@ -3923,14 +3903,11 @@
                     }
                 ]
             },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Login'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Email is required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid email</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Password is required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Enter minimum 6 characters</span>\n                <div class=\"submit-button-container\">\n                    <button class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/forgot-password\" class=\"w-100 link\">Forgot Password?</a>\n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\" >\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Login'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Email\" type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid Email</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Enter minimum 6 characters</span>\n                <br>\n                <div class=\"submit-button-container\">\n                    <button aria-label=\"Login\" class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/forgot-password\" class=\"w-100 link\">Forgot Password?</a>\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "NavbarComponent",
-            "id": "component-NavbarComponent-d4dd64c71e4131cddd4479015533c3d9",
+            "id": "component-NavbarComponent-20b9e7fa3e49b87ef4ff7ee2dbbdbb2b",
             "file": "src/app/global/navbar/navbar.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4035,7 +4012,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 84,
+                    "line": 81,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4048,34 +4025,6 @@
                     "line": 38,
                     "deprecated": false,
                     "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnChanges",
-                    "args": [
-                        {
-                            "name": "changes",
-                            "type": "SimpleChanges",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 80,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "changes",
-                            "type": "SimpleChanges",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
                 },
                 {
                     "name": "ngOnDestroy",
@@ -4139,7 +4088,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 87,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4149,7 +4098,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 99,
+                    "line": 96,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4159,7 +4108,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 94,
+                    "line": 91,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4201,7 +4150,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthService } from '../../login/auth.service';\nimport { SignupComponent } from '../../login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy, OnChanges {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n\n  @Input() config: any = {};\n  username: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService, \n    private router: Router) {}\n\n  logout(){\n    localStorage.removeItem(\"user\");\n    localStorage.removeItem(\"firstname\");\n    localStorage.removeItem(\"cartItems\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n      console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n      this.username = localStorage.getItem(\"firstname\");\n  }\n\n  ngOnChanges(changes:SimpleChanges){\n    console.log(changes);\n  }\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n    \n  }\n  onSettings(){\n    console.log(this.isOpenMenu);\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    console.log(this.currentUser);\n    this.authService.getUsers().subscribe(data=>{\n      console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i];\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      ref.afterClosed.subscribe(result => {\n        console.log('Dialog closed', result);      \n      });\n    });\n  }\n\n  \n\n}\n",
+            "sourceCode": "import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthService } from '../../login/auth.service';\nimport { SignupComponent } from '../../login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n\n  @Input() config: any = {};\n  username: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService, \n    private router: Router) {}\n\n  logout(){\n    localStorage.removeItem(\"user\");\n    localStorage.removeItem(\"firstname\");\n    localStorage.removeItem(\"cartItems\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n      // console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n      this.username = localStorage.getItem(\"firstname\");\n  }\n\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n    \n  }\n  onSettings(){\n    // console.log(this.isOpenMenu);\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    // console.log(this.currentUser);\n    this.authService.getUsers().subscribe(data=>{\n      // console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i];\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      ref.afterClosed.subscribe(result => {\n        console.log('Dialog closed', result);      \n      });\n    });\n  }\n\n  \n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4313,10 +4262,9 @@
             },
             "implements": [
                 "OnInit",
-                "OnDestroy",
-                "OnChanges"
+                "OnDestroy"
             ],
-            "templateData": "<div class=\"nav\">\n\t<div class=\"content\">\n        <a href=\"/\" title=\"Products\"><img width=\"70\" class=\"logo-img\" alt=\"Products\" src=\"assets/logo.png\"/></a>\n\t\t<div class=\"links nav-items\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a><button id=\"mode\" (click)=\"toggleTheme()\" style=\"font-size: 14px; font-weight: 500;\">{{themeText}}</button></a>\n\t\t\t<!-- <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 25px; grid-gap: 0px !important;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a> -->\n\t\t\t<button *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i> </button> \n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t<div class=\"profile\" id=\"profile\" [class.show]=\"isOpenMenu\">\n\t\t\t<a *ngIf=\"currentUser\"><i style=\"font-size: 20px;\" class=\"fa fa-envelope icon\"></i> &nbsp;&nbsp; {{currentUser}}</a>\n\t\t\t<a title=\"Profile\" *ngIf=\"currentUser\" (click)=\"onProfileSetting()\"><i style=\"font-size: 20px;\" class=\"fa fa-user-circle icon\"></i>&nbsp;&nbsp; PROFILE</a>\t\t\t\n\t\t\t<a rel=\"noopener\" href=\"/\" title=\"Logout\" *ngIf=\"currentUser\" (click)=\"logout()\"><i style=\"font-size: 20px;\" class=\"fa fa-sign-out icon\"></i>&nbsp;&nbsp; LOGOUT</a>\n\t\t</div>\n\n\t\t<div class=\"menu\" (click)=\"onMenu()\">\n\t\t\t<input type=\"checkbox\" hidden id=\"hamburger\" />\n\t\t\t<label for=\"hamburger\" [hidden]=\"isOpen\">&#9776;</label>\n\t\t\t<label for=\"hamburger\" [hidden]=\"!isOpen\">&#10006;</label>\n\t\t</div>\n\t\t<div class=\"dropdown\" id=\"dropdown\" [class.show]=\"isOpen\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <!-- <a rel=\"noopener\" href=\"/\" title=\"Products\">PRODUCTS</a> -->\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <button id=\"mode\" (click)=\"toggleTheme()\"\n\t\t\t[ngClass]=\"{'light-mode': themeText === 'LIGHT', 'dark-mode' : themeText === 'DARK' }\">{{themeText}}</button>\n\t\t\t<button *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i></button>\n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t\n\t</div>\n</div>"
+            "templateData": "<div class=\"nav\">\n\t<div class=\"content\">\n        <a href=\"/\" title=\"Products\"><img width=\"70\" class=\"logo-img\" alt=\"Products\" src=\"assets/logo.png\"/></a>\n\t\t<div class=\"links nav-items\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a id=\"mode\" (click)=\"toggleTheme()\" style=\"font-size: 14px; font-weight: 500;\">{{themeText}}</a>\n\t\t\t<!-- <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 25px; grid-gap: 0px !important;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a> -->\n\t\t\t<a *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i> </a> \n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t<div class=\"profile\" id=\"profile\" [class.show]=\"isOpenMenu\">\n\t\t\t<a *ngIf=\"currentUser\"><i style=\"font-size: 20px;\" class=\"fa fa-envelope icon\"></i> &nbsp;&nbsp; {{currentUser}}</a>\n\t\t\t<a title=\"Profile\" *ngIf=\"currentUser\" (click)=\"onProfileSetting()\"><i style=\"font-size: 20px;\" class=\"fa fa-user-circle icon\"></i>&nbsp;&nbsp; PROFILE</a>\t\t\t\n\t\t\t<a rel=\"noopener\" href=\"/\" title=\"Logout\" *ngIf=\"currentUser\" (click)=\"logout()\"><i style=\"font-size: 20px;\" class=\"fa fa-sign-out icon\"></i>&nbsp;&nbsp; LOGOUT</a>\n\t\t</div>\n\n\t\t<div class=\"menu\" (click)=\"onMenu()\">\n\t\t\t<input type=\"checkbox\" hidden id=\"hamburger\" />\n\t\t\t<label for=\"hamburger\" [hidden]=\"isOpen\">&#9776;</label>\n\t\t\t<label for=\"hamburger\" [hidden]=\"!isOpen\">&#10006;</label>\n\t\t</div>\n\t\t<div class=\"dropdown\" id=\"dropdown\" [class.show]=\"isOpen\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <!-- <a rel=\"noopener\" href=\"/\" title=\"Products\">PRODUCTS</a> -->\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <button id=\"mode\" (click)=\"toggleTheme()\"\n\t\t\t[ngClass]=\"{'light-mode': themeText === 'LIGHT', 'dark-mode' : themeText === 'DARK' }\">{{themeText}}</button>\n\t\t\t<button *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i></button>\n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t\n\t</div>\n</div>"
         },
         {
             "name": "PageComponent",
@@ -4392,7 +4340,7 @@
         },
         {
             "name": "ProductsListComponent",
-            "id": "component-ProductsListComponent-f123eea2ce1829f376f78ecb0b107d69",
+            "id": "component-ProductsListComponent-906a8d7ae292d8b7a4451dbc2a31d2e3",
             "file": "src/app/products/products-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4532,7 +4480,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 88,
+                    "line": 90,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -4563,7 +4511,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4577,6 +4525,16 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "getProducts",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": ""
                 },
                 {
                     "name": "ngOnInit",
@@ -4594,7 +4552,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4604,7 +4562,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 95,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4621,7 +4579,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 77,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4642,7 +4600,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4654,11 +4612,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../app.state';\nimport { DialogService } from '../global/dialog/dialog.service';\nimport { CartComponent } from '../cart/cart.component';\nimport { NavbarComponent } from '../global/navbar/navbar.component';\nimport { AddProductComponent } from './add-product/add-product.component';\nimport { EditProductComponent } from './edit-product/edit-product.component';\nimport { Product } from './products.model';\nimport { addProduct, deleteProduct, loadProducts } from './state/products.actions';\nimport { getProducts } from './state/products.selector';\n\n@Component({\n  selector: 'app-products-list',\n  templateUrl: './products-list.component.html',\n  styleUrls: ['./products-list.component.scss']\n})\nexport class ProductsListComponent implements OnInit {\n  products: Observable<Product[]>;\n  NoProducts: boolean=false;\n  p: any;\n  public searchText: any;\n  cartProductList = [];\n  @Output() comp1Out = new EventEmitter();\n  public cartItems:any[]=new Array();\n  public cartProductCount: number = 0;\n  currentUser: string | null;\n  \n  constructor(private store : Store<AppState>, private router: Router, \n    public dialog: DialogService) { }\n\n  ngOnInit(): void {\n    this.products = this.store.select(getProducts);\n    this.store.dispatch(loadProducts());\n\n    if(localStorage.getItem(\"cartItems\")){\n      let localItems:any = localStorage.getItem(\"cartItems\");\n      this.cartItems = JSON.parse(localItems);\n      this.cartProductCount = this.cartItems.length;\n    }else{\n      console.log(\"Cart is empty\");\n    }\n    \n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  deleteProduct(id:string){\n    if(confirm(\"Are you sure you want to delete?\")){\n      this.store.dispatch(deleteProduct({id}));\n      this.router.navigate(['/products']);\n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    }\n    if(!this.products){\n      this.NoProducts = true;\n    }\n  }\n\n  viewProduct(){\n\n  }\n\n  openAddDialog(){\n    const ref = this.dialog.open(AddProductComponent, {\n      data: { message: 'testing' }\n    });\n\n    ref.afterClosed.subscribe(result => {\n      console.log('Dialog closed', result);  \n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    });\n  }\n\n  openUpdateDialog(product){\n    // console.log(product);\n    const ref = this.dialog.open(EditProductComponent, {\n      data: product\n    });\n\n    ref.afterClosed.subscribe(result => {\n      console.log('Dialog closed', result);      \n    });\n  }\n\n  public addToCart(product): void {\n      this.cartItems.push(product);\n      console.log(this.cartItems);\n      this.cartProductCount = this.cartItems.length;\n      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));\n  }\n\n  openCartDialog(){\n    //this.router.navigate(['/cart']);\n    const ref = this.dialog.open(CartComponent, {\n      data: this.cartItems\n     });\n \n     ref.afterClosed.subscribe(result => {\n       console.log('Dialog closed', result);\n       if(localStorage.getItem(\"token\")){\n        this.cartItems = [];\n        this.cartProductCount = this.cartItems.length;\n        localStorage.removeItem(\"token\");\n       }\n          \n     }); \n  }\n  \n}\n",
+            "sourceCode": "import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../app.state';\nimport { DialogService } from '../global/dialog/dialog.service';\nimport { CartComponent } from '../cart/cart.component';\nimport { NavbarComponent } from '../global/navbar/navbar.component';\nimport { AddProductComponent } from './add-product/add-product.component';\nimport { EditProductComponent } from './edit-product/edit-product.component';\nimport { Product } from './products.model';\nimport { addProduct, deleteProduct, loadProducts } from './state/products.actions';\nimport { getProducts } from './state/products.selector';\n\n@Component({\n  selector: 'app-products-list',\n  templateUrl: './products-list.component.html',\n  styleUrls: ['./products-list.component.scss']\n})\nexport class ProductsListComponent implements OnInit {\n  products: Observable<Product[]>;\n  NoProducts: boolean=false;\n  p: any;\n  public searchText: any;\n  cartProductList = [];\n  @Output() comp1Out = new EventEmitter();\n  public cartItems:any[]=new Array();\n  public cartProductCount: number = 0;\n  currentUser: string | null;\n  \n  constructor(private store : Store<AppState>, private router: Router, \n    public dialog: DialogService) { }\n\n  ngOnInit(): void {\n    this.getProducts();\n    if(localStorage.getItem(\"cartItems\")){\n      let localItems:any = localStorage.getItem(\"cartItems\");\n      this.cartItems = JSON.parse(localItems);\n      this.cartProductCount = this.cartItems.length;\n    }else{\n      // console.log(\"Cart is empty\");\n    }    \n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  getProducts(){\n    this.products = this.store.select(getProducts);\n    this.store.dispatch(loadProducts());\n  }\n\n  deleteProduct(id:string){\n    if(confirm(\"Are you sure you want to delete?\")){\n      this.store.dispatch(deleteProduct({id}));\n      //this.router.navigate(['/products']);\n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    }\n    if(!this.products){\n      this.NoProducts = true;\n    }\n  }\n\n  viewProduct(){\n\n  }\n\n  openAddDialog(){\n    const ref = this.dialog.open(AddProductComponent, {\n      data: { message: 'testing' }\n    });\n\n    ref.afterClosed.subscribe(result => {\n      //console.log('Dialog closed', result);  \n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    });\n  }\n\n  openUpdateDialog(product){\n    // console.log(product);\n    const ref = this.dialog.open(EditProductComponent, {\n      data: product\n    });\n\n    ref.afterClosed.subscribe(result => {\n      console.log('Dialog closed', result);      \n    });\n  }\n\n  public addToCart(product): void {\n      this.cartItems.push(product);\n      // console.log(this.cartItems);\n      this.cartProductCount = this.cartItems.length;\n      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));\n  }\n\n  openCartDialog(){\n    //this.router.navigate(['/cart']);\n    const ref = this.dialog.open(CartComponent, {\n      data: this.cartItems\n     });\n \n     ref.afterClosed.subscribe(result => {\n       //console.log('Dialog closed', result);\n       if(localStorage.getItem(\"token\")){\n        this.cartItems = [];\n        this.cartProductCount = this.cartItems.length;\n        localStorage.removeItem(\"token\");\n       }\n          \n     }); \n  }\n  \n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "h1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n.products-tasks{\r\n    margin-bottom: -20px;\r\n}\r\n#products{\r\n    display: grid;\r\n    .search-product{\r\n        margin-left: auto !important;\r\n        margin-top: 10px !important;\r\n        .form-control{\r\n            border: 1px solid #000;\r\n            \r\n            width: 40%;\r\n            font-size: 16px;\r\n            margin-bottom:0px !important;\r\n            margin-top:0px !important;\r\n            //float: right;\r\n        }\r\n    }\r\n}\r\n.spacer{\r\n    width: 60%;\r\n}\r\n\r\n.container {\r\n    display: grid;\r\n    grid-template-columns: repeat(3, 1fr);\r\n    grid-auto-rows: 300px;\r\n    grid-gap: 30px;\r\n    grid-row-gap: 80px;\r\n\r\n    .card{\r\n        transition: all 0.5s ease-out;\r\n        border: 1px solid #283593;\r\n        border-top: 2px solid #283593;\r\n        border-right: 2px solid #283593;\r\n        border-radius: 10px;\r\n        padding: 10px;\r\n        row-gap: 20px;\r\n        margin-bottom: 40px;\r\n\r\n        .card-image{\r\n            height: 200px;\r\n            width: 100%;\r\n        }\r\n\r\n        button{\r\n            cursor: pointer;\r\n            background-color: #283593;\r\n            color :#fff;\r\n            border-radius: 20px;\r\n            font-size: 16px;\r\n            padding:5px 7px 5px 7px;\r\n            border: 0px;\r\n            \r\n        } \r\n    }\r\n    .card:hover{\r\n        margin-top: -20px;\r\n    }\r\n    \r\n}\r\n.pagination{\r\n    float: right;\r\n}\r\n\r\n.footer-top{\r\n    background-color: #f3f3f3;\r\n    width:100%;\r\n    display: grid;\r\n    grid-template-columns: repeat(3, 1fr);\r\n    margin-bottom: -70px;\r\n\r\n    .footer-box{\r\n        padding-left : 20px;\r\n\r\n        .icon{\r\n            padding:5px; \r\n            border:1px solid #000; \r\n            border-radius: 10px; \r\n            margin-right: 5px;\r\n        }\r\n    }\r\n\r\n}\r\n\r\n@media only screen and (max-width: 800px) and (min-width: 550px){\r\n    .container{\r\n        grid-template-columns: repeat(2, 1fr);\r\n    }\r\n    .products-tasks{\r\n        margin-bottom: 0px;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 550px){\r\n    .container{\r\n        grid-template-columns: 2fr;\r\n        margin-top:60px !important;\r\n    }\r\n    .form-control{\r\n        width: 100%;\r\n        margin-top: 0px !important;\r\n        //margin-bottom: 0px !important;\r\n        margin-bottom:40px !important;\r\n    }\r\n\r\n    .products-tasks{\r\n        margin-bottom: 0px;\r\n    }\r\n}\r\n",
+                    "data": "h1, .secondary-text-color{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n}\r\n.products-tasks{\r\n    margin-bottom: -20px;\r\n}\r\n.list-col1{\r\n    margin-top: 30px;\r\n}\r\n#products{\r\n    display: grid;\r\n    .search-product{\r\n        margin-left: auto !important;\r\n        margin-top: 20px !important;\r\n        .form-control{\r\n            border: 1px solid #000;\r\n            \r\n            width: 40%;\r\n            font-size: 16px;\r\n            margin-bottom:0px !important;\r\n            margin-top:0px !important;\r\n            //float: right;\r\n        }\r\n    }\r\n}\r\n.spacer{\r\n    width: 60%;\r\n}\r\n\r\n.container {\r\n    display: grid;\r\n    grid-template-columns: repeat(3, 1fr);\r\n    grid-auto-rows: 300px;\r\n    grid-gap: 30px;\r\n    grid-row-gap: 80px;\r\n\r\n    .card{\r\n        transition: all 0.5s ease-out;\r\n        border: 1px solid #283593;\r\n        border-top: 2px solid #283593;\r\n        border-right: 2px solid #283593;\r\n        border-radius: 10px;\r\n        padding: 10px;\r\n        row-gap: 20px;\r\n        margin-bottom: 40px;\r\n\r\n        .card-actions{\r\n            margin: 0px 0px 5px 0px;\r\n        }\r\n        .card-image{\r\n            height: 200px;\r\n            width: 100%;\r\n        }\r\n\r\n        button{\r\n            cursor: pointer;\r\n            background-color: #283593;\r\n            color :#fff;\r\n            border-radius: 20px;\r\n            font-size: 16px;\r\n            padding:5px 7px 5px 7px;\r\n            border: 0px;\r\n            \r\n        } \r\n    }\r\n    .card:hover{\r\n        margin-top: -20px;\r\n    }\r\n    \r\n}\r\n.pagination{\r\n    float: right;\r\n}\r\n\r\n.footer-top{\r\n    background-color: #f3f3f3;\r\n    width:100%;\r\n    display: grid;\r\n    // grid-template-columns: repeat(3, 1fr);\r\n    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\r\n    margin-bottom: -70px;\r\n\r\n    .footer-box{\r\n        padding-left : 20px;\r\n\r\n        .icon{\r\n            padding:5px; \r\n            border:1px solid #000; \r\n            border-radius: 10px; \r\n            margin-right: 5px;\r\n        }\r\n    }\r\n\r\n}\r\n\r\n@media only screen and (max-width: 850px) and (min-width: 550px){\r\n    .container{\r\n        grid-template-columns: repeat(2, 1fr);\r\n        grid-gap: 30px;\r\n        grid-row-gap: 80px;\r\n        .card{\r\n            row-gap: 40px;\r\n        }\r\n    }\r\n    .products-tasks{\r\n        margin-bottom: 0px;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 550px){\r\n    .container{\r\n        grid-template-columns: 2fr;\r\n        margin-top:60px !important;\r\n\r\n        .card{\r\n            row-gap: 20px;\r\n        }\r\n    }\r\n    .form-control{\r\n        width: 100%;\r\n        margin-top: 0px !important;\r\n        //margin-bottom: 0px !important;\r\n        margin-bottom:40px !important;\r\n    }\r\n\r\n    .products-tasks{\r\n        margin-bottom: 0px;\r\n    }\r\n}\r\n",
                     "styleUrl": "./products-list.component.scss"
                 }
             ],
@@ -4722,11 +4680,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<br><br><br>\n<div class=\"outer\" style=\"margin: 0 10px 0 10px\"> \n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>Products List</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice</p>\n    </div>\n    <div class=\"products-tasks\" style=\"display: flex; flex-wrap: wrap;\">\n        <div class=\"search-product\" style=\"margin-top: 12px;\">\n            <input class=\"form-control\" style=\"margin: 0px !important; padding-bottom: 4px; border-radius: 5px; border: 1px solid #000;\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n        </div>\n        <div style=\"margin-bottom: 0px; margin-left:auto\">\n            <button *ngIf=\"currentUser\" (click)=\"openAddDialog()\" style=\"margin-top: -20px;\" class=\"add-product-button\">Add Product</button> &nbsp;&nbsp;&nbsp;\n            <button (click)=\"openCartDialog()\" title=\"Cart\">\n\t\t\t\t<span class=\"cart-count\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 19.25 19.25\" style=\"enable-background:new 0 0 19.25 19.25;\" xml:space=\"preserve\" width=\"15px\" height=\"20px\">\n\t\t\t\t\t<g>\n\t\t\t\t\t\t<g id=\"Layer_1_107_\">\n\t\t\t\t\t\t<g>\n\t\t\t\t\t\t\t<path d=\"M19.006,2.97c-0.191-0.219-0.466-0.345-0.756-0.345H4.431L4.236,1.461     C4.156,0.979,3.739,0.625,3.25,0.625H1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1.403l1.86,11.164c0.008,0.045,0.031,0.082,0.045,0.124     c0.016,0.053,0.029,0.103,0.054,0.151c0.032,0.066,0.075,0.122,0.12,0.179c0.031,0.039,0.059,0.078,0.095,0.112     c0.058,0.054,0.125,0.092,0.193,0.13c0.038,0.021,0.071,0.049,0.112,0.065c0.116,0.047,0.238,0.075,0.367,0.075     c0.001,0,11.001,0,11.001,0c0.553,0,1-0.447,1-1s-0.447-1-1-1H6.097l-0.166-1H17.25c0.498,0,0.92-0.366,0.99-0.858l1-7     C19.281,3.479,19.195,3.188,19.006,2.97z M17.097,4.625l-0.285,2H13.25v-2H17.097z M12.25,4.625v2h-3v-2H12.25z M12.25,7.625v2     h-3v-2H12.25z M8.25,4.625v2h-3c-0.053,0-0.101,0.015-0.148,0.03l-0.338-2.03H8.25z M5.264,7.625H8.25v2H5.597L5.264,7.625z      M13.25,9.625v-2h3.418l-0.285,2H13.25z\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"6.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"15.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t</g>\n\t\t\t\t\t</svg>\n\t\t\t\t<em>{{cartProductCount}}</em> \n\t\t\t\t</span>\n\t\t\t</button>\n        </div>\n        \n       \n    </div>\n\n    <div class=\"list-col1\">\n        <div id=\"products\" class=\"mt-2 pt-3\">\n            <div class=\"container\">\n                <div class=\"card\" *ngFor=\"let p of products | async | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n                    <img [src]=\"p.image\" alt=\"image\" class=\"card-image\">\n                    <h3>{{p.name}} <span style=\"float:right\">Price: {{p.price}} $</span>  </h3>\n                    <p>Description: {{p.description}}</p>\n                    <span *ngIf=\"currentUser\"><button (click)=\"openUpdateDialog(p)\">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]=\"['edit', p.id]\"-->\n                    <span *ngIf=\"currentUser\"><button  (click)=\"deleteProduct(p.id)\">Delete</button> &nbsp;&nbsp;</span>\n                    <button (click)=\"addToCart(p)\" >Add To Cart</button>\n                </div>\n            </div>\n            <div class=\"card\" *ngIf=\"NoProducts\">\n                <h1>No Products added</h1>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"list-col2\">\n    <div style=\"width:30%\"></div>\n    <router-outlet></router-outlet>\n    <div style=\"width:30%\"></div>\n</div>\n<br>\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n<br><br><br>\n\n<div class=\"footer-top\">\n    <div class=\"footer-box\">\n        <h3>Why Choose Us</h3>\n        <p><i class=\"fa fa-credit-card icon\"></i>Secure Payments</p>\n        <p><i class=\"fa fa-undo icon\"></i>Easy Returns</p>\n        <p><i class=\"fa fa-times icon\"></i>Free Cancellation</p>\n        <p><i class=\"fa fa-truck icon\"></i>Free Shipping</p>\n        <!-- <p><i class=\"fa fa-question-circle icon\"></i>24/7 Support</p> -->\n    </div>\n    <div class=\"footer-box\">\n        <h3>Social</h3>\n        <p><i class=\"fa fa-facebook-square icon\"></i>Facebook</p>\n        <p><i class=\"fa fa-twitter icon\"></i>Twitter</p>\n        <p><i class=\"fa fa-instagram icon\"></i>Instagram</p>\n        <p><i class=\"fa fa-linkedin icon\"></i>Linkedin</p>\n    </div>\n    <div class=\"footer-box\">\n        <h3>Contact</h3>\n        <p><i class=\"fa fa-phone icon\"></i>Customer Care: 1234567890</p>\n        <p><i class=\"fa fa-whatsapp icon\"></i>Whatsapp: 1234567890</p>\n        <p><i class=\"fa fa-envelope icon\"></i>Email: order@products.com</p>\n        <p><i class=\"fa fa-map-marker icon\"></i>Address: Pune, Maharashtra, India</p>\n    </div>\n</div>\n\n<app-footer></app-footer>\n\n"
+            "templateData": "<div class=\"outer\" style=\"margin: 0 10px 0 10px\"> \n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>Products List</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice</p>\n    </div>\n    <div class=\"products-tasks\" style=\"display: flex; flex-wrap: wrap;\">\n        <div class=\"search-product\" style=\"margin-top: 12px;\">\n            <input class=\"form-control\" style=\"margin: 0px !important; padding-bottom: 4px; border-radius: 5px; border: 1px solid #000;\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n        </div>\n        <div style=\"margin-bottom: 0px; margin-left:auto\">\n            <button *ngIf=\"currentUser\" (click)=\"openAddDialog()\" style=\"margin-top: -20px;\" class=\"add-product-button\">Add Product</button> &nbsp;&nbsp;&nbsp;\n            <button (click)=\"openCartDialog()\" title=\"Cart\">\n\t\t\t\t<span class=\"cart-count\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 19.25 19.25\" style=\"enable-background:new 0 0 19.25 19.25;\" xml:space=\"preserve\" width=\"15px\" height=\"20px\">\n\t\t\t\t\t<g>\n\t\t\t\t\t\t<g id=\"Layer_1_107_\">\n\t\t\t\t\t\t<g>\n\t\t\t\t\t\t\t<path d=\"M19.006,2.97c-0.191-0.219-0.466-0.345-0.756-0.345H4.431L4.236,1.461     C4.156,0.979,3.739,0.625,3.25,0.625H1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1.403l1.86,11.164c0.008,0.045,0.031,0.082,0.045,0.124     c0.016,0.053,0.029,0.103,0.054,0.151c0.032,0.066,0.075,0.122,0.12,0.179c0.031,0.039,0.059,0.078,0.095,0.112     c0.058,0.054,0.125,0.092,0.193,0.13c0.038,0.021,0.071,0.049,0.112,0.065c0.116,0.047,0.238,0.075,0.367,0.075     c0.001,0,11.001,0,11.001,0c0.553,0,1-0.447,1-1s-0.447-1-1-1H6.097l-0.166-1H17.25c0.498,0,0.92-0.366,0.99-0.858l1-7     C19.281,3.479,19.195,3.188,19.006,2.97z M17.097,4.625l-0.285,2H13.25v-2H17.097z M12.25,4.625v2h-3v-2H12.25z M12.25,7.625v2     h-3v-2H12.25z M8.25,4.625v2h-3c-0.053,0-0.101,0.015-0.148,0.03l-0.338-2.03H8.25z M5.264,7.625H8.25v2H5.597L5.264,7.625z      M13.25,9.625v-2h3.418l-0.285,2H13.25z\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"6.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"15.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t</g>\n\t\t\t\t\t</svg>\n\t\t\t\t<em>{{cartProductCount}}</em> \n\t\t\t\t</span>\n\t\t\t</button>\n        </div>\n        \n       \n    </div>\n\n    <div class=\"list-col1\">\n        <div id=\"products\" class=\"mt-2 pt-3\">\n            <div class=\"container\">\n                <div class=\"card\" *ngFor=\"let p of products | async | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n                    <img [src]=\"p.image\" alt=\"image\" class=\"card-image\">\n                    <h3>{{p.name}} <span style=\"float:right\">Price: {{p.price}} $</span>  </h3>\n                    <p>Description: {{p.description}}</p>\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"openUpdateDialog(p)\">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]=\"['edit', p.id]\"-->\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"deleteProduct(p.id)\">Delete</button> &nbsp;&nbsp;</span>\n                    <button (click)=\"addToCart(p)\" class=\"card-actions\">Add To Cart</button>\n                </div>\n            </div>\n            <div class=\"card\" *ngIf=\"NoProducts\">\n                <h1>No Products added</h1>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"list-col2\">\n    <div style=\"width:30%\"></div>\n    <router-outlet></router-outlet>\n    <div style=\"width:30%\"></div>\n</div>\n<br>\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n<br><br><br>\n\n<div class=\"footer-top\">\n    <div class=\"footer-box\">\n        <h3>Why Choose Us</h3>\n        <p><i class=\"fa fa-credit-card icon\"></i>Secure Payments</p>\n        <p><i class=\"fa fa-undo icon\"></i>Easy Returns</p>\n        <p><i class=\"fa fa-times icon\"></i>Free Cancellation</p>\n        <p><i class=\"fa fa-truck icon\"></i>Free Shipping</p>\n        <!-- <p><i class=\"fa fa-question-circle icon\"></i>24/7 Support</p> -->\n    </div>\n    <div class=\"footer-box\">\n        <h3>Social</h3>\n        <p><i class=\"fa fa-facebook-square icon\"></i>Facebook</p>\n        <p><i class=\"fa fa-twitter icon\"></i>Twitter</p>\n        <p><i class=\"fa fa-instagram icon\"></i>Instagram</p>\n        <p><i class=\"fa fa-linkedin icon\"></i>Linkedin</p>\n    </div>\n    <div class=\"footer-box\">\n        <h3>Contact</h3>\n        <p><i class=\"fa fa-phone icon\"></i>Customer Care: 1234567890</p>\n        <p><i class=\"fa fa-whatsapp icon\"></i>Whatsapp: 1234567890</p>\n        <p><i class=\"fa fa-envelope icon\"></i>Email: order@products.com</p>\n        <p><i class=\"fa fa-map-marker icon\"></i>Address: Pune, Maharashtra, India</p>\n    </div>\n</div>\n\n<app-footer></app-footer>\n\n"
         },
         {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-5fadd47f58df2e57f2353bafc3f043d9",
+            "id": "component-SignupComponent-511477b62521923ec9eb607b1b6d3008",
             "file": "src/app/login/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4855,7 +4813,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 84,
+                    "line": 88,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4867,11 +4825,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { signupStart, updateUser } from '../auth.actions';\nimport { AuthService } from '../auth.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  submitted = false;\n  users: any=[];\n  title: string;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,\n     public config: DialogConfig, private authService: AuthService) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    // console.log(\"In signup\");\n    //console.log(this.config);\n    if(this.config.data){\n      this.updateForm();\n      this.newUser = false;\n      this.title = \"Update Profile\";\n    }else{\n      this.newUser = true;\n      this.title = \"Signup\";\n    }\n\n    this.authService.getUsers().subscribe(users => {\n      this.users = users;\n    });\n  }\n\n  updateForm(){\n    this.form = new FormGroup({\n      id: new FormControl(this.config.data.id, Validators.required),\n      firstname: new FormControl(this.config.data.firstname, Validators.required),\n      lastname: new FormControl(this.config.data.lastname, Validators.required),\n      email: new FormControl(this.config.data.email, Validators.required),\n      contact: new FormControl(this.config.data.contact, Validators.required),\n      password: new FormControl(this.config.data.password, Validators.required),\n      retype_password: new FormControl(this.config.data.password, Validators.required),\n    });\n  }\n\n  onSubmit(){\n    this.submitted = true;\n    console.log(this.form.value);\n    // if(!this.form.valid){\n    //   return;\n    // }\n    const firstname= this.form.value.firstname;\n    const lastname= this.form.value.lastname;\n    const contact= this.form.value.contact;\n    const email= this.form.value.email;\n    const password= this.form.value.password;\n    const retype_password= this.form.value.retype_password;\n    \n    if(this.form.value.id){\n      console.log(\"Update User\");\n      this.store.dispatch(updateUser(this.form.value));\n    }else{\n      this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n    }\n    \n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n    for(let i=0; i<this.users.length;i++){\n      if(this.users[i][\"email\"] == this.form.controls.email.value){\n        this.form.controls.email.setErrors({'exist':true})\n      }\n    }\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { signupStart, updateUser } from '../auth.actions';\nimport { AuthService } from '../auth.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  submitted = false;\n  users: any=[];\n  title: string;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,\n     public config: DialogConfig, private authService: AuthService) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    // console.log(\"In signup\");\n    //console.log(this.config);\n    if(this.config.data){\n      this.updateForm();\n      this.newUser = false;\n      this.title = \"Update Profile\";\n    }else{\n      this.newUser = true;\n      this.title = \"Signup\";\n    }\n\n    this.authService.getUsers().subscribe(users => {\n      this.users = users;\n    });\n  }\n\n  updateForm(){\n    this.form = new FormGroup({\n      id: new FormControl(this.config.data.id, Validators.required),\n      firstname: new FormControl(this.config.data.firstname, Validators.required),\n      lastname: new FormControl(this.config.data.lastname, Validators.required),\n      email: new FormControl(this.config.data.email, Validators.required),\n      contact: new FormControl(this.config.data.contact, Validators.required),\n      password: new FormControl(this.config.data.password, Validators.required),\n      retype_password: new FormControl(this.config.data.password, Validators.required),\n    });\n  }\n\n  onSubmit(){\n    if(this.form.invalid){\n      this.form.controls.firstname.markAsTouched();\n      this.form.controls.lastname.markAsTouched();\n      this.form.controls.contact.markAsTouched();\n      this.form.controls.email.markAsTouched();\n      this.form.controls.password.markAsTouched();\n      this.form.controls.retype_password.markAsTouched();\n    }else{\n      this.submitted = true;\n      const firstname= this.form.value.firstname;\n      const lastname= this.form.value.lastname;\n      const contact= this.form.value.contact;\n      const email= this.form.value.email;\n      const password= this.form.value.password;\n      const retype_password= this.form.value.retype_password;\n      \n      if(this.form.value.id){\n        console.log(\"Update User\");\n        this.store.dispatch(updateUser(this.form.value));\n      }else{\n        this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n      }\n    }\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n    for(let i=0; i<this.users.length;i++){\n      if(this.users[i][\"email\"] == this.form.controls.email.value){\n        this.form.controls.email.setErrors({'exist':true})\n      }\n    }\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "\r\n.icon {\r\n    padding: 5px;\r\n    background: #283593;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 74%;\r\n    }\r\n}  \r\n\r\n.container{\r\n    margin-top: 50px !important;\r\n}\r\n\r\n@media only screen and (max-width: 780px){\r\n    .container{\r\n        margin-top:100px;\r\n    }\r\n}",
+                    "data": "\r\n.icon {\r\n    padding: 5px;\r\n    background: #283593;\r\n    color: white;\r\n    min-width: 50px;\r\n    text-align: center;\r\n  }\r\n.form-control{\r\n    display: -ms-flexbox; /* IE10 */\r\n    display: flex;\r\n    width: 100%;\r\n    margin-bottom: 15px;\r\n    input{\r\n        min-width: 80%;\r\n    }\r\n}\r\n// .submit-button{\r\n//     margin-top: 20px;\r\n// }  \r\n\r\n.container{\r\n    margin-top: -50px !important;\r\n}\r\n\r\n@media only screen and (max-width: 780px){\r\n    .container{\r\n        margin-top:100px;\r\n    }\r\n}",
                     "styleUrl": "./signup.component.scss"
                 }
             ],
@@ -4950,11 +4908,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n        <app-header \n            [icon]=\"'exit_to_app'\" \n            [title]=\"title\" \n            [hasBgImage]=\"true\" \n            [class]=\"'card-spacing'\">\n        </app-header>            \n           <div class=\"card-inner\">\n                <a *ngIf=\"newUser\" routerLink=\"/login\" color=\"accent\" class=\"w-100 link\">Already have an account? login now!</a>\n                <!-- <h2 *ngIf=\"!newUser\" style=\"font-family: Roboto;\">Update Profile</h2> -->\n                <div class=\"form-control\">\n                    <!-- <label for=\"firstname\">First Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"firstname\" placeholder=\"First Name\" name=\"firstname\" formControlName=\"firstname\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.firstname.errors?.required && form.controls.firstname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"lastname\">Last Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input type=\"text\" id=\"lastname\" placeholder=\"Last Name\" name=\"lastname\" formControlName=\"lastname\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.lastname.errors?.required && form.controls.lastname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"contact\">Contact</label> -->\n                    <i class=\"fa fa-phone icon\"></i>\n                    <input type=\"text\" id=\"contact\" placeholder=\"Contact\" name=\"contact\" formControlName=\"contact\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.required && form.controls.contact.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.pattern\">Enter only numbers</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-envelope icon\"></i>\n                    <input (input)=\"validateForm()\" type=\"text\" id=\"email\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid email</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.exist\">Already Exists</span>\n\n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input (input)=\"validateForm()\" type=\"password\" placeholder=\"Password\" id=\"password\" name=\"password\" formControlName=\"password\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                \n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input (input)=\"validateForm()\" type=\"password\" placeholder=\"Retype Password\" id=\"retype_password\" name=\"retype_password\" formControlName=\"retype_password\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.errors?.required && form.controls.retype_password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('mismatchedPasswords') && newUser\">Password  not matching</span>\n\n                <div class=\"submit-button-container\">\n                    <button class=\"w-100 submit-button\" type=\"submit\">Submit</button> <!--[disabled]=\"!form.valid\"-->\n                </div> \n\n                <a *ngIf=\"newUser\" color=\"accent\" routerLink=\"/\" class=\"w-100 link\">Back to Homepage</a>\n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n        <app-header  style=\"width:600px !important;\"\n            [icon]=\"'exit_to_app'\" \n            [title]=\"title\" \n            [hasBgImage]=\"true\" \n            [class]=\"'card-spacing'\">\n        </app-header>            \n           <div class=\"card-inner\">\n                <a *ngIf=\"newUser\" routerLink=\"/login\" color=\"accent\" class=\"w-100 link\">Already have an account? login now!</a>\n                <!-- <h2 *ngIf=\"!newUser\" style=\"font-family: Roboto;\">Update Profile</h2> -->\n                <div class=\"form-control\">\n                    <!-- <label for=\"firstname\">First Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"firstname\" type=\"text\" id=\"firstname\" placeholder=\"First Name\" name=\"firstname\" formControlName=\"firstname\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.firstname.errors?.required && form.controls.firstname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"lastname\">Last Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Lastname\" type=\"text\" id=\"lastname\" placeholder=\"Last Name\" name=\"lastname\" formControlName=\"lastname\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.lastname.errors?.required && form.controls.lastname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"contact\">Contact</label> -->\n                    <i class=\"fa fa-phone icon\"></i>\n                    <input aria-label=\"Contact\" type=\"text\" id=\"contact\" placeholder=\"Contact\" name=\"contact\" formControlName=\"contact\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.required && form.controls.contact.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.pattern\">Enter only numbers</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-envelope icon\"></i>\n                    <input aria-label=\"Email\" (input)=\"validateForm()\" type=\"text\" id=\"email\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid email</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.exist\">Already Exists</span>\n\n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" (input)=\"validateForm()\" type=\"password\" placeholder=\"Password\" id=\"password\" name=\"password\" formControlName=\"password\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                \n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Retype Password\" (input)=\"validateForm()\" type=\"password\" placeholder=\"Retype Password\" id=\"retype_password\" name=\"retype_password\" formControlName=\"retype_password\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.errors?.required && form.controls.retype_password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('mismatchedPasswords') && newUser\">Password  not matching</span>\n                <div style=\"height: 20px;\"></div>\n                <div class=\"submit-button-container\" style=\"margin:0px\">\n                    <button aria-label=\"Submit\" class=\"w-100 submit-button\" type=\"submit\">Submit</button> <!--[disabled]=\"!form.valid\"-->\n                </div> \n\n                <a *ngIf=\"newUser\" color=\"accent\" routerLink=\"/\" class=\"w-100 link\">Back to Homepage</a>\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "SpinnerComponent",
-            "id": "component-SpinnerComponent-63333552853a73b8c1791ca62d19fffd",
+            "id": "component-SpinnerComponent-e9925e3215bbcc24ffb1f853424236f6",
             "file": "src/app/story-components/spinner/spinner.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4989,18 +4947,7 @@
             ],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 15,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -5008,7 +4955,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent implements OnInit {\n  @Input() size: string = \"small\";\n  @Input() borderColor: string;\n  //@Input() border-top: string;\n  \n  constructor() { }\n\n  ngOnInit(): void {\n    console.log(this.borderColor);\n  }\n\n  // public get classes(): string[] {\n  //   const mode = this.border ? 'app-spinner--red' : 'app-spinner--pink';\n\n  //   return ['app-spinner', `app-spinner--${this.border}`, mode];\n  // }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent {\n  @Input() size: string = \"small\";\n  @Input() borderColor: string;\n  //@Input() border-top: string;\n  \n  constructor() { }\n\n  // ngOnInit(): void {\n  //   //console.log(this.borderColor);\n  // }\n\n  // public get classes(): string[] {\n  //   const mode = this.border ? 'app-spinner--red' : 'app-spinner--pink';\n\n  //   return ['app-spinner', `app-spinner--${this.border}`, mode];\n  // }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -5025,22 +4972,19 @@
                 "args": [],
                 "line": 10
             },
-            "implements": [
-                "OnInit"
-            ],
             "templateData": "<div\n    class=\"spin\"\n    [ngStyle]=\"{ 'border': borderColor}\"\n>\n    \n</div>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-30dc2bc4627dc590082930f9109a57d2",
+            "id": "module-AppModule-1c169028828f07b7959a39af0f90082d",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\nimport { HomepageService } from './homepage/homepage.service';\nimport { NavbarComponent } from './global/navbar/navbar.component';\nimport { DialogService } from './global/dialog/dialog.service';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent,\n    NavbarComponent,\n    \n  ],\n  imports: [    \n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    \n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  \n  providers: [HomepageService, DialogService, AuthService],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\nimport { HomepageService } from './homepage/homepage.service';\nimport { NavbarComponent } from './global/navbar/navbar.component';\nimport { DialogService } from './global/dialog/dialog.service';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent,\n    NavbarComponent\n  ],\n  imports: [    \n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    \n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  \n  providers: [ DialogService, AuthService, HomepageService], \n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -5104,13 +5048,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-ae7fe494ceb5aedb2a1012b57862e47b",
+            "id": "module-AppRoutingModule-120d6aafe323d7f1d27b6d221d7e2e38",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nexport const routes: Routes = [\n\n  // { path: '', \n  //   loadChildren: () => import('./homepage/homepage.module').then((m)=>m.HomepageModule)\n  // },\n  { path: '', loadChildren: () => \"import('./products/products.module').then((m)=>m.ProductsModule)\"},\n  { path: 'login', loadChildren: () => \"import('./login/login.module').then(m => m.LoginModule)\" },\n  // {path: '', component: ProductsListComponent,\n  //   children: [\n  //     {path: '', redirectTo: 'products-list', pathMatch: 'full'},\n  //     { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },\n  //   ]\n  // },\n  { path: 'cart', loadChildren: () => \"import('./cart/cart.module').then((m)=>m.CartModule)\"},\n  \n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n\n }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nexport const routes: Routes = [\n\n  { path: '', loadChildren: () => \"import('./products/products.module').then((m)=>m.ProductsModule)\"},\n  { path: 'login', loadChildren: () => \"import('./login/login.module').then(m => m.LoginModule)\" },\n  { path: 'cart', loadChildren: () => \"import('./cart/cart.module').then((m)=>m.CartModule)\"},\n  \n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n\n }\n\n // {path: '', component: ProductsListComponent,\n  //   children: [\n  //     {path: '', redirectTo: 'products-list', pathMatch: 'full'},\n  //     { path: 'products-list', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },\n  //   ]\n  // },\n",
             "children": [
                 {
                     "type": "providers",
@@ -5184,13 +5128,13 @@
         },
         {
             "name": "DialogModule",
-            "id": "module-DialogModule-883b680ab26fc482ea28da33c9e44a77",
+            "id": "module-DialogModule-71e7f46dd3e8941588b1a8467b95661b",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/global/dialog/dialog.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { InsertionDirective } from './insertion.directive';\r\nimport { DialogComponent } from './dialog/dialog.component';\r\nimport { DialogConfig } from './dialog-config';\r\nimport { DialogService } from './dialog.service';\r\n\r\n@NgModule({\r\n  imports: [CommonModule],\r\n  declarations: [DialogComponent, InsertionDirective],\r\n  entryComponents: [DialogComponent],\r\n  providers:[{ provide: DialogConfig, useValue: DialogConfig }]\r\n})\r\nexport class DialogModule { }\r\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { InsertionDirective } from './insertion.directive';\r\nimport { DialogComponent } from './dialog/dialog.component';\r\nimport { DialogConfig } from './dialog-config';\r\nimport { DialogService } from './dialog.service';\r\nimport { DialogRef } from './dialog-ref';\r\n\r\n@NgModule({\r\n  imports: [CommonModule],\r\n  declarations: [DialogComponent, InsertionDirective],\r\n  entryComponents: [DialogComponent],\r\n  providers:[{ provide: DialogConfig, useValue: DialogConfig }, DialogRef]\r\n})\r\nexport class DialogModule { }\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -5633,16 +5577,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Checkbox",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Checkbox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "DELETE_PRODUCT_ACTION",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5710,7 +5644,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  production: false,\n  FIRBASE_API_KEY: 'AIzaSyA9HEOZrRHZP026VQObeDz2PVD_GLpMV50',\n}"
+                "defaultValue": "{\n  production: false,\n  productsUrl: 'http://localhost:3000/products',\n  usersUrl: 'http://localhost:3000/users'\n}"
             },
             {
                 "name": "footer",
@@ -5893,30 +5827,10 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "LoggedOut",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -6017,6 +5931,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/homepage/homepage.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "products",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/products/products-list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -6186,16 +6110,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Checkbox.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<CheckboxComponent>",
-                "defaultValue": "(args: CheckboxComponent) => ({\r\n  component: CheckboxComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6211,16 +6125,6 @@
                 "deprecationMessage": "",
                 "type": "Story<ImageComponent>",
                 "defaultValue": "(args: ImageComponent) => ({\r\n    component: ImageComponent,\r\n    props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -6251,6 +6155,16 @@
                 "deprecationMessage": "",
                 "type": "Story<LoginComponent>",
                 "defaultValue": "(args: LoginComponent) => ({\r\n  component: LoginComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/products/products-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ProductsListComponent>",
+                "defaultValue": "(args: ProductsListComponent) => ({\r\n  component: ProductsListComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -6894,28 +6808,6 @@
                     "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
                 }
             ],
-            "src/stories/Checkbox.stories.ts": [
-                {
-                    "name": "Checkbox",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Checkbox.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Checkbox.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<CheckboxComponent>",
-                    "defaultValue": "(args: CheckboxComponent) => ({\r\n  component: CheckboxComponent,\r\n  props: args,\r\n})"
-                }
-            ],
             "src/app/products/edit-product/edit-product.stories.ts": [
                 {
                     "name": "edit",
@@ -6959,7 +6851,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  production: false,\n  FIRBASE_API_KEY: 'AIzaSyA9HEOZrRHZP026VQObeDz2PVD_GLpMV50',\n}"
+                    "defaultValue": "{\n  production: false,\n  productsUrl: 'http://localhost:3000/products',\n  usersUrl: 'http://localhost:3000/users'\n}"
                 }
             ],
             "src/app/global/footer/footer.stories.ts": [
@@ -7198,38 +7090,6 @@
                     "deprecationMessage": "",
                     "type": "Story<Header>",
                     "defaultValue": "(args: Header) => ({\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  props: args,\n})"
                 }
             ],
             "src/app/login/login.stories.ts": [
@@ -7480,6 +7340,28 @@
                     "deprecationMessage": "",
                     "type": "Story<HomepageComponent>",
                     "defaultValue": "(args: HomepageComponent) => ({\r\n  component: HomepageComponent,\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/app/products/products-list.stories.ts": [
+                {
+                    "name": "products",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/products/products-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/products/products-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ProductsListComponent>",
+                    "defaultValue": "(args: ProductsListComponent) => ({\r\n  component: ProductsListComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/cart/cart.module.ts": [
@@ -7995,8 +7877,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "NavbarComponent",
-                "coveragePercent": 9,
-                "coverageCount": "2/21",
+                "coveragePercent": 10,
+                "coverageCount": "2/20",
                 "status": "low"
             },
             {
@@ -8309,7 +8191,7 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/11",
                 "status": "low"
             },
             {
@@ -8415,7 +8297,7 @@
                 "linktype": "component",
                 "name": "EditProductComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -8444,7 +8326,27 @@
                 "linktype": "component",
                 "name": "ProductsListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/19",
+                "coverageCount": "0/20",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/products/products-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "products",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/products/products-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -8893,7 +8795,7 @@
                 "linktype": "component",
                 "name": "SpinnerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -8967,26 +8869,6 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Checkbox.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Checkbox",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Checkbox.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
                 "filePath": "src/stories/Header.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -9008,36 +8890,6 @@
             },
             {
                 "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",

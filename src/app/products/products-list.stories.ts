@@ -7,14 +7,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedReducer } from 'src/app/store/Shared/shared.reducer';
-import { HomepageComponent } from './homepage.component';
-import { HomepageService } from './homepage.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductsListComponent } from './products-list.component';
+import { ProductsService } from './products.service';
+import { DialogService } from '../global/dialog/dialog.service';
 
 export default {
-  title: 'Example/Homepage',
-  component: HomepageComponent,
+  title: 'Homepage',
+  component: ProductsListComponent,
   decorators: [
     moduleMetadata({
       declarations: [],
@@ -29,13 +30,13 @@ export default {
           Ng2SearchPipeModule
         ],
      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-     providers: [HomepageService]
+     providers: [ProductsService, DialogService]
     }),
   ],
 } as Meta;
 
-const Template: Story<HomepageComponent> = (args: HomepageComponent) => ({
-  component: HomepageComponent,
+const Template: Story<ProductsListComponent> = (args: ProductsListComponent) => ({
+  component: ProductsListComponent,
   props: args,
 });
 

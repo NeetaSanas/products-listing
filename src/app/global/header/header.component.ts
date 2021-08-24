@@ -7,9 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() icon:any;
-  @Input() title:any;
+  @Input() title:any= "Header";
   @Input() desc:any;
-  @Input() hasBgImage:boolean = false;
+  @Input() hasBgImage:boolean = true;
   @Input() class:any;
   
   constructor() { }

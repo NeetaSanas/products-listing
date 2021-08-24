@@ -4,14 +4,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
-import { MockStore } from '@ngrx/store/testing';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DialogConfig } from '../global/dialog/dialog-config';
 import { DialogModule } from '../global/dialog/dialog.module';
-import { DialogService } from '../global/dialog/dialog.service';
 import { FooterComponent } from '../global/footer/footer.component';
 import { HeaderModule } from '../global/header/header.module';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -58,5 +54,40 @@ describe('ProductsListComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should get products', () => {
+    const spy = jest.fn();
+    component.getProducts();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should Delete product', () => {
+    const spy = jest.fn();
+    component.deleteProduct('1');
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should open add dialog', () => {
+    const spy = jest.fn();
+    component.openAddDialog();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should open update dialog', () => {
+    const spy = jest.fn();
+    component.openUpdateDialog([]);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should add to cart', () => {
+    const spy = jest.fn();
+    component.addToCart([]);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should open cart dialog', () => {
+    const spy = jest.fn();
+    component.openCartDialog();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
 
 });

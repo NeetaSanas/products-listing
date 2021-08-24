@@ -13,7 +13,7 @@
           <td><h3>{{i+1}}.</h3></td>
           <td><h3>{{item.name}}</h3></td>
           <td style="text-align: right;"><h3>${{item.price}}</h3></td>
-          <td style="vertical-align: top;"><button style="background-color: red;" (click)="removeItem(item,i)" class="delete-cart" title="Delete">
+          <td style="vertical-align: top;"><button style="background-color: red;" (click)="removeItem(i)" class="delete-cart" title="Delete">
             <i style="font-size: 20px;" class="fa fa-trash icon" ></i>
           </button></td>
       </tr>
@@ -34,7 +34,7 @@
       <button class="w-40 cancel-button" (click)="cancel()">Cancel</button>
     </div> 
 
-    <div class="empty" *ngIf="myCartItems" > <!--*ngIf="myCartItems.length > 0"-->
+    <div class="empty" *ngIf="!myCartItems"> <!--*ngIf="myCartItems.length > 0"-->
       <h3>Cart is empty <br>Please add products to continue...</h3>
       <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
         <button class="w-40 cancel-button" (click)="cancel()">Close</button>

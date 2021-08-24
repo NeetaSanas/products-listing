@@ -36,25 +36,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
       const id = params.get('id');
       this.store.select(getProductById,{id}).subscribe((data) => {
         this.product = data;
-        //this.createForm();
-        // this.productForm = new FormGroup({
-        //   name: new FormControl(this.productData.name, Validators.required),
-        //   description: new FormControl(this.productData.description, Validators.required),
-        //   price: new FormControl(this.productData.price, Validators.required),
-        //   image: new FormControl(this.productData.image, Validators.required),
-        // });
-        this.productForm.controls.setValue(this.productData.name);
+        this.productForm.patchValue(this.productData);
       })
     })
-  }
-
-  createForm(){
-    this.productForm = new FormGroup({
-      name: new FormControl(this.productData.name, Validators.required),
-      description: new FormControl(this.productData.description, Validators.required),
-      price: new FormControl(this.productData.price, Validators.required),
-      image: new FormControl(this.productData.image, Validators.required),
-    });
   }
 
   ngOnDestroy(){
@@ -65,24 +49,22 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   onUpdateProduct(){
     if(!this.productForm.valid){
-      return;
+      // return;
+      this.productForm.markAllAsTouched();
+    }else{
+      const product: Product = {
+        id:this.productData.id,
+        name:this.productForm.value.name,
+        description: this.productForm.value.description,
+        price: this.productForm.value.price,
+        image: this.productForm.value.image
+      }
+      
+      this.store.dispatch(updateProduct({ product }));
+      this.dialogRef.close();
     }
 
-    const name = this.productForm.value.name;
-    const description = this.productForm.value.description;
-    const price = this.productForm.value.price;
-    const image = this.productForm.value.image;
-
-    const product: Product = {
-      id:this.productData.id,
-      name,
-      description,
-      price,
-      image
-    }
-
-    this.store.dispatch(updateProduct({ product }));
-    this.dialogRef.close();
+    
   }
 
   cancel(){

@@ -18,26 +18,26 @@ export class CartComponent implements OnInit {
   ngOnInit(){
     this.myCartItems = this.config.data;
     if(this.myCartItems){
-      this.getTotalAmount(this.myCartItems);
+      this.getTotalAmount();
     }
-      
   }
   
-  getTotalAmount(items){
+  getTotalAmount(){
     this.cartTotal = 0;
     let itemsArray: any[] = [];
-    itemsArray = items;
-    //let itemsLength: number = itemsArray?.length;
-    // for(let i=0; i<itemsLength; i++){
-    //   this.cartTotal = Number(this.cartTotal) + Number(items[i]["price"]); 
-    // }
+    itemsArray = this.myCartItems;
+    let itemsLength: number = itemsArray?.length;
+    for(let i=0; i<itemsLength; i++){
+      this.cartTotal = Number(this.cartTotal) + Number(itemsArray[i]["price"]); 
+    }
   }
 
-  removeItem(item,index){
-    //console.log(item);
-    this.myCartItems.splice(index,1);
+  removeItem(index){
+    this.myCartItems = this.myCartItems.splice(index,1);
     if(this.myCartItems){
-      this.getTotalAmount(this.myCartItems);
+      this.getTotalAmount();
+    }else{
+      this.myCartItems = [];
     }
   }
 
@@ -48,15 +48,10 @@ export class CartComponent implements OnInit {
       token: function (token: any) {
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
-        // console.log(token);
-        // console.log(token.id);
         if(token.id){
           //console.log("payment done");
-          //this.toastr.success("Order Placed Successfully");
           localStorage.removeItem("cartItems");
           localStorage.setItem("token",token.id);
-        }else{
-          //this.toastr.error("ERROR");
         }
         this.token = token.id;
       },

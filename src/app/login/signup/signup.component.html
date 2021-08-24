@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
     <form [formGroup]="form" (ngSubmit)="onSubmit()"
         style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
-        <app-header 
+        <app-header  style="width:600px !important;"
             [icon]="'exit_to_app'" 
             [title]="title" 
             [hasBgImage]="true" 
@@ -13,7 +13,7 @@
                 <div class="form-control">
                     <!-- <label for="firstname">First Name</label> -->
                     <i class="fa fa-user icon"></i>
-                    <input type="text" id="firstname" placeholder="First Name" name="firstname" formControlName="firstname"><br>
+                    <input aria-label="firstname" type="text" id="firstname" placeholder="First Name" name="firstname" formControlName="firstname"><br>
                     
                 </div>
                 <span class="error-message" *ngIf="form.controls.firstname.errors?.required && form.controls.firstname.touched">Required</span>
@@ -21,21 +21,21 @@
                 <div class="form-control">
                     <!-- <label for="lastname">Last Name</label> -->
                     <i class="fa fa-user icon"></i>
-                    <input type="text" id="lastname" placeholder="Last Name" name="lastname" formControlName="lastname"><br> 
+                    <input aria-label="Lastname" type="text" id="lastname" placeholder="Last Name" name="lastname" formControlName="lastname"><br> 
                 </div>
                 <span class="error-message" *ngIf="form.controls.lastname.errors?.required && form.controls.lastname.touched">Required</span>
                 
                 <div class="form-control">
                     <!-- <label for="contact">Contact</label> -->
                     <i class="fa fa-phone icon"></i>
-                    <input type="text" id="contact" placeholder="Contact" name="contact" formControlName="contact"><br>
+                    <input aria-label="Contact" type="text" id="contact" placeholder="Contact" name="contact" formControlName="contact"><br>
                 </div>
                 <span class="error-message" *ngIf="form.controls.contact.errors?.required && form.controls.contact.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.contact.errors?.pattern">Enter only numbers</span>
                 
                 <div class="form-control">
                     <i class="fa fa-envelope icon"></i>
-                    <input (input)="validateForm()" type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
+                    <input aria-label="Email" (input)="validateForm()" type="text" id="email" placeholder="Email" name="email" formControlName="email"><br>
                 </div>
                 <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid email</span>
@@ -43,22 +43,21 @@
 
                 <div class="form-control" *ngIf="newUser">
                     <i class="fa fa-key icon"></i>
-                    <input (input)="validateForm()" type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
+                    <input aria-label="Password" (input)="validateForm()" type="password" placeholder="Password" id="password" name="password" formControlName="password"><br> 
                 </div>
                 <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched && newUser">Required</span>
                 <span class="error-message" *ngIf="form.controls.password.hasError('minlength') && newUser">Enter minimum 6 characters</span>
                 
                 <div class="form-control" *ngIf="newUser">
                     <i class="fa fa-key icon"></i>
-                    <input (input)="validateForm()" type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
-                    
+                    <input aria-label="Retype Password" (input)="validateForm()" type="password" placeholder="Retype Password" id="retype_password" name="retype_password" formControlName="retype_password"><br>
                 </div>
                 <span class="error-message" *ngIf="form.controls.retype_password.errors?.required && form.controls.retype_password.touched && newUser">Required</span>
                 <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength') && newUser">Enter minimum 6 characters</span>
                 <span class="error-message" *ngIf="form.controls.retype_password.hasError('mismatchedPasswords') && newUser">Password  not matching</span>
-
-                <div class="submit-button-container">
-                    <button class="w-100 submit-button" type="submit">Submit</button> <!--[disabled]="!form.valid"-->
+                <div style="height: 20px;"></div>
+                <div class="submit-button-container" style="margin:0px">
+                    <button aria-label="Submit" class="w-100 submit-button" type="submit">Submit</button> <!--[disabled]="!form.valid"-->
                 </div> 
 
                 <a *ngIf="newUser" color="accent" routerLink="/" class="w-100 link">Back to Homepage</a>

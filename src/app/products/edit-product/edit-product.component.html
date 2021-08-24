@@ -11,34 +11,34 @@
            <div class="card-inner" style="margin-top: -20px;">
                 <div class="form-control">
                     <label>Name</label>
-                    <input type="text" formControlName="name" id="name" placeholder="Product Name" name="name">
-                    <div *ngIf="productForm.controls.name.errors?.required && productForm.controls.name.touched">Required</div>
+                    <input aria-label="Name" type="text" formControlName="name" id="name" placeholder="Product Name" name="name">
+                    <div *ngIf="productForm.controls.name.errors?.required && productForm.controls.name.touched"><br><p>Required</p></div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Price</label>
-                    <input type="text" formControlName="price" id="price" placeholder="Price" name="price">
-                    <div *ngIf="productForm.controls.price.errors?.required && productForm.controls.price.touched">Required</div>
+                    <input aria-label="Price" type="text" formControlName="price" id="price" placeholder="Price" name="price">
+                    <div *ngIf="productForm.controls.price.errors?.required && productForm.controls.price.touched"><br><p>Required</p></div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Description</label>
-                    <input type="text" formControlName="description" id="description" placeholder="description" name="description">
-                    <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched">Required</div>
+                    <input aria-label="Description" type="text" formControlName="description" id="description" placeholder="description" name="description">
+                    <div *ngIf="productForm.controls.description.errors?.required && productForm.controls.description.touched"><br><p>Required</p></div>
                 </div>
                 <br>
                 <div class="form-control">
                     <label>Image Url</label>
-                    <input type="text" formControlName="image" id="image" placeholder="image" name="image">
-                    <div *ngIf="productForm.controls.image.errors?.required && productForm.controls.image.touched"><p>Required</p></div>
+                    <input aria-label="Image" type="text" formControlName="image" id="image" placeholder="image" name="image">
+                    <div *ngIf="productForm.controls.image.errors?.required && productForm.controls.image.touched"><br><p>Required</p></div>
                 </div>
                 <br><br>
                 
                 <div class="submit-button-container" fxLayout="row" fxLayoutAlign="space-between center">
                     <br>
-                    <button class="w-30 submit-button" type="submit" [disabled]="!productForm.valid">Update</button>
+                    <button aria-label="Submit" class="w-30 submit-button" type="submit" >Update</button> <!--[disabled]="!productForm.valid"-->
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="w-30 cancel-button" (click)="cancel()">Cancel</button>
+                    <button aria-label="Cancel" class="w-30 cancel-button" (click)="cancel()">Cancel</button>
                 </div> 
             </div>        
     </form>

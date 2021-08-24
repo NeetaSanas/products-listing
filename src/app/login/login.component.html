@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="h-100 container">
+<div fxLayout="row" fxLayoutAlign="center center" class="h-100 container" >
     <form [formGroup]="form" (ngSubmit)="onSubmit()"
         style="background-color: #f3f3f3;" fxFlex="90" fxFlex.gt-sm="30" fxFlex.sm="60">
          <app-header 
@@ -10,19 +10,20 @@
                 <a routerLink="/login/signup" color="accent" class="w-100 link">Don't have an account? Sign up now!</a>
                 <div class="form-control">
                     <i class="fa fa-user icon"></i>
-                    <input type="text" id="email" name="email" placeholder="Email" formControlName="email">
+                    <input aria-label="Email" type="text" id="email" name="email" placeholder="Email" formControlName="email">
                 </div>
-                <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Email is required</span>
-                <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid email</span>
+                <span class="error-message" *ngIf="form.controls.email.errors?.required && form.controls.email.touched">Required</span>
+                <span class="error-message" *ngIf="form.controls.email.errors?.pattern">Invalid Email</span>
                 
                 <div class="form-control">
                     <i class="fa fa-key icon"></i>
-                    <input type="password" id="password" placeholder="Password" name="password" formControlName="password">
+                    <input aria-label="Password" type="password" id="password" placeholder="Password" name="password" formControlName="password">
                 </div>
-                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Password is required</span>
+                <span class="error-message" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">Required</span>
                 <span class="error-message" *ngIf="form.controls.password.hasError('minlength')">Enter minimum 6 characters</span>
+                <br>
                 <div class="submit-button-container">
-                    <button class="w-100 submit-button" type="submit">LOGIN</button>
+                    <button aria-label="Login" class="w-100 submit-button" type="submit">LOGIN</button>
                 </div> 
                 <a color="accent" routerLink="/forgot-password" class="w-100 link">Forgot Password?</a>
             </div>        

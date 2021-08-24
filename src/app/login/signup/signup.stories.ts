@@ -1,16 +1,17 @@
 import { moduleMetadata } from '@storybook/angular';
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import { RouterTestingModule } from '@angular/router/testing';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedReducer } from '../../store/Shared/shared.reducer';
 import { HeaderModule } from '../../global/header/header.module';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { SignupComponent } from './signup.component';
-import { DialogConfig } from '../../global/dialog/dialog-config';
+import { RouterModule } from '@angular/router';
+import { DialogService } from 'src/app/global/dialog/dialog.service';
+import { AuthService } from '../auth.service';
+import { DialogModule } from 'src/app/global/dialog/dialog.module';
 
 export default {
   title: 'Signup',
@@ -19,17 +20,19 @@ export default {
     moduleMetadata({
       declarations: [SignupComponent],
       imports: [
-          HeaderModule,
-          CommonModule,
-          FormsModule,
-          ReactiveFormsModule,
-          RouterTestingModule,
-          HttpClientModule,
-          StoreModule.forRoot(SharedReducer, {})
-        ],
-     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-     providers: [{ provide: ToastrService, useValue: ToastrService },
-        { provide: DialogConfig, useValue: DialogConfig }]
+        DialogModule,
+        CommonModule,
+        HeaderModule,
+        FormsModule, 
+        ReactiveFormsModule,
+        HttpClientModule,
+        StoreModule.forRoot({}),
+        RouterModule.forRoot([]),
+        ToastrModule.forRoot({})
+  
+      ], 
+      providers:[AuthService, DialogService, Store, { provide: APP_BASE_HREF, useValue: "/" }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     }),
   ],
 } as Meta;

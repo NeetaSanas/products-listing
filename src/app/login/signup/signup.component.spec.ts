@@ -15,8 +15,12 @@ import { ToastrModule } from 'ngx-toastr';
 describe('SignupComponent', () => {
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
+  let UserServiceMock: any;
 
   beforeEach(async () => {
+    UserServiceMock = {
+			dispatch: jest.fn()
+		};
     await TestBed.configureTestingModule({
       declarations: [ SignupComponent ],
       imports: [
@@ -86,8 +90,38 @@ describe('SignupComponent', () => {
   it('should onSubmit user', () => {
     const spy = jest.fn();
     component.onSubmit();
-    expect(component.submitted).toEqual(true);
+    // expect(component.submitted).toEqual(true);
     expect(spy).toHaveBeenCalledTimes(0);
   });
   
+  it('should validate form', () => {
+    const spy = jest.fn();
+    component.validateForm();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  describe('Test: Signup Form', () => {
+		it('should invalidate the form', () => {
+			component.form.controls.firstname.setValue('');
+			component.form.controls.lastname.setValue('');
+			component.form.controls.email.setValue('');
+      component.form.controls.contact.setValue('');
+      component.form.controls.password.setValue('');
+			component.form.controls.retype_password.setValue('');
+			expect(component.form.valid).toBeFalsy();
+		});
+
+		it('should validate the form', () => {
+			component.form.controls.firstname.setValue('Neeta');
+			component.form.controls.lastname.setValue('Sanas');
+			component.form.controls.email.setValue('neeta@techspian.com');
+			component.form.controls.contact.setValue('9422015306');
+			component.form.controls.password.setValue('123456');
+			component.form.controls.retype_password.setValue('123456');
+			expect(component.form.valid).toBeTruthy();
+		});
+	});
+
+  
+
 });

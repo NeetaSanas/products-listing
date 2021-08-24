@@ -12,12 +12,15 @@
     width: 100%;
     margin-bottom: 15px;
     input{
-        min-width: 74%;
+        min-width: 80%;
     }
-}  
+}
+// .submit-button{
+//     margin-top: 20px;
+// }  
 
 .container{
-    margin-top: 50px !important;
+    margin-top: -50px !important;
 }
 
 @media only screen and (max-width: 780px){

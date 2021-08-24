@@ -30,23 +30,17 @@ export class AuthService {
 
   updateUser(user: User): Observable<{name:string}>{
     const userData = {
-        [user.id] : {
             id: user.id,
             firstname: user.firstname, 
             lastname: user.lastname, 
             email: user.email,
             contact: user.contact,
-        }
     }
-    console.log(userData);
+    
     return this.http.patch<{name:string}>(`http://localhost:3000/users/${user.id}`, userData);
   }
 
   login(){
-    // return this.http.post<AuthResponseData>(
-    //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
-    //   { email, password, returnSecureToken: true }
-    // );
     return this.http.get(`http://localhost:3000/users`);
   }
 
@@ -60,10 +54,10 @@ export class AuthService {
       new Date().getTime() + +data.expiresIn * 1000
     );
     const user = new User(
-      data.email,
-      data.idToken,
-      data.localId,
-      expirationDate
+      // data.email,
+      // data.idToken,
+      // data.localId,
+      // expirationDate
     );
     return user;
   }
@@ -83,18 +77,18 @@ export class AuthService {
   setUserInLocalStorage(user: User) {
     localStorage.setItem('userData', JSON.stringify(user));
 
-    this.runTimeoutInterval(user);
+    //this.runTimeoutInterval(user);
   }
 
-  runTimeoutInterval(user: User) {
-    const todaysDate = new Date().getTime();
-    const expirationDate = user.expireDate.getTime();
-    const timeInterval = expirationDate - todaysDate;
+  // runTimeoutInterval(user: User) {
+  //   const todaysDate = new Date().getTime();
+  //   const expirationDate = user.expireDate.getTime();
+  //   const timeInterval = expirationDate - todaysDate;
 
-    this.timeoutInterval = setTimeout(() => {
-      //this.store.dispatch(autoLogout());
-      //logout functionality or get the refresh token
-    }, timeInterval);
-  }
+  //   this.timeoutInterval = setTimeout(() => {
+  //     //this.store.dispatch(autoLogout());
+  //     //logout functionality or get the refresh token
+  //   }, timeInterval);
+  // }
 
 }

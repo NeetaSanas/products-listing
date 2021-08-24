@@ -44,4 +44,34 @@ describe('NavbarComponent', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
+  it('should toggle theme', () => {
+    const spy = jest.fn();
+    component.toggleTheme();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should check onMenu', () => {
+    const spy = jest.fn();
+    component.onMenu();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should update profile', () => {
+    const spy = jest.fn();
+    component.onProfileSetting();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should show/hide menu', () => {
+    const spy = jest.fn();
+    component.onSettings();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should check navbar open/close', () => {
+    const spy = jest.fn();
+    component.checkIfNavDropDown();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
 });

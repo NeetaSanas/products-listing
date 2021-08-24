@@ -5,7 +5,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DialogConfig } from '../../global/dialog/dialog-config';
 import { DialogModule } from '../../global/dialog/dialog.module';
 import { DialogService } from '../../global/dialog/dialog.service';
 import { FooterComponent } from '../../global/footer/footer.component';
@@ -17,10 +16,12 @@ import { EditProductComponent } from './edit-product.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Subscription } from 'rxjs';
 
 describe('EditProductComponent', () => {
   let component: EditProductComponent;
   let fixture: ComponentFixture<EditProductComponent>;
+  let SubscriptionMock: Subscription;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -50,6 +51,7 @@ describe('EditProductComponent', () => {
     fixture = TestBed.createComponent(EditProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    SubscriptionMock = new Subscription();
   });
   //test.skip('skip', () => {});
 
@@ -79,5 +81,56 @@ describe('EditProductComponent', () => {
     expect(image.hasError('required')).toBeTruthy();
   });
 
+
+  it('should update product', () => {
+    const spy = jest.fn();
+    component.onUpdateProduct();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should Cancel product', () => {
+    const spy = jest.fn();
+    component.cancel();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  describe('Test: addProduct Form', () => {
+		it('should invalidate the form', () => {
+			component.productForm.controls.name.setValue('');
+			component.productForm.controls.description.setValue('');
+			component.productForm.controls.price.setValue('');
+      component.productForm.controls.image.setValue('');
+			expect(component.productForm.valid).toBeFalsy();
+		});
+
+		it('should validate the form', () => {
+			component.productForm.controls.name.setValue('product1');
+			component.productForm.controls.description.setValue('desc');
+			component.productForm.controls.price.setValue('100');
+			component.productForm.controls.image.setValue('www');
+			expect(component.productForm.valid).toBeTruthy();
+		});
+	});
+
+  describe('Test ngOnDestroy', () => {
+		it('should unsubscribe', () => {
+			component.ngOnDestroy();
+			const spyunsubscribe = jest.spyOn(SubscriptionMock, 'unsubscribe');
+			expect(spyunsubscribe).toBeDefined();
+		});
+	});
+
+  describe('Login: ngOnInit', () => {
+		it('should set values for Form', () => {
+      const formValue = {
+        name: 'test',
+        price: '100',
+        description: 'testing',
+        image: 'www'
+      };
+      component.productForm.patchValue(formValue);
+      expect(component.productForm.value).toEqual(formValue);
+    });
+	});
   
 });

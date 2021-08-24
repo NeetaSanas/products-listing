@@ -30,19 +30,22 @@ export class AddProductComponent implements OnInit {
 
   onAddProduct(){
     if(!this.productForm.valid){
-      return;
+      // return;
+        this.productForm.markAllAsTouched();
+    }else{
+      const product: Product = {
+        id:'',
+        name: this.productForm.value.name,
+        description: this.productForm.value.description,
+        price: this.productForm.value.price,
+        image: this.productForm.value.image,
+      }
+      //console.log(product);
+      this.store.dispatch(addProduct({product}));
+      this.dialogRef.close();
     }
 
-    const product: Product = {
-      id:'',
-      name: this.productForm.value.name,
-      description: this.productForm.value.description,
-      price: this.productForm.value.price,
-      image: this.productForm.value.image,
-    }
-    //console.log(product);
-    this.store.dispatch(addProduct({product}));
-    this.dialogRef.close();
+    
   }
 
   cancel(){

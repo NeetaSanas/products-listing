@@ -31,13 +31,11 @@ export class ProductsService {
   }
   updateProduct(product: Product): Observable<{name:string}>{
     const productData = {
-        [product.id] : {
             id: product.id,
             name: product.name, 
             description: product.description, 
             price: product.price,
             image: product.image
-        }
     }
     return this.http.patch<{name:string}>(`http://localhost:3000/products/${product.id}`, productData);
   }

@@ -51,18 +51,13 @@ export class ProductsListComponent implements OnInit {
   deleteProduct(id:string){
     if(confirm("Are you sure you want to delete?")){
       this.store.dispatch(deleteProduct({id}));
-      this.router.navigate(['/products']);
+      //this.router.navigate(['/products']);
       this.products = this.store.select(getProducts);
       this.store.dispatch(loadProducts());
     }
-    if(!this.products){
-      this.NoProducts = true;
-    }
+    
   }
 
-  viewProduct(){
-
-  }
 
   openAddDialog(){
     const ref = this.dialog.open(AddProductComponent, {
@@ -70,7 +65,7 @@ export class ProductsListComponent implements OnInit {
     });
 
     ref.afterClosed.subscribe(result => {
-      console.log('Dialog closed', result);  
+      //console.log('Dialog closed', result);  
       this.products = this.store.select(getProducts);
       this.store.dispatch(loadProducts());
     });
@@ -82,14 +77,14 @@ export class ProductsListComponent implements OnInit {
       data: product
     });
 
-    ref.afterClosed.subscribe(result => {
-      console.log('Dialog closed', result);      
-    });
+    // ref.afterClosed.subscribe(result => {
+    //   // console.log('Dialog closed', result);      
+    // });
   }
 
   public addToCart(product): void {
       this.cartItems.push(product);
-      console.log(this.cartItems);
+      // console.log(this.cartItems);
       this.cartProductCount = this.cartItems.length;
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
@@ -101,7 +96,7 @@ export class ProductsListComponent implements OnInit {
      });
  
      ref.afterClosed.subscribe(result => {
-       console.log('Dialog closed', result);
+       //console.log('Dialog closed', result);
        if(localStorage.getItem("token")){
         this.cartItems = [];
         this.cartProductCount = this.cartItems.length;

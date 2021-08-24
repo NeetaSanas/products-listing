@@ -30,8 +30,6 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log("In signup");
-    //console.log(this.config);
     if(this.config.data){
       this.updateForm();
       this.newUser = false;
@@ -59,25 +57,24 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    this.submitted = true;
-    //console.log(this.form.value);
-    // if(!this.form.valid){
-    //   return;
-    // }
-    const firstname= this.form.value.firstname;
-    const lastname= this.form.value.lastname;
-    const contact= this.form.value.contact;
-    const email= this.form.value.email;
-    const password= this.form.value.password;
-    const retype_password= this.form.value.retype_password;
-    
-    if(this.form.value.id){
-      console.log("Update User");
-      this.store.dispatch(updateUser(this.form.value));
+    if(this.form.invalid){
+      this.form.markAllAsTouched();
+      
     }else{
-      this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));
+      this.submitted = true;      
+      if(this.form.value.id){
+        this.store.dispatch(updateUser(this.form.value));
+      }else{
+        this.store.dispatch(signupStart({
+          firstname:this.form.value.firstname,
+          lastname:this.form.value.lastname,
+          contact:this.form.value.contact,
+          email:this.form.value.password,
+          password:this.form.value.password,
+          retype_password:this.form.value.retype_password
+        }));
+      }
     }
-    
     
   }
 

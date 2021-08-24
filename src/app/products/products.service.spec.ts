@@ -3,6 +3,7 @@ import { HttpTestingController, HttpClientTestingModule } from '@angular/common/
 import { environment } from '../../environments/environment';
 import { ProductsService } from './products.service';
 import { Store, StoreModule } from '@ngrx/store';
+import { of } from 'rxjs';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -51,16 +52,5 @@ describe('ProductsService', () => {
     mockReq.flush({});
     expect(spy).toHaveBeenCalledWith({});
   });
-
-//   it('should update Product', () => {
-//     const spy = jest.fn();
-//     const requestBody: any = [];
-//     const id: string='3';
-//     service.updateProduct(requestBody).subscribe(spy);
-//     const mockReq = httpMock.expectOne(req => req.url.includes(`${environment.productsUrl}/${id}`));
-//     mockReq.flush({});
-//     expect(spy).toHaveBeenCalledWith([]);
-//   });
-
 
 });

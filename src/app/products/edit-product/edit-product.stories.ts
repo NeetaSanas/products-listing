@@ -14,7 +14,7 @@ import { DialogConfig } from '../../global/dialog/dialog-config';
 import { DialogModule } from '../../global/dialog/dialog.module';
 
 export default {
-  title: 'Example/Edit-Product',
+  title: 'Edit-Product',
   component: EditProductComponent,
   decorators: [
     moduleMetadata({

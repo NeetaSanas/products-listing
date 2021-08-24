@@ -7,8 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedReducer } from '../../store/Shared/shared.reducer';
-import { HeaderModule } from '../../global/header/header.module';
-import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from './navbar.component';
 import { DialogService } from '../dialog/dialog.service';
 
