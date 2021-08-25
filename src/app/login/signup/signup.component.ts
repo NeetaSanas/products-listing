@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { DialogRef } from '../../global/dialog/dialog-ref';
 import { AppState } from '../../app.state';
 import { DialogConfig } from '../../global/dialog/dialog-config';
 import { signupStart, updateUser } from '../auth.actions';
@@ -17,7 +18,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   users: any=[];
   title: string;
-  constructor(public fb: FormBuilder, private store: Store<AppState>,
+  constructor(public fb: FormBuilder, private store: Store<AppState>,public dialogRef: DialogRef,
      public config: DialogConfig, private authService: AuthService) { 
     this.form = this.fb.group({
       'firstname': [null, Validators.compose([Validators.required])],
@@ -31,28 +32,21 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.config.data){
-      this.updateForm();
+      //this.updateForm();
+      this.form.patchValue(this.config.data);
       this.newUser = false;
-      this.title = "Update Profile";
+      this.title = "View Profile";
+      this.form.disable();
     }else{
       this.newUser = true;
       this.title = "Signup";
     }
 
+    this.getUsers();
+  }
+  getUsers(){
     this.authService.getUsers().subscribe(users => {
       this.users = users;
-    });
-  }
-
-  updateForm(){
-    this.form = new FormGroup({
-      id: new FormControl(this.config.data.id, Validators.required),
-      firstname: new FormControl(this.config.data.firstname, Validators.required),
-      lastname: new FormControl(this.config.data.lastname, Validators.required),
-      email: new FormControl(this.config.data.email, Validators.required),
-      contact: new FormControl(this.config.data.contact, Validators.required),
-      password: new FormControl(this.config.data.password, Validators.required),
-      retype_password: new FormControl(this.config.data.password, Validators.required),
     });
   }
 
@@ -62,9 +56,9 @@ export class SignupComponent implements OnInit {
       
     }else{
       this.submitted = true;      
-      if(this.form.value.id){
-        this.store.dispatch(updateUser(this.form.value));
-      }else{
+      // if(this.form.value.id){
+      //   this.store.dispatch(updateUser(this.form.value));
+      // }else{
         this.store.dispatch(signupStart({
           firstname:this.form.value.firstname,
           lastname:this.form.value.lastname,
@@ -73,7 +67,7 @@ export class SignupComponent implements OnInit {
           password:this.form.value.password,
           retype_password:this.form.value.retype_password
         }));
-      }
+      //}
     }
     
   }
@@ -88,6 +82,10 @@ export class SignupComponent implements OnInit {
         this.form.controls.email.setErrors({'exist':true})
       }
     }
+  }
+
+  cancel(){
+    this.dialogRef.close();
   }
 
 }

@@ -1,5 +1,5 @@
 import 'zone.js/dist/zone';
-import { APP_BASE_HREF, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store, StoreModule } from '@ngrx/store';
@@ -11,6 +11,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule } from 'ngx-toastr';
+import { of } from 'rxjs';
+import { DialogService } from '../../global/dialog/dialog.service';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -19,7 +21,7 @@ describe('SignupComponent', () => {
 
   beforeEach(async () => {
     UserServiceMock = {
-			dispatch: jest.fn()
+			getUsers: jest.fn().mockReturnValue(of(true)),
 		};
     await TestBed.configureTestingModule({
       declarations: [ SignupComponent ],
@@ -29,15 +31,12 @@ describe('SignupComponent', () => {
         HeaderModule,
         FormsModule, 
         ReactiveFormsModule,
-        // EffectsModule.forFeature([AuthEffects]),
-        // StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
         StoreModule.forRoot({}),
-        // EffectsModule.forRoot([]),
         RouterTestingModule,
         HttpClientTestingModule,
         ToastrModule.forRoot({})
       ], 
-      providers:[AuthService, Store],
+      providers:[AuthService, Store, DialogService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
@@ -97,6 +96,15 @@ describe('SignupComponent', () => {
   it('should validate form', () => {
     const spy = jest.fn();
     component.validateForm();
+    expect(component.form.controls.password.value).toEqual(component.form.controls.retype_password.value);
+    if(component.form.controls.password.value !== component.form.controls.retype_password.value){
+      expect(component.form.controls.retype_password.invalid).toBeTruthy();
+    } 
+    for(let i=0; i<component.users.length;i++){
+      if(component.users[i]["email"] === component.form.controls.email.value){
+        expect(component.form.controls.email.invalid).toBeTruthy();
+      }
+    } 
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
@@ -122,6 +130,22 @@ describe('SignupComponent', () => {
 		});
 	});
 
-  
+  describe('Test: ngOnInit', () => {
+		it('should initialize Form', () => {
+			expect(component.config.data).toEqual(component.form.patchValue(component.config.data))
+		});
+	});
+
+  it('should close dialog', () => {
+    const spy = jest.fn();
+    component.cancel();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should get users', () => {
+    const spy = jest.fn();
+    component.getUsers();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
 
 });

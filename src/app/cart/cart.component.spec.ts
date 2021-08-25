@@ -34,21 +34,9 @@ describe('CartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should submit payment', () => {
-    const spy = jest.fn();
-    component.onSuccess();
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
-
   it('should Cancel checkout', () => {
     const spy = jest.fn();
     component.cancel();
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
-
-  it('should onSuccess', () => {
-    const spy = jest.fn();
-    component.onSuccess();
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
@@ -59,10 +47,16 @@ describe('CartComponent', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
   
-  it('should get checkout success', () => {
-    const spy = jest.fn();
-    component.onSuccess();
-    expect(spy).toHaveBeenCalledTimes(0);
+  it('should calcculate cart total', () => {
+    component.getTotalAmount();
+    let total = 0;
+    let arr: any[] = [];
+    arr = component.myCartItems;
+    let len : number = arr?.length;
+    for (let i = 0; i <len; i++) {
+      total = total + component.myCartItems[i];
+    }
+    expect(total).toEqual(component.cartTotal);
   });
 
 

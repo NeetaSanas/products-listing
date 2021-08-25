@@ -12,9 +12,7 @@ export class HomepageComponent implements OnInit {
   public searchText: string;
   constructor(private homepageService: HomepageService) { }
   ngOnInit(): void {
-    console.log("homepage");
     this.products = this.homepageService.getProducts();
-    console.log(this.products);
   }
 
   viewProduct(){}

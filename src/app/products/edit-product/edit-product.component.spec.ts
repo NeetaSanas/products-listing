@@ -114,13 +114,15 @@ describe('EditProductComponent', () => {
 
   describe('Test ngOnDestroy', () => {
 		it('should unsubscribe', () => {
+      const spy = jest.fn();
 			component.ngOnDestroy();
 			const spyunsubscribe = jest.spyOn(SubscriptionMock, 'unsubscribe');
 			expect(spyunsubscribe).toBeDefined();
+      expect(spy).toHaveBeenCalledTimes(0);
 		});
 	});
 
-  describe('Login: ngOnInit', () => {
+  describe('Signup: ngOnInit', () => {
 		it('should set values for Form', () => {
       const formValue = {
         name: 'test',

@@ -34,13 +34,13 @@ export class AuthEffects {
             this.authService.setUserInLocalStorage(user);
             return loginSuccess({ user, redirect: true });
           }),
-          catchError((errResp) => {
-            //this.store.dispatch(setLoadingSpinner({ status: false }));
-            const errorMessage = this.authService.getErrorMessage(
-              errResp.error.error.message
-            );
-            return of(setErrorMessage({ message: errorMessage }));
-          })
+          // catchError((errResp) => {
+          //   //this.store.dispatch(setLoadingSpinner({ status: false }));
+          //   const errorMessage = this.authService.getErrorMessage(
+          //     errResp.error.error.message
+          //   );
+          //   return of(setErrorMessage({ message: errorMessage }));
+          // })
         );
       })
     );

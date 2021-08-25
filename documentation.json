@@ -292,12 +292,12 @@
     "injectables": [
         {
             "name": "AuthEffects",
-            "id": "injectable-AuthEffects-b89a6b0aa0f8ebf316023f78d249e3dd",
+            "id": "injectable-AuthEffects-92399763daeb1311013801d2ff676f78",
             "file": "src/app/login/auth.effects.ts",
             "properties": [
                 {
                     "name": "login$",
-                    "defaultValue": "createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(loginStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.login().pipe( //action.email, action.password\r\n          map((data:any) => {\r\n            // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            this.store.dispatch(setErrorMessage({ message: '' }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return loginSuccess({ user, redirect: true });\r\n          }),\r\n          catchError((errResp) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const errorMessage = this.authService.getErrorMessage(\r\n              errResp.error.error.message\r\n            );\r\n            return of(setErrorMessage({ message: errorMessage }));\r\n          })\r\n        );\r\n      })\r\n    );\r\n  })",
+                    "defaultValue": "createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(loginStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.login().pipe( //action.email, action.password\r\n          map((data:any) => {\r\n            // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            this.store.dispatch(setErrorMessage({ message: '' }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return loginSuccess({ user, redirect: true });\r\n          }),\r\n          // catchError((errResp) => {\r\n          //   //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n          //   const errorMessage = this.authService.getErrorMessage(\r\n          //     errResp.error.error.message\r\n          //   );\r\n          //   return of(setErrorMessage({ message: errorMessage }));\r\n          // })\r\n        );\r\n      })\r\n    );\r\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -371,7 +371,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from \"@angular/core\";\r\nimport { Router } from \"@angular/router\";\r\nimport { Actions, createEffect, ofType } from \"@ngrx/effects\";\r\nimport { Update } from \"@ngrx/entity\";\r\nimport { Store } from \"@ngrx/store\";\r\nimport { ToastrModule, ToastrService } from \"ngx-toastr\";\r\nimport { of } from \"rxjs\";\r\nimport { catchError, exhaustMap, map, switchMap, tap } from \"rxjs/operators\";\r\nimport { AppState } from \"../app.state\";\r\nimport { setErrorMessage, } from \"../store/Shared/shared.actions\";\r\nimport { loginStart, loginSuccess, signupStart, signupSuccess, updateUser, updateUserSuccess } from \"./auth.actions\";\r\nimport { AuthService } from \"./auth.service\";\r\nimport { User } from \"./user.model\";\r\n\r\n@Injectable()\r\nexport class AuthEffects {\r\n  constructor(\r\n    private actions$: Actions,\r\n    private authService: AuthService,\r\n    private store: Store<AppState>,\r\n    private router: Router,\r\n    private toastr: ToastrService\r\n  ) {}\r\n\r\n  login$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(loginStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.login().pipe( //action.email, action.password\r\n          map((data:any) => {\r\n            // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            this.store.dispatch(setErrorMessage({ message: '' }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return loginSuccess({ user, redirect: true });\r\n          }),\r\n          catchError((errResp) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const errorMessage = this.authService.getErrorMessage(\r\n              errResp.error.error.message\r\n            );\r\n            return of(setErrorMessage({ message: errorMessage }));\r\n          })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  loginRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[loginSuccess]),\r\n        tap((action) => {\r\n          this.store.dispatch(setErrorMessage({ message: '' }));\r\n          if (action.redirect) {\r\n            this.toastr.success('Login Success');\r\n            this.router.navigate(['/']);\r\n            \r\n          }else{\r\n            this.toastr.error('Login Failed');\r\n          }\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signupRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/']);\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signUp$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(signupStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.signUp(action.firstname, \r\n          action.lastname, \r\n          action.contact,\r\n          action.email, \r\n          action.password,\r\n          action.retype_password).pipe(\r\n          map((data:any) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return signupSuccess({ user });\r\n          }),\r\n          // catchError((errResp) => {\r\n          //  // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n          //   const errorMessage = this.authService.getErrorMessage(\r\n          //     errResp.error.error.message\r\n          //   );\r\n          //   return of(setErrorMessage({ message: errorMessage }));\r\n          // })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  updateUser$ = createEffect(():any => {\r\n    return this.actions$.pipe(\r\n      ofType(updateUser),\r\n      switchMap((action) => {\r\n        return this.authService.updateUser(action.user).pipe(\r\n          map((data) => {\r\n            const updatedUser: Update<User> = {\r\n              id: action.user.id,\r\n              changes: {\r\n                ...action.user,\r\n              },\r\n            };\r\n            return updateUserSuccess({ user: action.user });\r\n          })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  userRedirect2$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[updateUserSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/']);\r\n          this.toastr.success(\"Success\");\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signupRedirect2$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/login']);\r\n          this.toastr.success(\"Signup Success\");\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n}\r\n",
+            "sourceCode": "import { Injectable } from \"@angular/core\";\r\nimport { Router } from \"@angular/router\";\r\nimport { Actions, createEffect, ofType } from \"@ngrx/effects\";\r\nimport { Update } from \"@ngrx/entity\";\r\nimport { Store } from \"@ngrx/store\";\r\nimport { ToastrModule, ToastrService } from \"ngx-toastr\";\r\nimport { of } from \"rxjs\";\r\nimport { catchError, exhaustMap, map, switchMap, tap } from \"rxjs/operators\";\r\nimport { AppState } from \"../app.state\";\r\nimport { setErrorMessage, } from \"../store/Shared/shared.actions\";\r\nimport { loginStart, loginSuccess, signupStart, signupSuccess, updateUser, updateUserSuccess } from \"./auth.actions\";\r\nimport { AuthService } from \"./auth.service\";\r\nimport { User } from \"./user.model\";\r\n\r\n@Injectable()\r\nexport class AuthEffects {\r\n  constructor(\r\n    private actions$: Actions,\r\n    private authService: AuthService,\r\n    private store: Store<AppState>,\r\n    private router: Router,\r\n    private toastr: ToastrService\r\n  ) {}\r\n\r\n  login$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(loginStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.login().pipe( //action.email, action.password\r\n          map((data:any) => {\r\n            // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            this.store.dispatch(setErrorMessage({ message: '' }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return loginSuccess({ user, redirect: true });\r\n          }),\r\n          // catchError((errResp) => {\r\n          //   //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n          //   const errorMessage = this.authService.getErrorMessage(\r\n          //     errResp.error.error.message\r\n          //   );\r\n          //   return of(setErrorMessage({ message: errorMessage }));\r\n          // })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  loginRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[loginSuccess]),\r\n        tap((action) => {\r\n          this.store.dispatch(setErrorMessage({ message: '' }));\r\n          if (action.redirect) {\r\n            this.toastr.success('Login Success');\r\n            this.router.navigate(['/']);\r\n            \r\n          }else{\r\n            this.toastr.error('Login Failed');\r\n          }\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signupRedirect$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/']);\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signUp$ = createEffect(() => {\r\n    return this.actions$.pipe(\r\n      ofType(signupStart),\r\n      exhaustMap((action) => {\r\n        return this.authService.signUp(action.firstname, \r\n          action.lastname, \r\n          action.contact,\r\n          action.email, \r\n          action.password,\r\n          action.retype_password).pipe(\r\n          map((data:any) => {\r\n            //this.store.dispatch(setLoadingSpinner({ status: false }));\r\n            const user = this.authService.formatUser(data);\r\n            this.authService.setUserInLocalStorage(user);\r\n            return signupSuccess({ user });\r\n          }),\r\n          // catchError((errResp) => {\r\n          //  // this.store.dispatch(setLoadingSpinner({ status: false }));\r\n          //   const errorMessage = this.authService.getErrorMessage(\r\n          //     errResp.error.error.message\r\n          //   );\r\n          //   return of(setErrorMessage({ message: errorMessage }));\r\n          // })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  updateUser$ = createEffect(():any => {\r\n    return this.actions$.pipe(\r\n      ofType(updateUser),\r\n      switchMap((action) => {\r\n        return this.authService.updateUser(action.user).pipe(\r\n          map((data) => {\r\n            const updatedUser: Update<User> = {\r\n              id: action.user.id,\r\n              changes: {\r\n                ...action.user,\r\n              },\r\n            };\r\n            return updateUserSuccess({ user: action.user });\r\n          })\r\n        );\r\n      })\r\n    );\r\n  });\r\n\r\n  userRedirect2$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[updateUserSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/']);\r\n          this.toastr.success(\"Success\");\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n\r\n  signupRedirect2$ = createEffect(\r\n    () => {\r\n      return this.actions$.pipe(\r\n        ofType(...[signupSuccess]),\r\n        tap((action) => {\r\n          this.router.navigate(['/login']);\r\n          this.toastr.success(\"Signup Success\");\r\n        })\r\n      );\r\n    },\r\n    { dispatch: false }\r\n  );\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -462,7 +462,7 @@
         },
         {
             "name": "AuthService",
-            "id": "injectable-AuthService-9a65fdbfa86c5e8daea00ad04d6aec05",
+            "id": "injectable-AuthService-4dd097a3bb462254e3fa4920ccfd53a8",
             "file": "src/app/login/auth.service.ts",
             "properties": [
                 {
@@ -489,7 +489,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -505,40 +505,12 @@
                     ]
                 },
                 {
-                    "name": "getErrorMessage",
-                    "args": [
-                        {
-                            "name": "message",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "\"Email Not Found\" | \"Invalid Password\" | \"Email already exists\" | \"Unknown error occurred. Please try again\"",
-                    "typeParameters": [],
-                    "line": 66,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "message",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
                     "name": "getUsers",
                     "args": [],
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -548,37 +520,9 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": ""
-                },
-                {
-                    "name": "runTimeoutInterval",
-                    "args": [
-                        {
-                            "name": "user",
-                            "type": "User",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 85,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "user",
-                            "type": "User",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
                 },
                 {
                     "name": "setUserInLocalStorage",
@@ -593,7 +537,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 77,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -744,7 +688,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AuthResponseData } from './AuthResponseDate.model';\nimport { environment } from 'src/environments/environment';\nimport { User } from './user.model';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.state';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n  timeoutInterval: any;\n\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\n\n  signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){\n    const params={\n      firstname: firstname,\n      lastname: lastname, \n      contact: contact, \n      email: email, \n      password: password, \n      retype_password: retype_password\n    };\n    //console.log(params);\n    return this.http.post(`http://localhost:3000/users`, params);\n  }\n\n  updateUser(user: User): Observable<{name:string}>{\n    const userData = {\n        [user.id] : {\n            id: user.id,\n            firstname: user.firstname, \n            lastname: user.lastname, \n            email: user.email,\n            contact: user.contact,\n        }\n    }\n    console.log(userData);\n    return this.http.patch<{name:string}>(`http://localhost:3000/users/${user.id}`, userData);\n  }\n\n  login(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  getUsers(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  formatUser(data: AuthResponseData) {\n    \n    const expirationDate = new Date(\n      new Date().getTime() + +data.expiresIn * 1000\n    );\n    const user = new User(\n      data.email,\n      data.idToken,\n      data.localId,\n      expirationDate\n    );\n    return user;\n  }\n  getErrorMessage(message: string) {\n    switch (message) {\n      case 'EMAIL_NOT_FOUND':\n        return 'Email Not Found';\n      case 'INVALID_PASSWORD':\n        return 'Invalid Password';\n      case 'EMAIL_EXISTS':\n        return 'Email already exists';\n      default:\n        return 'Unknown error occurred. Please try again';\n    }\n  }\n\n  setUserInLocalStorage(user: User) {\n    localStorage.setItem('userData', JSON.stringify(user));\n\n    this.runTimeoutInterval(user);\n  }\n\n  runTimeoutInterval(user: User) {\n    const todaysDate = new Date().getTime();\n    const expirationDate = user.expireDate.getTime();\n    const timeInterval = expirationDate - todaysDate;\n\n    this.timeoutInterval = setTimeout(() => {\n      //this.store.dispatch(autoLogout());\n      //logout functionality or get the refresh token\n    }, timeInterval);\n  }\n\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AuthResponseData } from './AuthResponseDate.model';\nimport { environment } from 'src/environments/environment';\nimport { User } from './user.model';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.state';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n  timeoutInterval: any;\n\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\n\n  signUp(firstname:string,lastname:string,contact:string,email:string,password:string,retype_password:string){\n    const params={\n      firstname: firstname,\n      lastname: lastname, \n      contact: contact, \n      email: email, \n      password: password, \n      retype_password: retype_password\n    };\n    //console.log(params);\n    return this.http.post(`http://localhost:3000/users`, params);\n  }\n\n  updateUser(user: User): Observable<{name:string}>{\n    const userData = {\n            id: user.id,\n            firstname: user.firstname, \n            lastname: user.lastname, \n            email: user.email,\n            contact: user.contact,\n    }\n    \n    return this.http.patch<{name:string}>(`http://localhost:3000/users/${user.id}`, userData);\n  }\n\n  login(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  getUsers(){\n    return this.http.get(`http://localhost:3000/users`);\n  }\n\n  formatUser(data: AuthResponseData) {\n    \n    const expirationDate = new Date(\n      new Date().getTime() + +data.expiresIn * 1000\n    );\n    const user = new User(\n      // data.email,\n      // data.idToken,\n      // data.localId,\n      // expirationDate\n    );\n    return user;\n  }\n  // getErrorMessage(message: string) {\n  //   switch (message) {\n  //     case 'EMAIL_NOT_FOUND':\n  //       return 'Email Not Found';\n  //     case 'INVALID_PASSWORD':\n  //       return 'Invalid Password';\n  //     case 'EMAIL_EXISTS':\n  //       return 'Email already exists';\n  //     default:\n  //       return 'Unknown error occurred. Please try again';\n  //   }\n  // }\n\n  setUserInLocalStorage(user: User) {\n    localStorage.setItem('userData', JSON.stringify(user));\n\n    //this.runTimeoutInterval(user);\n  }\n\n  // runTimeoutInterval(user: User) {\n  //   const todaysDate = new Date().getTime();\n  //   const expirationDate = user.expireDate.getTime();\n  //   const timeInterval = expirationDate - todaysDate;\n\n  //   this.timeoutInterval = setTimeout(() => {\n  //     //this.store.dispatch(autoLogout());\n  //     //logout functionality or get the refresh token\n  //   }, timeInterval);\n  // }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1175,7 +1119,7 @@
         },
         {
             "name": "ProductsService",
-            "id": "injectable-ProductsService-8b3fdac9232db720cfa89e64c49bdfb3",
+            "id": "injectable-ProductsService-60db99f6ee559ef76e76c1f04a767216",
             "file": "src/app/products/products.service.ts",
             "properties": [],
             "methods": [
@@ -1220,7 +1164,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1278,7 +1222,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from '../app.state';\r\nimport { Observable } from 'rxjs';\r\nimport { Product } from './products.model';\r\nimport { combineAll, map } from 'rxjs/operators';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class ProductsService {\r\n\r\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\r\n\r\n  getProducts() : Observable<Product[]>{\r\n    return this.http.get<Product[]>(`http://localhost:3000/products`)\r\n    .pipe(map(data => {\r\n        const products: Product[] = [];\r\n        for(let key in data){\r\n          let key1 = data[key]['id'];\r\n          products.push({...data[key], id: key1});\r\n        }\r\n        return products;\r\n    })\r\n    );\r\n  }\r\n\r\n  addProduct(product: Product): Observable<{name:string}>{\r\n    return this.http.post<{name:string}>(`http://localhost:3000/products`, product);\r\n  }\r\n  updateProduct(product: Product): Observable<{name:string}>{\r\n    const productData = {\r\n        [product.id] : {\r\n            id: product.id,\r\n            name: product.name, \r\n            description: product.description, \r\n            price: product.price,\r\n            image: product.image\r\n        }\r\n    }\r\n    return this.http.patch<{name:string}>(`http://localhost:3000/products/${product.id}`, productData);\r\n  }\r\n \r\n  deleteProduct(id: string){\r\n    // console.log(`http://localhost:3000/products/${id}`)\r\n    return this.http.delete<{name:string}>(`http://localhost:3000/products/${id}`);\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from '../app.state';\r\nimport { Observable } from 'rxjs';\r\nimport { Product } from './products.model';\r\nimport { combineAll, map } from 'rxjs/operators';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class ProductsService {\r\n\r\n  constructor(private http: HttpClient, private store: Store<AppState>) { }\r\n\r\n  getProducts() : Observable<Product[]>{\r\n    return this.http.get<Product[]>(`http://localhost:3000/products`)\r\n    .pipe(map(data => {\r\n        const products: Product[] = [];\r\n        for(let key in data){\r\n          let key1 = data[key]['id'];\r\n          products.push({...data[key], id: key1});\r\n        }\r\n        return products;\r\n    })\r\n    );\r\n  }\r\n\r\n  addProduct(product: Product): Observable<{name:string}>{\r\n    return this.http.post<{name:string}>(`http://localhost:3000/products`, product);\r\n  }\r\n  updateProduct(product: Product): Observable<{name:string}>{\r\n    const productData = {\r\n            id: product.id,\r\n            name: product.name, \r\n            description: product.description, \r\n            price: product.price,\r\n            image: product.image\r\n    }\r\n    return this.http.patch<{name:string}>(`http://localhost:3000/products/${product.id}`, productData);\r\n  }\r\n \r\n  deleteProduct(id: string){\r\n    return this.http.delete<{name:string}>(`http://localhost:3000/products/${id}`);\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1742,83 +1686,12 @@
         },
         {
             "name": "User",
-            "id": "class-User-47223c073c98b8d24e537cf0d44504cb",
+            "id": "class-User-b0bf7fa50e77d77a88570032dc7768b8",
             "file": "src/app/login/user.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "export class User {\r\n    constructor(\r\n      // firstname: string; \r\n      // lastname: string; \r\n      // contact: string; \r\n      // email: string; \r\n      // password: string,\r\n      // retype_password: string, \r\n      \r\n      public email: string,\r\n      public token: string,\r\n      public localId: string,\r\n      public expirationDate: Date,\r\n      //public id?:string,\r\n    ) {}\r\n  \r\n    get expireDate() {\r\n      return this.expirationDate;\r\n    }\r\n  \r\n    get userToken() {\r\n      return this.token;\r\n    }\r\n\r\n    id: string;\r\n    firstname: string; \r\n    lastname: string; \r\n    contact: string; \r\n    //email: string; \r\n    password: string;\r\n    retype_password: string; \r\n  }",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "email",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "token",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "localId",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "expirationDate",
-                        "type": "Date",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 1,
-                "jsdoctags": [
-                    {
-                        "name": "email",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "localId",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "expirationDate",
-                        "type": "Date",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
+            "sourceCode": "export class User {\r\n    //constructor(\r\n      //public email: string,\r\n      //public token: string,\r\n      //public localId: string,\r\n      //public expirationDate: Date,\r\n    //) {}\r\n  \r\n    // get expireDate() {\r\n    //   return this.expirationDate;\r\n    // }\r\n  \r\n    // get userToken() {\r\n    //   return this.token;\r\n    // }\r\n\r\n    id: string;\r\n    firstname: string; \r\n    lastname: string; \r\n    contact: string; \r\n    email: string; \r\n    password: string;\r\n    retype_password: string; \r\n  }",
             "properties": [
                 {
                     "name": "contact",
@@ -1827,7 +1700,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 20
                 },
                 {
                     "name": "email",
@@ -1836,22 +1709,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 10,
-                    "modifierKind": [
-                        122
-                    ]
-                },
-                {
-                    "name": "expirationDate",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Date",
-                    "optional": false,
-                    "description": "",
-                    "line": 13,
-                    "modifierKind": [
-                        122
-                    ]
+                    "line": 21
                 },
                 {
                     "name": "firstname",
@@ -1860,7 +1718,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 18
                 },
                 {
                     "name": "id",
@@ -1869,7 +1727,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 25
+                    "line": 17
                 },
                 {
                     "name": "lastname",
@@ -1878,19 +1736,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 27
-                },
-                {
-                    "name": "localId",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 12,
-                    "modifierKind": [
-                        122
-                    ]
+                    "line": 19
                 },
                 {
                     "name": "password",
@@ -1899,7 +1745,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 30
+                    "line": 22
                 },
                 {
                     "name": "retype_password",
@@ -1908,43 +1754,11 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 31
-                },
-                {
-                    "name": "token",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 11,
-                    "modifierKind": [
-                        122
-                    ]
+                    "line": 23
                 }
             ],
             "methods": [],
             "indexSignatures": [],
-            "accessors": {
-                "expireDate": {
-                    "name": "expireDate",
-                    "getSignature": {
-                        "name": "expireDate",
-                        "type": "",
-                        "returnType": "",
-                        "line": 17
-                    }
-                },
-                "userToken": {
-                    "name": "userToken",
-                    "getSignature": {
-                        "name": "userToken",
-                        "type": "",
-                        "returnType": "",
-                        "line": 21
-                    }
-                }
-            },
             "inputsClass": [],
             "outputsClass": [],
             "hostBindings": [],
@@ -2014,7 +1828,7 @@
     "components": [
         {
             "name": "AddProductComponent",
-            "id": "component-AddProductComponent-91a00882473c3e4e6fe8e563715b886c",
+            "id": "component-AddProductComponent-185513c110961d0ad2230f23ac332287",
             "file": "src/app/products/add-product/add-product.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2071,7 +1885,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2103,7 +1917,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { addProduct } from '../state/products.actions';\nimport { getProducts } from '../state/products.selector';\n\n@Component({\n  selector: 'app-add-product',\n  templateUrl: './add-product.component.html',\n  styleUrls: ['./add-product.component.scss']\n})\nexport class AddProductComponent implements OnInit {\n  products: Observable<Product[]>;\n  productForm: FormGroup;\n\n  constructor(private store: Store<AppState>, public dialogRef: DialogRef) { }\n\n  ngOnInit(): void {\n    this.productForm = new FormGroup({\n      name: new FormControl(null, Validators.required),\n      description: new FormControl(null, Validators.required),\n      price: new FormControl(null, Validators.required),\n      image: new FormControl(null, Validators.required),\n    })\n  }\n\n  onAddProduct(){\n    if(!this.productForm.valid){\n      // return;\n      //console.log(this.productForm);\n      //if(this.productForm.status == \"INVALID\"){\n        this.productForm.controls.name.markAsTouched();\n        this.productForm.controls.description.markAsTouched();\n        this.productForm.controls.price.markAsTouched();\n        this.productForm.controls.image.markAsTouched();\n      //}\n    }else{\n      const product: Product = {\n        id:'',\n        name: this.productForm.value.name,\n        description: this.productForm.value.description,\n        price: this.productForm.value.price,\n        image: this.productForm.value.image,\n      }\n      //console.log(product);\n      this.store.dispatch(addProduct({product}));\n      this.dialogRef.close();\n    }\n\n    \n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { addProduct } from '../state/products.actions';\nimport { getProducts } from '../state/products.selector';\n\n@Component({\n  selector: 'app-add-product',\n  templateUrl: './add-product.component.html',\n  styleUrls: ['./add-product.component.scss']\n})\nexport class AddProductComponent implements OnInit {\n  products: Observable<Product[]>;\n  productForm: FormGroup;\n\n  constructor(private store: Store<AppState>, public dialogRef: DialogRef) { }\n\n  ngOnInit(): void {\n    this.productForm = new FormGroup({\n      name: new FormControl(null, Validators.required),\n      description: new FormControl(null, Validators.required),\n      price: new FormControl(null, Validators.required),\n      image: new FormControl(null, Validators.required),\n    })\n  }\n\n  onAddProduct(){\n    if(!this.productForm.valid){\n      // return;\n        this.productForm.markAllAsTouched();\n    }else{\n      const product: Product = {\n        id:'',\n        name: this.productForm.value.name,\n        description: this.productForm.value.description,\n        price: this.productForm.value.price,\n        image: this.productForm.value.image,\n      }\n      //console.log(product);\n      this.store.dispatch(addProduct({product}));\n      this.dialogRef.close();\n    }\n\n    \n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2215,7 +2029,7 @@
                 "args": [],
                 "line": 9
             },
-            "templateData": "<div class=\"content\" role=\"main\" ><span hidden>products-listing app is running!</span></div>\n<app-navbar></app-navbar>\n  \n<router-outlet></router-outlet>\n    "
+            "templateData": "<div class=\"content\" role=\"main\" ><span hidden>products-listing app is running!</span></div>\n<app-navbar></app-navbar>\n\n<router-outlet></router-outlet>\n    "
         },
         {
             "name": "ButtonComponent",
@@ -2430,7 +2244,7 @@
         },
         {
             "name": "CartComponent",
-            "id": "component-CartComponent-18536f1c813aedf6594210c4e78f8baf",
+            "id": "component-CartComponent-9e702cf5d237d5d58926b894fb6daf0d",
             "file": "src/app/cart/cart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2509,7 +2323,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 83,
+                    "line": 76,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2519,37 +2333,19 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
                     "name": "getTotalAmount",
-                    "args": [
-                        {
-                            "name": "items",
-                            "type": "",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
+                    "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 25,
                     "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "items",
-                            "type": "",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
+                    "deprecationMessage": ""
                 },
                 {
                     "name": "ngOnInit",
@@ -2562,24 +2358,8 @@
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "onSuccess",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 75,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
                     "name": "removeItem",
                     "args": [
-                        {
-                            "name": "item",
-                            "type": "",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
                         {
                             "name": "index",
                             "type": "",
@@ -2590,19 +2370,10 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
-                        {
-                            "name": "item",
-                            "type": "",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        },
                         {
                             "name": "index",
                             "type": "",
@@ -2622,11 +2393,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';\nimport { ToastrService } from 'ngx-toastr';\nimport { DialogConfig } from '../global/dialog/dialog-config';\nimport { DialogRef } from '../global/dialog/dialog-ref';\n\n@Component({\n  selector: 'app-cart',\n  templateUrl: './cart.component.html',\n  styleUrls: ['./cart.component.scss']\n})\nexport class CartComponent implements OnInit {\n  @Input() values: any;\n  myCartItems :any= [];\n  cartTotal: number = 0;\n  constructor( public dialogRef: DialogRef, \n    public config: DialogConfig, private toastr: ToastrService) {}\n\n  ngOnInit(){\n    this.myCartItems = this.config.data;\n    if(this.myCartItems){\n      this.getTotalAmount(this.myCartItems);\n    }\n      \n  }\n  \n  getTotalAmount(items){\n    this.cartTotal = 0;\n    let itemsArray: any[] = [];\n    itemsArray = items;\n    let itemsLength: number = itemsArray?.length;\n    for(let i=0; i<itemsLength; i++){\n      this.cartTotal = Number(this.cartTotal) + Number(items[i][\"price\"]); \n    }\n  }\n\n  removeItem(item,index){\n    //console.log(item);\n    this.myCartItems.splice(index,1);\n    if(this.myCartItems){\n      this.getTotalAmount(this.myCartItems);\n    }else{\n      this.myCartItems = [];\n    }\n  }\n\n  checkout(){\n    var handler = (<any>window).StripeCheckout.configure({\n      key: 'pk_test_51IudUaSJYmBu1ez60Gerwee2ob0K7dlbbryng5XOeZLehSllKhjcZKC6YIa9mcsjMVD1L4DgU4qPOF30OjhAerny00xeLagm23',\n      locale: 'auto',\n      token: function (token: any) {\n        // You can access the token ID with `token.id`.\n        // Get the token ID to your server-side code for use.\n        // console.log(token);\n        // console.log(token.id);\n        if(token.id){\n          //console.log(\"payment done\");\n          //this.toastr.success(\"Order Placed Successfully\");\n          localStorage.removeItem(\"cartItems\");\n          localStorage.setItem(\"token\",token.id);\n        }else{\n          //this.toastr.error(\"ERROR\");\n        }\n        this.token = token.id;\n      },\n    });\n    \n    handler.open({\n      name: 'Testing payment',\n      description: 'Enter Card No: 4242 4242 4242 4242',\n      amount: this.cartTotal * 100,\n    });\n\n  }\n\n  onSuccess() {\n    if(localStorage.getItem(\"token\")){\n      this.toastr.success(\"Order Placed Successfully\");\n      this.dialogRef.close();\n    }\n    localStorage.removeItem(\"token\");\n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';\nimport { ToastrService } from 'ngx-toastr';\nimport { DialogConfig } from '../global/dialog/dialog-config';\nimport { DialogRef } from '../global/dialog/dialog-ref';\n\n@Component({\n  selector: 'app-cart',\n  templateUrl: './cart.component.html',\n  styleUrls: ['./cart.component.scss']\n})\nexport class CartComponent implements OnInit {\n  @Input() values: any;\n  myCartItems :any= [];\n  cartTotal: number = 0;\n  constructor( public dialogRef: DialogRef, \n    public config: DialogConfig, private toastr: ToastrService) {}\n\n  ngOnInit(){\n    this.myCartItems = this.config.data;\n    if(this.myCartItems){\n      this.getTotalAmount();\n    }\n  }\n  \n  getTotalAmount(){\n    this.cartTotal = 0;\n    let itemsArray: any[] = [];\n    itemsArray = this.myCartItems;\n    let itemsLength: number = itemsArray?.length;\n    for(let i=0; i<itemsLength; i++){\n      this.cartTotal = Number(this.cartTotal) + Number(itemsArray[i][\"price\"]); \n    }\n  }\n\n  removeItem(index){\n    this.myCartItems = this.myCartItems.splice(index,1);\n    if(this.myCartItems){\n      this.getTotalAmount();\n    }else{\n      this.myCartItems = [];\n    }\n  }\n\n  checkout(){\n    var handler = (<any>window).StripeCheckout.configure({\n      key: 'pk_test_51IudUaSJYmBu1ez60Gerwee2ob0K7dlbbryng5XOeZLehSllKhjcZKC6YIa9mcsjMVD1L4DgU4qPOF30OjhAerny00xeLagm23',\n      locale: 'auto',\n      token: function (token: any) {\n        // You can access the token ID with `token.id`.\n        // Get the token ID to your server-side code for use.\n        if(token.id){\n          //console.log(\"payment done\");\n          localStorage.removeItem(\"cartItems\");\n          localStorage.setItem(\"token\",token.id);\n        }\n        this.token = token.id;\n      },\n    });\n    \n    handler.open({\n      name: 'Testing payment',\n      description: 'Enter Card No: 4242 4242 4242 4242',\n      amount: this.cartTotal * 100,\n    });\n\n  }\n\n  // onSuccess() {\n  //   if(localStorage.getItem(\"token\")){\n  //     this.toastr.success(\"Order Placed Successfully\");\n  //     this.dialogRef.close();\n  //   }\n  //   localStorage.removeItem(\"token\");\n  // }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "/* Add application styles & imports to this file! */\r\n\r\n.cart-dialog {  \r\n    //padding: 20px;\r\n    //position: fixed;\r\n    //right: 1em;\r\n    //top: 73px;\r\n    width: 350px;\r\n    background-color: #f3f3f3;\r\n    border: 1px solid #283593;\r\n    box-shadow: 0 5px 15px rgba(0,0,0, 0.2);\r\n\r\n    .empty{\r\n        text-align: center;\r\n    }\r\n\r\n    .delete-cart{\r\n        float: right;\r\n    }\r\n    .cart-details, .submit-button-container{\r\n        padding:20px;\r\n\r\n        tr.border-bottom td {\r\n            border-bottom: 1px solid #000;\r\n        }\r\n    }\r\n  }\r\n  \r\n  .product-cart ul {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n  }\r\n  \r\n  .product-cart li {\r\n    display: flex;\r\n    flex-flow: row;\r\n    padding: 1em;\r\n    border-bottom: 1px solid #CCC;\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .product-cart img {\r\n    height: 50px;\r\n    width: auto;\r\n    margin-right: 1em;\r\n  }\r\n  \r\n  .product-list__item h4 {\r\n    font-size: 16px;\r\n  }\r\n  \r\n  .product-list__image {\r\n    padding: 1em;\r\n    height: 250px;\r\n  }\r\n  \r\n  .product-list__image img {\r\n    max-width: 100%;\r\n  }\r\n  \r\n  .cart-count {\r\n    color: #FFF;\r\n    position: relative;\r\n  }\r\n  .cart-count em {\r\n    height: 24px;\r\n    background-color: red;\r\n    font-style: normal;\r\n    padding: 0;\r\n    border-radius: 50px;\r\n    position: absolute;\r\n    top: -5px;\r\n    right: -14px;\r\n    width: 24px;\r\n    text-align: center;\r\n    line-height: 24px;\r\n    color: #FFF;\r\n    font-weight: bold;\r\n  }\r\n  \r\n  .cart-total {\r\n    padding: 1em;\r\n    margin: 0;\r\n    display: flex;\r\n    flex-flow: row;\r\n    align-items: normal;\r\n    justify-content: space-between;\r\n  }",
+                    "data": "/* Add application styles & imports to this file! */\r\n\r\n.cart-dialog {  \r\n    //padding: 20px;\r\n    //position: fixed;\r\n    //right: 1em;\r\n    //top: 73px;\r\n    width: 370px;\r\n    background-color: #f3f3f3;\r\n    border: 1px solid #283593;\r\n    box-shadow: 0 5px 15px rgba(0,0,0, 0.2);\r\n\r\n    .empty{\r\n        text-align: center;\r\n    }\r\n\r\n    .delete-cart{\r\n        float: right;\r\n    }\r\n    .cart-details, .submit-button-container{\r\n        padding:20px;\r\n\r\n        tr.border-bottom td {\r\n            border-bottom: 1px solid #000;\r\n        }\r\n    }\r\n  }\r\n  \r\n  .product-cart ul {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n  }\r\n  \r\n  .product-cart li {\r\n    display: flex;\r\n    flex-flow: row;\r\n    padding: 1em;\r\n    border-bottom: 1px solid #CCC;\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .product-cart img {\r\n    height: 50px;\r\n    width: auto;\r\n    margin-right: 1em;\r\n  }\r\n  \r\n  .product-list__item h4 {\r\n    font-size: 16px;\r\n  }\r\n  \r\n  .product-list__image {\r\n    padding: 1em;\r\n    height: 250px;\r\n  }\r\n  \r\n  .product-list__image img {\r\n    max-width: 100%;\r\n  }\r\n  \r\n  .cart-count {\r\n    color: #FFF;\r\n    position: relative;\r\n  }\r\n  .cart-count em {\r\n    height: 24px;\r\n    background-color: red;\r\n    font-style: normal;\r\n    padding: 0;\r\n    border-radius: 50px;\r\n    position: absolute;\r\n    top: -5px;\r\n    right: -14px;\r\n    width: 24px;\r\n    text-align: center;\r\n    line-height: 24px;\r\n    color: #FFF;\r\n    font-weight: bold;\r\n  }\r\n  \r\n  .cart-total {\r\n    padding: 1em;\r\n    margin: 0;\r\n    display: flex;\r\n    flex-flow: row;\r\n    align-items: normal;\r\n    justify-content: space-between;\r\n  }",
                     "styleUrl": "./cart.component.scss"
                 }
             ],
@@ -2690,7 +2461,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">  \n  <div class=\"cart-dialog\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n    <app-header style=\"width: 100% !important;\"\n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Checkout'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>\n    <!-- <h3 style=\"text-align: center;\">My Cart</h3> -->\n    \n\n    <table width=\"100%\" class=\"cart-details\">\n      <tr *ngFor=\"let item of myCartItems; let i=index\" class=\"border-bottom\">\n          <td><h3>{{i+1}}.</h3></td>\n          <td><h3>{{item.name}}</h3></td>\n          <td style=\"text-align: right;\"><h3>${{item.price}}</h3></td>\n          <td style=\"vertical-align: top;\"><button style=\"background-color: red;\" (click)=\"removeItem(item,i)\" class=\"delete-cart\" title=\"Delete\">\n            <i style=\"font-size: 20px;\" class=\"fa fa-trash icon\" ></i>\n          </button></td>\n      </tr>\n      <tr *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n        <td></td>\n        <td style=\"text-align: right;\"><h3>Total:</h3></td>\n        <td style=\"text-align: right;\"><h3 style=\"text-align: right;\" >${{cartTotal}}</h3></td>\n      </tr>\n    </table>\n\n    <!-- <div>\n      <button (click)=\"checkout()\">Checkout</button>\n    </div> -->\n    <div style=\"margin-top: 0px;\" class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\" *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n      <br>\n      <button class=\"w-40 submit-button\" (click)=\"checkout()\">Checkout</button>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Cancel</button>\n    </div> \n\n    <div class=\"empty\" *ngIf=\"!myCartItems\"> <!--*ngIf=\"myCartItems.length > 0\"-->\n      <h3>Cart is empty <br>Please add products to continue...</h3>\n      <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Close</button>\n      </div>\n    </div>\n  </div>\n\n\n</div>\n\n"
+            "templateData": "<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">  \n  <div class=\"cart-dialog\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n    <app-header style=\"width: 100% !important;\"\n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Checkout'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>\n    <!-- <h3 style=\"text-align: center;\">My Cart</h3> -->\n    \n\n    <table width=\"100%\" class=\"cart-details\">\n      <tr *ngFor=\"let item of myCartItems; let i=index\" class=\"border-bottom\">\n          <td><h3>{{i+1}}.</h3></td>\n          <td><h3>{{item.name}}</h3></td>\n          <td style=\"text-align: right;\"><h3>${{item.price}}</h3></td>\n          <td style=\"vertical-align: top;\"><button style=\"background-color: red;\" (click)=\"removeItem(i)\" class=\"delete-cart\" title=\"Delete\">\n            <i style=\"font-size: 20px;\" class=\"fa fa-trash icon\" ></i>\n          </button></td>\n      </tr>\n      <tr *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n        <td></td>\n        <td style=\"text-align: right;\"><h3>Total:</h3></td>\n        <td style=\"text-align: right;\"><h3 style=\"text-align: right;\" >${{cartTotal}}</h3></td>\n      </tr>\n    </table>\n\n    <!-- <div>\n      <button (click)=\"checkout()\">Checkout</button>\n    </div> -->\n    <div style=\"margin-top: 0px;\" class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\" *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n      <br>\n      <button class=\"w-40 submit-button\" (click)=\"checkout()\">Checkout</button>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Cancel</button>\n    </div> \n\n    <div class=\"empty\" *ngIf=\"!myCartItems\"> <!--*ngIf=\"myCartItems.length > 0\"-->\n      <h3>Cart is empty <br>Please add products to continue...</h3>\n      <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Close</button>\n      </div>\n    </div>\n  </div>\n\n\n</div>\n\n"
         },
         {
             "name": "CheckboxComponent",
@@ -3054,7 +2825,7 @@
         },
         {
             "name": "EditProductComponent",
-            "id": "component-EditProductComponent-2aa4fbaf098cf356bdf25c75b50b25a4",
+            "id": "component-EditProductComponent-25bbddf72370f60cebf08f0ecf7ae523",
             "file": "src/app/products/edit-product/edit-product.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3141,7 +2912,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 96,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3151,7 +2922,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 62,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3171,7 +2942,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 68,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3183,7 +2954,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Inject, OnDestroy, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { ActivatedRoute } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Subscription } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { updateProduct } from '../state/products.actions';\nimport { getProductById } from '../state/products.selector';\n\n@Component({\n  selector: 'app-edit-product',\n  templateUrl: './edit-product.component.html',\n  styleUrls: ['./edit-product.component.scss']\n})\nexport class EditProductComponent implements OnInit, OnDestroy {\n  product:Product |any;\n  productForm: FormGroup |any ;\n  productSubscription : Subscription |any;\n  productData: any;\n  constructor(private route:ActivatedRoute, private store:Store<AppState>,\n    public dialogRef: DialogRef, public config: DialogConfig) {\n      this.productForm = new FormGroup({\n        name: new FormControl('', Validators.required),\n        description: new FormControl('', Validators.required),\n        price: new FormControl('', Validators.required),\n        image: new FormControl('', Validators.required),\n      });\n     }\n\n  ngOnInit(): void {\n    this.productData = this.config.data;\n    this.route.paramMap.subscribe((params) =>{\n      const id = params.get('id');\n      this.store.select(getProductById,{id}).subscribe((data) => {\n        this.product = data;\n        //this.createForm();\n        this.productForm.controls.name.setValue(this.productData.name);\n        this.productForm.controls.description.setValue(this.productData.description);\n        this.productForm.controls.price.setValue(this.productData.price);\n        this.productForm.controls.image.setValue(this.productData.image);\n      })\n    })\n  }\n\n  //createForm(){\n    \n    // this.productForm.controls.name.setValue(this.productData.name);\n    // this.productForm.controls.description.setValue(this.productData.description);\n    // this.productForm.controls.price.setValue(this.productData.price);\n    // this.productForm.controls.image.setValue(this.productData.image);\n    // this.productForm = new FormGroup({\n    //   name: new FormControl(this.productData.name, Validators.required),\n    //   description: new FormControl(this.productData.description, Validators.required),\n    //   price: new FormControl(this.productData.price, Validators.required),\n    //   image: new FormControl(this.productData.image, Validators.required),\n    // });\n  //}\n\n  ngOnDestroy(){\n    if(this.productSubscription){\n      this.productSubscription.unsubscribe();\n    }\n  }\n\n  onUpdateProduct(){\n    if(!this.productForm.valid){\n      // return;\n      this.productForm.controls.name.markAsTouched();\n      this.productForm.controls.description.markAsTouched();\n      this.productForm.controls.price.markAsTouched();\n      this.productForm.controls.image.markAsTouched();\n    }else{\n      const name = this.productForm.value.name;\n      const description = this.productForm.value.description;\n      const price = this.productForm.value.price;\n      const image = this.productForm.value.image;\n  \n      const product: Product = {\n        id:this.productData.id,\n        name,\n        description,\n        price,\n        image\n      }\n  \n      this.store.dispatch(updateProduct({ product }));\n      this.dialogRef.close();\n    }\n\n    \n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, Inject, OnDestroy, OnInit } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { ActivatedRoute } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Subscription } from 'rxjs';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { Product } from '../products.model';\nimport { updateProduct } from '../state/products.actions';\nimport { getProductById } from '../state/products.selector';\n\n@Component({\n  selector: 'app-edit-product',\n  templateUrl: './edit-product.component.html',\n  styleUrls: ['./edit-product.component.scss']\n})\nexport class EditProductComponent implements OnInit, OnDestroy {\n  product:Product |any;\n  productForm: FormGroup |any ;\n  productSubscription : Subscription |any;\n  productData: any;\n  constructor(private route:ActivatedRoute, private store:Store<AppState>,\n    public dialogRef: DialogRef, public config: DialogConfig) {\n      this.productForm = new FormGroup({\n        name: new FormControl('', Validators.required),\n        description: new FormControl('', Validators.required),\n        price: new FormControl('', Validators.required),\n        image: new FormControl('', Validators.required),\n      });\n     }\n\n  ngOnInit(): void {\n    this.productData = this.config.data;\n    this.route.paramMap.subscribe((params) =>{\n      const id = params.get('id');\n      this.store.select(getProductById,{id}).subscribe((data) => {\n        this.product = data;\n        this.productForm.patchValue(this.productData);\n      })\n    })\n  }\n\n  ngOnDestroy(){\n    if(this.productSubscription){\n      this.productSubscription.unsubscribe();\n    }\n  }\n\n  onUpdateProduct(){\n    if(!this.productForm.valid){\n      // return;\n      this.productForm.markAllAsTouched();\n    }else{\n      const product: Product = {\n        id:this.productData.id,\n        name:this.productForm.value.name,\n        description: this.productForm.value.description,\n        price: this.productForm.value.price,\n        image: this.productForm.value.image\n      }\n      \n      this.store.dispatch(updateProduct({ product }));\n      this.dialogRef.close();\n    }\n\n    \n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3391,7 +3162,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-7a78e291f4160d8bd8e2ffe2e0c89d6b-1",
+            "id": "component-HeaderComponent-82cc1ed3143c9fce621376e4c46724ca-1",
             "file": "src/app/global/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3424,7 +3195,7 @@
                 },
                 {
                     "name": "hasBgImage",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 12,
@@ -3439,6 +3210,7 @@
                 },
                 {
                     "name": "title",
+                    "defaultValue": "\"Header\"",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 10,
@@ -3455,7 +3227,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  templateUrl: './header.component.html',\r\n  styleUrls: ['./header.component.scss']\r\n})\r\nexport class HeaderComponent {\r\n  @Input() icon:any;\r\n  @Input() title:any;\r\n  @Input() desc:any;\r\n  @Input() hasBgImage:boolean = false;\r\n  @Input() class:any;\r\n  \r\n  constructor() { }\r\n\r\n \r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  templateUrl: './header.component.html',\r\n  styleUrls: ['./header.component.scss']\r\n})\r\nexport class HeaderComponent {\r\n  @Input() icon:any;\r\n  @Input() title:any= \"Header\";\r\n  @Input() desc:any;\r\n  @Input() hasBgImage:boolean = true;\r\n  @Input() class:any;\r\n  \r\n  constructor() { }\r\n\r\n \r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3597,7 +3369,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<!-- <br><br><br>\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"search-product\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n    </div>\n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let prod of products | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n            <img [src]=\"prod.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{prod.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{prod.price}} </h2>\n            <p>{{prod.desc}}</p>\n\n            <button (click)=\"viewProduct()\">More Details</button>\n        </div>\n        \n    </div>\n    \n</div>\n\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n\n<app-footer></app-footer> -->"
+            "templateData": "<!-- <br><br><br>\n<div id=\"products\" class=\"mt-2 pt-3\">\n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>PRODUCTS LIST</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice...</p>\n    </div> \n    <div class=\"search-product\">\n        <input class=\"form-control\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n    </div>\n    <div class=\"container\">\n        <div class=\"card\" *ngFor=\"let prod of products | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n            <img [src]=\"prod.src\" alt=\"image\" class=\"card-image\">\n            <h2>{{prod.name}} &nbsp;&nbsp;&nbsp;&nbsp;{{prod.price}} </h2>\n            <p>{{prod.desc}}</p>\n\n            <button (click)=\"viewProduct()\">More Details</button>\n        </div>\n        \n    </div>\n    \n</div>\n\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n\n<app-footer></app-footer> -->\n<div class=\"outer\" style=\"margin: 0 10px 0 10px\"> \n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>Products List</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice</p>\n    </div>\n    <div class=\"products-tasks\" style=\"display: flex; flex-wrap: wrap;\">\n        <div class=\"search-product\" style=\"margin-top: 12px;\">\n            <input class=\"form-control\" style=\"margin: 0px !important; padding-bottom: 4px; border-radius: 5px; border: 1px solid #000;\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n        </div>\n        <div style=\"margin-bottom: 0px; margin-left:auto\">\n            <button *ngIf=\"currentUser\" (click)=\"openAddDialog()\" style=\"margin-top: -20px;\" class=\"add-product-button\">Add Product</button> &nbsp;&nbsp;&nbsp;\n            <button (click)=\"openCartDialog()\" title=\"Cart\">\n\t\t\t\t<span class=\"cart-count\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 19.25 19.25\" style=\"enable-background:new 0 0 19.25 19.25;\" xml:space=\"preserve\" width=\"15px\" height=\"20px\">\n\t\t\t\t\t<g>\n\t\t\t\t\t\t<g id=\"Layer_1_107_\">\n\t\t\t\t\t\t<g>\n\t\t\t\t\t\t\t<path d=\"M19.006,2.97c-0.191-0.219-0.466-0.345-0.756-0.345H4.431L4.236,1.461     C4.156,0.979,3.739,0.625,3.25,0.625H1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1.403l1.86,11.164c0.008,0.045,0.031,0.082,0.045,0.124     c0.016,0.053,0.029,0.103,0.054,0.151c0.032,0.066,0.075,0.122,0.12,0.179c0.031,0.039,0.059,0.078,0.095,0.112     c0.058,0.054,0.125,0.092,0.193,0.13c0.038,0.021,0.071,0.049,0.112,0.065c0.116,0.047,0.238,0.075,0.367,0.075     c0.001,0,11.001,0,11.001,0c0.553,0,1-0.447,1-1s-0.447-1-1-1H6.097l-0.166-1H17.25c0.498,0,0.92-0.366,0.99-0.858l1-7     C19.281,3.479,19.195,3.188,19.006,2.97z M17.097,4.625l-0.285,2H13.25v-2H17.097z M12.25,4.625v2h-3v-2H12.25z M12.25,7.625v2     h-3v-2H12.25z M8.25,4.625v2h-3c-0.053,0-0.101,0.015-0.148,0.03l-0.338-2.03H8.25z M5.264,7.625H8.25v2H5.597L5.264,7.625z      M13.25,9.625v-2h3.418l-0.285,2H13.25z\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"6.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"15.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t</g>\n\t\t\t\t\t</svg>\n\t\t\t\t<em>{{cartProductCount}}</em> \n\t\t\t\t</span>\n\t\t\t</button>\n        </div>\n        \n       \n    </div>\n\n    <div class=\"list-col1\">\n        <div id=\"products\" class=\"mt-2 pt-3\">\n            <div class=\"container\">\n                <div class=\"card\" *ngFor=\"let p of products | async | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n                    <img [src]=\"p.image\" alt=\"image\" class=\"card-image\">\n                    <h3>{{p.name}} <span style=\"float:right\">Price: {{p.price}} $</span>  </h3>\n                    <p>Description: {{p.description}}</p>\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"openUpdateDialog(p)\">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]=\"['edit', p.id]\"-->\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"deleteProduct(p.id)\">Delete</button> &nbsp;&nbsp;</span>\n                    <button (click)=\"addToCart(p)\" class=\"card-actions\">Add To Cart</button>\n                </div>\n            </div>\n            <div class=\"card\" *ngIf=\"NoProducts\">\n                <h1>No Products added</h1>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"list-col2\">\n    <div style=\"width:30%\"></div>\n    <router-outlet></router-outlet>\n    <div style=\"width:30%\"></div>\n</div>\n<br>\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n<br><br><br>\n\n<div class=\"footer-top\">\n    <div class=\"footer-box\">\n        <h3>Why Choose Us</h3>\n        <p><i class=\"fa fa-credit-card icon\"></i>Secure Payments</p>\n        <p><i class=\"fa fa-undo icon\"></i>Easy Returns</p>\n        <p><i class=\"fa fa-times icon\"></i>Free Cancellation</p>\n        <p><i class=\"fa fa-truck icon\"></i>Free Shipping</p>\n        <!-- <p><i class=\"fa fa-question-circle icon\"></i>24/7 Support</p> -->\n    </div>\n    <div class=\"footer-box\">\n        <h3>Social</h3>\n        <p><i class=\"fa fa-facebook-square icon\"></i>Facebook</p>\n        <p><i class=\"fa fa-twitter icon\"></i>Twitter</p>\n        <p><i class=\"fa fa-instagram icon\"></i>Instagram</p>\n        <p><i class=\"fa fa-linkedin icon\"></i>Linkedin</p>\n    </div>\n    <div class=\"footer-box\">\n        <h3>Contact</h3>\n        <p><i class=\"fa fa-phone icon\"></i>Customer Care: 1234567890</p>\n        <p><i class=\"fa fa-whatsapp icon\"></i>Whatsapp: 1234567890</p>\n        <p><i class=\"fa fa-envelope icon\"></i>Email: order@products.com</p>\n        <p><i class=\"fa fa-map-marker icon\"></i>Address: Pune, Maharashtra, India</p>\n    </div>\n</div>\n\n<app-footer></app-footer>\n\n"
         },
         {
             "name": "ImageComponent",
@@ -3682,7 +3454,7 @@
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-d1aae78725797d3bd1dd9e258962825f",
+            "id": "component-LoginComponent-24478c1d1e746a915b763f3500751ea5",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3708,7 +3480,7 @@
                     "type": "AuthService",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 22,
                     "modifierKind": [
                         122
                     ]
@@ -3729,7 +3501,7 @@
                     "type": "FormBuilder",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 21,
                     "modifierKind": [
                         122
                     ]
@@ -3753,7 +3525,7 @@
                     "type": "Router",
                     "optional": false,
                     "description": "",
-                    "line": 22,
+                    "line": 23,
                     "modifierKind": [
                         122
                     ]
@@ -3767,6 +3539,16 @@
                     "optional": false,
                     "description": "",
                     "line": 19
+                },
+                {
+                    "name": "successFlag",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
                 },
                 {
                     "name": "users",
@@ -3786,7 +3568,27 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 76,
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getLoginMessage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3796,7 +3598,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3808,7 +3610,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from '../app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  submitted = false;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    this.form = this.fb.group({\n      'email': [null, Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  onSubmit(){\n\n    if(this.form.invalid){\n      this.form.controls.email.markAsTouched();\n      this.form.controls.password.markAsTouched();\n    }else{\n      this.submitted = true;\n      this.currentUser = this.form.value.email;\n      this.authService.login().subscribe(\n        data => {\n          let successFlag = false;\n          console.log(data);\n          if(data){\n            this.users = data;\n            for(let i=0; i<this.users.length; i++){\n              if(this.form.value.email === this.users[i][\"email\"] && this.form.value.password === this.users[i][\"password\"]){\n                console.log(\"if\");\n                console.log(this.currentUser);\n                localStorage.setItem('user', this.currentUser);\n                localStorage.setItem('firstname', this.users[i].firstname);\n                console.log(localStorage.getItem(\"user\"));\n                this.toastr.success('Login Success');\n                successFlag = true;\n                this.router.navigate(['/']);\n              }else{\n                successFlag = false;\n              }\n            }\n            console.log(successFlag);\n            if(!successFlag){\n              console.log(successFlag);\n              this.toastr.error('Invalid email or password');\n            }\n          }else{\n            console.log(\"Users not found\");\n          }\n        },\n        error => {\n          error='Bad email';\n        });\n    }\n    \n  }\n\n\n  forgotPassword(){\n    this.toastr.info(\"Not Implemented\");\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from '../app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  submitted = false;\n  successFlag = true;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    \n  }\n  ngOnInit(){\n    this.form = this.fb.group({\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  onSubmit(){\n\n    if(this.form.invalid){\n      this.form.markAllAsTouched();\n    }else{\n      this.submitted = true;\n      this.currentUser = this.form.value.email;\n      this.authService.login().subscribe(\n        data => {\n          \n          if(data){\n            this.users = data;\n            for(let i=0; i<this.users.length; i++){\n              if(this.form.value.email === this.users[i][\"email\"] && this.form.value.password === this.users[i][\"password\"]){\n                localStorage.setItem('user', this.currentUser);\n                localStorage.setItem('firstname', this.users[i].firstname);\n                this.successFlag = true;\n                this.router.navigate(['/']);\n                break;\n              }else{\n                this.successFlag = false;\n              }\n            }\n            this.getLoginMessage();\n          }else{\n            this.toastr.info(\"Users not found\");\n          }\n        },\n        error => {\n          error='Bad email';\n        });\n    }\n    \n  }\n\n  getLoginMessage(){\n    if(!this.successFlag){\n      this.toastr.error('Invalid email or password');\n    }else{\n      this.toastr.success('Login Success');\n    }\n  }\n\n\n  forgotPassword(){\n    this.toastr.info(\"Not Implemented\");\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3854,7 +3656,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 19,
+                "line": 20,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -3903,11 +3705,14 @@
                     }
                 ]
             },
+            "implements": [
+                "OnInit"
+            ],
             "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\" >\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Login'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Email\" type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid Email</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Enter minimum 6 characters</span>\n                <br>\n                <div class=\"submit-button-container\">\n                    <button aria-label=\"Login\" class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/forgot-password\" class=\"w-100 link\">Forgot Password?</a>\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "NavbarComponent",
-            "id": "component-NavbarComponent-20b9e7fa3e49b87ef4ff7ee2dbbdbb2b",
+            "id": "component-NavbarComponent-06a41448c50943c31f57181411887ea7",
             "file": "src/app/global/navbar/navbar.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4150,7 +3955,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthService } from '../../login/auth.service';\nimport { SignupComponent } from '../../login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n\n  @Input() config: any = {};\n  username: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService, \n    private router: Router) {}\n\n  logout(){\n    localStorage.removeItem(\"user\");\n    localStorage.removeItem(\"firstname\");\n    localStorage.removeItem(\"cartItems\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n      // console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n      this.username = localStorage.getItem(\"firstname\");\n  }\n\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n    \n  }\n  onSettings(){\n    // console.log(this.isOpenMenu);\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    // console.log(this.currentUser);\n    this.authService.getUsers().subscribe(data=>{\n      // console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i];\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      ref.afterClosed.subscribe(result => {\n        console.log('Dialog closed', result);      \n      });\n    });\n  }\n\n  \n\n}\n",
+            "sourceCode": "import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthService } from '../../login/auth.service';\nimport { SignupComponent } from '../../login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n\n  @Input() config: any = {};\n  username: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService, \n    private router: Router) {}\n\n  logout(){\n    localStorage.removeItem(\"user\");\n    localStorage.removeItem(\"firstname\");\n    localStorage.removeItem(\"cartItems\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n      // console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n      this.username = localStorage.getItem(\"firstname\");\n  }\n\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n    \n  }\n  onSettings(){\n    // console.log(this.isOpenMenu);\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    // console.log(this.currentUser);\n    this.authService.getUsers().subscribe(data=>{\n      // console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i];\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      // ref.afterClosed.subscribe(result => {\n      //   console.log('Dialog closed', result);      \n      // });\n    });\n  }\n\n  \n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4340,7 +4145,7 @@
         },
         {
             "name": "ProductsListComponent",
-            "id": "component-ProductsListComponent-906a8d7ae292d8b7a4451dbc2a31d2e3",
+            "id": "component-ProductsListComponent-c2c1e4bc9133a12c7c3489cf3185d266",
             "file": "src/app/products/products-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4480,7 +4285,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -4552,7 +4357,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 62,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4562,7 +4367,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 97,
+                    "line": 92,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4579,7 +4384,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 74,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4593,16 +4398,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "name": "viewProduct",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 63,
-                    "deprecated": false,
-                    "deprecationMessage": ""
                 }
             ],
             "deprecated": false,
@@ -4612,7 +4407,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../app.state';\nimport { DialogService } from '../global/dialog/dialog.service';\nimport { CartComponent } from '../cart/cart.component';\nimport { NavbarComponent } from '../global/navbar/navbar.component';\nimport { AddProductComponent } from './add-product/add-product.component';\nimport { EditProductComponent } from './edit-product/edit-product.component';\nimport { Product } from './products.model';\nimport { addProduct, deleteProduct, loadProducts } from './state/products.actions';\nimport { getProducts } from './state/products.selector';\n\n@Component({\n  selector: 'app-products-list',\n  templateUrl: './products-list.component.html',\n  styleUrls: ['./products-list.component.scss']\n})\nexport class ProductsListComponent implements OnInit {\n  products: Observable<Product[]>;\n  NoProducts: boolean=false;\n  p: any;\n  public searchText: any;\n  cartProductList = [];\n  @Output() comp1Out = new EventEmitter();\n  public cartItems:any[]=new Array();\n  public cartProductCount: number = 0;\n  currentUser: string | null;\n  \n  constructor(private store : Store<AppState>, private router: Router, \n    public dialog: DialogService) { }\n\n  ngOnInit(): void {\n    this.getProducts();\n    if(localStorage.getItem(\"cartItems\")){\n      let localItems:any = localStorage.getItem(\"cartItems\");\n      this.cartItems = JSON.parse(localItems);\n      this.cartProductCount = this.cartItems.length;\n    }else{\n      // console.log(\"Cart is empty\");\n    }    \n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  getProducts(){\n    this.products = this.store.select(getProducts);\n    this.store.dispatch(loadProducts());\n  }\n\n  deleteProduct(id:string){\n    if(confirm(\"Are you sure you want to delete?\")){\n      this.store.dispatch(deleteProduct({id}));\n      //this.router.navigate(['/products']);\n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    }\n    if(!this.products){\n      this.NoProducts = true;\n    }\n  }\n\n  viewProduct(){\n\n  }\n\n  openAddDialog(){\n    const ref = this.dialog.open(AddProductComponent, {\n      data: { message: 'testing' }\n    });\n\n    ref.afterClosed.subscribe(result => {\n      //console.log('Dialog closed', result);  \n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    });\n  }\n\n  openUpdateDialog(product){\n    // console.log(product);\n    const ref = this.dialog.open(EditProductComponent, {\n      data: product\n    });\n\n    ref.afterClosed.subscribe(result => {\n      console.log('Dialog closed', result);      \n    });\n  }\n\n  public addToCart(product): void {\n      this.cartItems.push(product);\n      // console.log(this.cartItems);\n      this.cartProductCount = this.cartItems.length;\n      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));\n  }\n\n  openCartDialog(){\n    //this.router.navigate(['/cart']);\n    const ref = this.dialog.open(CartComponent, {\n      data: this.cartItems\n     });\n \n     ref.afterClosed.subscribe(result => {\n       //console.log('Dialog closed', result);\n       if(localStorage.getItem(\"token\")){\n        this.cartItems = [];\n        this.cartProductCount = this.cartItems.length;\n        localStorage.removeItem(\"token\");\n       }\n          \n     }); \n  }\n  \n}\n",
+            "sourceCode": "import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../app.state';\nimport { DialogService } from '../global/dialog/dialog.service';\nimport { CartComponent } from '../cart/cart.component';\nimport { NavbarComponent } from '../global/navbar/navbar.component';\nimport { AddProductComponent } from './add-product/add-product.component';\nimport { EditProductComponent } from './edit-product/edit-product.component';\nimport { Product } from './products.model';\nimport { addProduct, deleteProduct, loadProducts } from './state/products.actions';\nimport { getProducts } from './state/products.selector';\n\n@Component({\n  selector: 'app-products-list',\n  templateUrl: './products-list.component.html',\n  styleUrls: ['./products-list.component.scss']\n})\nexport class ProductsListComponent implements OnInit {\n  products: Observable<Product[]>;\n  NoProducts: boolean=false;\n  p: any;\n  public searchText: any;\n  cartProductList = [];\n  @Output() comp1Out = new EventEmitter();\n  public cartItems:any[]=new Array();\n  public cartProductCount: number = 0;\n  currentUser: string | null;\n  \n  constructor(private store : Store<AppState>, private router: Router, \n    public dialog: DialogService) { }\n\n  ngOnInit(): void {\n    this.getProducts();\n    if(localStorage.getItem(\"cartItems\")){\n      let localItems:any = localStorage.getItem(\"cartItems\");\n      this.cartItems = JSON.parse(localItems);\n      this.cartProductCount = this.cartItems.length;\n    }else{\n      // console.log(\"Cart is empty\");\n    }    \n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  getProducts(){\n    this.products = this.store.select(getProducts);\n    this.store.dispatch(loadProducts());\n  }\n\n  deleteProduct(id:string){\n    if(confirm(\"Are you sure you want to delete?\")){\n      this.store.dispatch(deleteProduct({id}));\n      //this.router.navigate(['/products']);\n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    }\n    \n  }\n\n\n  openAddDialog(){\n    const ref = this.dialog.open(AddProductComponent, {\n      data: { message: 'testing' }\n    });\n\n    ref.afterClosed.subscribe(result => {\n      //console.log('Dialog closed', result);  \n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    });\n  }\n\n  openUpdateDialog(product){\n    // console.log(product);\n    const ref = this.dialog.open(EditProductComponent, {\n      data: product\n    });\n\n    // ref.afterClosed.subscribe(result => {\n    //   // console.log('Dialog closed', result);      \n    // });\n  }\n\n  public addToCart(product): void {\n      this.cartItems.push(product);\n      // console.log(this.cartItems);\n      this.cartProductCount = this.cartItems.length;\n      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));\n  }\n\n  openCartDialog(){\n    //this.router.navigate(['/cart']);\n    const ref = this.dialog.open(CartComponent, {\n      data: this.cartItems\n     });\n \n     ref.afterClosed.subscribe(result => {\n       //console.log('Dialog closed', result);\n       if(localStorage.getItem(\"token\")){\n        this.cartItems = [];\n        this.cartProductCount = this.cartItems.length;\n        localStorage.removeItem(\"token\");\n       }\n          \n     }); \n  }\n  \n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4680,11 +4475,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"outer\" style=\"margin: 0 10px 0 10px\"> \n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>Products List</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice</p>\n    </div>\n    <div class=\"products-tasks\" style=\"display: flex; flex-wrap: wrap;\">\n        <div class=\"search-product\" style=\"margin-top: 12px;\">\n            <input class=\"form-control\" style=\"margin: 0px !important; padding-bottom: 4px; border-radius: 5px; border: 1px solid #000;\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n        </div>\n        <div style=\"margin-bottom: 0px; margin-left:auto\">\n            <button *ngIf=\"currentUser\" (click)=\"openAddDialog()\" style=\"margin-top: -20px;\" class=\"add-product-button\">Add Product</button> &nbsp;&nbsp;&nbsp;\n            <button (click)=\"openCartDialog()\" title=\"Cart\">\n\t\t\t\t<span class=\"cart-count\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 19.25 19.25\" style=\"enable-background:new 0 0 19.25 19.25;\" xml:space=\"preserve\" width=\"15px\" height=\"20px\">\n\t\t\t\t\t<g>\n\t\t\t\t\t\t<g id=\"Layer_1_107_\">\n\t\t\t\t\t\t<g>\n\t\t\t\t\t\t\t<path d=\"M19.006,2.97c-0.191-0.219-0.466-0.345-0.756-0.345H4.431L4.236,1.461     C4.156,0.979,3.739,0.625,3.25,0.625H1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1.403l1.86,11.164c0.008,0.045,0.031,0.082,0.045,0.124     c0.016,0.053,0.029,0.103,0.054,0.151c0.032,0.066,0.075,0.122,0.12,0.179c0.031,0.039,0.059,0.078,0.095,0.112     c0.058,0.054,0.125,0.092,0.193,0.13c0.038,0.021,0.071,0.049,0.112,0.065c0.116,0.047,0.238,0.075,0.367,0.075     c0.001,0,11.001,0,11.001,0c0.553,0,1-0.447,1-1s-0.447-1-1-1H6.097l-0.166-1H17.25c0.498,0,0.92-0.366,0.99-0.858l1-7     C19.281,3.479,19.195,3.188,19.006,2.97z M17.097,4.625l-0.285,2H13.25v-2H17.097z M12.25,4.625v2h-3v-2H12.25z M12.25,7.625v2     h-3v-2H12.25z M8.25,4.625v2h-3c-0.053,0-0.101,0.015-0.148,0.03l-0.338-2.03H8.25z M5.264,7.625H8.25v2H5.597L5.264,7.625z      M13.25,9.625v-2h3.418l-0.285,2H13.25z\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"6.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"15.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t</g>\n\t\t\t\t\t</svg>\n\t\t\t\t<em>{{cartProductCount}}</em> \n\t\t\t\t</span>\n\t\t\t</button>\n        </div>\n        \n       \n    </div>\n\n    <div class=\"list-col1\">\n        <div id=\"products\" class=\"mt-2 pt-3\">\n            <div class=\"container\">\n                <div class=\"card\" *ngFor=\"let p of products | async | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n                    <img [src]=\"p.image\" alt=\"image\" class=\"card-image\">\n                    <h3>{{p.name}} <span style=\"float:right\">Price: {{p.price}} $</span>  </h3>\n                    <p>Description: {{p.description}}</p>\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"openUpdateDialog(p)\">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]=\"['edit', p.id]\"-->\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"deleteProduct(p.id)\">Delete</button> &nbsp;&nbsp;</span>\n                    <button (click)=\"addToCart(p)\" class=\"card-actions\">Add To Cart</button>\n                </div>\n            </div>\n            <div class=\"card\" *ngIf=\"NoProducts\">\n                <h1>No Products added</h1>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"list-col2\">\n    <div style=\"width:30%\"></div>\n    <router-outlet></router-outlet>\n    <div style=\"width:30%\"></div>\n</div>\n<br>\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n<br><br><br>\n\n<div class=\"footer-top\">\n    <div class=\"footer-box\">\n        <h3>Why Choose Us</h3>\n        <p><i class=\"fa fa-credit-card icon\"></i>Secure Payments</p>\n        <p><i class=\"fa fa-undo icon\"></i>Easy Returns</p>\n        <p><i class=\"fa fa-times icon\"></i>Free Cancellation</p>\n        <p><i class=\"fa fa-truck icon\"></i>Free Shipping</p>\n        <!-- <p><i class=\"fa fa-question-circle icon\"></i>24/7 Support</p> -->\n    </div>\n    <div class=\"footer-box\">\n        <h3>Social</h3>\n        <p><i class=\"fa fa-facebook-square icon\"></i>Facebook</p>\n        <p><i class=\"fa fa-twitter icon\"></i>Twitter</p>\n        <p><i class=\"fa fa-instagram icon\"></i>Instagram</p>\n        <p><i class=\"fa fa-linkedin icon\"></i>Linkedin</p>\n    </div>\n    <div class=\"footer-box\">\n        <h3>Contact</h3>\n        <p><i class=\"fa fa-phone icon\"></i>Customer Care: 1234567890</p>\n        <p><i class=\"fa fa-whatsapp icon\"></i>Whatsapp: 1234567890</p>\n        <p><i class=\"fa fa-envelope icon\"></i>Email: order@products.com</p>\n        <p><i class=\"fa fa-map-marker icon\"></i>Address: Pune, Maharashtra, India</p>\n    </div>\n</div>\n\n<app-footer></app-footer>\n\n"
+            "templateData": "<div class=\"outer\" style=\"margin: 0 10px 0 10px\"> \n    <div fxLayout=\"column\" fxLayoutAlign=\"center center\" class=\"title-section p-2 mb-2\">  \n        <h1>Products List</h1>             \n        <p class=\"secondary-text-color\">Explore products of your choice</p>\n    </div>\n    <div class=\"products-tasks\" style=\"display: flex; flex-wrap: wrap;\">\n        <div class=\"search-product\" style=\"margin-top: 12px;\">\n            <input class=\"form-control\" style=\"margin: 0px !important; padding-bottom: 4px; border-radius: 5px; border: 1px solid #000;\" type=\"text\" name=\"search\" [(ngModel)]=\"searchText\" autocomplete=\"off\" placeholder=\"Search Products\">\n        </div>\n        <div style=\"margin-bottom: 0px; margin-left:auto\">\n            <button *ngIf=\"currentUser\" (click)=\"openAddDialog()\" style=\"margin-top: -20px;\" class=\"add-product-button\">Add Product</button> &nbsp;&nbsp;&nbsp;\n            <button (click)=\"openCartDialog()\" title=\"Cart\">\n\t\t\t\t<span class=\"cart-count\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Capa_1\" x=\"0px\" y=\"0px\" viewBox=\"0 0 19.25 19.25\" style=\"enable-background:new 0 0 19.25 19.25;\" xml:space=\"preserve\" width=\"15px\" height=\"20px\">\n\t\t\t\t\t<g>\n\t\t\t\t\t\t<g id=\"Layer_1_107_\">\n\t\t\t\t\t\t<g>\n\t\t\t\t\t\t\t<path d=\"M19.006,2.97c-0.191-0.219-0.466-0.345-0.756-0.345H4.431L4.236,1.461     C4.156,0.979,3.739,0.625,3.25,0.625H1c-0.553,0-1,0.447-1,1s0.447,1,1,1h1.403l1.86,11.164c0.008,0.045,0.031,0.082,0.045,0.124     c0.016,0.053,0.029,0.103,0.054,0.151c0.032,0.066,0.075,0.122,0.12,0.179c0.031,0.039,0.059,0.078,0.095,0.112     c0.058,0.054,0.125,0.092,0.193,0.13c0.038,0.021,0.071,0.049,0.112,0.065c0.116,0.047,0.238,0.075,0.367,0.075     c0.001,0,11.001,0,11.001,0c0.553,0,1-0.447,1-1s-0.447-1-1-1H6.097l-0.166-1H17.25c0.498,0,0.92-0.366,0.99-0.858l1-7     C19.281,3.479,19.195,3.188,19.006,2.97z M17.097,4.625l-0.285,2H13.25v-2H17.097z M12.25,4.625v2h-3v-2H12.25z M12.25,7.625v2     h-3v-2H12.25z M8.25,4.625v2h-3c-0.053,0-0.101,0.015-0.148,0.03l-0.338-2.03H8.25z M5.264,7.625H8.25v2H5.597L5.264,7.625z      M13.25,9.625v-2h3.418l-0.285,2H13.25z\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"6.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t\t<circle cx=\"15.75\" cy=\"17.125\" r=\"1.5\" fill=\"#FFFFFF\"/>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t\t</g>\n\t\t\t\t\t</g>\n\t\t\t\t\t</svg>\n\t\t\t\t<em>{{cartProductCount}}</em> \n\t\t\t\t</span>\n\t\t\t</button>\n        </div>\n        \n       \n    </div>\n\n    <div class=\"list-col1\">\n        <div id=\"products\" class=\"mt-2 pt-3\">\n            <div class=\"container\">\n                <div class=\"card\" *ngFor=\"let p of products | async | filter:searchText | paginate: { itemsPerPage: 6, currentPage: p}\">\n                    <img [src]=\"p.image\" alt=\"image\" class=\"card-image\">\n                    <h3>{{p.name}} <span style=\"float:right\">Price: {{p.price}} $</span>  </h3>\n                    <p>Description: {{p.description}}</p>\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"openUpdateDialog(p)\">Update</button>&nbsp;&nbsp;</span> <!--[routerLink]=\"['edit', p.id]\"-->\n                    <span *ngIf=\"currentUser\"><button class=\"card-actions\" (click)=\"deleteProduct(p.id)\">Delete</button> &nbsp;&nbsp;</span>\n                    <button (click)=\"addToCart(p)\" class=\"card-actions\">Add To Cart</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"list-col2\">\n    <div style=\"width:30%\"></div>\n    <router-outlet></router-outlet>\n    <div style=\"width:30%\"></div>\n</div>\n<br>\n<div class=\"pagination\">\n    <pagination-controls (pageChange)=\"p=$event\"></pagination-controls>\n</div>\n<br><br><br>\n\n<div class=\"footer-top\">\n    <div class=\"footer-box\">\n        <h3>Why Choose Us</h3>\n        <p><i class=\"fa fa-credit-card icon\"></i>Secure Payments</p>\n        <p><i class=\"fa fa-undo icon\"></i>Easy Returns</p>\n        <p><i class=\"fa fa-times icon\"></i>Free Cancellation</p>\n        <p><i class=\"fa fa-truck icon\"></i>Free Shipping</p>\n        <!-- <p><i class=\"fa fa-question-circle icon\"></i>24/7 Support</p> -->\n    </div>\n    <div class=\"footer-box\">\n        <h3>Social</h3>\n        <p><i class=\"fa fa-facebook-square icon\"></i>Facebook</p>\n        <p><i class=\"fa fa-twitter icon\"></i>Twitter</p>\n        <p><i class=\"fa fa-instagram icon\"></i>Instagram</p>\n        <p><i class=\"fa fa-linkedin icon\"></i>Linkedin</p>\n    </div>\n    <div class=\"footer-box\">\n        <h3>Contact</h3>\n        <p><i class=\"fa fa-phone icon\"></i>Customer Care: 1234567890</p>\n        <p><i class=\"fa fa-whatsapp icon\"></i>Whatsapp: 1234567890</p>\n        <p><i class=\"fa fa-envelope icon\"></i>Email: order@products.com</p>\n        <p><i class=\"fa fa-map-marker icon\"></i>Address: Pune, Maharashtra, India</p>\n    </div>\n</div>\n\n<app-footer></app-footer>\n\n"
         },
         {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-511477b62521923ec9eb607b1b6d3008",
+            "id": "component-SignupComponent-f153a0f781b9c6e38d5eae1642164dda",
             "file": "src/app/login/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4798,22 +4593,12 @@
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "updateForm",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 49,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
                     "name": "validateForm",
                     "args": [],
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 88,
+                    "line": 83,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4825,7 +4610,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { signupStart, updateUser } from '../auth.actions';\nimport { AuthService } from '../auth.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  submitted = false;\n  users: any=[];\n  title: string;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,\n     public config: DialogConfig, private authService: AuthService) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    // console.log(\"In signup\");\n    //console.log(this.config);\n    if(this.config.data){\n      this.updateForm();\n      this.newUser = false;\n      this.title = \"Update Profile\";\n    }else{\n      this.newUser = true;\n      this.title = \"Signup\";\n    }\n\n    this.authService.getUsers().subscribe(users => {\n      this.users = users;\n    });\n  }\n\n  updateForm(){\n    this.form = new FormGroup({\n      id: new FormControl(this.config.data.id, Validators.required),\n      firstname: new FormControl(this.config.data.firstname, Validators.required),\n      lastname: new FormControl(this.config.data.lastname, Validators.required),\n      email: new FormControl(this.config.data.email, Validators.required),\n      contact: new FormControl(this.config.data.contact, Validators.required),\n      password: new FormControl(this.config.data.password, Validators.required),\n      retype_password: new FormControl(this.config.data.password, Validators.required),\n    });\n  }\n\n  onSubmit(){\n    if(this.form.invalid){\n      this.form.controls.firstname.markAsTouched();\n      this.form.controls.lastname.markAsTouched();\n      this.form.controls.contact.markAsTouched();\n      this.form.controls.email.markAsTouched();\n      this.form.controls.password.markAsTouched();\n      this.form.controls.retype_password.markAsTouched();\n    }else{\n      this.submitted = true;\n      const firstname= this.form.value.firstname;\n      const lastname= this.form.value.lastname;\n      const contact= this.form.value.contact;\n      const email= this.form.value.email;\n      const password= this.form.value.password;\n      const retype_password= this.form.value.retype_password;\n      \n      if(this.form.value.id){\n        console.log(\"Update User\");\n        this.store.dispatch(updateUser(this.form.value));\n      }else{\n        this.store.dispatch(signupStart({firstname,lastname,contact,email,password,retype_password}));\n      }\n    }\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n    for(let i=0; i<this.users.length;i++){\n      if(this.users[i][\"email\"] == this.form.controls.email.value){\n        this.form.controls.email.setErrors({'exist':true})\n      }\n    }\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { signupStart, updateUser } from '../auth.actions';\nimport { AuthService } from '../auth.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  submitted = false;\n  users: any=[];\n  title: string;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,\n     public config: DialogConfig, private authService: AuthService) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    if(this.config.data){\n      //this.updateForm();\n      this.form.patchValue(this.config.data);\n      this.newUser = false;\n      this.title = \"Update Profile\";\n    }else{\n      this.newUser = true;\n      this.title = \"Signup\";\n    }\n\n    this.authService.getUsers().subscribe(users => {\n      console.log(users);\n      this.users = users;\n    });\n  }\n\n  // updateForm(){\n  //   this.form = new FormGroup({\n  //     id: new FormControl(this.config.data.id, Validators.required),\n  //     firstname: new FormControl(this.config.data.firstname, Validators.required),\n  //     lastname: new FormControl(this.config.data.lastname, Validators.required),\n  //     email: new FormControl(this.config.data.email, Validators.required),\n  //     contact: new FormControl(this.config.data.contact, Validators.required),\n  //     password: new FormControl(this.config.data.password, Validators.required),\n  //     retype_password: new FormControl(this.config.data.password, Validators.required),\n  //   });\n  // }\n\n  onSubmit(){\n    if(this.form.invalid){\n      this.form.markAllAsTouched();\n      \n    }else{\n      this.submitted = true;      \n      if(this.form.value.id){\n        this.store.dispatch(updateUser(this.form.value));\n      }else{\n        this.store.dispatch(signupStart({\n          firstname:this.form.value.firstname,\n          lastname:this.form.value.lastname,\n          contact:this.form.value.contact,\n          email:this.form.value.password,\n          password:this.form.value.password,\n          retype_password:this.form.value.retype_password\n        }));\n      }\n    }\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n    for(let i=0; i<this.users.length;i++){\n      if(this.users[i][\"email\"] == this.form.controls.email.value){\n        this.form.controls.email.setErrors({'exist':true})\n      }\n    }\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4978,13 +4763,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-1c169028828f07b7959a39af0f90082d",
+            "id": "module-AppModule-4609fe842a3e0c396871a3eab7179c46",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\nimport { HomepageService } from './homepage/homepage.service';\nimport { NavbarComponent } from './global/navbar/navbar.component';\nimport { DialogService } from './global/dialog/dialog.service';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent,\n    NavbarComponent\n  ],\n  imports: [    \n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    \n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  \n  providers: [ DialogService, AuthService, HomepageService], \n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { HttpClientModule } from '@angular/common/http';\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { EffectsModule } from '@ngrx/effects';\nimport { StoreModule } from '@ngrx/store';\nimport { StoreDevtoolsModule } from '@ngrx/store-devtools';\nimport { ToastrModule } from 'ngx-toastr';\nimport { environment } from 'src/environments/environment';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { AuthService } from './login/auth.service';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { appReducer } from './app.state';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { ImageComponent } from './story-components/image/image.component';\nimport { CardComponent } from './story-components/card/card.component';\nimport { CheckboxComponent } from './story-components/checkbox/checkbox.component';\nimport { HomepageService } from './homepage/homepage.service';\nimport { NavbarComponent } from './global/navbar/navbar.component';\nimport { DialogService } from './global/dialog/dialog.service';\nimport { FooterComponent } from './global/footer/footer.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ImageComponent,\n    CardComponent,\n    CheckboxComponent,\n    NavbarComponent\n  ],\n  imports: [    \n    BrowserModule,\n    ReactiveFormsModule,\n    AppRoutingModule,\n    FormsModule,\n    HttpClientModule,\n    ToastrModule.forRoot(),\n    StoreModule.forRoot(appReducer),\n    EffectsModule.forRoot([]),\n    BrowserAnimationsModule,\n    \n    StoreDevtoolsModule.instrument({\n      // maxAge: 25, // Retains last 25 states\n      logOnly: environment.production, // Restrict extension to log-only mode\n      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open\n    }),\n  ],\n  \n  providers: [ DialogService, AuthService, HomepageService], \n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -5537,6 +5322,16 @@
                 "defaultValue": "createAction(ADD_PRODUCT_SUCCESS,props<{ product: Product }>())"
             },
             {
+                "name": "app",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "appReducer",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5571,6 +5366,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/spinner.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "cart",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/cart/cart.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -5615,6 +5420,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createAction(DELETE_PRODUCT_SUCCESS, props<{id:string}>())"
+            },
+            {
+                "name": "dialog",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/dialog/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "edit",
@@ -5665,16 +5480,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createSelector(getRouterState, (router) => {\n  return router.state;\n})"
-            },
-            {
-                "name": "getErrorMessage",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/store/Shared/shared.selector.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "createSelector(getSharedState, (state) => {\n  return state.errorMessage;\n})"
             },
             {
                 "name": "getLoading",
@@ -5735,6 +5540,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createFeatureSelector<SharedState>(SHARED_STATE_NAME)"
+            },
+            {
+                "name": "header",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/header/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "initialState",
@@ -5815,26 +5630,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createAction(LOAD_PRODUCTS_SUCCESS, props<{products: Product[]}>())"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "login",
@@ -6100,21 +5895,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/app/app.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "type": "Story<AppComponent>",
+                "defaultValue": "(args: AppComponent) => ({\r\n  component: AppComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
+                "file": "src/stories/Button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                "type": "Story<Button>",
+                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -6135,6 +5930,16 @@
                 "deprecationMessage": "",
                 "type": "Story<SpinnerComponent>",
                 "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/cart/cart.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CartComponent>",
+                "defaultValue": "(args: CartComponent) => ({\r\n  component: CartComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -6180,6 +5985,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/global/header/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<HeaderComponent>",
+                "defaultValue": "(args: HeaderComponent) => ({\r\n  component: HeaderComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/global/navbar/navbar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6215,6 +6030,16 @@
                 "deprecationMessage": "",
                 "type": "Story<EditProductComponent>",
                 "defaultValue": "(args: EditProductComponent) => ({\r\n  component: EditProductComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/global/dialog/dialog/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DialogComponent>",
+                "defaultValue": "(args: DialogComponent) => ({\r\n  component: DialogComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "UPDATE_PRODUCT_ACTION",
@@ -6750,6 +6575,28 @@
                     "defaultValue": "createAction(UPDATE_PRODUCT_SUCCESS, props<{product:Product}>())"
                 }
             ],
+            "src/app/app.stories.ts": [
+                {
+                    "name": "app",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<AppComponent>",
+                    "defaultValue": "(args: AppComponent) => ({\r\n  component: AppComponent,\r\n  props: args,\r\n})"
+                }
+            ],
             "src/app/app.state.ts": [
                 {
                     "name": "appReducer",
@@ -6806,6 +6653,50 @@
                     "deprecationMessage": "",
                     "type": "Story<SpinnerComponent>",
                     "defaultValue": "(args: SpinnerComponent) => ({\r\n    component: SpinnerComponent,\r\n    props: args,\r\n})"
+                }
+            ],
+            "src/app/cart/cart.stories.ts": [
+                {
+                    "name": "cart",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/cart/cart.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/cart/cart.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<CartComponent>",
+                    "defaultValue": "(args: CartComponent) => ({\r\n  component: CartComponent,\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/app/global/dialog/dialog/dialog.stories.ts": [
+                {
+                    "name": "dialog",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/dialog/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/dialog/dialog/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<DialogComponent>",
+                    "defaultValue": "(args: DialogComponent) => ({\r\n  component: DialogComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/products/edit-product/edit-product.stories.ts": [
@@ -6900,16 +6791,6 @@
             ],
             "src/app/store/Shared/shared.selector.ts": [
                 {
-                    "name": "getErrorMessage",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/store/Shared/shared.selector.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "createSelector(getSharedState, (state) => {\n  return state.errorMessage;\n})"
-                },
-                {
                     "name": "getLoading",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -6970,6 +6851,28 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "createFeatureSelector<ProductsState>('products')"
+                }
+            ],
+            "src/app/global/header/header.stories.ts": [
+                {
+                    "name": "header",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/header/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/global/header/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<HeaderComponent>",
+                    "defaultValue": "(args: HeaderComponent) => ({\r\n  component: HeaderComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/login/auth.state.ts": [
@@ -7058,38 +6961,6 @@
                     "deprecationMessage": "",
                     "type": "Story<Button>",
                     "defaultValue": "(args: Button) => ({\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  props: args,\n})"
                 }
             ],
             "src/app/login/login.stories.ts": [
@@ -7762,12 +7633,32 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "app",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/cart/cart.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "CartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -7776,6 +7667,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "routes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/cart/cart.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "cart",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/cart/cart.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -7826,6 +7737,26 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/global/dialog/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "dialog",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/global/dialog/dialog/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/global/dialog/insertion.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
@@ -7870,6 +7801,26 @@
                 "name": "HeaderComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/global/header/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "header",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/global/header/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -8163,7 +8114,7 @@
                 "linktype": "injectable",
                 "name": "AuthService",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -8191,7 +8142,7 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
@@ -8230,7 +8181,7 @@
                 "linktype": "component",
                 "name": "SignupComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -8259,7 +8210,7 @@
                 "linktype": "classe",
                 "name": "User",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -8326,7 +8277,7 @@
                 "linktype": "component",
                 "name": "ProductsListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/20",
+                "coverageCount": "0/19",
                 "status": "low"
             },
             {
@@ -8670,16 +8621,6 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "getErrorMessage",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/store/Shared/shared.selector.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
                 "name": "getLoading",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -8860,36 +8801,6 @@
             },
             {
                 "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",

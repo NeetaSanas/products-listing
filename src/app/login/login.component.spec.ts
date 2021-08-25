@@ -109,7 +109,7 @@ describe('LoginComponent', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
-  it('should onSubmit user', () => {
+  it('should forgot password', () => {
     const spy = jest.fn();
     component.forgotPassword();
     expect(spy).toHaveBeenCalledTimes(0);

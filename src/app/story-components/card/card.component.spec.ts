@@ -27,4 +27,10 @@ describe('CardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get users', () => {
+    const spy = jest.fn();
+    component.handleBtnClick();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
 });

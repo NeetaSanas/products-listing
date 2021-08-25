@@ -61,18 +61,18 @@ export class AuthService {
     );
     return user;
   }
-  getErrorMessage(message: string) {
-    switch (message) {
-      case 'EMAIL_NOT_FOUND':
-        return 'Email Not Found';
-      case 'INVALID_PASSWORD':
-        return 'Invalid Password';
-      case 'EMAIL_EXISTS':
-        return 'Email already exists';
-      default:
-        return 'Unknown error occurred. Please try again';
-    }
-  }
+  // getErrorMessage(message: string) {
+  //   switch (message) {
+  //     case 'EMAIL_NOT_FOUND':
+  //       return 'Email Not Found';
+  //     case 'INVALID_PASSWORD':
+  //       return 'Invalid Password';
+  //     case 'EMAIL_EXISTS':
+  //       return 'Email already exists';
+  //     default:
+  //       return 'Unknown error occurred. Please try again';
+  //   }
+  // }
 
   setUserInLocalStorage(user: User) {
     localStorage.setItem('userData', JSON.stringify(user));

@@ -96,7 +96,8 @@ export class ProductsListComponent implements OnInit {
      });
  
      ref.afterClosed.subscribe(result => {
-       //console.log('Dialog closed', result);
+      //  console.log('Dialog closed', result);
+       this.cartProductCount = this.cartItems.length;
        if(localStorage.getItem("token")){
         this.cartItems = [];
         this.cartProductCount = this.cartItems.length;

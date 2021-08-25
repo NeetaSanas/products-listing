@@ -16,12 +16,10 @@ import { AddProductComponent } from './add-product.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockStore } from '@ngrx/store/testing';
 
 describe('AddProductComponent', () => {
   let component: AddProductComponent;
   let fixture: ComponentFixture<AddProductComponent>;
-  let store: MockStore;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductsListComponent, AddProductComponent, EditProductComponent,
@@ -34,7 +32,6 @@ describe('AddProductComponent', () => {
             DialogModule,
             NgxPaginationModule,
             Ng2SearchPipeModule,
-            // EffectsModule.forRoot([]),
             StoreModule.forRoot({}),
             HttpClientModule,
             RouterTestingModule,
@@ -52,11 +49,34 @@ describe('AddProductComponent', () => {
   });
 
   // test.skip('skip', () => {});
-  
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+	it('should invalidate the form', () => {
+    component.productForm.controls.name.setValue('');
+    component.productForm.controls.description.setValue('');
+    component.productForm.controls.price.setValue('');
+    component.productForm.controls.image.setValue('');
+    expect(component.productForm.valid).toBeFalsy();
+  });
+
+  it('should validate the form', () => {
+    component.productForm.controls.name.setValue('product1');
+    component.productForm.controls.description.setValue('desc');
+    component.productForm.controls.price.setValue('100');
+    component.productForm.controls.image.setValue('www');
+    expect(component.productForm.valid).toBeTruthy();
+  });
+
+  it('should add product', () => {
+    const spy = jest.fn();
+    component.productForm.patchValue({name:"test1", price:"100", description:"testing...", image:"www"});
+    expect(component.productForm.valid).toEqual(true);
+    component.onAddProduct();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
 
   it('Required Validation', () => {
     let name = component.productForm.controls['name'];
@@ -80,13 +100,7 @@ describe('AddProductComponent', () => {
     expect(image.hasError('required')).toBeTruthy();
   });
 
-  it('should add product', () => {
-    const spy = jest.fn();
-    component.productForm.patchValue({name:"test1", price:"100", description:"testi...", image:"www"});
-    expect(component.productForm.valid).toEqual(true);
-    component.onAddProduct();
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
+
 
   it('should Cancel product', () => {
     const spy = jest.fn();
@@ -94,22 +108,6 @@ describe('AddProductComponent', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
-  describe('Test: addProduct Form', () => {
-		it('should invalidate the form', () => {
-			component.productForm.controls.name.setValue('');
-			component.productForm.controls.description.setValue('');
-			component.productForm.controls.price.setValue('');
-      component.productForm.controls.image.setValue('');
-			expect(component.productForm.valid).toBeFalsy();
-		});
 
-		it('should validate the form', () => {
-			component.productForm.controls.name.setValue('product1');
-			component.productForm.controls.description.setValue('desc');
-			component.productForm.controls.price.setValue('100');
-			component.productForm.controls.image.setValue('www');
-			expect(component.productForm.valid).toBeTruthy();
-		});
-	});
   
 });

@@ -72,21 +72,15 @@ describe('AuthService', () => {
     expect(spy).toHaveBeenCalledWith({});
   });
 
-  it('should get error message', () => {
-    const spy = jest.fn();
-    service.getErrorMessage('');
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
+  // it('should get error message', () => {
+  //   const spy = jest.fn();
+  //   service.getErrorMessage('');
+  //   expect(spy).toHaveBeenCalledTimes(0);
+  // });
 
   it('should get users', () => {
     const spy = jest.fn();
     service.getUsers();
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
-
-  it('should get error message', () => {
-    const spy = jest.fn();
-    service.getErrorMessage('');
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
@@ -101,6 +95,21 @@ describe('AuthService', () => {
     }
     // var result = service.updateUser(userData);
     service.updateUser(userData);
+    // expect(result).toBe(true);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should update user', () => {
+    const spy = jest.fn();
+    const userData:any = {
+      id: '123',
+      firstname: 'a', 
+      lastname: 'b', 
+      email:'c',
+      contact: '9422015306',
+    }
+    // var result = service.updateUser(userData);
+    service.setUserInLocalStorage(userData);
     // expect(result).toBe(true);
     expect(spy).toHaveBeenCalledTimes(0);
   });

@@ -10,13 +10,22 @@
       "id": "MBvXyIW"
     },
     {
-      "firstname": "aaa",
+      "firstname": "Test",
       "lastname": "bbb",
       "contact": "9422015308",
-      "email": "neetasanas1995@gmail.com",
+      "email": "neeta@gmail.com",
       "password": "123456",
       "retype_password": "123456",
       "id": "VPjUCn9"
+    },
+    {
+      "firstname": "test",
+      "lastname": "test",
+      "contact": "9422015308",
+      "email": "123456",
+      "password": "123456",
+      "retype_password": "123456",
+      "id": "IWQvmhY"
     }
   ],
   "products": [
@@ -105,11 +114,11 @@
       }
     },
     {
-      "id": "01LF0pM",
-      "name": null,
-      "description": null,
-      "price": null,
-      "image": null
+      "id": "ygVo7uP",
+      "name": "test",
+      "description": "testing",
+      "price": "100",
+      "image": "test"
     }
   ]
 }

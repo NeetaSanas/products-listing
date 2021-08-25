@@ -56,9 +56,12 @@
                 <span class="error-message" *ngIf="form.controls.retype_password.hasError('minlength') && newUser">Enter minimum 6 characters</span>
                 <span class="error-message" *ngIf="form.controls.retype_password.hasError('mismatchedPasswords') && newUser">Password  not matching</span>
                 <div style="height: 20px;"></div>
-                <div class="submit-button-container" style="margin:0px">
+                <div class="submit-button-container" style="margin:0px" *ngIf="newUser === true">
                     <button aria-label="Submit" class="w-100 submit-button" type="submit">Submit</button> <!--[disabled]="!form.valid"-->
                 </div> 
+                <div class="submit-button-container" style="margin:0px" *ngIf="newUser === false">
+                    <button aria-label="Cancel" class="w-100 submit-button" (click)="cancel()">Close</button> <!--[disabled]="!form.valid"-->
+                </div>
 
                 <a *ngIf="newUser" color="accent" routerLink="/" class="w-100 link">Back to Homepage</a>
             </div>        

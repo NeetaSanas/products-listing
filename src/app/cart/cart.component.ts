@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   @Input() values: any;
   myCartItems :any= [];
   cartTotal: number = 0;
+  cartEmty: boolean=false;
   constructor( public dialogRef: DialogRef, 
     public config: DialogConfig, private toastr: ToastrService) {}
 
@@ -19,6 +20,8 @@ export class CartComponent implements OnInit {
     this.myCartItems = this.config.data;
     if(this.myCartItems){
       this.getTotalAmount();
+    }else{
+      this.cartEmty = true;
     }
   }
   
@@ -33,8 +36,11 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(index){
-    this.myCartItems = this.myCartItems.splice(index,1);
-    if(this.myCartItems){
+    let updatedArray = [];
+    updatedArray = this.myCartItems.splice(index, 1);
+    if(updatedArray){
+      localStorage.removeItem('cartItems');
+      localStorage.setItem('cartItems', JSON.stringify(updatedArray));
       this.getTotalAmount();
     }else{
       this.myCartItems = [];
@@ -65,13 +71,13 @@ export class CartComponent implements OnInit {
 
   }
 
-  onSuccess() {
-    if(localStorage.getItem("token")){
-      this.toastr.success("Order Placed Successfully");
-      this.dialogRef.close();
-    }
-    localStorage.removeItem("token");
-  }
+  // onSuccess() {
+  //   if(localStorage.getItem("token")){
+  //     this.toastr.success("Order Placed Successfully");
+  //     this.dialogRef.close();
+  //   }
+  //   localStorage.removeItem("token");
+  // }
 
   cancel(){
     this.dialogRef.close();

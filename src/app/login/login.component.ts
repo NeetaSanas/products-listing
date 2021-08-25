@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
 
     if(this.form.invalid){
-      this.form.controls.email.markAsTouched();
-      this.form.controls.password.markAsTouched();
+      this.form.markAllAsTouched();
     }else{
       this.submitted = true;
       this.currentUser = this.form.value.email;
