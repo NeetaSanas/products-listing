@@ -17,6 +17,11 @@ import { DialogModule } from '../dialog/dialog.module';
 export default {
   title: 'Footer',
   component: FooterComponent,
+  argTypes: {
+    backgroundColor: { control: 'color' },
+    textColor: { control: 'color' },
+    // figCaptionTxt: {control: 'Copyright ©2021 All Rights Reserved'},
+  },
   decorators: [
     moduleMetadata({
       declarations: [FooterComponent],
@@ -43,7 +48,12 @@ const Template: Story<FooterComponent> = (args: FooterComponent) => ({
   props: args,
 });
 
-export const footer = Template.bind({});
-footer.args = {
-  //product: {},
+// export const footer = Template.bind({});
+// footer.args = {
+//   //product: {},
+// };
+
+export const FooterText = Template.bind({});
+FooterText.args = {
+  copyrightText: 'Copyright ©2021 All Rights Reserved',
 };

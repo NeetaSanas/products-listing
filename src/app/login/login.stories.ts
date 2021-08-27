@@ -17,6 +17,10 @@ import { DialogService } from '../global/dialog/dialog.service';
 export default {
   title: 'Login',
   component: LoginComponent,
+  argTypes: {
+    backgroundColor: { control: 'color' },
+    // textColor: { control: 'color' },
+  },
   decorators: [
     moduleMetadata({
     declarations: [

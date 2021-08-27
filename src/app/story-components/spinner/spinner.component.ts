@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SpinnerComponent {
   @Input() size: string = "small";
   @Input() borderColor: string;
+  @Input() backgroundColor: string="#000";
   //@Input() border-top: string;
   
   constructor() { }

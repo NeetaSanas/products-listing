@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -13,6 +13,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @Input() backgroundColor?: string = "#f3f3f3";
   public form:FormGroup;
   users :any= [];
   currentUser: any;

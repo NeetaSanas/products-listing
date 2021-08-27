@@ -2244,7 +2244,7 @@
         },
         {
             "name": "CartComponent",
-            "id": "component-CartComponent-9e702cf5d237d5d58926b894fb6daf0d",
+            "id": "component-CartComponent-c4a014dc28634cf9343521c42f2392e5",
             "file": "src/app/cart/cart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2272,6 +2272,16 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "cartEmty",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
                     "name": "cartTotal",
                     "defaultValue": "0",
                     "deprecated": false,
@@ -2288,7 +2298,7 @@
                     "type": "DialogConfig",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         122
                     ]
@@ -2300,7 +2310,7 @@
                     "type": "DialogRef",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 16,
                     "modifierKind": [
                         122
                     ]
@@ -2323,7 +2333,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 76,
+                    "line": 82,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2333,7 +2343,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2343,7 +2353,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2353,7 +2363,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 19,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2370,7 +2380,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2393,7 +2403,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';\nimport { ToastrService } from 'ngx-toastr';\nimport { DialogConfig } from '../global/dialog/dialog-config';\nimport { DialogRef } from '../global/dialog/dialog-ref';\n\n@Component({\n  selector: 'app-cart',\n  templateUrl: './cart.component.html',\n  styleUrls: ['./cart.component.scss']\n})\nexport class CartComponent implements OnInit {\n  @Input() values: any;\n  myCartItems :any= [];\n  cartTotal: number = 0;\n  constructor( public dialogRef: DialogRef, \n    public config: DialogConfig, private toastr: ToastrService) {}\n\n  ngOnInit(){\n    this.myCartItems = this.config.data;\n    if(this.myCartItems){\n      this.getTotalAmount();\n    }\n  }\n  \n  getTotalAmount(){\n    this.cartTotal = 0;\n    let itemsArray: any[] = [];\n    itemsArray = this.myCartItems;\n    let itemsLength: number = itemsArray?.length;\n    for(let i=0; i<itemsLength; i++){\n      this.cartTotal = Number(this.cartTotal) + Number(itemsArray[i][\"price\"]); \n    }\n  }\n\n  removeItem(index){\n    this.myCartItems = this.myCartItems.splice(index,1);\n    if(this.myCartItems){\n      this.getTotalAmount();\n    }else{\n      this.myCartItems = [];\n    }\n  }\n\n  checkout(){\n    var handler = (<any>window).StripeCheckout.configure({\n      key: 'pk_test_51IudUaSJYmBu1ez60Gerwee2ob0K7dlbbryng5XOeZLehSllKhjcZKC6YIa9mcsjMVD1L4DgU4qPOF30OjhAerny00xeLagm23',\n      locale: 'auto',\n      token: function (token: any) {\n        // You can access the token ID with `token.id`.\n        // Get the token ID to your server-side code for use.\n        if(token.id){\n          //console.log(\"payment done\");\n          localStorage.removeItem(\"cartItems\");\n          localStorage.setItem(\"token\",token.id);\n        }\n        this.token = token.id;\n      },\n    });\n    \n    handler.open({\n      name: 'Testing payment',\n      description: 'Enter Card No: 4242 4242 4242 4242',\n      amount: this.cartTotal * 100,\n    });\n\n  }\n\n  // onSuccess() {\n  //   if(localStorage.getItem(\"token\")){\n  //     this.toastr.success(\"Order Placed Successfully\");\n  //     this.dialogRef.close();\n  //   }\n  //   localStorage.removeItem(\"token\");\n  // }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';\nimport { ToastrService } from 'ngx-toastr';\nimport { DialogConfig } from '../global/dialog/dialog-config';\nimport { DialogRef } from '../global/dialog/dialog-ref';\n\n@Component({\n  selector: 'app-cart',\n  templateUrl: './cart.component.html',\n  styleUrls: ['./cart.component.scss']\n})\nexport class CartComponent implements OnInit {\n  @Input() values: any;\n  myCartItems :any= [];\n  cartTotal: number = 0;\n  cartEmty: boolean=false;\n  constructor( public dialogRef: DialogRef, \n    public config: DialogConfig, private toastr: ToastrService) {}\n\n  ngOnInit(){\n    this.myCartItems = this.config.data;\n    if(this.myCartItems){\n      this.getTotalAmount();\n    }else{\n      this.cartEmty = true;\n    }\n  }\n  \n  getTotalAmount(){\n    this.cartTotal = 0;\n    let itemsArray: any[] = [];\n    itemsArray = this.myCartItems;\n    let itemsLength: number = itemsArray?.length;\n    for(let i=0; i<itemsLength; i++){\n      this.cartTotal = Number(this.cartTotal) + Number(itemsArray[i][\"price\"]); \n    }\n  }\n\n  removeItem(index){\n    let updatedArray = [];\n    updatedArray = this.myCartItems.splice(index, 1);\n    if(updatedArray){\n      localStorage.removeItem('cartItems');\n      localStorage.setItem('cartItems', JSON.stringify(updatedArray));\n      this.getTotalAmount();\n    }else{\n      this.myCartItems = [];\n    }\n  }\n\n  checkout(){\n    var handler = (<any>window).StripeCheckout.configure({\n      key: 'pk_test_51IudUaSJYmBu1ez60Gerwee2ob0K7dlbbryng5XOeZLehSllKhjcZKC6YIa9mcsjMVD1L4DgU4qPOF30OjhAerny00xeLagm23',\n      locale: 'auto',\n      token: function (token: any) {\n        // You can access the token ID with `token.id`.\n        // Get the token ID to your server-side code for use.\n        if(token.id){\n          //console.log(\"payment done\");\n          localStorage.removeItem(\"cartItems\");\n          localStorage.setItem(\"token\",token.id);\n        }\n        this.token = token.id;\n      },\n    });\n    \n    handler.open({\n      name: 'Testing payment',\n      description: 'Enter Card No: 4242 4242 4242 4242',\n      amount: this.cartTotal * 100,\n    });\n\n  }\n\n  // onSuccess() {\n  //   if(localStorage.getItem(\"token\")){\n  //     this.toastr.success(\"Order Placed Successfully\");\n  //     this.dialogRef.close();\n  //   }\n  //   localStorage.removeItem(\"token\");\n  // }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2427,7 +2437,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 14,
+                "line": 15,
                 "jsdoctags": [
                     {
                         "name": "dialogRef",
@@ -2461,7 +2471,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">  \n  <div class=\"cart-dialog\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n    <app-header style=\"width: 100% !important;\"\n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Checkout'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>\n    <!-- <h3 style=\"text-align: center;\">My Cart</h3> -->\n    \n\n    <table width=\"100%\" class=\"cart-details\">\n      <tr *ngFor=\"let item of myCartItems; let i=index\" class=\"border-bottom\">\n          <td><h3>{{i+1}}.</h3></td>\n          <td><h3>{{item.name}}</h3></td>\n          <td style=\"text-align: right;\"><h3>${{item.price}}</h3></td>\n          <td style=\"vertical-align: top;\"><button style=\"background-color: red;\" (click)=\"removeItem(i)\" class=\"delete-cart\" title=\"Delete\">\n            <i style=\"font-size: 20px;\" class=\"fa fa-trash icon\" ></i>\n          </button></td>\n      </tr>\n      <tr *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n        <td></td>\n        <td style=\"text-align: right;\"><h3>Total:</h3></td>\n        <td style=\"text-align: right;\"><h3 style=\"text-align: right;\" >${{cartTotal}}</h3></td>\n      </tr>\n    </table>\n\n    <!-- <div>\n      <button (click)=\"checkout()\">Checkout</button>\n    </div> -->\n    <div style=\"margin-top: 0px;\" class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\" *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n      <br>\n      <button class=\"w-40 submit-button\" (click)=\"checkout()\">Checkout</button>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Cancel</button>\n    </div> \n\n    <div class=\"empty\" *ngIf=\"!myCartItems\"> <!--*ngIf=\"myCartItems.length > 0\"-->\n      <h3>Cart is empty <br>Please add products to continue...</h3>\n      <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Close</button>\n      </div>\n    </div>\n  </div>\n\n\n</div>\n\n"
+            "templateData": "<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">  \n  <div class=\"cart-dialog\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n    <app-header style=\"width: 100% !important;\"\n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Checkout'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>\n    <!-- <h3 style=\"text-align: center;\">My Cart</h3> -->\n    \n\n    <table width=\"100%\" class=\"cart-details\">\n      <tr *ngFor=\"let item of myCartItems; let i=index\" class=\"border-bottom\">\n          <td><h3>{{i+1}}.</h3></td>\n          <td><h3>{{item.name}}</h3></td>\n          <td style=\"text-align: right;\"><h3>${{item.price}}</h3></td>\n          <td style=\"vertical-align: top;\"><button style=\"background-color: red;\" (click)=\"removeItem(i)\" class=\"delete-cart\" title=\"Delete\">\n            <i style=\"font-size: 20px;\" class=\"fa fa-trash icon\" ></i>\n          </button></td>\n      </tr>\n      <tr *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n        <td></td>\n        <td style=\"text-align: right;\"><h3>Total:</h3></td>\n        <td style=\"text-align: right;\"><h3 style=\"text-align: right;\" >${{cartTotal}}</h3></td>\n      </tr>\n    </table>\n\n    <div style=\"margin-top: 0px;\" class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\" *ngIf=\"myCartItems\"><!--*ngIf=\"myCartItems.length > 0\"-->\n      <br>\n      <button class=\"w-40 submit-button\" (click)=\"checkout()\">Checkout</button>\n      &nbsp;&nbsp;&nbsp;&nbsp;\n      <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Cancel</button>\n    </div> \n\n    <div class=\"empty\" *ngIf=\"cartEmty\"> <!-- !myCartItems ||  *ngIf=\"myCartItems.length > 0\"-->\n      <h3>Cart is empty <br>Please add products to continue...</h3>\n      <div class=\"submit-button-container\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <button class=\"w-40 cancel-button\" (click)=\"cancel()\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
         },
         {
             "name": "CheckboxComponent",
@@ -3042,7 +3052,7 @@
         },
         {
             "name": "FooterComponent",
-            "id": "component-FooterComponent-ecbc3b7129d63304db7989921879c5c9",
+            "id": "component-FooterComponent-d2d4e241b0b41b9a338d018beea962f7",
             "file": "src/app/global/footer/footer.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3058,7 +3068,32 @@
                 "./footer.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "defaultValue": "\"#283593\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string"
+                },
+                {
+                    "name": "copyrightText",
+                    "defaultValue": "'Copyright ©2021 All Rights Reserved'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string"
+                },
+                {
+                    "name": "textColor",
+                    "defaultValue": "\"#fff\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string"
+                }
+            ],
             "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [],
@@ -3069,11 +3104,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-footer',\n  templateUrl: './footer.component.html',\n  styleUrls: ['./footer.component.scss']\n})\nexport class FooterComponent{\n\n  constructor() { }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-footer',\n  templateUrl: './footer.component.html',\n  styleUrls: ['./footer.component.scss']\n})\nexport class FooterComponent{\n  @Input()\n  backgroundColor?: string = \"#283593\";\n  @Input()\n  textColor?:string = \"#fff\";\n  @Input()\n  copyrightText?: string = 'Copyright ©2021 All Rights Reserved';\n\n  constructor() { }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".footer{    \r\n    height: 50px;\r\n    position: relative;\r\n    z-index: 3;\r\n    width: 100%;\r\n    background-color: #283593;\r\n    color:#fff;\r\n    \r\n    .footer-content{\r\n        padding-top: 5px;\r\n        padding-left:10px;\r\n    }\r\n}",
+                    "data": ".footer{    \r\n    height: 50px;\r\n    position: relative;\r\n    z-index: 3;\r\n    width: 100%;\r\n    //background-color: #283593;\r\n    color:#fff;\r\n    \r\n    .footer-content{\r\n        padding-top: 5px;\r\n        padding-left:10px;\r\n    }\r\n}",
                     "styleUrl": "./footer.component.scss"
                 }
             ],
@@ -3084,9 +3119,9 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 8
+                "line": 14
             },
-            "templateData": "<br><br><br><br>\n<div class=\"footer\"> <!--color=\"primary\" class=\"footer mt-5\"-->\n    <!-- <div fxLayout.xs=\"column\" fxLayout.gt-xs=\"row wrap\" fxLayoutAlign=\"space-between\" class=\"w-100\">\n        <p>Copyright ©2021 All Rights Reserved</p>\n    </div>\n   \n    <div style=\"text-align: right;\" fxLayout.xs=\"column\" fxLayout.gt-xs=\"row wrap\" fxLayoutAlign=\"space-between\" class=\"w-100\">\n        <p>Designed & developed by Products</p>\n    </div> -->\n    <div fxLayout.xs=\"column\" fxLayout.gt-xs=\"row wrap\" class=\"footer-content\">\n        <p>Copyright ©2021 All Rights Reserved</p>\n    </div>\n</div>"
+            "templateData": "<br><br><br><br>\n<div class=\"footer\" [ngStyle]=\"{ 'background-color': backgroundColor }\"> <!--color=\"primary\" class=\"footer mt-5\"-->\n    <!-- <div fxLayout.xs=\"column\" fxLayout.gt-xs=\"row wrap\" fxLayoutAlign=\"space-between\" class=\"w-100\">\n        <p>Copyright ©2021 All Rights Reserved</p>\n    </div>\n   \n    <div style=\"text-align: right;\" fxLayout.xs=\"column\" fxLayout.gt-xs=\"row wrap\" fxLayoutAlign=\"space-between\" class=\"w-100\">\n        <p>Designed & developed by Products</p>\n    </div> -->\n    <div fxLayout.xs=\"column\" fxLayout.gt-xs=\"row wrap\" class=\"footer-content\">\n        <p [ngStyle]=\"{ 'color': textColor }\">{{copyrightText}}</p>\n    </div>\n</div>"
         },
         {
             "name": "HeaderComponent",
@@ -3162,7 +3197,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-82cc1ed3143c9fce621376e4c46724ca-1",
+            "id": "component-HeaderComponent-86abbeea96dcaf64c8d216471cb1a9db-1",
             "file": "src/app/global/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3179,6 +3214,14 @@
             ],
             "viewProviders": [],
             "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "defaultValue": "\"#283593\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string"
+                },
                 {
                     "name": "class",
                     "deprecated": false,
@@ -3209,6 +3252,14 @@
                     "type": "any"
                 },
                 {
+                    "name": "textColor",
+                    "defaultValue": "\"#fff\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string"
+                },
+                {
                     "name": "title",
                     "defaultValue": "\"Header\"",
                     "deprecated": false,
@@ -3227,7 +3278,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  templateUrl: './header.component.html',\r\n  styleUrls: ['./header.component.scss']\r\n})\r\nexport class HeaderComponent {\r\n  @Input() icon:any;\r\n  @Input() title:any= \"Header\";\r\n  @Input() desc:any;\r\n  @Input() hasBgImage:boolean = true;\r\n  @Input() class:any;\r\n  \r\n  constructor() { }\r\n\r\n \r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  templateUrl: './header.component.html',\r\n  styleUrls: ['./header.component.scss']\r\n})\r\nexport class HeaderComponent {\r\n  @Input() icon:any;\r\n  @Input() title:any= \"Header\";\r\n  @Input() desc:any;\r\n  @Input() hasBgImage:boolean = true;\r\n  @Input() class:any;\r\n  @Input() backgroundColor?: string = \"#283593\";\r\n  @Input() textColor?:string = \"#fff\";\r\n  constructor() { }\r\n\r\n \r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3242,16 +3293,16 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 13
+                "line": 15
             },
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "HeaderComponent-1",
-            "templateData": "<div class=\"content-header bg-primary\" [class.bg-image]=\"hasBgImage\" [ngClass]=\"class\">\n    <!-- <mat-icon *ngIf=\"icon\" class=\"mat-icon-xlg\">{{icon}}</mat-icon> -->\n    <!-- <span *ngIf=\"icon\">\n        <i class=\"icon\">{{icon}}</i>\n      </span> -->\n    <h3 *ngIf=\"title\">{{title}}</h3>\n    <h4 *ngIf=\"desc\" class=\"p-2\">{{desc}}</h4>\n</div>"
+            "templateData": "<div class=\"content-header bg-primary\" [class.bg-image]=\"hasBgImage\" [ngClass]=\"class\"\n[ngStyle]=\"{ 'background-color': backgroundColor }\">\n    <!-- <mat-icon *ngIf=\"icon\" class=\"mat-icon-xlg\">{{icon}}</mat-icon> -->\n    <!-- <span *ngIf=\"icon\">\n        <i class=\"icon\">{{icon}}</i>\n      </span> -->\n    <h3 *ngIf=\"title\" [ngStyle]=\"{ 'color': textColor }\">{{title}}</h3>\n    <h4 *ngIf=\"desc\" class=\"p-2\">{{desc}}</h4>\n</div>"
         },
         {
             "name": "HomepageComponent",
-            "id": "component-HomepageComponent-1ca97e45ebaf641aa3d0f2530a2900fb",
+            "id": "component-HomepageComponent-d01bfabb49e8ace5f78a243d886cdb42",
             "file": "src/app/homepage/homepage.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3319,7 +3370,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 18,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3331,7 +3382,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { HomepageService } from './homepage.service';\n\n@Component({\n  selector: 'app-homepage',\n  templateUrl: './homepage.component.html',\n  styleUrls: ['./homepage.component.scss']\n})\nexport class HomepageComponent implements OnInit {\n  products :any = [];\n  p: any;\n  public searchText: string;\n  constructor(private homepageService: HomepageService) { }\n  ngOnInit(): void {\n    console.log(\"homepage\");\n    this.products = this.homepageService.getProducts();\n    console.log(this.products);\n  }\n\n  viewProduct(){}\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { HomepageService } from './homepage.service';\n\n@Component({\n  selector: 'app-homepage',\n  templateUrl: './homepage.component.html',\n  styleUrls: ['./homepage.component.scss']\n})\nexport class HomepageComponent implements OnInit {\n  products :any = [];\n  p: any;\n  public searchText: string;\n  constructor(private homepageService: HomepageService) { }\n  ngOnInit(): void {\n    this.products = this.homepageService.getProducts();\n  }\n\n  viewProduct(){}\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3454,7 +3505,7 @@
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-24478c1d1e746a915b763f3500751ea5",
+            "id": "component-LoginComponent-a1aa4149860a11dfdfa41e00419a346d",
             "file": "src/app/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3470,7 +3521,16 @@
                 "./login.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "defaultValue": "\"#f3f3f3\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string"
+                }
+            ],
             "outputsClass": [],
             "propertiesClass": [
                 {
@@ -3480,7 +3540,7 @@
                     "type": "AuthService",
                     "optional": false,
                     "description": "",
-                    "line": 22,
+                    "line": 23,
                     "modifierKind": [
                         122
                     ]
@@ -3492,7 +3552,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
                 },
                 {
                     "name": "fb",
@@ -3501,7 +3561,7 @@
                     "type": "FormBuilder",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 22,
                     "modifierKind": [
                         122
                     ]
@@ -3513,7 +3573,7 @@
                     "type": "FormGroup",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         122
                     ]
@@ -3525,7 +3585,7 @@
                     "type": "Router",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 24,
                     "modifierKind": [
                         122
                     ]
@@ -3538,7 +3598,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 20
                 },
                 {
                     "name": "successFlag",
@@ -3548,7 +3608,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 21
                 },
                 {
                     "name": "users",
@@ -3558,7 +3618,7 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -3568,7 +3628,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 80,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3578,7 +3638,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 71,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3588,7 +3648,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 29,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3598,7 +3658,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 36,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3610,7 +3670,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from '../app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  submitted = false;\n  successFlag = true;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    \n  }\n  ngOnInit(){\n    this.form = this.fb.group({\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  onSubmit(){\n\n    if(this.form.invalid){\n      this.form.markAllAsTouched();\n    }else{\n      this.submitted = true;\n      this.currentUser = this.form.value.email;\n      this.authService.login().subscribe(\n        data => {\n          \n          if(data){\n            this.users = data;\n            for(let i=0; i<this.users.length; i++){\n              if(this.form.value.email === this.users[i][\"email\"] && this.form.value.password === this.users[i][\"password\"]){\n                localStorage.setItem('user', this.currentUser);\n                localStorage.setItem('firstname', this.users[i].firstname);\n                this.successFlag = true;\n                this.router.navigate(['/']);\n                break;\n              }else{\n                this.successFlag = false;\n              }\n            }\n            this.getLoginMessage();\n          }else{\n            this.toastr.info(\"Users not found\");\n          }\n        },\n        error => {\n          error='Bad email';\n        });\n    }\n    \n  }\n\n  getLoginMessage(){\n    if(!this.successFlag){\n      this.toastr.error('Invalid email or password');\n    }else{\n      this.toastr.success('Login Success');\n    }\n  }\n\n\n  forgotPassword(){\n    this.toastr.info(\"Not Implemented\");\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { ToastrService } from 'ngx-toastr';\nimport { AppState } from '../app.state';\nimport { loginStart } from './auth.actions';\nimport { AuthService } from './auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent implements OnInit {\n  @Input() backgroundColor?: string = \"#f3f3f3\";\n  public form:FormGroup;\n  users :any= [];\n  currentUser: any;\n  submitted = false;\n  successFlag = true;\n  constructor(public fb: FormBuilder, \n    public authService:AuthService, \n    public router: Router, \n    private toastr: ToastrService,\n    private store: Store<AppState>) { \n    \n  }\n  ngOnInit(){\n    this.form = this.fb.group({\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  onSubmit(){\n\n    if(this.form.invalid){\n      this.form.markAllAsTouched();\n    }else{\n      this.submitted = true;\n      this.currentUser = this.form.value.email;\n      this.authService.login().subscribe(\n        data => {\n          \n          if(data){\n            this.users = data;\n            for(let i=0; i<this.users.length; i++){\n              if(this.form.value.email === this.users[i][\"email\"] && this.form.value.password === this.users[i][\"password\"]){\n                localStorage.setItem('user', this.currentUser);\n                localStorage.setItem('firstname', this.users[i].firstname);\n                this.successFlag = true;\n                this.router.navigate(['/']);\n                break;\n              }else{\n                this.successFlag = false;\n              }\n            }\n            this.getLoginMessage();\n          }else{\n            this.toastr.info(\"Users not found\");\n          }\n        },\n        error => {\n          error='Bad email';\n        });\n    }\n    \n  }\n\n  getLoginMessage(){\n    if(!this.successFlag){\n      this.toastr.error('Invalid email or password');\n    }else{\n      this.toastr.success('Login Success');\n    }\n  }\n\n\n  forgotPassword(){\n    this.toastr.info(\"Not Implemented\");\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3656,7 +3716,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 20,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -3708,11 +3768,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\" >\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Login'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Email\" type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid Email</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Enter minimum 6 characters</span>\n                <br>\n                <div class=\"submit-button-container\">\n                    <button aria-label=\"Login\" class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" routerLink=\"/forgot-password\" class=\"w-100 link\">Forgot Password?</a>\n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\" >\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n         <app-header \n             [icon]=\"'exit_to_app'\" \n             [title]=\"'Login'\" \n             [hasBgImage]=\"true\" \n             [class]=\"'card-spacing'\"\n             ></app-header>            \n           <div class=\"card-inner\">\n                <a routerLink=\"/login/signup\" color=\"accent\" class=\"w-100 link\">Don't have an account? Sign up now!</a>\n                <div class=\"form-control\">\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Email\" type=\"text\" id=\"email\" name=\"email\" placeholder=\"Email\" formControlName=\"email\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid Email</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" type=\"password\" id=\"password\" placeholder=\"Password\" name=\"password\" formControlName=\"password\">\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength')\">Enter minimum 6 characters</span>\n                <br>\n                <div class=\"submit-button-container\">\n                    <button aria-label=\"Login\" class=\"w-100 submit-button\" type=\"submit\">LOGIN</button>\n                </div> \n                <a color=\"accent\" style=\"cursor: pointer;\" (click)=\"forgotPassword()\" class=\"w-100 link\">Forgot Password?</a><!--routerLink=\"/forgot-password\"-->\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "NavbarComponent",
-            "id": "component-NavbarComponent-06a41448c50943c31f57181411887ea7",
+            "id": "component-NavbarComponent-21f60ca7111fd73b278e9d61268dc482",
             "file": "src/app/global/navbar/navbar.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3730,11 +3790,19 @@
             "viewProviders": [],
             "inputsClass": [
                 {
+                    "name": "backgroundColor",
+                    "defaultValue": "\"#283593\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "string"
+                },
+                {
                     "name": "config",
                     "defaultValue": "{}",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 24,
                     "type": "any"
                 }
             ],
@@ -3756,7 +3824,7 @@
                     "type": "DialogService",
                     "optional": false,
                     "description": "",
-                    "line": 34,
+                    "line": 37,
                     "modifierKind": [
                         122
                     ]
@@ -3807,7 +3875,7 @@
                     "type": "string | null",
                     "optional": false,
                     "description": "",
-                    "line": 22
+                    "line": 25
                 }
             ],
             "methodsClass": [
@@ -3817,7 +3885,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 81,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3827,7 +3895,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3837,7 +3905,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3847,7 +3915,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 68,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3864,7 +3932,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nListens for a click in document and then check for isOpen to be true.\nIf so, then close it\n",
@@ -3893,7 +3961,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 87,
+                    "line": 90,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3903,7 +3971,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 96,
+                    "line": 99,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3913,7 +3981,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 91,
+                    "line": 94,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3923,7 +3991,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3949,17 +4017,17 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nListens for a click in document and then check for isOpen to be true.\nIf so, then close it\n",
                     "description": "<p>Listens for a click in document and then check for isOpen to be true.\nIf so, then close it</p>\n",
-                    "line": 27
+                    "line": 30
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthService } from '../../login/auth.service';\nimport { SignupComponent } from '../../login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n\n  @Input() config: any = {};\n  username: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService, \n    private router: Router) {}\n\n  logout(){\n    localStorage.removeItem(\"user\");\n    localStorage.removeItem(\"firstname\");\n    localStorage.removeItem(\"cartItems\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n      // console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n      this.username = localStorage.getItem(\"firstname\");\n  }\n\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n    \n  }\n  onSettings(){\n    // console.log(this.isOpenMenu);\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    // console.log(this.currentUser);\n    this.authService.getUsers().subscribe(data=>{\n      // console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i];\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      // ref.afterClosed.subscribe(result => {\n      //   console.log('Dialog closed', result);      \n      // });\n    });\n  }\n\n  \n\n}\n",
+            "sourceCode": "import { Component, ElementRef, HostListener, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { fromEvent, Subscription } from 'rxjs';\nimport { filter, throttleTime } from 'rxjs/operators';\nimport { AuthService } from '../../login/auth.service';\nimport { SignupComponent } from '../../login/signup/signup.component';\nimport { DialogService } from '../dialog/dialog.service';\n\n@Component({\n  selector: 'app-navbar',\n  templateUrl: './navbar.component.html',\n  styleUrls: ['./navbar.component.scss']\n})\nexport class NavbarComponent implements OnInit, OnDestroy {\n  isOpen = false;\n  isOpenMenu = false;\n  resize: Subscription;\n  themeText: string =\"DARK\";\n  currentUser: string | null;\n\n  @Input()\n  backgroundColor?: string = \"#283593\";\n\n  @Input() config: any = {};\n  username: string | null;\n  /**\n   * Listens for a click in document and then check for isOpen to be true.\n   * If so, then close it\n   */\n  @HostListener(\"document:click\", [\"$event\"]) onClick(event:any) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.checkIfNavDropDown();\n    }\n  }\n\n  constructor(private elementRef: ElementRef, private el: ElementRef, \n    private renderer: Renderer2, public dialog: DialogService, \n    private authService: AuthService, \n    private router: Router) {}\n\n  logout(){\n    localStorage.removeItem(\"user\");\n    localStorage.removeItem(\"firstname\");\n    localStorage.removeItem(\"cartItems\");\n  }\n\n  toggleTheme() {\n    //INCOMPLETE NEEDS IMPROVEMENTS\n    if(this.themeText == 'DARK'){\n      this.themeText = \"LIGHT\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'black');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'white');\n    }else{\n      this.themeText = \"DARK\";\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'backgroundColor', 'white');\n      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'color', 'black');\n    }\n  }\n\n  ngOnDestroy() {\n    /**\n     * It's a good habit to unsubscribe from observable event to prevent memory leak. If your application create \n     * streams without cleaning up it can be a memory hog and will eventually crash. \n     */\n    this.resize.unsubscribe();\n  }\n\n  ngOnInit() {\n    /**\n     * Although the application doesn't use this.resize. it is used for unsubscribing (memory cleanup)\n     */\n    this.resize = fromEvent(window, \"resize\")\n      .pipe(\n        throttleTime(500),\n        filter(() => !!this.elementRef)\n      )\n      .subscribe(() => this.checkIfNavDropDown());\n      // console.log(localStorage.getItem(\"user\"));\n      this.currentUser = localStorage.getItem(\"user\");\n      this.username = localStorage.getItem(\"firstname\");\n  }\n\n\n  checkIfNavDropDown() {\n    if (this.isOpen) {\n      this.isOpen = false;\n    }\n  }\n\n  onMenu() {\n    this.isOpen = !this.isOpen;\n    \n  }\n  onSettings(){\n    // console.log(this.isOpenMenu);\n    this.isOpenMenu = !this.isOpenMenu;\n  }\n\n  onProfileSetting(){\n    // console.log(this.currentUser);\n    this.authService.getUsers().subscribe(data=>{\n      // console.log(data);\n      let usersData:any = data;\n      let user ;\n      for(let i=0; i<usersData.length;i++){\n        if(this.currentUser == usersData[i][\"email\"]){\n          user = usersData[i];\n        }\n      }\n\n      const ref = this.dialog.open(SignupComponent, {\n        data: user\n      });\n  \n      // ref.afterClosed.subscribe(result => {\n      //   console.log('Dialog closed', result);      \n      // });\n    });\n  }\n\n  \n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "a {\r\n    color: #fff;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    transition: color 0.3s ease;\r\n    &:hover {\r\n      color: #000;\r\n    }\r\n  }\r\n  \r\n  .nav{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    background-color: #283593;\r\n    color: white;\r\n    font-weight: 500;\r\n\r\n    background-color: #283593;\r\n    height: 60px;\r\n    display: grid;\r\n    grid-template-rows: minmax(min-content, 60px);\r\n    .brand {\r\n      cursor: pointer;\r\n      justify-self: left;\r\n      margin-left: 15px;\r\n    }\r\n    .content {\r\n      align-content: space-evenly;\r\n      background-color: var(--greyapple);\r\n      display: grid;\r\n      grid-auto-flow: column;\r\n      place-items: left;\r\n      position: relative;\r\n      z-index: 10;\r\n\r\n      .logo-img{\r\n        margin-left: 10px;\r\n      }\r\n    }\r\n    .dropdown {\r\n      background-color: #283593;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 100%;\r\n      a {\r\n        color: #fff;\r\n        padding: 20px;\r\n        &:hover {\r\n          color: #000;\r\n          background-color: #283593;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .profile {\r\n      background-color: #f3f3f3;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 25%;\r\n      left:80%;\r\n      a {\r\n        text-align: left;\r\n        color: #000;\r\n        padding: 10px;\r\n        &:hover {\r\n          color: #fff;\r\n          background-color: #283593;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .links {\r\n      display: grid;\r\n      grid-auto-columns: minmax(min-content, 50px);\r\n      grid-auto-flow: column;\r\n      grid-gap: 15px;\r\n      place-items: center;\r\n      &.nav-items {\r\n        justify-self: right;\r\n        padding-right: 1px;\r\n      }\r\n    }\r\n    .menu {\r\n      -webkit-user-select: none;\r\n      display: none;\r\n      justify-self: right;\r\n      margin-right: 15px;\r\n      position: relative;\r\n      user-select: none;\r\n      input {\r\n        -webkit-touch-callout: none;\r\n        cursor: pointer;\r\n        display: block;\r\n        height: 24px;\r\n        left: -5px;\r\n        opacity: 0;\r\n        position: absolute;\r\n        top: 0;\r\n        width: 24px;\r\n        z-index: 2;\r\n      }\r\n      label {\r\n        color: #fff;\r\n        font-size: 32px;\r\n        left: -8px;\r\n        position: relative;\r\n        top: 0px;\r\n      }\r\n      &:hover {\r\n        opacity: 0.5;\r\n      }\r\n    }\r\n  }\r\n\r\n  .light-mode{\r\n    h1{\r\n      color:#000;\r\n    }\r\n  }\r\n  .dark-mode{\r\n    color:#fff;\r\n  }\r\n  \r\n  @media only screen and (max-width: 768px) {\r\n    .nav {\r\n      .content {\r\n        .links {\r\n          display: none;\r\n        }\r\n        .menu {\r\n          display: initial;\r\n        }\r\n      }\r\n      .profile{\r\n        margin-top: 180px;\r\n        margin-right: 20px !important;\r\n        left:20%;\r\n        width: 70%;\r\n      }\r\n    }\r\n\r\n    \r\n  }\r\n  ",
+                    "data": "a {\r\n    color: #fff;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    transition: color 0.3s ease;\r\n    &:hover {\r\n      color: #000;\r\n    }\r\n  }\r\n  \r\n  .nav{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    height: 60px;\r\n    display: flex;\r\n    align-items: center;\r\n    //background-color: #283593;\r\n    color: white;\r\n    font-weight: 500;\r\n    display: grid;\r\n    grid-template-rows: minmax(min-content, 60px);\r\n    .brand {\r\n      cursor: pointer;\r\n      justify-self: left;\r\n      margin-left: 15px;\r\n    }\r\n    .content {\r\n      align-content: space-evenly;\r\n      background-color: var(--greyapple);\r\n      display: grid;\r\n      grid-auto-flow: column;\r\n      place-items: left;\r\n      position: relative;\r\n      z-index: 10;\r\n\r\n      .logo-img{\r\n        margin-left: 10px;\r\n      }\r\n    }\r\n    .dropdown {\r\n      background-color: #283593;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 100%;\r\n      a {\r\n        color: #fff;\r\n        padding: 20px;\r\n        &:hover {\r\n          color: #000;\r\n          background-color: #283593;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .profile {\r\n      background-color: #f3f3f3;\r\n      display: none;\r\n      margin-top: 60px;\r\n      position: absolute;\r\n      text-align: center;\r\n      top: 0;\r\n      width: 25%;\r\n      left:80%;\r\n      a {\r\n        text-align: left;\r\n        color: #000;\r\n        padding: 10px;\r\n        &:hover {\r\n          color: #fff;\r\n          background-color: #283593;\r\n        }\r\n      }\r\n      &.show {\r\n        display: grid;\r\n      }\r\n    }\r\n    .links {\r\n      display: grid;\r\n      grid-auto-columns: minmax(min-content, 50px);\r\n      grid-auto-flow: column;\r\n      grid-gap: 15px;\r\n      place-items: center;\r\n      &.nav-items {\r\n        justify-self: right;\r\n        padding-right: 1px;\r\n      }\r\n    }\r\n    .menu {\r\n      -webkit-user-select: none;\r\n      display: none;\r\n      justify-self: right;\r\n      margin-right: 15px;\r\n      position: relative;\r\n      user-select: none;\r\n      input {\r\n        -webkit-touch-callout: none;\r\n        cursor: pointer;\r\n        display: block;\r\n        height: 24px;\r\n        left: -5px;\r\n        opacity: 0;\r\n        position: absolute;\r\n        top: 0;\r\n        width: 24px;\r\n        z-index: 2;\r\n      }\r\n      label {\r\n        color: #fff;\r\n        font-size: 32px;\r\n        left: -8px;\r\n        position: relative;\r\n        top: 0px;\r\n      }\r\n      &:hover {\r\n        opacity: 0.5;\r\n      }\r\n    }\r\n  }\r\n\r\n  .light-mode{\r\n    h1{\r\n      color:#000;\r\n    }\r\n  }\r\n  .dark-mode{\r\n    color:#fff;\r\n  }\r\n  \r\n  @media only screen and (max-width: 768px) {\r\n    .nav {\r\n      .content {\r\n        .links {\r\n          display: none;\r\n        }\r\n        .menu {\r\n          display: initial;\r\n        }\r\n      }\r\n      .profile{\r\n        margin-top: 180px;\r\n        margin-right: 20px !important;\r\n        left:20%;\r\n        width: 70%;\r\n      }\r\n    }\r\n\r\n    \r\n  }\r\n  ",
                     "styleUrl": "./navbar.component.scss"
                 }
             ],
@@ -4007,7 +4075,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 31,
+                "line": 34,
                 "jsdoctags": [
                     {
                         "name": "elementRef",
@@ -4069,7 +4137,7 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<div class=\"nav\">\n\t<div class=\"content\">\n        <a href=\"/\" title=\"Products\"><img width=\"70\" class=\"logo-img\" alt=\"Products\" src=\"assets/logo.png\"/></a>\n\t\t<div class=\"links nav-items\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a id=\"mode\" (click)=\"toggleTheme()\" style=\"font-size: 14px; font-weight: 500;\">{{themeText}}</a>\n\t\t\t<!-- <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 25px; grid-gap: 0px !important;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a> -->\n\t\t\t<a *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i> </a> \n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t<div class=\"profile\" id=\"profile\" [class.show]=\"isOpenMenu\">\n\t\t\t<a *ngIf=\"currentUser\"><i style=\"font-size: 20px;\" class=\"fa fa-envelope icon\"></i> &nbsp;&nbsp; {{currentUser}}</a>\n\t\t\t<a title=\"Profile\" *ngIf=\"currentUser\" (click)=\"onProfileSetting()\"><i style=\"font-size: 20px;\" class=\"fa fa-user-circle icon\"></i>&nbsp;&nbsp; PROFILE</a>\t\t\t\n\t\t\t<a rel=\"noopener\" href=\"/\" title=\"Logout\" *ngIf=\"currentUser\" (click)=\"logout()\"><i style=\"font-size: 20px;\" class=\"fa fa-sign-out icon\"></i>&nbsp;&nbsp; LOGOUT</a>\n\t\t</div>\n\n\t\t<div class=\"menu\" (click)=\"onMenu()\">\n\t\t\t<input type=\"checkbox\" hidden id=\"hamburger\" />\n\t\t\t<label for=\"hamburger\" [hidden]=\"isOpen\">&#9776;</label>\n\t\t\t<label for=\"hamburger\" [hidden]=\"!isOpen\">&#10006;</label>\n\t\t</div>\n\t\t<div class=\"dropdown\" id=\"dropdown\" [class.show]=\"isOpen\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <!-- <a rel=\"noopener\" href=\"/\" title=\"Products\">PRODUCTS</a> -->\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <button id=\"mode\" (click)=\"toggleTheme()\"\n\t\t\t[ngClass]=\"{'light-mode': themeText === 'LIGHT', 'dark-mode' : themeText === 'DARK' }\">{{themeText}}</button>\n\t\t\t<button *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i></button>\n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t\n\t</div>\n</div>"
+            "templateData": "<div class=\"nav\" [ngStyle]=\"{ 'background-color': backgroundColor }\">\n\t<div class=\"content\">\n        <a href=\"/\" title=\"Products\"><img width=\"70\" class=\"logo-img\" alt=\"Products\" src=\"assets/logo.png\"/></a>\n\t\t<div class=\"links nav-items\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <a id=\"mode\" (click)=\"toggleTheme()\" style=\"font-size: 14px; font-weight: 500;\">{{themeText}}</a>\n\t\t\t<!-- <a rel=\"noopener\" href=\"/\" title=\"Logout\" style=\"font-size: 25px; grid-gap: 0px !important;\" *ngIf=\"currentUser\" (click)=\"logout()\"><i class=\"fa fa-sign-out icon\"></i></a> -->\n\t\t\t<a *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i> </a> \n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t<div class=\"profile\" id=\"profile\" [class.show]=\"isOpenMenu\">\n\t\t\t<a *ngIf=\"currentUser\"><i style=\"font-size: 20px;\" class=\"fa fa-envelope icon\"></i> &nbsp;&nbsp; {{currentUser}}</a>\n\t\t\t<a title=\"Profile\" *ngIf=\"currentUser\" (click)=\"onProfileSetting()\"><i style=\"font-size: 20px;\" class=\"fa fa-user-circle icon\"></i>&nbsp;&nbsp; PROFILE</a>\t\t\t\n\t\t\t<a rel=\"noopener\" href=\"/\" title=\"Logout\" *ngIf=\"currentUser\" (click)=\"logout()\"><i style=\"font-size: 20px;\" class=\"fa fa-sign-out icon\"></i>&nbsp;&nbsp; LOGOUT</a>\n\t\t</div>\n\n\t\t<div class=\"menu\" (click)=\"onMenu()\">\n\t\t\t<input type=\"checkbox\" hidden id=\"hamburger\" />\n\t\t\t<label for=\"hamburger\" [hidden]=\"isOpen\">&#9776;</label>\n\t\t\t<label for=\"hamburger\" [hidden]=\"!isOpen\">&#10006;</label>\n\t\t</div>\n\t\t<div class=\"dropdown\" id=\"dropdown\" [class.show]=\"isOpen\">\n\t\t\t<a href=\"/\" title=\"Home\">HOME</a>\n            <!-- <a rel=\"noopener\" href=\"/\" title=\"Products\">PRODUCTS</a> -->\n            <a rel=\"noopener\" href=\"/login\" title=\"Login\" *ngIf=\"!currentUser\">LOGIN</a>\n            <a rel=\"noopener\" href=\"/login/signup\" title=\"Signup\" *ngIf=\"!currentUser\">SIGNUP</a>\n            <button id=\"mode\" (click)=\"toggleTheme()\"\n\t\t\t[ngClass]=\"{'light-mode': themeText === 'LIGHT', 'dark-mode' : themeText === 'DARK' }\">{{themeText}}</button>\n\t\t\t<button *ngIf=\"currentUser\" (click)=\"onSettings()\" style=\"font-size: 20px; grid-gap: 0px !important;\"><i class=\"fa fa-user-circle\"></i></button>\n\t\t\t<span *ngIf=\"currentUser\" style=\"margin-right: 10px;\">Welcome {{username}}</span>\n\t\t</div>\n\n\t\t\n\t</div>\n</div>"
         },
         {
             "name": "PageComponent",
@@ -4145,7 +4213,7 @@
         },
         {
             "name": "ProductsListComponent",
-            "id": "component-ProductsListComponent-c2c1e4bc9133a12c7c3489cf3185d266",
+            "id": "component-ProductsListComponent-f6a2069b114cb71115f4c3946e79d85a",
             "file": "src/app/products/products-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4407,7 +4475,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../app.state';\nimport { DialogService } from '../global/dialog/dialog.service';\nimport { CartComponent } from '../cart/cart.component';\nimport { NavbarComponent } from '../global/navbar/navbar.component';\nimport { AddProductComponent } from './add-product/add-product.component';\nimport { EditProductComponent } from './edit-product/edit-product.component';\nimport { Product } from './products.model';\nimport { addProduct, deleteProduct, loadProducts } from './state/products.actions';\nimport { getProducts } from './state/products.selector';\n\n@Component({\n  selector: 'app-products-list',\n  templateUrl: './products-list.component.html',\n  styleUrls: ['./products-list.component.scss']\n})\nexport class ProductsListComponent implements OnInit {\n  products: Observable<Product[]>;\n  NoProducts: boolean=false;\n  p: any;\n  public searchText: any;\n  cartProductList = [];\n  @Output() comp1Out = new EventEmitter();\n  public cartItems:any[]=new Array();\n  public cartProductCount: number = 0;\n  currentUser: string | null;\n  \n  constructor(private store : Store<AppState>, private router: Router, \n    public dialog: DialogService) { }\n\n  ngOnInit(): void {\n    this.getProducts();\n    if(localStorage.getItem(\"cartItems\")){\n      let localItems:any = localStorage.getItem(\"cartItems\");\n      this.cartItems = JSON.parse(localItems);\n      this.cartProductCount = this.cartItems.length;\n    }else{\n      // console.log(\"Cart is empty\");\n    }    \n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  getProducts(){\n    this.products = this.store.select(getProducts);\n    this.store.dispatch(loadProducts());\n  }\n\n  deleteProduct(id:string){\n    if(confirm(\"Are you sure you want to delete?\")){\n      this.store.dispatch(deleteProduct({id}));\n      //this.router.navigate(['/products']);\n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    }\n    \n  }\n\n\n  openAddDialog(){\n    const ref = this.dialog.open(AddProductComponent, {\n      data: { message: 'testing' }\n    });\n\n    ref.afterClosed.subscribe(result => {\n      //console.log('Dialog closed', result);  \n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    });\n  }\n\n  openUpdateDialog(product){\n    // console.log(product);\n    const ref = this.dialog.open(EditProductComponent, {\n      data: product\n    });\n\n    // ref.afterClosed.subscribe(result => {\n    //   // console.log('Dialog closed', result);      \n    // });\n  }\n\n  public addToCart(product): void {\n      this.cartItems.push(product);\n      // console.log(this.cartItems);\n      this.cartProductCount = this.cartItems.length;\n      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));\n  }\n\n  openCartDialog(){\n    //this.router.navigate(['/cart']);\n    const ref = this.dialog.open(CartComponent, {\n      data: this.cartItems\n     });\n \n     ref.afterClosed.subscribe(result => {\n       //console.log('Dialog closed', result);\n       if(localStorage.getItem(\"token\")){\n        this.cartItems = [];\n        this.cartProductCount = this.cartItems.length;\n        localStorage.removeItem(\"token\");\n       }\n          \n     }); \n  }\n  \n}\n",
+            "sourceCode": "import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { Observable } from 'rxjs';\nimport { AppState } from '../app.state';\nimport { DialogService } from '../global/dialog/dialog.service';\nimport { CartComponent } from '../cart/cart.component';\nimport { NavbarComponent } from '../global/navbar/navbar.component';\nimport { AddProductComponent } from './add-product/add-product.component';\nimport { EditProductComponent } from './edit-product/edit-product.component';\nimport { Product } from './products.model';\nimport { addProduct, deleteProduct, loadProducts } from './state/products.actions';\nimport { getProducts } from './state/products.selector';\n\n@Component({\n  selector: 'app-products-list',\n  templateUrl: './products-list.component.html',\n  styleUrls: ['./products-list.component.scss']\n})\nexport class ProductsListComponent implements OnInit {\n  products: Observable<Product[]>;\n  NoProducts: boolean=false;\n  p: any;\n  public searchText: any;\n  cartProductList = [];\n  @Output() comp1Out = new EventEmitter();\n  public cartItems:any[]=new Array();\n  public cartProductCount: number = 0;\n  currentUser: string | null;\n  \n  constructor(private store : Store<AppState>, private router: Router, \n    public dialog: DialogService) { }\n\n  ngOnInit(): void {\n    this.getProducts();\n    if(localStorage.getItem(\"cartItems\")){\n      let localItems:any = localStorage.getItem(\"cartItems\");\n      this.cartItems = JSON.parse(localItems);\n      this.cartProductCount = this.cartItems.length;\n    }else{\n      // console.log(\"Cart is empty\");\n    }    \n    this.currentUser = localStorage.getItem(\"user\");\n  }\n\n  getProducts(){\n    this.products = this.store.select(getProducts);\n    this.store.dispatch(loadProducts());\n  }\n\n  deleteProduct(id:string){\n    if(confirm(\"Are you sure you want to delete?\")){\n      this.store.dispatch(deleteProduct({id}));\n      //this.router.navigate(['/products']);\n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    }\n    \n  }\n\n\n  openAddDialog(){\n    const ref = this.dialog.open(AddProductComponent, {\n      data: { message: 'testing' }\n    });\n\n    ref.afterClosed.subscribe(result => {\n      //console.log('Dialog closed', result);  \n      this.products = this.store.select(getProducts);\n      this.store.dispatch(loadProducts());\n    });\n  }\n\n  openUpdateDialog(product){\n    // console.log(product);\n    const ref = this.dialog.open(EditProductComponent, {\n      data: product\n    });\n\n    // ref.afterClosed.subscribe(result => {\n    //   // console.log('Dialog closed', result);      \n    // });\n  }\n\n  public addToCart(product): void {\n      this.cartItems.push(product);\n      // console.log(this.cartItems);\n      this.cartProductCount = this.cartItems.length;\n      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));\n  }\n\n  openCartDialog(){\n    //this.router.navigate(['/cart']);\n    const ref = this.dialog.open(CartComponent, {\n      data: this.cartItems\n     });\n \n     ref.afterClosed.subscribe(result => {\n      //  console.log('Dialog closed', result);\n       this.cartProductCount = this.cartItems.length;\n       if(localStorage.getItem(\"token\")){\n        this.cartItems = [];\n        this.cartProductCount = this.cartItems.length;\n        localStorage.removeItem(\"token\");\n       }\n          \n     }); \n  }\n  \n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4479,7 +4547,7 @@
         },
         {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-f153a0f781b9c6e38d5eae1642164dda",
+            "id": "component-SignupComponent-dc18d81839048b1a436c3113b30c4a66",
             "file": "src/app/login/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4505,6 +4573,18 @@
                     "type": "DialogConfig",
                     "optional": false,
                     "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        122
+                    ]
+                },
+                {
+                    "name": "dialogRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DialogRef",
+                    "optional": false,
+                    "description": "",
                     "line": 21,
                     "modifierKind": [
                         122
@@ -4517,7 +4597,7 @@
                     "type": "FormBuilder",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 21,
                     "modifierKind": [
                         122
                     ]
@@ -4529,7 +4609,7 @@
                     "type": "FormGroup",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 16
                 },
                 {
                     "name": "newUser",
@@ -4539,7 +4619,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 17
                 },
                 {
                     "name": "submitted",
@@ -4549,7 +4629,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 18
                 },
                 {
                     "name": "title",
@@ -4558,7 +4638,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 20
                 },
                 {
                     "name": "users",
@@ -4568,17 +4648,37 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "cancel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 87,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getUsers",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4588,7 +4688,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4598,7 +4698,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 83,
+                    "line": 75,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4610,7 +4710,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { signupStart, updateUser } from '../auth.actions';\nimport { AuthService } from '../auth.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  submitted = false;\n  users: any=[];\n  title: string;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,\n     public config: DialogConfig, private authService: AuthService) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    if(this.config.data){\n      //this.updateForm();\n      this.form.patchValue(this.config.data);\n      this.newUser = false;\n      this.title = \"Update Profile\";\n    }else{\n      this.newUser = true;\n      this.title = \"Signup\";\n    }\n\n    this.authService.getUsers().subscribe(users => {\n      console.log(users);\n      this.users = users;\n    });\n  }\n\n  // updateForm(){\n  //   this.form = new FormGroup({\n  //     id: new FormControl(this.config.data.id, Validators.required),\n  //     firstname: new FormControl(this.config.data.firstname, Validators.required),\n  //     lastname: new FormControl(this.config.data.lastname, Validators.required),\n  //     email: new FormControl(this.config.data.email, Validators.required),\n  //     contact: new FormControl(this.config.data.contact, Validators.required),\n  //     password: new FormControl(this.config.data.password, Validators.required),\n  //     retype_password: new FormControl(this.config.data.password, Validators.required),\n  //   });\n  // }\n\n  onSubmit(){\n    if(this.form.invalid){\n      this.form.markAllAsTouched();\n      \n    }else{\n      this.submitted = true;      \n      if(this.form.value.id){\n        this.store.dispatch(updateUser(this.form.value));\n      }else{\n        this.store.dispatch(signupStart({\n          firstname:this.form.value.firstname,\n          lastname:this.form.value.lastname,\n          contact:this.form.value.contact,\n          email:this.form.value.password,\n          password:this.form.value.password,\n          retype_password:this.form.value.retype_password\n        }));\n      }\n    }\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n    for(let i=0; i<this.users.length;i++){\n      if(this.users[i][\"email\"] == this.form.controls.email.value){\n        this.form.controls.email.setErrors({'exist':true})\n      }\n    }\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';\nimport { Store } from '@ngrx/store';\nimport { DialogRef } from '../../global/dialog/dialog-ref';\nimport { AppState } from '../../app.state';\nimport { DialogConfig } from '../../global/dialog/dialog-config';\nimport { signupStart, updateUser } from '../auth.actions';\nimport { AuthService } from '../auth.service';\n\n@Component({\n  selector: 'app-signup',\n  templateUrl: './signup.component.html',\n  styleUrls: ['./signup.component.scss']\n})\nexport class SignupComponent implements OnInit {\n  form: FormGroup;\n  newUser = true;\n  submitted = false;\n  users: any=[];\n  title: string;\n  constructor(public fb: FormBuilder, private store: Store<AppState>,public dialogRef: DialogRef,\n     public config: DialogConfig, private authService: AuthService) { \n    this.form = this.fb.group({\n      'firstname': [null, Validators.compose([Validators.required])],\n      'lastname': [null, Validators.compose([Validators.required])],\n      'contact': [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])],\n      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}$')])],\n      'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n      'retype_password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],\n    });\n  }\n\n  ngOnInit(): void {\n    if(this.config.data){\n      //this.updateForm();\n      this.form.patchValue(this.config.data);\n      this.newUser = false;\n      this.title = \"View Profile\";\n      this.form.disable();\n    }else{\n      this.newUser = true;\n      this.title = \"Signup\";\n    }\n\n    this.getUsers();\n  }\n  getUsers(){\n    this.authService.getUsers().subscribe(users => {\n      this.users = users;\n    });\n  }\n\n  onSubmit(){\n    if(this.form.invalid){\n      this.form.markAllAsTouched();\n      \n    }else{\n      this.submitted = true;      \n      // if(this.form.value.id){\n      //   this.store.dispatch(updateUser(this.form.value));\n      // }else{\n        this.store.dispatch(signupStart({\n          firstname:this.form.value.firstname,\n          lastname:this.form.value.lastname,\n          contact:this.form.value.contact,\n          email:this.form.value.password,\n          password:this.form.value.password,\n          retype_password:this.form.value.retype_password\n        }));\n      //}\n    }\n    \n  }\n\n  validateForm(){\n    if (this.form.controls.password.value !== this.form.controls.retype_password.value) {\n      return this.form.controls.retype_password.setErrors({mismatchedPasswords: true})\n    }\n\n    for(let i=0; i<this.users.length;i++){\n      if(this.users[i][\"email\"] == this.form.controls.email.value){\n        this.form.controls.email.setErrors({'exist':true})\n      }\n    }\n  }\n\n  cancel(){\n    this.dialogRef.close();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4638,6 +4738,12 @@
                         "deprecationMessage": ""
                     },
                     {
+                        "name": "dialogRef",
+                        "type": "DialogRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
                         "name": "config",
                         "type": "DialogConfig",
                         "deprecated": false,
@@ -4650,7 +4756,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 19,
+                "line": 20,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -4664,6 +4770,15 @@
                     {
                         "name": "store",
                         "type": "Store<AppState>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "dialogRef",
+                        "type": "DialogRef",
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
@@ -4693,11 +4808,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n        <app-header  style=\"width:600px !important;\"\n            [icon]=\"'exit_to_app'\" \n            [title]=\"title\" \n            [hasBgImage]=\"true\" \n            [class]=\"'card-spacing'\">\n        </app-header>            \n           <div class=\"card-inner\">\n                <a *ngIf=\"newUser\" routerLink=\"/login\" color=\"accent\" class=\"w-100 link\">Already have an account? login now!</a>\n                <!-- <h2 *ngIf=\"!newUser\" style=\"font-family: Roboto;\">Update Profile</h2> -->\n                <div class=\"form-control\">\n                    <!-- <label for=\"firstname\">First Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"firstname\" type=\"text\" id=\"firstname\" placeholder=\"First Name\" name=\"firstname\" formControlName=\"firstname\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.firstname.errors?.required && form.controls.firstname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"lastname\">Last Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Lastname\" type=\"text\" id=\"lastname\" placeholder=\"Last Name\" name=\"lastname\" formControlName=\"lastname\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.lastname.errors?.required && form.controls.lastname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"contact\">Contact</label> -->\n                    <i class=\"fa fa-phone icon\"></i>\n                    <input aria-label=\"Contact\" type=\"text\" id=\"contact\" placeholder=\"Contact\" name=\"contact\" formControlName=\"contact\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.required && form.controls.contact.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.pattern\">Enter only numbers</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-envelope icon\"></i>\n                    <input aria-label=\"Email\" (input)=\"validateForm()\" type=\"text\" id=\"email\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid email</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.exist\">Already Exists</span>\n\n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" (input)=\"validateForm()\" type=\"password\" placeholder=\"Password\" id=\"password\" name=\"password\" formControlName=\"password\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                \n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Retype Password\" (input)=\"validateForm()\" type=\"password\" placeholder=\"Retype Password\" id=\"retype_password\" name=\"retype_password\" formControlName=\"retype_password\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.errors?.required && form.controls.retype_password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('mismatchedPasswords') && newUser\">Password  not matching</span>\n                <div style=\"height: 20px;\"></div>\n                <div class=\"submit-button-container\" style=\"margin:0px\">\n                    <button aria-label=\"Submit\" class=\"w-100 submit-button\" type=\"submit\">Submit</button> <!--[disabled]=\"!form.valid\"-->\n                </div> \n\n                <a *ngIf=\"newUser\" color=\"accent\" routerLink=\"/\" class=\"w-100 link\">Back to Homepage</a>\n            </div>        \n     </form>\n     \n</div>\n"
+            "templateData": "<div fxLayout=\"row\" fxLayoutAlign=\"center center\" class=\"h-100 container\">\n    <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\"\n        style=\"background-color: #f3f3f3;\" fxFlex=\"90\" fxFlex.gt-sm=\"30\" fxFlex.sm=\"60\">\n        <app-header  style=\"width:600px !important;\"\n            [icon]=\"'exit_to_app'\" \n            [title]=\"title\" \n            [hasBgImage]=\"true\" \n            [class]=\"'card-spacing'\">\n        </app-header>            \n           <div class=\"card-inner\">\n                <a *ngIf=\"newUser\" routerLink=\"/login\" color=\"accent\" class=\"w-100 link\">Already have an account? login now!</a>\n                <!-- <h2 *ngIf=\"!newUser\" style=\"font-family: Roboto;\">Update Profile</h2> -->\n                <div class=\"form-control\">\n                    <!-- <label for=\"firstname\">First Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"firstname\" type=\"text\" id=\"firstname\" placeholder=\"First Name\" name=\"firstname\" formControlName=\"firstname\"><br>\n                    \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.firstname.errors?.required && form.controls.firstname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"lastname\">Last Name</label> -->\n                    <i class=\"fa fa-user icon\"></i>\n                    <input aria-label=\"Lastname\" type=\"text\" id=\"lastname\" placeholder=\"Last Name\" name=\"lastname\" formControlName=\"lastname\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.lastname.errors?.required && form.controls.lastname.touched\">Required</span>\n                \n                <div class=\"form-control\">\n                    <!-- <label for=\"contact\">Contact</label> -->\n                    <i class=\"fa fa-phone icon\"></i>\n                    <input aria-label=\"Contact\" type=\"text\" id=\"contact\" placeholder=\"Contact\" name=\"contact\" formControlName=\"contact\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.required && form.controls.contact.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.contact.errors?.pattern\">Enter only numbers</span>\n                \n                <div class=\"form-control\">\n                    <i class=\"fa fa-envelope icon\"></i>\n                    <input aria-label=\"Email\" (input)=\"validateForm()\" type=\"text\" id=\"email\" placeholder=\"Email\" name=\"email\" formControlName=\"email\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.required && form.controls.email.touched\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.pattern\">Invalid email</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.email.errors?.exist\">Already Exists</span>\n\n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Password\" (input)=\"validateForm()\" type=\"password\" placeholder=\"Password\" id=\"password\" name=\"password\" formControlName=\"password\"><br> \n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.errors?.required && form.controls.password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                \n                <div class=\"form-control\" *ngIf=\"newUser\">\n                    <i class=\"fa fa-key icon\"></i>\n                    <input aria-label=\"Retype Password\" (input)=\"validateForm()\" type=\"password\" placeholder=\"Retype Password\" id=\"retype_password\" name=\"retype_password\" formControlName=\"retype_password\"><br>\n                </div>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.errors?.required && form.controls.retype_password.touched && newUser\">Required</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('minlength') && newUser\">Enter minimum 6 characters</span>\n                <span class=\"error-message\" *ngIf=\"form.controls.retype_password.hasError('mismatchedPasswords') && newUser\">Password  not matching</span>\n                <div style=\"height: 20px;\"></div>\n                <div class=\"submit-button-container\" style=\"margin:0px\" *ngIf=\"newUser === true\">\n                    <button aria-label=\"Submit\" class=\"w-100 submit-button\" type=\"submit\">Submit</button> <!--[disabled]=\"!form.valid\"-->\n                </div> \n                <div class=\"submit-button-container\" style=\"margin:0px\" *ngIf=\"newUser === false\">\n                    <button aria-label=\"Cancel\" class=\"w-100 submit-button\" (click)=\"cancel()\">Close</button> <!--[disabled]=\"!form.valid\"-->\n                </div>\n\n                <a *ngIf=\"newUser\" color=\"accent\" routerLink=\"/\" class=\"w-100 link\">Back to Homepage</a>\n            </div>        \n     </form>\n     \n</div>\n"
         },
         {
             "name": "SpinnerComponent",
-            "id": "component-SpinnerComponent-e9925e3215bbcc24ffb1f853424236f6",
+            "id": "component-SpinnerComponent-98a088f3859e13f9f94eb8066114966a",
             "file": "src/app/story-components/spinner/spinner.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4714,6 +4829,14 @@
             ],
             "viewProviders": [],
             "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "defaultValue": "\"#000\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string"
+                },
                 {
                     "name": "borderColor",
                     "deprecated": false,
@@ -4740,7 +4863,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent {\n  @Input() size: string = \"small\";\n  @Input() borderColor: string;\n  //@Input() border-top: string;\n  \n  constructor() { }\n\n  // ngOnInit(): void {\n  //   //console.log(this.borderColor);\n  // }\n\n  // public get classes(): string[] {\n  //   const mode = this.border ? 'app-spinner--red' : 'app-spinner--pink';\n\n  //   return ['app-spinner', `app-spinner--${this.border}`, mode];\n  // }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-spinner',\n  templateUrl: './spinner.component.html',\n  styleUrls: ['./spinner.component.scss']\n})\nexport class SpinnerComponent {\n  @Input() size: string = \"small\";\n  @Input() borderColor: string;\n  @Input() backgroundColor: string=\"#000\";\n  //@Input() border-top: string;\n  \n  constructor() { }\n\n  // ngOnInit(): void {\n  //   //console.log(this.borderColor);\n  // }\n\n  // public get classes(): string[] {\n  //   const mode = this.border ? 'app-spinner--red' : 'app-spinner--pink';\n\n  //   return ['app-spinner', `app-spinner--${this.border}`, mode];\n  // }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4755,9 +4878,9 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 10
+                "line": 11
             },
-            "templateData": "<div\n    class=\"spin\"\n    [ngStyle]=\"{ 'border': borderColor}\"\n>\n    \n</div>\n"
+            "templateData": "<div\n    class=\"spin\"\n    [ngStyle]=\"{ 'border-bottom-color': backgroundColor }\"\n    [ngStyle]=\"{ 'border': borderColor}\"\n>\n    \n</div>\n"
         }
     ],
     "modules": [
@@ -5422,16 +5545,6 @@
                 "defaultValue": "createAction(DELETE_PRODUCT_SUCCESS, props<{id:string}>())"
             },
             {
-                "name": "dialog",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/global/dialog/dialog/dialog.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "edit",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5462,7 +5575,7 @@
                 "defaultValue": "{\n  production: false,\n  productsUrl: 'http://localhost:3000/products',\n  usersUrl: 'http://localhost:3000/users'\n}"
             },
             {
-                "name": "footer",
+                "name": "FooterText",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/global/footer/footer.stories.ts",
@@ -5565,21 +5678,21 @@
                 "name": "initialState",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/products/state/products.state.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\r\n    products : [\r\n        // {id : '1', name: 'Product 1', price: '100$', desc: 'Product1 Description to be enter here.', },\r\n        // {id : '2', name:'title2', price: '200$', description:'description2'},\r\n        // {id : '3', name:'title3', price: '300$', description:'description3'},\r\n        // {id : '4', name:'title4', price: '400$', description:'description4'},\r\n    ]\r\n}"
-            },
-            {
-                "name": "initialState",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/store/Shared/shared.state.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "SharedState",
                 "defaultValue": "{\n  showLoading: false,\n  errorMessage: '',\n}"
+            },
+            {
+                "name": "initialState",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/products/state/products.state.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n    products : [\r\n        // {id : '1', name: 'Product 1', price: '100$', desc: 'Product1 Description to be enter here.', },\r\n        // {id : '2', name:'title2', price: '200$', description:'description2'},\r\n        // {id : '3', name:'title3', price: '300$', description:'description3'},\r\n        // {id : '4', name:'title4', price: '400$', description:'description4'},\r\n    ]\r\n}"
             },
             {
                 "name": "Large",
@@ -5755,21 +5868,21 @@
                 "name": "routes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/homepage/homepage.module.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "[]",
-                "defaultValue": "[\r\n  { path: '', component: HomepageComponent, pathMatch: 'full' }\r\n]"
-            },
-            {
-                "name": "routes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/login/login.module.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[\r\n  {\r\n    path:'',\r\n    children:[\r\n      { path: '', redirectTo: 'login' },\r\n      { path: 'login', component: LoginComponent },\r\n      { path: 'signup', component: SignupComponent }\r\n    ]\r\n  }\r\n]"
+            },
+            {
+                "name": "routes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/homepage/homepage.module.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  { path: '', component: HomepageComponent, pathMatch: 'full' }\r\n]"
             },
             {
                 "name": "Secondary",
@@ -5945,21 +6058,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/homepage/homepage.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<HomepageComponent>",
-                "defaultValue": "(args: HomepageComponent) => ({\r\n  component: HomepageComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/login/login.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<LoginComponent>",
                 "defaultValue": "(args: LoginComponent) => ({\r\n  component: LoginComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/homepage/homepage.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<HomepageComponent>",
+                "defaultValue": "(args: HomepageComponent) => ({\r\n  component: HomepageComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -6030,16 +6143,6 @@
                 "deprecationMessage": "",
                 "type": "Story<EditProductComponent>",
                 "defaultValue": "(args: EditProductComponent) => ({\r\n  component: EditProductComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/global/dialog/dialog/dialog.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DialogComponent>",
-                "defaultValue": "(args: DialogComponent) => ({\r\n  component: DialogComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "UPDATE_PRODUCT_ACTION",
@@ -6677,28 +6780,6 @@
                     "defaultValue": "(args: CartComponent) => ({\r\n  component: CartComponent,\r\n  props: args,\r\n})"
                 }
             ],
-            "src/app/global/dialog/dialog/dialog.stories.ts": [
-                {
-                    "name": "dialog",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/global/dialog/dialog/dialog.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/global/dialog/dialog/dialog.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<DialogComponent>",
-                    "defaultValue": "(args: DialogComponent) => ({\r\n  component: DialogComponent,\r\n  props: args,\r\n})"
-                }
-            ],
             "src/app/products/edit-product/edit-product.stories.ts": [
                 {
                     "name": "edit",
@@ -6747,7 +6828,7 @@
             ],
             "src/app/global/footer/footer.stories.ts": [
                 {
-                    "name": "footer",
+                    "name": "FooterText",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/global/footer/footer.stories.ts",
@@ -6887,18 +6968,6 @@
                     "defaultValue": "{\r\n    user: null,\r\n}"
                 }
             ],
-            "src/app/products/state/products.state.ts": [
-                {
-                    "name": "initialState",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/products/state/products.state.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\r\n    products : [\r\n        // {id : '1', name: 'Product 1', price: '100$', desc: 'Product1 Description to be enter here.', },\r\n        // {id : '2', name:'title2', price: '200$', description:'description2'},\r\n        // {id : '3', name:'title3', price: '300$', description:'description3'},\r\n        // {id : '4', name:'title4', price: '400$', description:'description4'},\r\n    ]\r\n}"
-                }
-            ],
             "src/app/store/Shared/shared.state.ts": [
                 {
                     "name": "initialState",
@@ -6909,6 +6978,18 @@
                     "deprecationMessage": "",
                     "type": "SharedState",
                     "defaultValue": "{\n  showLoading: false,\n  errorMessage: '',\n}"
+                }
+            ],
+            "src/app/products/state/products.state.ts": [
+                {
+                    "name": "initialState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/products/state/products.state.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n    products : [\r\n        // {id : '1', name: 'Product 1', price: '100$', desc: 'Product1 Description to be enter here.', },\r\n        // {id : '2', name:'title2', price: '200$', description:'description2'},\r\n        // {id : '3', name:'title3', price: '300$', description:'description3'},\r\n        // {id : '4', name:'title4', price: '400$', description:'description4'},\r\n    ]\r\n}"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -7247,18 +7328,6 @@
                     "defaultValue": "[\r\n  { path: '', component: CartComponent }\r\n]"
                 }
             ],
-            "src/app/homepage/homepage.module.ts": [
-                {
-                    "name": "routes",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/homepage/homepage.module.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "[]",
-                    "defaultValue": "[\r\n  { path: '', component: HomepageComponent, pathMatch: 'full' }\r\n]"
-                }
-            ],
             "src/app/login/login.module.ts": [
                 {
                     "name": "routes",
@@ -7269,6 +7338,18 @@
                     "deprecationMessage": "",
                     "type": "[]",
                     "defaultValue": "[\r\n  {\r\n    path:'',\r\n    children:[\r\n      { path: '', redirectTo: 'login' },\r\n      { path: 'login', component: LoginComponent },\r\n      { path: 'signup', component: SignupComponent }\r\n    ]\r\n  }\r\n]"
+                }
+            ],
+            "src/app/homepage/homepage.module.ts": [
+                {
+                    "name": "routes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/homepage/homepage.module.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  { path: '', component: HomepageComponent, pathMatch: 'full' }\r\n]"
                 }
             ],
             "src/app/store/Shared/shared.actions.ts": [
@@ -7658,7 +7739,7 @@
                 "linktype": "component",
                 "name": "CartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -7737,26 +7818,6 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/global/dialog/dialog/dialog.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "dialog",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/global/dialog/dialog/dialog.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
                 "filePath": "src/app/global/dialog/insertion.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
@@ -7771,7 +7832,7 @@
                 "linktype": "component",
                 "name": "FooterComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -7779,7 +7840,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "footer",
+                "name": "FooterText",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -7800,7 +7861,7 @@
                 "linktype": "component",
                 "name": "HeaderComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -7828,8 +7889,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "NavbarComponent",
-                "coveragePercent": 10,
-                "coverageCount": "2/20",
+                "coveragePercent": 9,
+                "coverageCount": "2/21",
                 "status": "low"
             },
             {
@@ -8142,7 +8203,7 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/14",
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -8181,7 +8242,7 @@
                 "linktype": "component",
                 "name": "SignupComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -8736,7 +8797,7 @@
                 "linktype": "component",
                 "name": "SpinnerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {

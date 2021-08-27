@@ -13,6 +13,9 @@ import { DialogService } from '../dialog/dialog.service';
 export default {
   title: 'Navbar',
   component: NavbarComponent,
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
   decorators: [
     moduleMetadata({
       declarations: [NavbarComponent],

@@ -14,6 +14,10 @@ import { HeaderComponent } from './header.component';
 export default {
   title: 'Header',
   component: HeaderComponent,
+  argTypes: {
+    backgroundColor: { control: 'color' },
+    textColor: { control: 'color' },
+  },
   decorators: [
     moduleMetadata({
       declarations: [HeaderComponent],

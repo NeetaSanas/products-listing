@@ -11,7 +11,8 @@ export class HeaderComponent {
   @Input() desc:any;
   @Input() hasBgImage:boolean = true;
   @Input() class:any;
-  
+  @Input() backgroundColor?: string = "#283593";
+  @Input() textColor?:string = "#fff";
   constructor() { }
 
  

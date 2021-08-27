@@ -4,6 +4,10 @@ import { SpinnerComponent } from 'src/app/story-components/spinner/spinner.compo
 
 export default {
   title: 'Spinner Component',
+  argTypes: {
+    backgroundColor: { control: 'color' },
+    // textColor: { control: 'color' },
+  },
   component: SpinnerComponent
 } as Meta;
 

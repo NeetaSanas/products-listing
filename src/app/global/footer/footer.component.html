@@ -1,5 +1,5 @@
 <br><br><br><br>
-<div class="footer"> <!--color="primary" class="footer mt-5"-->
+<div class="footer" [ngStyle]="{ 'background-color': backgroundColor }"> <!--color="primary" class="footer mt-5"-->
     <!-- <div fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="space-between" class="w-100">
         <p>Copyright ©2021 All Rights Reserved</p>
     </div>
@@ -8,6 +8,6 @@
         <p>Designed & developed by Products</p>
     </div> -->
     <div fxLayout.xs="column" fxLayout.gt-xs="row wrap" class="footer-content">
-        <p>Copyright ©2021 All Rights Reserved</p>
+        <p [ngStyle]="{ 'color': textColor }">{{copyrightText}}</p>
     </div>
 </div>

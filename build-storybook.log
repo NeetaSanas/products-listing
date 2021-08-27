@@ -1,0 +1,1291 @@
+[0m
+[0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m
+[0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m
+[0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m
+[48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m
+[48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m
+[48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m
+[48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m
+[48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m [0m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [48;5;255m [0m
+[0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m
+[0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m
+[0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [48;5;255m [48;5;255m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m [0m
+
+1.1.14
+
+TypeScript version used by Compodoc : 4.3.5
+
+TypeScript version of current project : 4.2.3
+
+Node.js version : v14.17.1
+
+Operating system : Windows 10
+
+[[90m12:04:46[39m] No configuration file found, switching to CLI flags.
+[[90m12:04:46[39m] Using tsconfig file : D:\Projects\products\tsconfig.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\.browserslistrc
+[[90m12:04:46[39m] Including      : D:\Projects\products\.editorconfig
+[[90m12:04:46[39m] Including      : D:\Projects\products\.eslintrc.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\.gitignore
+[[90m12:04:46[39m] Including      : D:\Projects\products\angular.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\build-storybook.log
+[[90m12:04:46[39m] Including      : D:\Projects\products\documentation.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\localhost_4200-20210813T111206login.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\localhost_4200-20210813T111319signup.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\localhost_4200-20210813T111422homepage.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\localhost_4200-20210813T111537Mobile.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\package-lock.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\package.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\README.md
+[[90m12:04:46[39m] Including      : D:\Projects\products\setupJest.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\setupJest.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\tsconfig.app.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\tsconfig.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\tsconfig.spec.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\.storybook\main.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\.storybook\preview.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\.storybook\tsconfig.json
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\.storybook\typings.d.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\.vscode\settings.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\base.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\block-navigation.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\clover.xml
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\coverage-final.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\favicon.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\footer.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\footer.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov.info
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\prettify.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\prettify.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\sort-arrow-sprite.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\sorter.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\server\db.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\server\package.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\favicon.ico
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\main.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\polyfills.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\styles.scss
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\tslint.json
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\0.b73eaee9a88f178d62ed.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\1.f296d183a17268696d73.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\10.9998ba67d65d81d20896.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\11.49c687eaa6261f8b7be2.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\11.49c687eaa6261f8b7be2.manager.bundle.js.LICENSE.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\12.c9538ed3766c96f289e7.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\167.acdcde29.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\167.acdcde29.iframe.bundle.js.LICENSE.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\167.acdcde29.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\331.d5eae6a7.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\331.d5eae6a7.iframe.bundle.js.LICENSE.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\331.d5eae6a7.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\459.25893e01.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\459.25893e01.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\5.fa71488e730c5c7f885f.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\5.fa71488e730c5c7f885f.manager.bundle.js.LICENSE.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\6.8096ae4aadde0743697b.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\7.b34baecbd082bc7b188d.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\8.15577edffecf900a8de2.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\881.8e951149.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\881.8e951149.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\9.d7d85aa0a49a98f17218.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\90.40bcb42b.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\90.40bcb42b.iframe.bundle.js.LICENSE.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\90.40bcb42b.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\913.cfd8b5c4.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\913.cfd8b5c4.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\favicon.ico
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\iframe.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\main.600d6c919d9f368542ae.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\main.cd64679f.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\main.cd64679f.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\runtime~main.909d038f912f063e8837.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\runtime~main.d1b8d9a3.iframe.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\runtime~main.d1b8d9a3.iframe.bundle.js.map
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\vendors~main.d3455eed64b243c89325.manager.bundle.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\vendors~main.d3455eed64b243c89325.manager.bundle.js.LICENSE.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\app-routing.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\app.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\app.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\app.state.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\cart\cart.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\cart\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\environments\environment.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage\homepage.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\environments\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage\homepage.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage\homepage.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\homepage\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\base.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\block-navigation.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\favicon.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\prettify.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\prettify.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\sorter.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\sort-arrow-sprite.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\login\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\login\auth.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\200.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\3rdpartylicenses.txt
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\319.2311e3c48c9b0f5e2cf0.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\592.528448bdadbb5f760228.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\402.db89d3cb6454e1e836e3.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\663.413341f87fcf1d37682f.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\favicon.ico
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\main.17a4ea7a5055c0565406.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\polyfills.f07bb59e1fcef060ed62.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\styles.b9bff62f421a3f789ea5.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\runtime.28d5b6fb97e4be439de8.js
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app-routing.module.ts
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\app.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app.component.scss
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app.state.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\app.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\assets\.gitkeep
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\assets\flower.jpg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\assets\header-bg.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\assets\header-bgOLD.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\assets\login-bg.jpg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\assets\logo.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\environments\environment.prod.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\environments\environment.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\button.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\button.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\Button.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\card.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\Checkbox.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\header.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\Header.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\image.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\Introduction.stories.mdx
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\page.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\page.css
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\Page.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\spinner.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\stories.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\assets\header-bg.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\header.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\cart\cart.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\cart\cart.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\cart\cart.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\cart\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\homepage\homepage.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\homepage\homepage.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\homepage\homepage.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\homepage\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\auth.actions.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\auth.effects.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\auth.reducer.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\auth.selector.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\auth.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\auth.state.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\login.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\login.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\login.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\user.model.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\products-list.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\products-list.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\products.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\dialog-ref.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\dialog.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\insertion.directive.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\header\header.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\header\header.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\header\header.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\header\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\footer\footer.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\footer\footer.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\footer\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\app.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\app.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\environments\environment.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\environments\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\card\card.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\card\card.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\card\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\login\signup\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\login\signup\signup.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\image\image.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\image\image.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\image\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\checkbox\checkbox.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\checkbox\checkbox.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\checkbox\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\spinner\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\spinner\spinner.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\story-components\spinner\spinner.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\assets\flower.jpg
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\assets\header-bg.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\assets\header-bgOLD.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\assets\login-bg.jpg
+[[90m12:04:46[39m] Including      : D:\Projects\products\dist\products\assets\logo.png
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\cart\cart.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\cart\cart.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\cart\cart.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\cart\cart.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\cart\cart.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\cart\cart.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\pagination.pipe.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\validators.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\auth.actions.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\auth.effects.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\auth.reducer.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\auth.selector.ts
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\login\auth.service.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\auth.service.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\auth.state.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\AuthResponseDate.model.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\login.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\login.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\login\login.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\login.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\login.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\login.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\user.model.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\homepage\homepage.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\homepage\homepage.component.scss
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\homepage\homepage.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\homepage\homepage.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\homepage\homepage.service.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\homepage\homepage.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products-list.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products-list.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\products\products-list.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products-list.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products-list.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products.model.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products.module.ts
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\products\products.service.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\products.service.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\code-brackets.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\colors.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\comments.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\direction.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\flow.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\plugin.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\repo.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\stories\assets\stackalt.svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\code-brackets.2e1112d7..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\colors.a4bd0486..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\comments.a3859089..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\direction.b770f9af..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\flow.edad2ac1..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\plugin.d494b228..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\repo.6d496322..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\storybook-static\static\media\stackalt.dba9fbb3..svg
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog-config.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog-injector.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog-ref.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\insertion.directive.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\footer\footer.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\footer\footer.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\footer\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\header\header.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\header\header.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\header\header.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\header\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\navbar\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\navbar\navbar.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\navbar\navbar.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\signup\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\signup\signup.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\login\signup\signup.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\add-post\add-post.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\add-post\add-post.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\add-post\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\edit-post\edit-post.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\edit-post\edit-post.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\edit-post\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\post-list\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\post-list\post-list.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\post-list\post-list.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\state\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\state\posts.actions.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\posts\state\posts.selector.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\add-product\add-product.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\add-product\add-product.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\add-product\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\edit-product\edit-product.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\edit-product\edit-product.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\edit-product\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\state\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\state\products.actions.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\state\products.effects.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\state\products.reducer.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\state\products.selector.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\products\state\products.state.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\store\Shared\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\store\Shared\shared.actions.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\card\card.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\card\card.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\card\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\checkbox\checkbox.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\checkbox\checkbox.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\checkbox\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\image\image.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\image\image.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\image\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\spinner\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\spinner\spinner.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\story-components\spinner\spinner.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\dialog\dialog.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\dialog\dialog.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\global\dialog\dialog\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\cart\cart.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\cart\cart.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\cart\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\homepage\homepage.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\homepage\homepage.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\homepage\homepage.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\homepage\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\auth.actions.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\auth.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\login.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\login.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\user.model.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\products-list.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\products-list.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\products.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog-config.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog-injector.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog-ref.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog.service.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\insertion.directive.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\footer\footer.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\footer\footer.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\global\footer\footer.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\footer\footer.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\footer\footer.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\header\header.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\header\header.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\global\header\header.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\header\header.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\header\header.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\header\header.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\navbar\navbar.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\navbar\navbar.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\global\navbar\navbar.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\navbar\navbar.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\navbar\navbar.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\signup\signup.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\signup\signup.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\login\signup\signup.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\signup\signup.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\login\signup\signup.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\store\router\custom-serializer.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\store\router\router.selector.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\store\Shared\shared.actions.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\store\Shared\shared.reducer.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\store\Shared\shared.selector.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\store\Shared\shared.state.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\add-product\add-product.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\add-product\add-product.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\products\add-product\add-product.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\add-product\add-product.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\add-product\add-product.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\edit-product\edit-product.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\edit-product\edit-product.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\products\edit-product\edit-product.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\edit-product\edit-product.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\edit-product\edit-product.stories.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\card\card.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\card\card.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\story-components\card\card.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\card\card.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\state\products.actions.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\state\products.effects.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\state\products.reducer.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\state\products.selector.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\products\state\products.state.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\checkbox\checkbox.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\checkbox\checkbox.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\story-components\checkbox\checkbox.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\checkbox\checkbox.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\image\image.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\image\image.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\story-components\image\image.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\image\image.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\spinner\spinner.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\spinner\spinner.component.scss
+[[90m12:04:46[39m] Ignoring       : D:\Projects\products\src\app\story-components\spinner\spinner.component.spec.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\spinner\spinner.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\story-components\spinner\spinner.module.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog\dialog.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog\dialog.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\app\global\dialog\dialog\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog-config.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog-injector.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog-ref.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog.service.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\insertion.directive.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\footer\footer.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\footer\footer.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\footer\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\header\header.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\header\header.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\header\header.module.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\header\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\navbar\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\navbar\navbar.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\navbar\navbar.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\signup\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\signup\signup.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\login\signup\signup.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\add-product\add-product.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\add-product\add-product.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\add-product\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\edit-product\edit-product.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\edit-product\edit-product.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\edit-product\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\state\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\state\products.actions.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\products\state\products.selector.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\card\card.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\card\card.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\card\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\image\image.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\image\image.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\image\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\checkbox\checkbox.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\checkbox\checkbox.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\checkbox\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\spinner\index.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\spinner\spinner.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\story-components\spinner\spinner.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog\dialog.component.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog\dialog.component.scss
+[[90m12:04:46[39m] Including      : D:\Projects\products\src\app\global\dialog\dialog\dialog.component.ts
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog\dialog.component.html.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog\dialog.component.ts.html
+[[90m12:04:46[39m] Including      : D:\Projects\products\coverage\lcov-report\app\global\dialog\dialog\index.html
+[[90m12:04:46[39m] Searching package.json file
+[[90m12:04:46[39m] package.json file found
+[[90m12:04:46[39m] Processing package.json dependencies
+[[90m12:04:46[39m] Searching README.md, CHANGELOG.md, CONTRIBUTING.md, LICENSE.md, TODO.md files
+[[90m12:04:46[39m] README.md file found
+[[90m12:04:46[39m] Error during D:\Projects\products\CHANGELOG read
+[[90m12:04:46[39m] Continuing without CHANGELOG.md file
+[[90m12:04:46[39m] Error during D:\Projects\products\CONTRIBUTING read
+[[90m12:04:46[39m] Continuing without CONTRIBUTING.md file
+[[90m12:04:46[39m] Error during D:\Projects\products\LICENSE read
+[[90m12:04:46[39m] Continuing without LICENSE.md file
+[[90m12:04:46[39m] Error during D:\Projects\products\TODO read
+[[90m12:04:46[39m] Continuing without TODO.md file
+[[90m12:04:46[39m] Get dependencies data
+[[90m12:04:54[39m] parsing        : D:/Projects/products/setupJest.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/main.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/polyfills.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/app-routing.module.ts
+[[90m12:04:54[39m] Analysing routes definitions and clean them if necessary
+[[90m12:04:54[39m] found          : AppRoutingModule
+[[90m12:04:54[39m]                : - imports:
+[[90m12:04:54[39m]                : 	- RouterModule
+[[90m12:04:54[39m]                : - exports:
+[[90m12:04:54[39m]                : 	- RouterModule
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/app.component.ts
+[[90m12:04:54[39m] found          : AppComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/app.module.ts
+[[90m12:04:54[39m] found          : AppModule
+[[90m12:04:54[39m]                : - imports:
+[[90m12:04:54[39m]                : 	- BrowserModule
+[[90m12:04:54[39m]                : 	- ReactiveFormsModule
+[[90m12:04:54[39m]                : 	- AppRoutingModule
+[[90m12:04:54[39m]                : 	- FormsModule
+[[90m12:04:54[39m]                : 	- HttpClientModule
+[[90m12:04:54[39m]                : 	- ToastrModule
+[[90m12:04:54[39m]                : 	- StoreModule
+[[90m12:04:54[39m]                : 	- EffectsModule
+[[90m12:04:54[39m]                : 	- BrowserAnimationsModule
+[[90m12:04:54[39m]                : 	- StoreDevtoolsModule
+[[90m12:04:54[39m]                : - declarations:
+[[90m12:04:54[39m]                : 	- AppComponent
+[[90m12:04:54[39m]                : 	- ImageComponent
+[[90m12:04:54[39m]                : 	- CardComponent
+[[90m12:04:54[39m]                : 	- CheckboxComponent
+[[90m12:04:54[39m]                : 	- NavbarComponent
+[[90m12:04:54[39m]                : - providers:
+[[90m12:04:54[39m]                : 	- DialogService
+[[90m12:04:54[39m]                : 	- AuthService
+[[90m12:04:54[39m]                : 	- HomepageService
+[[90m12:04:54[39m]                : - bootstrap:
+[[90m12:04:54[39m]                : 	- AppComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/app.state.ts
+[[90m12:04:54[39m] found          : AppState
+[[90m12:04:54[39m] found          : appReducer
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/app.stories.ts
+[[90m12:04:54[39m] found          : Template
+[[90m12:04:54[39m] found          : app
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/environments/environment.prod.ts
+[[90m12:04:54[39m] found          : environment
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/environments/environment.ts
+[[90m12:04:54[39m] found          : environment
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/button.component.ts
+[[90m12:04:54[39m] found          : ButtonComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/Button.stories.ts
+[[90m12:04:54[39m] found          : Template
+[[90m12:04:54[39m] found          : Primary
+[[90m12:04:54[39m] found          : Secondary
+[[90m12:04:54[39m] found          : Large
+[[90m12:04:54[39m] found          : Small
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/card.stories.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/Checkbox.stories.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/Header.stories.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/image.stories.ts
+[[90m12:04:54[39m] found          : Template
+[[90m12:04:54[39m] found          : NoImageCaption
+[[90m12:04:54[39m] found          : WithImageCaption
+[[90m12:04:54[39m] found          : WithZeroOpacity
+[[90m12:04:54[39m] found          : WithHalfOpacity
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/page.component.ts
+[[90m12:04:54[39m] found          : PageComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/Page.stories.ts
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/spinner.stories.ts
+[[90m12:04:54[39m] found          : Template
+[[90m12:04:54[39m] found          : borderColor
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/stories.module.ts
+[[90m12:04:54[39m] found          : StoriesModule
+[[90m12:04:54[39m]                : - imports:
+[[90m12:04:54[39m]                : 	- CommonModule
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/stories/header.component.ts
+[[90m12:04:54[39m] found          : HeaderComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/cart/cart.component.ts
+[[90m12:04:54[39m] found          : CartComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/cart/cart.module.ts
+[[90m12:04:54[39m] found          : routes
+[[90m12:04:54[39m] found          : CartModule
+[[90m12:04:54[39m]                : - imports:
+[[90m12:04:54[39m]                : 	- CommonModule
+[[90m12:04:54[39m]                : 	- RouterModule
+[[90m12:04:54[39m]                : 	- FormsModule
+[[90m12:04:54[39m]                : 	- ReactiveFormsModule
+[[90m12:04:54[39m]                : 	- HeaderModule
+[[90m12:04:54[39m]                : - declarations:
+[[90m12:04:54[39m]                : 	- CartComponent
+[[90m12:04:54[39m] parsing        : D:/Projects/products/src/app/cart/cart.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : cart
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/pagination.pipe.ts
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/validators.ts
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/auth.actions.ts
+[[90m12:04:55[39m] found          : LOGIN_START
+[[90m12:04:55[39m] found          : LOGIN_SUCCESS
+[[90m12:04:55[39m] found          : LOGIN_FAIL
+[[90m12:04:55[39m] found          : SIGNUP_START
+[[90m12:04:55[39m] found          : SIGNUP_SUCCESS
+[[90m12:04:55[39m] found          : UPDATE_USER_ACTION
+[[90m12:04:55[39m] found          : UPDATE_SUCCESS
+[[90m12:04:55[39m] found          : loginStart
+[[90m12:04:55[39m] found          : loginSuccess
+[[90m12:04:55[39m] found          : signupStart
+[[90m12:04:55[39m] found          : updateUser
+[[90m12:04:55[39m] found          : signupSuccess
+[[90m12:04:55[39m] found          : updateUserSuccess
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/auth.effects.ts
+[[90m12:04:55[39m] found          : AuthEffects
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/auth.reducer.ts
+[[90m12:04:55[39m] found          : authReducer
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/auth.selector.ts
+[[90m12:04:55[39m] found          : AUTH_STATE_NAME
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/auth.service.ts
+[[90m12:04:55[39m] found          : AuthService
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/auth.state.ts
+[[90m12:04:55[39m] found          : AuthState
+[[90m12:04:55[39m] found          : initialState
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/AuthResponseDate.model.ts
+[[90m12:04:55[39m] found          : AuthResponseData
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/login.component.ts
+[[90m12:04:55[39m] found          : LoginComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/login.module.ts
+[[90m12:04:55[39m] found          : routes
+[[90m12:04:55[39m] found          : LoginModule
+[[90m12:04:55[39m]                : - imports:
+[[90m12:04:55[39m]                : 	- DialogModule
+[[90m12:04:55[39m]                : 	- CommonModule
+[[90m12:04:55[39m]                : 	- HeaderModule
+[[90m12:04:55[39m]                : 	- RouterModule
+[[90m12:04:55[39m]                : 	- FormsModule
+[[90m12:04:55[39m]                : 	- ReactiveFormsModule
+[[90m12:04:55[39m]                : 	- EffectsModule
+[[90m12:04:55[39m]                : 	- StoreModule
+[[90m12:04:55[39m]                : - declarations:
+[[90m12:04:55[39m]                : 	- LoginComponent
+[[90m12:04:55[39m]                : 	- SignupComponent
+[[90m12:04:55[39m]                : - providers:
+[[90m12:04:55[39m]                : 	- AuthService
+[[90m12:04:55[39m]                : 	- { provide: APP_BASE_HREF, useValue:  }
+[[90m12:04:55[39m]                : 	- DialogService
+[[90m12:04:55[39m]                : 	- { provide: DialogConfig, useValue: DialogConfig }
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/login.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : login
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/user.model.ts
+[[90m12:04:55[39m] found          : User
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/homepage/homepage.component.ts
+[[90m12:04:55[39m] found          : HomepageComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/homepage/homepage.module.ts
+[[90m12:04:55[39m] found          : routes
+[[90m12:04:55[39m] found          : HomepageModule
+[[90m12:04:55[39m]                : - imports:
+[[90m12:04:55[39m]                : 	- ProductsModule
+[[90m12:04:55[39m]                : 	- CommonModule
+[[90m12:04:55[39m]                : 	- RouterModule
+[[90m12:04:55[39m]                : 	- FormsModule
+[[90m12:04:55[39m]                : 	- ReactiveFormsModule
+[[90m12:04:55[39m]                : 	- NgxPaginationModule
+[[90m12:04:55[39m]                : 	- Ng2SearchPipeModule
+[[90m12:04:55[39m]                : - declarations:
+[[90m12:04:55[39m]                : 	- HomepageComponent
+[[90m12:04:55[39m]                : 	- FooterComponent
+[[90m12:04:55[39m]                : - providers:
+[[90m12:04:55[39m]                : 	- HomepageService
+[[90m12:04:55[39m]                : 	- ProductsService
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/homepage/homepage.service.ts
+[[90m12:04:55[39m] found          : HomepageService
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/homepage/homepage.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : products
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/products-list.component.ts
+[[90m12:04:55[39m] found          : ProductsListComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/products-list.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : products
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/products.model.ts
+[[90m12:04:55[39m] found          : Product
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/products.module.ts
+[[90m12:04:55[39m] Analysing routes definitions and clean them if necessary
+[[90m12:04:55[39m] found          : ProductsModule
+[[90m12:04:55[39m]                : - imports:
+[[90m12:04:55[39m]                : 	- CommonModule
+[[90m12:04:55[39m]                : 	- FormsModule
+[[90m12:04:55[39m]                : 	- HeaderModule
+[[90m12:04:55[39m]                : 	- ReactiveFormsModule
+[[90m12:04:55[39m]                : 	- RouterModule
+[[90m12:04:55[39m]                : 	- EffectsModule
+[[90m12:04:55[39m]                : 	- DialogModule
+[[90m12:04:55[39m]                : 	- NgxPaginationModule
+[[90m12:04:55[39m]                : 	- Ng2SearchPipeModule
+[[90m12:04:55[39m]                : - declarations:
+[[90m12:04:55[39m]                : 	- ProductsListComponent
+[[90m12:04:55[39m]                : 	- AddProductComponent
+[[90m12:04:55[39m]                : 	- EditProductComponent
+[[90m12:04:55[39m]                : 	- FooterComponent
+[[90m12:04:55[39m]                : - providers:
+[[90m12:04:55[39m]                : 	- ProductsService
+[[90m12:04:55[39m]                : 	- DialogService
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/products.service.ts
+[[90m12:04:55[39m] found          : ProductsService
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/dialog-config.ts
+[[90m12:04:55[39m] found          : DialogConfig
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/dialog-injector.ts
+[[90m12:04:55[39m] found          : DialogInjector
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/dialog-ref.ts
+[[90m12:04:55[39m] found          : DialogRef
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/dialog.module.ts
+[[90m12:04:55[39m] found          : DialogModule
+[[90m12:04:55[39m]                : - imports:
+[[90m12:04:55[39m]                : 	- CommonModule
+[[90m12:04:55[39m]                : - declarations:
+[[90m12:04:55[39m]                : 	- DialogComponent
+[[90m12:04:55[39m]                : 	- InsertionDirective
+[[90m12:04:55[39m]                : - providers:
+[[90m12:04:55[39m]                : 	- { provide: DialogConfig, useValue: DialogConfig }
+[[90m12:04:55[39m]                : 	- DialogRef
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/dialog.service.ts
+[[90m12:04:55[39m] found          : DialogService
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/insertion.directive.ts
+[[90m12:04:55[39m] found          : InsertionDirective
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/footer/footer.component.ts
+[[90m12:04:55[39m] found          : FooterComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/footer/footer.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : FooterText
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/header/header.component.ts
+[[90m12:04:55[39m] found          : HeaderComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/header/header.module.ts
+[[90m12:04:55[39m] found          : HeaderModule
+[[90m12:04:55[39m]                : - imports:
+[[90m12:04:55[39m]                : 	- CommonModule
+[[90m12:04:55[39m]                : - exports:
+[[90m12:04:55[39m]                : 	- HeaderComponent
+[[90m12:04:55[39m]                : - declarations:
+[[90m12:04:55[39m]                : 	- HeaderComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/header/header.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : header
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/navbar/navbar.component.ts
+[[90m12:04:55[39m] found          : NavbarComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/navbar/navbar.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : navbar
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/signup/signup.component.ts
+[[90m12:04:55[39m] found          : SignupComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/login/signup/signup.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : signup
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/store/router/custom-serializer.ts
+[[90m12:04:55[39m] found          : RouterStateUrl
+[[90m12:04:55[39m] found          : CustomSerializer
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/store/router/router.selector.ts
+[[90m12:04:55[39m] found          : getRouterState
+[[90m12:04:55[39m] found          : getCurrentRoute
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/store/Shared/shared.actions.ts
+[[90m12:04:55[39m] found          : SET_LOADING_ACTION
+[[90m12:04:55[39m] found          : SET_ERROR_MESSAGE
+[[90m12:04:55[39m] found          : setLoadingSpinner
+[[90m12:04:55[39m] found          : setErrorMessage
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/store/Shared/shared.reducer.ts
+[[90m12:04:55[39m] found          : _sharedReducer
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/store/Shared/shared.selector.ts
+[[90m12:04:55[39m] found          : SHARED_STATE_NAME
+[[90m12:04:55[39m] found          : getSharedState
+[[90m12:04:55[39m] found          : getLoading
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/store/Shared/shared.state.ts
+[[90m12:04:55[39m] found          : SharedState
+[[90m12:04:55[39m] found          : initialState
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/add-product/add-product.component.ts
+[[90m12:04:55[39m] found          : AddProductComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/add-product/add-product.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : add
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/edit-product/edit-product.component.ts
+[[90m12:04:55[39m] found          : EditProductComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/edit-product/edit-product.stories.ts
+[[90m12:04:55[39m] found          : Template
+[[90m12:04:55[39m] found          : edit
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/story-components/card/card.component.ts
+[[90m12:04:55[39m] found          : CardComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/state/products.actions.ts
+[[90m12:04:55[39m] found          : ADD_PRODUCT_ACTION
+[[90m12:04:55[39m] found          : ADD_PRODUCT_SUCCESS
+[[90m12:04:55[39m] found          : UPDATE_PRODUCT_ACTION
+[[90m12:04:55[39m] found          : UPDATE_PRODUCT_SUCCESS
+[[90m12:04:55[39m] found          : DELETE_PRODUCT_ACTION
+[[90m12:04:55[39m] found          : DELETE_PRODUCT_SUCCESS
+[[90m12:04:55[39m] found          : LOAD_PRODUCTS
+[[90m12:04:55[39m] found          : LOAD_PRODUCTS_SUCCESS
+[[90m12:04:55[39m] found          : addProduct
+[[90m12:04:55[39m] found          : addProductSuccess
+[[90m12:04:55[39m] found          : updateProduct
+[[90m12:04:55[39m] found          : deleteProduct
+[[90m12:04:55[39m] found          : loadProducts
+[[90m12:04:55[39m] found          : loadProductsSuccess
+[[90m12:04:55[39m] found          : updateProductSuccess
+[[90m12:04:55[39m] found          : deleteProductSuccess
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/state/products.effects.ts
+[[90m12:04:55[39m] found          : ProductsEffects
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/state/products.reducer.ts
+[[90m12:04:55[39m] found          : _productsReducer
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/state/products.selector.ts
+[[90m12:04:55[39m] found          : getProductsState
+[[90m12:04:55[39m] found          : getProducts
+[[90m12:04:55[39m] found          : getProductById
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/products/state/products.state.ts
+[[90m12:04:55[39m] found          : ProductsState
+[[90m12:04:55[39m] found          : initialState
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/story-components/checkbox/checkbox.component.ts
+[[90m12:04:55[39m] found          : CheckboxComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/story-components/image/image.component.ts
+[[90m12:04:55[39m] found          : ImageComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/story-components/spinner/spinner.component.ts
+[[90m12:04:55[39m] found          : SpinnerComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/story-components/spinner/spinner.module.ts
+[[90m12:04:55[39m] found          : SpinnerModule
+[[90m12:04:55[39m]                : - imports:
+[[90m12:04:55[39m]                : 	- CommonModule
+[[90m12:04:55[39m]                : - exports:
+[[90m12:04:55[39m]                : 	- SpinnerComponent
+[[90m12:04:55[39m]                : - declarations:
+[[90m12:04:55[39m]                : 	- SpinnerComponent
+[[90m12:04:55[39m] parsing        : D:/Projects/products/src/app/global/dialog/dialog/dialog.component.ts
+[[90m12:04:55[39m] found          : DialogComponent
+[[90m12:04:55[39m] -------------------
+[[90m12:04:55[39m] Project statistics 
+[[90m12:04:55[39m] - files      : 443
+[[90m12:04:55[39m] - module     : 10
+[[90m12:04:55[39m] - component  : 19
+[[90m12:04:55[39m] - directive  : 1
+[[90m12:04:55[39m] - injectable : 6
+[[90m12:04:55[39m] - class      : 5
+[[90m12:04:55[39m] - interface  : 7
+[[90m12:04:55[39m] - route      : 3
+[[90m12:04:55[39m] -------------------
+[[90m12:04:55[39m] Prepare components
+[[90m12:04:55[39m]  AddProductComponent has a templateUrl, include it
+[[90m12:04:55[39m]  AddProductComponent has styleUrls, include them
+[[90m12:04:55[39m]  AppComponent has a templateUrl, include it
+[[90m12:04:55[39m]  AppComponent has styleUrls, include them
+[[90m12:04:55[39m]  ButtonComponent has styleUrls, include them
+[[90m12:04:55[39m]  CardComponent has a templateUrl, include it
+[[90m12:04:55[39m]  CardComponent has styleUrls, include them
+[[90m12:04:55[39m]  CartComponent has a templateUrl, include it
+[[90m12:04:55[39m]  CartComponent has styleUrls, include them
+[[90m12:04:55[39m]  CheckboxComponent has a templateUrl, include it
+[[90m12:04:55[39m]  CheckboxComponent has styleUrls, include them
+[[90m12:04:55[39m]  DialogComponent has a templateUrl, include it
+[[90m12:04:55[39m]  DialogComponent has styleUrls, include them
+[[90m12:04:55[39m]  EditProductComponent has a templateUrl, include it
+[[90m12:04:55[39m]  EditProductComponent has styleUrls, include them
+[[90m12:04:55[39m]  FooterComponent has a templateUrl, include it
+[[90m12:04:55[39m]  FooterComponent has styleUrls, include them
+[[90m12:04:55[39m]  HeaderComponent has styleUrls, include them
+[[90m12:04:55[39m]  HeaderComponent has a templateUrl, include it
+[[90m12:04:55[39m]  HeaderComponent has styleUrls, include them
+[[90m12:04:55[39m]  HomepageComponent has a templateUrl, include it
+[[90m12:04:55[39m]  HomepageComponent has styleUrls, include them
+[[90m12:04:55[39m]  ImageComponent has a templateUrl, include it
+[[90m12:04:55[39m]  ImageComponent has styleUrls, include them
+[[90m12:04:55[39m]  LoginComponent has a templateUrl, include it
+[[90m12:04:55[39m]  LoginComponent has styleUrls, include them
+[[90m12:04:55[39m]  NavbarComponent has a templateUrl, include it
+[[90m12:04:55[39m]  NavbarComponent has styleUrls, include them
+[[90m12:04:55[39m]  PageComponent has styleUrls, include them
+[[90m12:04:55[39m]  ProductsListComponent has a templateUrl, include it
+[[90m12:04:55[39m]  ProductsListComponent has styleUrls, include them
+[[90m12:04:55[39m]  SignupComponent has a templateUrl, include it
+[[90m12:04:55[39m]  SignupComponent has styleUrls, include them
+[[90m12:04:55[39m]  SpinnerComponent has a templateUrl, include it
+[[90m12:04:55[39m]  SpinnerComponent has styleUrls, include them
+[[90m12:04:55[39m] Prepare modules
+[[90m12:04:55[39m] Prepare directives
+[[90m12:04:55[39m] Prepare injectables
+[[90m12:04:55[39m] Process routes
+[[90m12:04:55[39m] Prepare classes
+[[90m12:04:55[39m] Prepare interfaces
+[[90m12:04:55[39m] Prepare miscellaneous
+[[90m12:04:55[39m] Process documentation coverage report
+[[90m12:04:55[39m] Generating documentation in export format json
+[[90m12:04:55[39m] Documentation generated in ./ in 9.622 seconds
+info @storybook/angular v6.3.7
+info 
+info => Cleaning outputDir: C:\Users\User\AppData\Local\Temp\chromatic--7028-TupgQZDL8JZw
+info => Loading presets
+info Found existing addon "@storybook/addon-controls", skipping.
+info => Compiling manager..
+info => Compiling preview..
+info => Loading 1 config file in "D:\Projects\products\.storybook"
+info => Loading 9 other files in "D:\Projects\products\.storybook"
+info => Adding stories defined in "D:\Projects\products\.storybook\main.js"
+info => Found custom tsconfig.json
+info => Using implicit CSS loaders
+info => Loading angular-cli config
+info => Using angular project "products:build" for configuring Storybook
+info => Using angular-cli webpack config
+info => Using default Webpack5 setup
+<s> [webpack.Progress] 0% 
+
+<s> [webpack.Progress] 1% setup initialize
+<s> [webpack.Progress] 1% setup initialize HtmlWebpackPlugin
+<s> [webpack.Progress] 1% setup initialize
+<s> [webpack.Progress] 2% setup before run
+<s> [webpack.Progress] 2% setup before run NodeEnvironmentPlugin
+<s> [webpack.Progress] 2% setup before run
+<s> [webpack.Progress] 3% setup run
+<s> [webpack.Progress] 3% setup run fork-ts-checker-webpack-plugin
+<s> [webpack.Progress] 3% setup run
+<s> [webpack.Progress] 4% setup normal module factory
+<s> [webpack.Progress] 4% setup normal module factory CaseSensitivePathsPlugin
+<s> [webpack.Progress] 4% setup normal module factory
+<s> [webpack.Progress] 5% setup context module factory
+<s> [webpack.Progress] 5% setup context module factory ContextReplacementPlugin
+<s> [webpack.Progress] 5% setup context module factory ContextReplacementPlugin
+<s> [webpack.Progress] 5% setup context module factory
+<s> [webpack.Progress] 6% setup before compile
+<s> [webpack.Progress] 6% setup before compile ProgressPlugin
+<s> [webpack.Progress] 6% setup before compile
+<s> [webpack.Progress] 7% setup compile
+<s> [webpack.Progress] 7% setup compile fork-ts-checker-webpack-plugin
+Starting type checking service...
+<s> [webpack.Progress] 7% setup compile ExternalsPlugin
+<s> [webpack.Progress] 7% setup compile
+<s> [webpack.Progress] 8% setup compilation
+<s> [webpack.Progress] 8% setup compilation CopyPlugin
+<s> [webpack.Progress] 8% setup compilation ArrayPushCallbackChunkFormatPlugin
+<s> [webpack.Progress] 8% setup compilation JsonpChunkLoadingPlugin
+<s> [webpack.Progress] 8% setup compilation StartupChunkDependenciesPlugin
+<s> [webpack.Progress] 8% setup compilation ImportScriptsChunkLoadingPlugin
+<s> [webpack.Progress] 8% setup compilation FetchCompileWasmPlugin
+<s> [webpack.Progress] 8% setup compilation FetchCompileAsyncWasmPlugin
+<s> [webpack.Progress] 8% setup compilation WorkerPlugin
+<s> [webpack.Progress] 8% setup compilation SplitChunksPlugin
+<s> [webpack.Progress] 8% setup compilation RuntimeChunkPlugin
+<s> [webpack.Progress] 8% setup compilation ResolverCachePlugin
+<s> [webpack.Progress] 8% setup compilation HtmlWebpackPlugin
+<s> [webpack.Progress] 8% setup compilation
+<s> [webpack.Progress] 9% setup compilation
+<s> [webpack.Progress] 9% setup compilation AnyComponentStyleBudgetChecker
+<s> [webpack.Progress] 9% setup compilation DedupeModuleResolvePlugin
+<s> [webpack.Progress] 9% setup compilation DefinePlugin
+<s> [webpack.Progress] 9% setup compilation ProgressPlugin
+<s> [webpack.Progress] 9% setup compilation ChunkPrefetchPreloadPlugin
+<s> [webpack.Progress] 9% setup compilation SourceMapDevToolPlugin
+<s> [webpack.Progress] 9% setup compilation JavascriptModulesPlugin
+<s> [webpack.Progress] 9% setup compilation JsonModulesPlugin
+<s> [webpack.Progress] 9% setup compilation AssetModulesPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation EntryPlugin
+<s> [webpack.Progress] 9% setup compilation RuntimePlugin
+<s> [webpack.Progress] 9% setup compilation InferAsyncModulesPlugin
+<s> [webpack.Progress] 9% setup compilation DataUriPlugin
+<s> [webpack.Progress] 9% setup compilation FileUriPlugin
+<s> [webpack.Progress] 9% setup compilation CompatibilityPlugin
+<s> [webpack.Progress] 9% setup compilation HarmonyModulesPlugin
+<s> [webpack.Progress] 9% setup compilation AMDPlugin
+<s> [webpack.Progress] 9% setup compilation RequireJsStuffPlugin
+<s> [webpack.Progress] 9% setup compilation CommonJsPlugin
+<s> [webpack.Progress] 9% setup compilation LoaderPlugin
+<s> [webpack.Progress] 9% setup compilation LoaderPlugin
+<s> [webpack.Progress] 9% setup compilation NodeStuffPlugin
+<s> [webpack.Progress] 9% setup compilation APIPlugin
+<s> [webpack.Progress] 9% setup compilation ExportsInfoApiPlugin
+<s> [webpack.Progress] 9% setup compilation WebpackIsIncludedPlugin
+<s> [webpack.Progress] 9% setup compilation ConstPlugin
+<s> [webpack.Progress] 9% setup compilation UseStrictPlugin
+<s> [webpack.Progress] 9% setup compilation RequireIncludePlugin
+<s> [webpack.Progress] 9% setup compilation RequireEnsurePlugin
+<s> [webpack.Progress] 9% setup compilation RequireContextPlugin
+<s> [webpack.Progress] 9% setup compilation ImportPlugin
+<s> [webpack.Progress] 9% setup compilation SystemPlugin
+<s> [webpack.Progress] 9% setup compilation ImportMetaPlugin
+<s> [webpack.Progress] 9% setup compilation URLPlugin
+<s> [webpack.Progress] 9% setup compilation DefaultStatsFactoryPlugin
+<s> [webpack.Progress] 9% setup compilation DefaultStatsPresetPlugin
+<s> [webpack.Progress] 9% setup compilation DefaultStatsPrinterPlugin
+<s> [webpack.Progress] 9% setup compilation JavascriptMetaInfoPlugin
+<s> [webpack.Progress] 9% setup compilation EnsureChunkConditionsPlugin
+<s> [webpack.Progress] 9% setup compilation RemoveEmptyChunksPlugin
+<s> [webpack.Progress] 9% setup compilation MergeDuplicateChunksPlugin
+<s> [webpack.Progress] 9% setup compilation FlagIncludedChunksPlugin
+<s> [webpack.Progress] 9% setup compilation SideEffectsFlagPlugin
+<s> [webpack.Progress] 9% setup compilation FlagDependencyExportsPlugin
+<s> [webpack.Progress] 9% setup compilation FlagDependencyUsagePlugin
+<s> [webpack.Progress] 9% setup compilation InnerGraphPlugin
+<s> [webpack.Progress] 9% setup compilation MangleExportsPlugin
+<s> [webpack.Progress] 9% setup compilation ModuleConcatenationPlugin
+<s> [webpack.Progress] 9% setup compilation NoEmitOnErrorsPlugin
+<s> [webpack.Progress] 9% setup compilation RealContentHashPlugin
+<s> [webpack.Progress] 9% setup compilation WasmFinalizeExportsPlugin
+<s> [webpack.Progress] 9% setup compilation DeterministicModuleIdsPlugin
+<s> [webpack.Progress] 9% setup compilation DeterministicChunkIdsPlugin
+<s> [webpack.Progress] 9% setup compilation DefinePlugin
+<s> [webpack.Progress] 9% setup compilation TerserPlugin
+<s> [webpack.Progress] 9% setup compilation TemplatedPathPlugin
+<s> [webpack.Progress] 9% setup compilation RecordIdsPlugin
+<s> [webpack.Progress] 9% setup compilation WarnCaseSensitiveModulesPlugin
+<s> [webpack.Progress] 9% setup compilation IgnoreWarningsPlugin
+<s> [webpack.Progress] 9% setup compilation
+<s> [webpack.Progress] 10% building
+<s> [webpack.Progress] 10% building 0/1 entries 0/0 dependencies 0/0 modules
+<s> [webpack.Progress] 10% building import loader ./node_modules/babel-loader/lib/index.js
+<s> [webpack.Progress] 10% building 0/16 entries 3/16 dependencies 0/3 modules
+<s> [webpack.Progress] 10% building 0/16 entries 4/16 dependencies 0/3 modules
+<s> [webpack.Progress] 10% building import loader ./node_modules/style-loader/dist/cjs.js
+<s> [webpack.Progress] 10% building import loader ./node_modules/css-loader/dist/cjs.js
+<s> [webpack.Progress] 10% building import loader ./node_modules/postcss-loader/dist/cjs.js
+<s> [webpack.Progress] 10% building 0/16 entries 12/16 dependencies 0/12 modules
+<s> [webpack.Progress] 10% building import loader ./node_modules/resolve-url-loader/index.js
+<s> [webpack.Progress] 10% building import loader ./node_modules/sass-loader/dist/cjs.js
+<s> [webpack.Progress] 10% building 0/16 entries 12/16 dependencies 0/12 modules
+<s> [webpack.Progress] 10% building 0/16 entries 18/51 dependencies 0/17 modules
+<s> [webpack.Progress] 10% building 0/16 entries 30/59 dependencies 0/28 modules
+<s> [webpack.Progress] 10% building 0/16 entries 36/74 dependencies 2/32 modules
+<s> [webpack.Progress] 13% building 1/16 entries 38/75 dependencies 5/34 modules
+<s> [webpack.Progress] 13% building 1/16 entries 76/164 dependencies 8/48 modules
+<s> [webpack.Progress] 13% building 1/16 entries 150/211 dependencies 10/98 modules
+<s> [webpack.Progress] 16% building 2/16 entries 165/287 dependencies 13/99 modules
+<s> [webpack.Progress] 16% building 2/16 entries 300/369 dependencies 14/187 modules
+<s> [webpack.Progress] 16% building import loader ./node_modules/@mdx-js/loader/index.js
+<s> [webpack.Progress] 16% building 2/16 entries 314/369 dependencies 14/194 modules
+<s> [webpack.Progress] 16% building import loader ./node_modules/ts-loader/index.js
+<s> [webpack.Progress] 16% building import loader ./node_modules/@storybook/angular/dist/ts3.9/server/ngx-template-loader/index.js
+<s> [webpack.Progress] 16% building import loader ./node_modules/@storybook/source-loader/dist/cjs/index.js
+<s> [webpack.Progress] 16% building 2/16 entries 314/369 dependencies 14/194 modules
+<s> [webpack.Progress] 16% building 2/16 entries 380/597 dependencies 18/220 modules
+<s> [webpack.Progress] 16% building 2/16 entries 500/890 dependencies 21/235 modules
+[BABEL] Note: The code generator has deoptimised the styling of D:\Projects\products\node_modules\prettier\standalone.js as it exceeds the max of 500KB.
+<s> [webpack.Progress] 16% building 2/16 entries 526/900 dependencies 22/242 modules
+<s> [webpack.Progress] 16% building 2/16 entries 600/911 dependencies 23/294 modules
+<s> [webpack.Progress] 16% building 2/16 entries 700/911 dependencies 23/319 modules
+<s> [webpack.Progress] 16% building 2/16 entries 987/1059 dependencies 27/346 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1025/1059 dependencies 34/346 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1200/1353 dependencies 72/358 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1394/1500 dependencies 99/423 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1574/1700 dependencies 106/465 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1600/1743 dependencies 111/467 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1800/1892 dependencies 161/530 modules
+<s> [webpack.Progress] 20% building 3/16 entries 1908/2000 dependencies 228/534 modules
+<s> [webpack.Progress] 20% building import loader ./node_modules/raw-loader/dist/cjs.js
+<s> [webpack.Progress] 20% building 3/16 entries 2211/2286 dependencies 280/564 modules
+<s> [webpack.Progress] 20% building 3/16 entries 2296/2400 dependencies 306/614 modules
+<s> [webpack.Progress] 20% building 3/16 entries 2400/2701 dependencies 333/678 modules
+<s> [webpack.Progress] 20% building 3/16 entries 2665/2800 dependencies 341/810 modules
+<s> [webpack.Progress] 20% building 3/16 entries 3100/3194 dependencies 392/857 modules
+<s> [webpack.Progress] 20% building 3/16 entries 3470/3500 dependencies 478/942 modules
+<s> [webpack.Progress] 20% building 3/16 entries 3945/4000 dependencies 643/1040 modules
+<s> [webpack.Progress] 20% building 3/16 entries 4220/4265 dependencies 765/1100 modules
+<s> [webpack.Progress] 20% building 3/16 entries 4670/4725 dependencies 955/1200 modules
+<s> [webpack.Progress] 21% building 3/16 entries 4919/5000 dependencies 1072/1267 modules
+<s> [webpack.Progress] 22% building 3/16 entries 5140/5200 dependencies 1150/1331 modules
+<s> [webpack.Progress] 23% building 4/16 entries 5388/5417 dependencies 1236/1376 modules
+<s> [webpack.Progress] 27% building 5/16 entries 5388/5417 dependencies 1237/1376 modules
+<s> [webpack.Progress] 30% building 6/16 entries 5388/5417 dependencies 1238/1376 modules
+<s> [webpack.Progress] 34% building 7/16 entries 5388/5417 dependencies 1239/1376 modules
+<s> [webpack.Progress] 37% building 8/16 entries 5388/5417 dependencies 1240/1376 modules
+<s> [webpack.Progress] 40% building 9/16 entries 5388/5417 dependencies 1241/1376 modules
+<s> [webpack.Progress] 44% building 10/16 entries 5388/5417 dependencies 1242/1376 modules
+<s> [webpack.Progress] 47% building 11/16 entries 5388/5417 dependencies 1243/1376 modules
+<s> [webpack.Progress] 51% building 12/16 entries 5388/5417 dependencies 1244/1376 modules
+<s> [webpack.Progress] 51% building 12/16 entries 5600/5668 dependencies 1299/1430 modules
+<s> [webpack.Progress] 51% building 12/16 entries 5837/5845 dependencies 1382/1500 modules
+<s> [webpack.Progress] 54% building 13/16 entries 5911/5921 dependencies 1485/1514 modules
+<s> [webpack.Progress] 58% building 14/16 entries 5929/5929 dependencies 1508/1523 modules
+<s> [webpack.Progress] 61% building 15/16 entries 5929/5929 dependencies 1522/1523 modules
+<s> [webpack.Progress] 64% building 16/16 entries 5929/5929 dependencies 1523/1523 modules
+<s> [webpack.Progress] 65% building
+<s> [webpack.Progress] 69% building finish
+<s> [webpack.Progress] 69% building finish
+<s> [webpack.Progress] 70% sealing finish module graph
+<s> [webpack.Progress] 70% sealing finish module graph ResolverCachePlugin
+<s> [webpack.Progress] 70% sealing finish module graph InferAsyncModulesPlugin
+<s> [webpack.Progress] 70% sealing finish module graph FlagDependencyExportsPlugin
+<s> [webpack.Progress] 70% sealing finish module graph InnerGraphPlugin
+<s> [webpack.Progress] 70% sealing finish module graph WasmFinalizeExportsPlugin
+<s> [webpack.Progress] 70% sealing finish module graph
+<s> [webpack.Progress] 70% sealing plugins
+<s> [webpack.Progress] 70% sealing plugins WarnCaseSensitiveModulesPlugin
+<s> [webpack.Progress] 70% sealing plugins
+<s> [webpack.Progress] 71% sealing dependencies optimization
+<s> [webpack.Progress] 71% sealing dependencies optimization SideEffectsFlagPlugin
+<s> [webpack.Progress] 71% sealing dependencies optimization FlagDependencyUsagePlugin
+<s> [webpack.Progress] 71% sealing dependencies optimization
+<s> [webpack.Progress] 71% sealing after dependencies optimization
+<s> [webpack.Progress] 71% sealing after dependencies optimization
+<s> [webpack.Progress] 72% sealing chunk graph
+<s> [webpack.Progress] 72% sealing chunk graph
+<s> [webpack.Progress] 73% sealing after chunk graph
+<s> [webpack.Progress] 73% sealing after chunk graph
+<s> [webpack.Progress] 73% sealing optimizing
+<s> [webpack.Progress] 73% sealing optimizing
+<s> [webpack.Progress] 74% sealing module optimization
+<s> [webpack.Progress] 74% sealing module optimization
+<s> [webpack.Progress] 75% sealing after module optimization
+<s> [webpack.Progress] 75% sealing after module optimization
+<s> [webpack.Progress] 75% sealing chunk optimization
+<s> [webpack.Progress] 75% sealing chunk optimization EnsureChunkConditionsPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization RemoveEmptyChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization MergeDuplicateChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization SplitChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization RemoveEmptyChunksPlugin
+<s> [webpack.Progress] 75% sealing chunk optimization
+<s> [webpack.Progress] 76% sealing after chunk optimization
+<s> [webpack.Progress] 76% sealing after chunk optimization
+<s> [webpack.Progress] 77% sealing module and chunk tree optimization
+<s> [webpack.Progress] 77% sealing module and chunk tree optimization PersistentChildCompilerSingletonPlugin
+<s> [webpack.Progress] 77% sealing module and chunk tree optimization
+<s> [webpack.Progress] 77% sealing after module and chunk tree optimization
+<s> [webpack.Progress] 77% sealing after module and chunk tree optimization
+<s> [webpack.Progress] 78% sealing chunk modules optimization
+<s> [webpack.Progress] 78% sealing chunk modules optimization ModuleConcatenationPlugin
+<s> [webpack.Progress] 78% sealing chunk modules optimization
+<s> [webpack.Progress] 78% sealing after chunk modules optimization
+<s> [webpack.Progress] 78% sealing after chunk modules optimization
+<s> [webpack.Progress] 79% sealing module reviving
+<s> [webpack.Progress] 79% sealing module reviving RecordIdsPlugin
+<s> [webpack.Progress] 79% sealing module reviving
+<s> [webpack.Progress] 80% sealing before module ids
+<s> [webpack.Progress] 80% sealing before module ids
+<s> [webpack.Progress] 80% sealing module ids
+<s> [webpack.Progress] 80% sealing module ids DeterministicModuleIdsPlugin
+<s> [webpack.Progress] 80% sealing module ids
+<s> [webpack.Progress] 81% sealing module id optimization
+<s> [webpack.Progress] 81% sealing module id optimization
+<s> [webpack.Progress] 82% sealing module id optimization
+<s> [webpack.Progress] 82% sealing module id optimization
+<s> [webpack.Progress] 82% sealing chunk reviving
+<s> [webpack.Progress] 82% sealing chunk reviving RecordIdsPlugin
+<s> [webpack.Progress] 82% sealing chunk reviving
+<s> [webpack.Progress] 83% sealing before chunk ids
+<s> [webpack.Progress] 83% sealing before chunk ids
+<s> [webpack.Progress] 84% sealing chunk ids
+<s> [webpack.Progress] 84% sealing chunk ids DeterministicChunkIdsPlugin
+<s> [webpack.Progress] 84% sealing chunk ids
+<s> [webpack.Progress] 84% sealing chunk id optimization
+<s> [webpack.Progress] 84% sealing chunk id optimization FlagIncludedChunksPlugin
+<s> [webpack.Progress] 84% sealing chunk id optimization
+<s> [webpack.Progress] 85% sealing after chunk id optimization
+<s> [webpack.Progress] 85% sealing after chunk id optimization
+<s> [webpack.Progress] 86% sealing record modules
+<s> [webpack.Progress] 86% sealing record modules RecordIdsPlugin
+<s> [webpack.Progress] 86% sealing record modules
+<s> [webpack.Progress] 86% sealing record chunks
+<s> [webpack.Progress] 86% sealing record chunks RecordIdsPlugin
+<s> [webpack.Progress] 86% sealing record chunks
+<s> [webpack.Progress] 87% sealing module hashing
+<s> [webpack.Progress] 87% sealing module hashing
+<s> [webpack.Progress] 87% sealing code generation
+<s> [webpack.Progress] 87% sealing code generation
+<s> [webpack.Progress] 88% sealing runtime requirements
+<s> [webpack.Progress] 88% sealing runtime requirements
+<s> [webpack.Progress] 89% sealing hashing
+<s> [webpack.Progress] 89% sealing hashing
+<s> [webpack.Progress] 89% sealing after hashing
+<s> [webpack.Progress] 89% sealing after hashing
+<s> [webpack.Progress] 90% sealing record hash
+<s> [webpack.Progress] 90% sealing record hash
+<s> [webpack.Progress] 91% sealing module assets processing
+<s> [webpack.Progress] 91% sealing module assets processing
+<s> [webpack.Progress] 91% sealing chunk assets processing
+<s> [webpack.Progress] 91% sealing chunk assets processing
+<s> [webpack.Progress] 92% sealing asset processing
+<s> [webpack.Progress] 92% sealing asset processing copy-webpack-plugin
+<s> [webpack.Progress] 92% sealing asset processing PersistentChildCompilerSingletonPlugin
+<s> [webpack.Progress] 92% sealing asset processing TerserPlugin
+info => Manager built (1.18 min)
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin main.64f612ec.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin main.64f612ec.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.74c1266a.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.74c1266a.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 90.9395ee64.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 90.9395ee64.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 913.8098c406.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 913.8098c406.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 881.5041ed5e.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 881.5041ed5e.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 459.a9143fc9.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 459.a9143fc9.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 331.ea603ca1.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 331.ea603ca1.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 995.92da49c2.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 995.92da49c2.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 464.85a76fec.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 464.85a76fec.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 895.35dfc4cc.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 895.35dfc4cc.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 417.aa2f4f76.iframe.bundle.js generate SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 417.aa2f4f76.iframe.bundle.js generated SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin resolve sources
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin main.64f612ec.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin main.64f612ec.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.74c1266a.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin runtime~main.74c1266a.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 90.9395ee64.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 90.9395ee64.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 913.8098c406.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 913.8098c406.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 881.5041ed5e.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 881.5041ed5e.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 459.a9143fc9.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 459.a9143fc9.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 331.ea603ca1.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 331.ea603ca1.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 995.92da49c2.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 995.92da49c2.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 464.85a76fec.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 464.85a76fec.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 895.35dfc4cc.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 895.35dfc4cc.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 417.aa2f4f76.iframe.bundle.js attach SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin 417.aa2f4f76.iframe.bundle.js attached SourceMap
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin resolve sources
+<s> [webpack.Progress] 92% sealing asset processing SourceMapDevToolPlugin
+<s> [webpack.Progress] 92% sealing asset processing HtmlWebpackPlugin
+<s> [webpack.Progress] 92% sealing asset processing HtmlWebpackPlugin
+<s> [webpack.Progress] 92% sealing asset processing HtmlWebpackPlugin resolve sources
+<s> [webpack.Progress] 92% sealing asset processing HtmlWebpackPlugin
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin resolve sources
+<s> [webpack.Progress] 92% sealing asset processing RealContentHashPlugin
+<s> [webpack.Progress] 92% sealing asset processing AnyComponentStyleBudgetChecker
+<s> [webpack.Progress] 92% sealing asset processing
+<s> [webpack.Progress] 93% sealing after asset optimization
+<s> [webpack.Progress] 93% sealing after asset optimization
+<s> [webpack.Progress] 93% sealing recording
+<s> [webpack.Progress] 93% sealing recording
+<s> [webpack.Progress] 94% sealing after seal
+<s> [webpack.Progress] 94% sealing after seal
+<s> [webpack.Progress] 95% emitting emit
+<s> [webpack.Progress] 95% emitting emit fork-ts-checker-webpack-plugin
+<s> [webpack.Progress] 95% emitting emit
+<s> [webpack.Progress] 98% emitting after emit
+<s> [webpack.Progress] 98% emitting after emit SizeLimitsPlugin
+<s> [webpack.Progress] 98% emitting after emit
+<s> [webpack.Progress] 99% done plugins
+<s> [webpack.Progress] 99% done plugins CaseSensitivePathsPlugin
+<s> [webpack.Progress] 99% done plugins fork-ts-checker-webpack-plugin
+<s> [webpack.Progress] 99% done plugins fork-ts-checker-webpack-plugin
+<s> [webpack.Progress] 99% done plugins
+<s> [webpack.Progress] 99% 
+
+<s> [webpack.Progress] 99% cache store build dependencies
+<s> [webpack.Progress] 99% cache store build dependencies
+<s> [webpack.Progress] 99% cache begin idle
+<s> [webpack.Progress] 99% cache begin idle
+<s> [webpack.Progress] 100% 
+
+info => Preview built (1.57 min)
+WARN System.import() is deprecated and will be removed soon. Use import() instead.
+WARN For more info visit https://webpack.js.org/guides/code-splitting/
+WARN System.import() is deprecated and will be removed soon. Use import() instead.
+WARN For more info visit https://webpack.js.org/guides/code-splitting/
+WARN asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+WARN This can impact web performance.
+WARN Assets: 
+WARN   assets/flower.jpg (667 KiB)
+WARN   assets/header-bgOLD.png (611 KiB)
+WARN   main.4922a32b.iframe.bundle.js (459 KiB)
+WARN   417.b1726252.iframe.bundle.js (4.35 MiB)
+WARN entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+WARN Entrypoints:
+WARN   main (4.8 MiB)
+WARN       runtime~main.9e0726ff.iframe.bundle.js
+WARN       417.b1726252.iframe.bundle.js
+WARN       main.4922a32b.iframe.bundle.js
+WARN 
+<s> [webpack.Progress] 99% cache shutdown
+<s> [webpack.Progress] 99% cache shutdown
+<s> [webpack.Progress] 100% 
+
+info => Output directory: C:\Users\User\AppData\Local\Temp\chromatic--7028-TupgQZDL8JZw

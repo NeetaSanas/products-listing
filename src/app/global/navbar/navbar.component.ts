@@ -18,6 +18,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   themeText: string ="DARK";
   currentUser: string | null;
 
+  @Input()
+  backgroundColor?: string = "#283593";
+
   @Input() config: any = {};
   username: string | null;
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent{
+  @Input()
+  backgroundColor?: string = "#283593";
+  @Input()
+  textColor?:string = "#fff";
+  @Input()
+  copyrightText?: string = 'Copyright ©2021 All Rights Reserved';
 
   constructor() { }
 
